@@ -1,0 +1,387 @@
+<?php
+require 'connect.php';
+session_start();
+
+// Prevent browser from caching the page
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+
+// Redirect to login page if session is not set
+if (!isset($_SESSION['user_name'])) {
+    header('location:silog.php');
+    exit();
+}
+
+// Fetch all professors from the database
+$result = $conn->query("SELECT id, name, role, prof_img FROM professors");
+
+// Keep your existing default image
+$default_image = "images/icon.jpg";
+
+// Use session to get the latest profile picture
+$current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
+
+// Force-refresh the image to prevent caching issues
+$current_image .= "?t=" . time();
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <Title>Instructor's Profiles</Title>
+
+     <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.home-header {
+      height: 55px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgb(10, 0, 104);
+      }
+    
+.left-section {
+      width: 400px;
+      display: flex;
+      align-items: center;
+      font-size: 21px;
+      font-family: Racing Sans One;
+      }
+  
+.right-section {
+      width: 120px;
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      background-color: rgb(10, 0, 104);
+      }
+
+.user {
+      color: white;
+     } 
+    
+.ham-menu {
+        height: 20px;
+        width: 20px;
+        margin: 15px 0px 0px 15px;
+        position: relative;
+        cursor: pointer;
+      }
+      
+.ham-menu span {
+        height: 2px;
+        width: 15px;
+        background-color: white;
+        border-radius: 7.5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: .3s ease;
+        z-index: 15;
+      }
+      
+  .ham-menu span:nth-child(1) {
+        top: 25%;
+      }
+      
+  .ham-menu span:nth-child(3) {
+        top: 75%;
+      }
+      
+  .ham-menu.active span:nth-child(1) {
+        top: 50%;
+        transform: translate(-50%,-50%) rotate(45deg);
+      }
+      
+  .ham-menu.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+  .ham-menu.active span:nth-child(3) {
+        top: 50%;
+        transform: translate(-50%,-50%) rotate(-45deg);
+      }  
+  
+    
+.sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        width: 250px;
+        padding-top: 55px;
+        padding-left: 0px;
+        z-index: 10;
+        background-color: rgb(11, 0, 114);
+        backdrop-filter: blur(5px);
+        box-shadow: -10px 0 10px rgb(0,0,0,0.1);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        list-style: none;
+        transition: left 0.3s ease;
+        margin-top: 0px;
+  
+      }
+      
+.sidebar.active {
+        left: 0;
+      }
+      
+.sidebar li {
+        list-style: none;
+        height: 54px;
+        width: 100%;
+      }
+      
+.sidebar a {
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Roboto, sans-serif;
+    color: white;
+    display: flex;
+    padding: 15px 0px 15px 30px;
+    transition: background-color 0.3s ease;
+    transition: color 0.3s ease;
+      }
+      
+.a-bar:hover {
+    color: rgb(248, 171, 27);
+      }
+
+.logpos {
+    position: absolute;
+    top: 2px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+      }
+      /* Container for the logo and dropdown */
+.logout-container {
+    position: relative;
+    display: inline-block;
+      }
+      
+      /* Style for the logo/image */
+      .logout-logo {
+    width: 40px;  /* Adjust the size of the logo */
+    cursor: pointer;
+    border-radius: 20px;
+      }
+      
+      /* Style for the dropdown (initially hidden) */    
+.logout-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;  /* Adjust as per the size of your logo */
+    background-color: orange;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 100px;
+      }
+      
+.logoutbb {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+      }
+      
+.logoutb2 {
+    width: 25px;  /* Adjust the size of the logo */
+    cursor: pointer;
+      }
+      
+      /* Style for the logout link */
+.logout-link {
+    color: #f00;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+      }
+      
+      /* Change color on hover */
+.logout-link:hover {
+    color: #c00;
+      }
+.adhome {
+    color: white;
+    text-emphasis: none;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: 10px;
+    border: solid 1px white;
+    border-radius: 14px;
+    padding: 5px 10px 5px 10px;
+    background-color: orange;
+
+}
+
+.adhome:hover {
+    background-color: white;
+    color: orange;
+    border: solid 1px orange;
+    transition: ease 0.5s;
+}
+h1 {
+    font-size: 28px;
+    color:rgb(11, 72, 146);
+    margin-bottom: 20px;
+}
+
+/* Container */
+.group-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Profile Card */
+.whole{
+  margin-top: 50px;
+  text-align: center;
+  padding: 20px;
+}
+
+.card {
+    background: linear-gradient(145deg, #ffffff, #bbdefb); /* Soft blue gradient */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Image */
+.card img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #1565c0; /* Blue border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Instructor Name */
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #0d47a1;
+}
+
+/* Role */
+.card .role {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1565c0;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #bbdefb;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+
+     </style>
+
+    </head>
+    
+    <body>
+
+    <nav class="home-header">
+
+<div class="ham-menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<ul class="sidebar" id="sidebar">
+      
+  <li><a class="a-bar"href="home.php">Home</a></li>
+  <li><a class="a-bar"href="#">Objectives</a></li>
+  <li><a class="a-bar"href="#">Announcement</a></li>
+  <li><a class="a-bar"href="#">Rules and Regulation</a></li>
+  <li><a class="a-bar"href="upf.php">Profile</a></li>
+       
+</ul>
+
+<div class="right-section">                              
+   
+  <div class="logpos">
+  <a class="adhome" href="admin.php">Home</a>
+      <div class="logout-container"> 
+      <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
+        <div class="logout-dropdown" id="logoutDropdown">
+            <div class="logoutbb">
+          <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+          <a href="logout.php" class="logout-link">Logout</a>
+        </div>
+    
+        </div>
+      </div>
+      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
+    </div>
+         
+</div>
+</nav>
+
+<div class="whole">
+        <h1>Instructor's Profiles</h1>
+        <br>
+        <div class="group-container"> 
+                <?php if ($result->num_rows > 0) { ?>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <div class="card">
+                <img src="<?php echo !empty($row['prof_img']) ? htmlspecialchars($row['prof_img']) : 'images/facultyb.png'; ?>" 
+                 alt="<?php echo htmlspecialchars($row['name']); ?>" 
+                 width="150" height="150">                    
+                 <h2><?php echo htmlspecialchars($row['name']); ?></h2>
+                    <a href="instructor.php?professor_id=<?php echo $row['id']; ?>"><p class="role"><?php echo htmlspecialchars($row['role']); ?></p></a>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+            <p>No professors.</p>
+        <?php } ?>
+        </div>
+        </div>
+        <script src="js/sidebar.js"></script>
+        <script src="js/logs.js"></script>
+    </body>
+</html>
