@@ -7,19 +7,130 @@ body {
     color: #333;
 }
 
+/* Navigation Bar Styles */
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 80px;
+    padding: 0;
+    margin: 0;
+    margin-right: 40%;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.nav-links img {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%); /* Makes icons white */
+}
+
+/* Tooltip Styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Responsive menu without JavaScript */
+.menu-checkbox {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background-color: #333;
+        top: 50px;
+        right: 0;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .menu-checkbox:checked ~ .nav-links {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .nav-links img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
 /* Header */
 header {
-    /* background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 15px; */
-    /* background-color: #007bff;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 1px; */
     background: linear-gradient(90deg, #007bff, #0056b3);
     color: white;
     text-align: center;
@@ -30,6 +141,7 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 10px 10px;
     text-transform: uppercase;
+    margin-top: 64px;
 }
 
 /* Layout */
@@ -100,9 +212,6 @@ main {
 .freewall-post label {
     border: 1px solid #e6e6e6;
     border-radius: 30px;
-    /* width: 65%;
-    height: 50%;
-    padding: 10px 0px 10px 15px; */
     cursor: pointer;
     width: 100%;
     padding: 10px 15px;
@@ -145,9 +254,6 @@ main {
     max-width: 600px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
-    /* text-align: left;
-    max-height: 70vh; 
-    overflow-y: auto;  */
 }
 
 .modal-content h3 {
@@ -193,20 +299,13 @@ main {
 
 .modal-content textarea {
     font-size: 15px;
-    /* font-weight: 700;
-    font-family: Roboto, sans-serif;
-    color: rgb(122, 122, 122); */
     border-radius: 5px;
     width: 97%;
     height: 100px;
-    /* cursor: text;
-    display: block; */
     border: 1px solid #ccc;
     padding: 5px;
     outline: none;
     resize: none;
-    /* overflow: auto;
-    margin-bottom: 20px; */
 }
 
 .post-file p {
