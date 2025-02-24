@@ -395,7 +395,7 @@ word-wrap: break-word;
   <span></span>
   <span></span>
 </div>
-<a class="adhome" href="admin.php">Home</a>
+
 <ul class="sidebar" id="sidebar">
       
   <li><a class="a-bar"href="home.php">Home</a></li>
