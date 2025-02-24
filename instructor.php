@@ -395,7 +395,7 @@ word-wrap: break-word;
   <span></span>
   <span></span>
 </div>
-
+<a class="adhome" href="admin.php">Home</a>
 <ul class="sidebar" id="sidebar">
       
   <li><a class="a-bar"href="home.php">Home</a></li>
@@ -409,7 +409,7 @@ word-wrap: break-word;
 <div class="right-section">                              
    
   <div class="logpos">
-  <a class="adhome" href="admin.php">Home</a>
+  
       <div class="logout-container"> 
         <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
         <div class="logout-dropdown" id="logoutDropdown">
