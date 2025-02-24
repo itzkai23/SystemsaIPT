@@ -230,12 +230,11 @@ $current_image .= "?t=" . time();
     font-size: 16px;
     font-weight: 700;
     text-decoration: none;
-    margin-right: 10px;
     border: solid 1px white;
-    border-radius: 14px;
-    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    padding: 10px 20px;
     background-color: orange;
-
+    margin-left: 20px;
 }
 
 .adhome:hover {
@@ -260,9 +259,22 @@ h1 {
 
 /* Profile Card */
 .whole{
-  margin-top: 50px;
-  text-align: center;
+  margin-top: 70px;
   padding: 20px;
+}
+
+.whole h1 {
+  margin-top: 20px;
+  margin-left: 32.5%;
+  width: 35%;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  background: linear-gradient(145deg, #ffffff, #bbdefb);
+  /* border: 1px solid #1565c0; */
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .card {
@@ -345,7 +357,7 @@ h1 {
 <div class="right-section">                              
    
   <div class="logpos">
-  <a class="adhome" href="admin.php">Home</a>
+  
       <div class="logout-container"> 
       <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
         <div class="logout-dropdown" id="logoutDropdown">
@@ -363,8 +375,8 @@ h1 {
 </nav>
 
 <div class="whole">
+        <a class="adhome" href="admin.php">Back</a>
         <h1>Instructor's Profiles</h1>
-        <br>
         <div class="group-container"> 
                 <?php if ($result->num_rows > 0) { ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
