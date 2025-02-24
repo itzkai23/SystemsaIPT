@@ -68,10 +68,8 @@ $current_image .= "?t=" . time();
     <title>Instructor</title>
     <style>
     body {
-        display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 95vh;
+    margin: 0;
+    padding: 0;
     background: 
         linear-gradient(rgb(76, 76, 209), rgba(125, 125, 233, 0.5)),
         url('images/malabon-1.jpg') no-repeat;
@@ -251,12 +249,13 @@ $current_image .= "?t=" . time();
 .container {
 width: 90%;
 max-width: 800px;
-margin: 20px auto;
-background: white;
+margin: 80px auto;
+background: rgba(255, 255, 255, 0.1); 
+backdrop-filter: blur(5px);
 padding: 20px;
 border-radius: 12px;
 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-margin: 80px auto;
+z-index: 0;
 }
 
 /* Avatar & Name Section */
@@ -302,6 +301,260 @@ margin-left: 23px;
 opacity: 0.9;
 }
 
+/* User comments to instructor profile (Only Text) */
+.comment-post {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    transition: box-shadow 0.3s;
+}
+
+.comment-post:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.comment-post label {
+    border: 1px solid #e6e6e6;
+    border-radius: 30px;
+    /* width: 65%;
+    height: 50%;
+    padding: 10px 0px 10px 15px; */
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    transition: background 0.3s;
+}
+
+.comment-post label:hover {
+    background-color: #e6e6e6;
+}
+
+.comment-post img {
+  width: 40px;
+}
+
+/* POP-UP USER COMMENT */
+
+/* Hidden Checkbox */
+.modal-toggle_usercom {
+    display: none;
+}
+
+/* Modal Styles */
+.modal_usercom {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Content */
+.modal-content_usercom {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    height: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    /* text-align: left;
+    max-height: 70vh; 
+    overflow-y: auto;  */
+}
+
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 7.5px 15px;
+    border-radius: 20px;
+}
+
+.close:hover {
+    color: black;
+    background-color: rgb(196, 192, 192);
+}
+
+/* Show Modal When Checkbox is Checked */
+.modal-toggle_usercom:checked + .modal_usercom {
+    display: block;
+}
+
+.modal-content-usercom {
+  text-align: center;
+  background-color: white;
+  margin: auto;
+  margin-top: 9%;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  height: 60%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* .comment-label-section {
+  width: 80%;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  vertical-align: top;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 50px;
+} */
+
+.modal-content-usercom div {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.modal-content-usercom img {
+  width: 40px;
+}
+
+.modal-content-usercom textarea {
+    font-size: 15px;
+    /* font-weight: 700;
+    font-family: Roboto, sans-serif;
+    color: rgb(122, 122, 122); */
+    border-radius: 5px;
+    width: 97%;
+    height: 100px;
+    /* cursor: text;
+    display: block; */
+    border: 1px solid #ccc;
+    padding: 5px;
+    outline: none;
+    resize: none;
+    /* overflow: auto;
+    margin-bottom: 20px; */
+}
+
+/* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
+textarea::-webkit-scrollbar {
+width: 10px; /* Width of the scrollbar */
+}
+
+textarea::-webkit-scrollbar-track {
+background: #f1f1f1; /* Background of the track */
+border-radius: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+background: #888; /* Color of the scroll thumb */
+border-radius: 5px; /* Round edges */
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+background: #555; /* Darker thumb on hover */
+}
+
+
+.modal-content-usercom button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Roboto, sans-serif;
+
+}
+
+textarea:not(:placeholder-shown) + button {
+    background-color: rgb(57, 57, 255);
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+/* POP-UP ALL USERS COMMENTS */
+
+/* Hidden Checkbox */
+.modal-toggle {
+    display: none;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: white;
+    margin: auto;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    height: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    /* text-align: left;
+    max-height: 70vh; 
+    overflow-y: auto;  */
+}
+
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 7.5px 15px;
+    border-radius: 20px;
+}
+
+.close:hover {
+    color: black;
+    background-color: rgb(196, 192, 192);
+}
+
+/* Show Modal When Checkbox is Checked */
+.modal-toggle:checked + .modal {
+    display: block;
+}
+
 /* Comment & Details Section */
 .comdent {
 display: flex;
@@ -312,7 +565,7 @@ gap: 15px;
 
 /* Individual Cards */
 .section {
-width: 30%;
+width: 45%;
 height: 150px;
 padding: 15px;
 background: #ffffff;
@@ -326,6 +579,59 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;
 .section:hover {
 transform: translateY(-5px);
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.con-rate {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 0px;
+}
+
+.label-section {
+width: 95%;
+height: 78%;
+padding: 15px;
+background: #ffffff;
+border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+display: inline-block;
+vertical-align: top;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+margin-top: 50px;
+}
+
+/* Custom Scrollbar for Sidebar */
+.label-section::-webkit-scrollbar {
+    width: 6px;
+    overflow-y: scroll;
+}
+
+.label-section::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 10px;
+}
+
+.label-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+.rating input {
+    display: none;
+}
+.rating label {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+}
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+    color: gold;
 }
 
 /* Headings */
@@ -342,6 +648,33 @@ p {
 font-size: 16px;
 color: #333;
 word-wrap: break-word;
+}
+
+.com-scroll {
+  max-height: 80px; 
+  overflow-y: scroll; 
+  border: 1px solid #ccc; 
+  padding: 10px; 
+  /* width: 92%;  */
+  min-width: 100px;
+}
+
+.com-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.com-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.com-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.com-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .comment-box {
@@ -441,17 +774,36 @@ word-wrap: break-word;
         <h5 class="subject"><?php echo $profrole; ?></h5>
         </div>
         
+        <section class="comment-post">
+          <img src="images/icon.jpg" alt="Profile pic">
+          <label for="termsCheckbox_usercomment" class="rant-post" type="text">Comment your concerns</label>
+        </section>
+
+        <input type="checkbox" id="termsCheckbox_usercomment" class="modal-toggle_usercom">
+        <div class="modal_usercom">
+          <div class="modal-content-usercom">
+            <label for="termsCheckbox_usercomment" class="close">&times;</label>
+            
+              <h3>Your comment/concerns</h3>
+                    <div>
+                    <img src="images/icon.jpg" alt="picture">
+                    <p>Name of user</p>
+                    </div>
+                   
+                    <textarea name="" id="" placeholder="What's your concern?"></textarea>
+                    
+                    <button>Comment</button>
+
+          
+          </div>  
+        </div>
         
         <!-- Display Submitted Data -->
         <div class="comdent">
-        <div class="section">
-            <h3>Student's</h3>
-            <p><?php echo $name; ?></p>
-        </div>
 
-          <div class="section">
+          <label for="termsCheckbox" class="section">
             <h3>Comments</h3>
-            <div style="max-height: 80px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; width: 92%; min-width: 100px;">
+            <div class="com-scroll" style="max-height: 80px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; width: 92%; min-width: 100px;">
                 <?php
                 foreach ($feedbackData as $comm) {
                     echo '<div class="comment-box">';
@@ -464,12 +816,64 @@ word-wrap: break-word;
                     echo '</div>';
                 }
                 ?>
-            </div>
-        </div>
+              </label>
 
-        <div class="section">
-            <h3>Rating</h3>
-            <p><?php echo $rating; ?></p>
+              <input type="checkbox" id="termsCheckbox" class="modal-toggle">
+              <div class="modal">
+                <div class="modal-content">
+                  <label for="termsCheckbox" class="close">&times;</label>
+                  
+                  <div class="label-section">
+                    <h3>Comments</h3>
+                    
+                    <!-- <div class="label-section"> -->
+                      <?php
+                      foreach ($feedbackData as $comm) {
+                          echo '<div class="comment-box">';
+                          echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                          echo '<div class="comment-text">';
+                          echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                          echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
+                          echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
+                          echo '</div>';
+                          echo '</div>';
+                      }
+                      ?>
+                      
+                <!-- </div> -->
+
+                </div>  
+              </div>
+
+
+              <div class="section">
+                <h3>Rating</h3>
+                <p><?php echo $rating; ?></p>
+
+                <div class="con-rate">
+                  <div>total of rate</div>
+                  <div>number of stars</div>
+                </div>
+                <div>users participant</div>
+                
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5">★</label>
+                    
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4">★</label>
+                    
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3">★</label>
+                    
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2">★</label>
+                    
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1">★</label>
+                </div>
+            </div>
+
         </div>
         
         </div>
