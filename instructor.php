@@ -502,47 +502,50 @@ textarea:not(:placeholder-shown) + button {
     display: none;
 }
 
-/* Modal Styles */
+/* Hide the modal by default */
 .modal {
-    display: none;
     position: fixed;
-    z-index: 10;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5); /* Overlay effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Show modal when checkbox is checked */
+#termsCheckbox:checked ~ .modal {
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Modal Content */
 .modal-content {
-    background-color: white;
-    margin: auto;
-    margin-top: 25px;
+    background: white;
+    width: 40%;
+    max-width: 500px;
     padding: 20px;
     border-radius: 10px;
-    width: 80%;
-    height: 80%;
-    max-width: 600px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    position: relative;
-    /* text-align: left;
-    max-height: 70vh; 
-    overflow-y: auto;  */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
 }
 
+/* Smooth pop effect */
+#termsCheckbox:checked ~ .modal .modal-content {
+    transform: scale(1);
+}
 
-/* Close Button */
+/* Close button */
 .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
+    float: right;
     font-size: 24px;
-    color: #aaa;
     cursor: pointer;
-    text-decoration: none;
-    padding: 7.5px 15px;
-    border-radius: 20px;
 }
 
 .close:hover {
@@ -551,9 +554,9 @@ textarea:not(:placeholder-shown) + button {
 }
 
 /* Show Modal When Checkbox is Checked */
-.modal-toggle:checked + .modal {
+/* .modal-toggle:checked + .modal {
     display: block;
-}
+} */
 
 /* Comment & Details Section */
 .comdent {
@@ -677,41 +680,40 @@ word-wrap: break-word;
   background: #555;
 }
 
+/* Comment box layout */
 .comment-box {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
     background: #f9f9f9;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
 }
 
 .comment-img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .comment-text {
-    flex: 1;
+    flex-grow: 1;
 }
 
 .comment-text strong {
     font-size: 14px;
-    color: #1976d2;
 }
 
 .comment-text p {
+    font-size: 13px;
     margin: 5px 0;
-    font-size: 14px;
-    color: #333;
 }
 
 .comment-text small {
-    font-size: 12px;
-    color: #666;
+    font-size: 11px;
+    color: gray;
 }
 
 .user {
@@ -818,15 +820,14 @@ word-wrap: break-word;
                 ?>
               </label>
 
-              <input type="checkbox" id="termsCheckbox" class="modal-toggle">
-              <div class="modal">
-                <div class="modal-content">
-                  <label for="termsCheckbox" class="close">&times;</label>
-                  
-                  <div class="label-section">
-                    <h3>Comments</h3>
+                <!-- Move the checkbox and modal to avoid overlap -->
+                <input type="checkbox" id="termsCheckbox" class="modal-toggle">
+                <div class="modal">  
+                  <div class="modal-content">
+                    <label for="termsCheckbox" class="close">&times;</label>
                     
-                    <!-- <div class="label-section"> -->
+                    <div class="label-section">
+                      <h3>Comments</h3>                   
                       <?php
                       foreach ($feedbackData as $comm) {
                           echo '<div class="comment-box">';
@@ -839,45 +840,38 @@ word-wrap: break-word;
                           echo '</div>';
                       }
                       ?>
+                    </div>
+                  </div>  
+                </div>
+
+                <!-- Rating Section -->
+                <div class="section">
+                  <h3>Rating</h3>
+                  <p><?php echo $rating; ?></p>
+
+                  <div class="con-rate">
+                    <div>total of rate</div>
+                    <div>number of stars</div>
+                  </div>
+                  <div>users participant</div>
+
+                  <div class="rating">
+                      <input type="radio" id="star5" name="rating" value="5">
+                      <label for="star5">★</label>
                       
-                <!-- </div> -->
-
-                </div>  
-              </div>
-
-
-              <div class="section">
-                <h3>Rating</h3>
-                <p><?php echo $rating; ?></p>
-
-                <div class="con-rate">
-                  <div>total of rate</div>
-                  <div>number of stars</div>
+                      <input type="radio" id="star4" name="rating" value="4">
+                      <label for="star4">★</label>
+                      
+                      <input type="radio" id="star3" name="rating" value="3">
+                      <label for="star3">★</label>
+                      
+                      <input type="radio" id="star2" name="rating" value="2">
+                      <label for="star2">★</label>
+                      
+                      <input type="radio" id="star1" name="rating" value="1">
+                      <label for="star1">★</label>
+                  </div>
                 </div>
-                <div>users participant</div>
-                
-                <div class="rating">
-                    <input type="radio" id="star5" name="rating" value="5">
-                    <label for="star5">★</label>
-                    
-                    <input type="radio" id="star4" name="rating" value="4">
-                    <label for="star4">★</label>
-                    
-                    <input type="radio" id="star3" name="rating" value="3">
-                    <label for="star3">★</label>
-                    
-                    <input type="radio" id="star2" name="rating" value="2">
-                    <label for="star2">★</label>
-                    
-                    <input type="radio" id="star1" name="rating" value="1">
-                    <label for="star1">★</label>
-                </div>
-            </div>
-
-        </div>
-        
-        </div>
- 
 
     </div>
     <script src="js/sidebar.js"></script>
