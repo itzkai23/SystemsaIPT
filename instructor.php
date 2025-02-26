@@ -24,10 +24,12 @@ if ($profQuery->num_rows > 0) {
 }
 
 // Prepare SQL query to fetch feedback for the logged-in user
-$query = "SELECT ie.feedback, ie.submitted_at, r.fname AS student_name, lname, r.picture AS student_image
+$query = "SELECT ie.feedback, c.comment,c.created_at AS comment_created_at, ie.submitted_at, r.fname AS student_name, lname, r.picture AS student_image
           FROM instructor_evaluation ie
           JOIN registration r ON ie.user_id = r.id
-          WHERE ie.professor_id = ?";
+           LEFT JOIN comments c ON ie.user_id = c.user_id AND ie.professor_id = c.professor_id
+          WHERE ie.professor_id = ?
+          ORDER BY ie.submitted_at DESC";  // Show latest feedback first";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $professor_id);
 $stmt->execute();
@@ -36,14 +38,27 @@ $result = $stmt->get_result();
 $feedbackData = [];
 
 while ($row = $result->fetch_assoc()) {
-    $feedbackData[] = [
-        'feedback' => $row['feedback'],
-        'submitted_at' => $row['submitted_at'],
-        'student_name' => $row['student_name'],
-        'lname' => $row['lname'],
-        'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg" // Default profile image
-    ];
+  // Store feedback
+  $feedbackData[] = [
+      'feedback' => $row['feedback'],
+      'submitted_at' => $row['submitted_at'],
+      'student_name' => $row['student_name'],
+      'lname' => $row['lname'],
+      'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
+  ];
+
+  // Only store comment if it exists
+  if (!empty($row['comment'])) {
+      $feedbackData[] = [
+          'feedback' => $row['comment'], // Store comment as a separate entry
+          'submitted_at' => $row['comment_created_at'],
+          'student_name' => $row['student_name'],
+          'lname' => $row['lname'],
+          'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
+      ];
+  }
 }
+
 
 $defimage = 'images/facultyb.png';
 
@@ -855,7 +870,6 @@ word-wrap: break-word;
           <img src="<?php echo htmlspecialchars($current_image); ?>" alt="Profile pic">
           <label for="termsCheckbox_usercomment" class="rant-post" type="text">Comment your concerns</label>
         </section>
-
         <input type="checkbox" id="termsCheckbox_usercomment" class="modal-toggle_usercom">
         <div class="modal_usercom">
           <div class="modal-content-usercom">
@@ -865,11 +879,21 @@ word-wrap: break-word;
                     <div>
                     <img src="<?php echo htmlspecialchars($current_image); ?>" alt="picture">
                     <p>Name of user</p>
+<<<<<<< HEAD
                     </div>                  
                     <textarea name="" id="" placeholder="What's your concern?"></textarea>
                     
                     <button>Comment</button>
 
+=======
+                    </div>
+                    <form action="comment.php" method="post">
+                        <input type="hidden" name="professor_id" value="<?php echo htmlspecialchars($professor_id); ?>">
+                        <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
+                        <textarea name="comment" id="" placeholder="What's your concern?"></textarea>            
+                    <button type="submit">Comment</button>
+                    </form>
+>>>>>>> origin/kai
           </div>  
         </div>
 
@@ -889,8 +913,20 @@ word-wrap: break-word;
                     echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
                     echo '</div>';
                     echo '</div>';
-                }
-                ?>
+
+                     // Display comment as its own post (separate from feedback)
+                    if (!empty($comm['comment'])) {
+                      echo '<div class="comment-box">';
+                      echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                      echo '<div class="comment-text">';
+                      echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                      echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
+                      echo '<small>Commented on: ' . htmlspecialchars($comm['comment_created_at']) . '</small>';
+                      echo '</div>';
+                      echo '</div>';
+                  }
+              }
+              ?>
             </div>
         </label>
 
@@ -959,8 +995,19 @@ word-wrap: break-word;
                     echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
                     echo '</div>';
                     echo '</div>';
-                }
-                ?>
+                     // Display comment as its own post (separate from feedback)
+                    if (!empty($comm['comment'])) {
+                      echo '<div class="comment-box">';
+                      echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                      echo '<div class="comment-text">';
+                      echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                      echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
+                      echo '<small>Commented on: ' . htmlspecialchars($comm['comment_created_at']) . '</small>';
+                      echo '</div>';
+                      echo '</div>';
+                  }
+              }
+              ?>
             </div>
         </div>
     </div>
