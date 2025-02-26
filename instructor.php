@@ -871,7 +871,6 @@ word-wrap: break-word;
                     
                     <button>Comment</button>
 
-          
           </div>  
         </div>
 
