@@ -24,12 +24,13 @@ if ($profQuery->num_rows > 0) {
 }
 
 // Prepare SQL query to fetch feedback for the logged-in user
-$query = "SELECT ie.feedback, c.comment,c.created_at AS comment_created_at, ie.submitted_at, r.fname AS student_name, lname, r.picture AS student_image
+$query = "SELECT ie.feedback, c.comment, c.created_at AS comment_created_at, ie.submitted_at, r.fname AS student_name, lname, r.picture AS student_image
           FROM instructor_evaluation ie
           JOIN registration r ON ie.user_id = r.id
-           LEFT JOIN comments c ON ie.user_id = c.user_id AND ie.professor_id = c.professor_id
+          LEFT JOIN comments c ON ie.user_id = c.user_id AND ie.professor_id = c.professor_id
           WHERE ie.professor_id = ?
           ORDER BY ie.submitted_at DESC";  // Show latest feedback first";
+
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $professor_id);
 $stmt->execute();
@@ -879,13 +880,6 @@ word-wrap: break-word;
                     <div>
                     <img src="<?php echo htmlspecialchars($current_image); ?>" alt="picture">
                     <p>Name of user</p>
-<<<<<<< HEAD
-                    </div>                  
-                    <textarea name="" id="" placeholder="What's your concern?"></textarea>
-                    
-                    <button>Comment</button>
-
-=======
                     </div>
                     <form action="comment.php" method="post">
                         <input type="hidden" name="professor_id" value="<?php echo htmlspecialchars($professor_id); ?>">
@@ -893,7 +887,6 @@ word-wrap: break-word;
                         <textarea name="comment" id="" placeholder="What's your concern?"></textarea>            
                     <button type="submit">Comment</button>
                     </form>
->>>>>>> origin/kai
           </div>  
         </div>
 
