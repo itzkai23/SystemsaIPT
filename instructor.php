@@ -337,6 +337,7 @@ opacity: 0.9;
 
 .comment-post img {
   width: 40px;
+  border-radius: 20px;
 }
 
 /* POP-UP USER COMMENT */
@@ -356,6 +357,7 @@ opacity: 0.9;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 14px;
 }
 
 /* Modal Content */
@@ -406,8 +408,8 @@ opacity: 0.9;
   padding: 20px;
   border-radius: 10px;
   width: 50%;
-  height: 60%;
-  max-width: 600px;
+  
+  max-width: 500px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
 }
@@ -433,6 +435,7 @@ opacity: 0.9;
 
 .modal-content-usercom img {
   width: 40px;
+  border-radius: 20px;
 }
 
 .modal-content-usercom textarea {
@@ -498,9 +501,25 @@ textarea:not(:placeholder-shown) + button {
 /* POP-UP ALL USERS COMMENTS */
 
 /* Hidden Checkbox */
+.modal-toggle {
+    display: none;
+}
 
 /* Hide the modal by default */
-
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
 
 /* Show modal when checkbox is checked */
 #termsCheckbox:checked ~ .modal {
@@ -510,7 +529,7 @@ textarea:not(:placeholder-shown) + button {
 
 /* Modal Content */
 .modal-content {
-    background: black;
+    background: white;
     width: 40%;
     max-width: 500px;
     padding: 20px;
@@ -518,12 +537,15 @@ textarea:not(:placeholder-shown) + button {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transform: scale(0.9);
     transition: transform 0.3s ease-in-out;
-    
 }
 
 /* Smooth pop effect */
 #termsCheckbox:checked ~ .modal .modal-content {
     transform: scale(1);
+}
+
+.modal-toggle:checked + .modal {
+    display: block;
 }
 
 /* Close button */
@@ -554,9 +576,15 @@ gap: 15px;
   gap:148px;
 }
 
+/* .boxes{
+  display: flex;
+  flex-direction: row;
+  gap:148px;
+} */
+
 /* Individual Cards */
 .section {
-width: 135%;
+width: 45%;
 height: 150px;
 padding: 15px;
 background: #ffffff;
@@ -567,26 +595,10 @@ vertical-align: top;
 transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.section2{
-  width: 45%;
-  height: 150px;
-  padding: 15px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-}
-
 .section:hover {
 transform: translateY(-5px);
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-
-.section2:hover {
-transform: translateY(-5px);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
 
 .con-rate {
   display: flex;
@@ -594,11 +606,40 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 0px;
 }
 
+.label-section {
+width: 95%;
+height: 78%;
+padding: 15px;
+background: #ffffff;
+border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+display: inline-block;
+vertical-align: top;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+margin-top: 50px;
+}
+
+/* Custom Scrollbar for Sidebar */
+.label-section::-webkit-scrollbar {
+    width: 6px;
+    overflow-y: scroll;
+}
+
+.label-section::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 10px;
+}
+
+.label-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
 
 .rating {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
+    margin-left: 60px;
 }
 .rating input {
     display: none;
@@ -635,7 +676,8 @@ word-wrap: break-word;
   overflow-y: scroll; 
   border: 1px solid #ccc; 
   padding: 10px; 
-  width: 92%; 
+  /* width: 92%;  */
+  min-width: 100px;
 }
 
 .com-scroll::-webkit-scrollbar {
@@ -665,38 +707,37 @@ word-wrap: break-word;
     padding: 10px;
     border-radius: 8px;
     margin-top: 10px;
-    
 }
 
+  .comment-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  }
 
-.comment-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+  .comment-text {
+  flex-grow: 1;
+  }
 
-.comment-text {
-    flex-grow: 1;
-}
+  .comment-text strong {
+  font-size: 14px;
+  }
 
-.comment-text strong {
-    font-size: 14px;
-}
+  .comment-text p {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 5px 0;
+  }
 
-.comment-text p {
-    font-size: 13px;
-    margin: 5px 0;
-}
+  .comment-text small {
+  font-size: 11px;
+  color: gray;
+  }
 
-.comment-text small {
-    font-size: 11px;
-    color: gray;
-}
-
-.user {
-    color: white;
-}
+  .user {
+  color: white;
+  }
     </style>
 </head>
 <body>
@@ -755,7 +796,7 @@ word-wrap: break-word;
         </div>
         
         <section class="comment-post">
-          <img src="images/icon.jpg" alt="Profile pic">
+          <img src="<?php echo htmlspecialchars($current_image); ?>" alt="Profile pic">
           <label for="termsCheckbox_usercomment" class="rant-post" type="text">Comment your concerns</label>
         </section>
 
@@ -766,7 +807,7 @@ word-wrap: break-word;
             
               <h3>Your comment/concerns</h3>
                     <div>
-                    <img src="images/icon.jpg" alt="picture">
+                    <img src="<?php echo htmlspecialchars($current_image); ?>" alt="picture">
                     <p>Name of user</p>
                     </div>
                    
@@ -774,14 +815,12 @@ word-wrap: break-word;
                     
                     <button>Comment</button>
 
-          
           </div>  
         </div>
-
-        <div class="boxes">
+        
         <!-- Display Submitted Data -->
+        <div class="comdent">
 
-          <div class="comdent">
           <label for="termsCheckbox" class="section">
             <h3>Comments</h3>
             <div class="com-scroll">
@@ -798,40 +837,61 @@ word-wrap: break-word;
                 }
                 ?>
               </label>
-          </div>
 
-          </div>
+                <!-- Move the checkbox and modal to avoid overlap -->
+                <input type="checkbox" id="termsCheckbox" class="modal-toggle">
+                <div class="modal">  
+                  <div class="modal-content">
+                    <label for="termsCheckbox" class="close">&times;</label>
+                    
+                    <div class="label-section">
+                      <h3>Comments</h3>                   
+                      <?php
+                      foreach ($feedbackData as $comm) {
+                          echo '<div class="comment-box">';
+                          echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                          echo '<div class="comment-text">';
+                          echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                          echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
+                          echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
+                          echo '</div>';
+                          echo '</div>';
+                      }
+                      ?>
+                    </div>
+                  </div>  
+                </div>
 
-    <!-- Rating Section -->
-                <div class="section2">
-  <h3>Rating</h3>
-  <p></p>
+                <!-- Rating Section -->
+                <div class="section">
+                  <h3>Rating</h3>
+                  <p><?php echo $rating; ?></p>
 
-  <div class="con-rate">
-    <div>total of rate</div>
-    <div>number of stars</div>
-  </div>
-  <div>users participant</div>
+                  <div class="con-rate">
+                    <div>total of rate</div>
+                    <div>number of stars</div>
+                  </div>
+                  <div>users participant</div>
 
-  <div class="rating">
-      <input type="radio" id="star5" name="rating" value="5">
-      <label for="star5">★</label>
-      
-      <input type="radio" id="star4" name="rating" value="4">
-      <label for="star4">★</label>
-      
-      <input type="radio" id="star3" name="rating" value="3">
-      <label for="star3">★</label>
-      
-      <input type="radio" id="star2" name="rating" value="2">
-      <label for="star2">★</label>
-      
-      <input type="radio" id="star1" name="rating" value="1">
-      <label for="star1">★</label>
-  </div>
-</div>
-</div>
+                  <div class="rating">
+                      <input type="radio" id="star5" name="rating" value="5">
+                      <label for="star5">★</label>
+                      
+                      <input type="radio" id="star4" name="rating" value="4">
+                      <label for="star4">★</label>
+                      
+                      <input type="radio" id="star3" name="rating" value="3">
+                      <label for="star3">★</label>
+                      
+                      <input type="radio" id="star2" name="rating" value="2">
+                      <label for="star2">★</label>
+                      
+                      <input type="radio" id="star1" name="rating" value="1">
+                      <label for="star1">★</label>
+                  </div>
+                </div>
 
+    </div>
     <script src="js/sidebar.js"></script>
     <script src="js/logs.js"></script>
     <script src="js/logs.js"></script>
