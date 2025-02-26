@@ -550,13 +550,12 @@ gap: 15px;
 
 .boxes{
   display: flex;
-  flex-direction: row;
-  gap:148px;
+  flex-direction: column;
 }
 
 /* Individual Cards */
 .section {
-width: 135%;
+width: 45%;
 height: 150px;
 padding: 15px;
 background: #ffffff;
@@ -665,7 +664,6 @@ word-wrap: break-word;
     padding: 10px;
     border-radius: 8px;
     margin-top: 10px;
-    
 }
 
 
@@ -780,13 +778,11 @@ word-wrap: break-word;
 
         <div class="boxes">
         <!-- Display Submitted Data -->
-
-          <div class="comdent">
           <label for="termsCheckbox" class="section">
             <h3>Comments</h3>
-            <div class="com-scroll">
                 <?php
                 foreach ($feedbackData as $comm) {
+                    echo '<div class="com-scroll">';
                     echo '<div class="comment-box">';
                     echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
                     echo '<div class="comment-text">';
@@ -799,11 +795,10 @@ word-wrap: break-word;
                 ?>
               </label>
           </div>
-
-          </div>
+              </div>
 
     <!-- Rating Section -->
-                <div class="section2">
+    <div class="section2">
   <h3>Rating</h3>
   <p></p>
 
