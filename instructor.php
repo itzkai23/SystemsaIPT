@@ -337,6 +337,7 @@ opacity: 0.9;
 
 .comment-post img {
   width: 40px;
+  border-radius: 20px;
 }
 
 /* POP-UP USER COMMENT */
@@ -356,6 +357,7 @@ opacity: 0.9;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 14px;
 }
 
 /* Modal Content */
@@ -406,8 +408,8 @@ opacity: 0.9;
   padding: 20px;
   border-radius: 10px;
   width: 50%;
-  height: 60%;
-  max-width: 600px;
+  
+  max-width: 500px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
 }
@@ -433,6 +435,7 @@ opacity: 0.9;
 
 .modal-content-usercom img {
   width: 40px;
+  border-radius: 20px;
 }
 
 .modal-content-usercom textarea {
@@ -498,7 +501,46 @@ textarea:not(:placeholder-shown) + button {
 /* POP-UP ALL USERS COMMENTS */
 
 /* Hidden Checkbox */
+.modal-toggle {
+  display: none;
+}
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0px;
+  border-radius: 13px;
 
+  /* display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); */
+}
+/* Modal Content */
+.modal-content {
+  background-color: white;
+  margin: auto;
+  margin-top: 80px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  height: 60%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
 /* Hide the modal by default */
 
 
@@ -508,22 +550,13 @@ textarea:not(:placeholder-shown) + button {
     opacity: 1;
 }
 
-/* Modal Content */
-.modal-content {
-    background: black;
-    width: 40%;
-    max-width: 500px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transform: scale(0.9);
-    transition: transform 0.3s ease-in-out;
-    
-}
-
 /* Smooth pop effect */
 #termsCheckbox:checked ~ .modal .modal-content {
     transform: scale(1);
+}
+
+.modal-toggle:checked + .modal {
+    display: block;
 }
 
 /* Close button */
@@ -541,23 +574,23 @@ textarea:not(:placeholder-shown) + button {
 /* Show Modal When Checkbox is Checked */
 
 /* Comment & Details Section */
-/* .comdent {
+.comdent {
 display: flex;
 justify-content: space-between;
 flex-wrap: wrap;
 gap: 15px;
-} */
+}
 
-.boxes{
+/* .boxes{
   display: flex;
   flex-direction: row;
   gap:148px;
-}
+} */
 
 /* Individual Cards */
 .section {
-width: 135%;
-height: 150px;
+width: 45%;
+height: 170px;
 padding: 15px;
 background: #ffffff;
 border-radius: 10px;
@@ -565,16 +598,6 @@ box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 display: inline-block;
 vertical-align: top;
 transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.section2{
-  width: 45%;
-  height: 150px;
-  padding: 15px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: inline-block;
 }
 
 .section:hover {
@@ -589,16 +612,88 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
 
 .con-rate {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 0px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: #f8f9fa;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+font-family: Arial, sans-serif;
+max-width: 400px;
+margin: 10px auto;
 }
 
+.rate-total, .rate-stars {
+display: flex;
+align-items: center;
+gap: 2px;
+font-size: 15px;
+color: #333;
+}
+
+.rate-total strong {
+color: #007bff;
+font-size: 18px;
+}
+
+.stars {
+font-size: 18px;
+color: #f1c40f; /* Gold color for stars */
+}
+
+.user-participant {
+background: #eef2f3;
+padding: 10px 15px;
+border-radius: 8px;
+font-size: 16px;
+color: #333;
+display: flex;
+align-items: center;
+gap: 6px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+max-width: 328px;
+
+}
+
+.user-participant strong {
+color: #28a745; /* Green color to highlight the number */
+font-size: 18px;
+}
+
+.label-section {
+  width: 95%;
+  height: 78%;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  vertical-align: top;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 0px;
+  margin-left: 0px;
+  overflow: scroll;
+}
+
+.label-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.label-section::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 10px;
+}
+
+.label-section::-webkit-scrollbar-track {
+  background: #f1f1f1
+}
 
 .rating {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
+    margin-left: 60px;
 }
 .rating input {
     display: none;
@@ -635,7 +730,8 @@ word-wrap: break-word;
   overflow-y: scroll; 
   border: 1px solid #ccc; 
   padding: 10px; 
-  width: 92%; 
+  width: 92%;
+  cursor: pointer; 
 }
 
 .com-scroll::-webkit-scrollbar {
@@ -657,46 +753,47 @@ word-wrap: break-word;
 }
 
 /* Comment box layout */
-.comment-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 10px;
-    
-}
+  .comment-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  
+  }
 
 
-.comment-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+  .comment-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  }
 
-.comment-text {
-    flex-grow: 1;
-}
+  .comment-text {
+  flex-grow: 1;
+  }
 
-.comment-text strong {
-    font-size: 14px;
-}
+  .comment-text strong {
+  font-size: 14px;
+  }
 
-.comment-text p {
-    font-size: 13px;
-    margin: 5px 0;
-}
+  .comment-text p {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 5px 0;
+  }
 
-.comment-text small {
-    font-size: 11px;
-    color: gray;
-}
+  .comment-text small {
+  font-size: 11px;
+  color: gray;
+  }
 
-.user {
-    color: white;
-}
+  .user {
+  color: white;
+  }
     </style>
 </head>
 <body>
@@ -755,7 +852,7 @@ word-wrap: break-word;
         </div>
         
         <section class="comment-post">
-          <img src="images/icon.jpg" alt="Profile pic">
+          <img src="<?php echo htmlspecialchars($current_image); ?>" alt="Profile pic">
           <label for="termsCheckbox_usercomment" class="rant-post" type="text">Comment your concerns</label>
         </section>
 
@@ -766,7 +863,7 @@ word-wrap: break-word;
             
               <h3>Your comment/concerns</h3>
                     <div>
-                    <img src="images/icon.jpg" alt="picture">
+                    <img src="<?php echo htmlspecialchars($current_image); ?>" alt="picture">
                     <p>Name of user</p>
                     </div>
                    
@@ -778,11 +875,10 @@ word-wrap: break-word;
           </div>  
         </div>
 
-        <div class="boxes">
-        <!-- Display Submitted Data -->
-
-          <div class="comdent">
-          <label for="termsCheckbox" class="section">
+        
+    <!-- Display Submitted Data -->
+    <div class="comdent">
+        <label for="termsCheckbox" class="section">
             <h3>Comments</h3>
             <div class="com-scroll">
                 <?php
@@ -797,23 +893,30 @@ word-wrap: break-word;
                     echo '</div>';
                 }
                 ?>
-              </label>
-          </div>
+            </div>
+        </label>
 
-          </div>
-
-    <!-- Rating Section -->
-                <div class="section2">
+<!-- Rating Section -->
+<div class="section">
   <h3>Rating</h3>
   <p></p>
 
   <div class="con-rate">
-    <div>total of rate</div>
-    <div>number of stars</div>
-  </div>
-  <div>users participant</div>
+    <div class="rate-total">
+        <span>Ratings:</span> <strong>120</strong>
+    </div>
+    <div class="rate-stars">
+        <span>Stars Rating:</span> 
+        <div class="stars">
+            ⭐⭐⭐⭐☆
+        </div>
+    </div>
+</div>
+  
+<div class="user-participant">
+    <span>Users Participating:</span> <strong>150</strong>
 
-  <div class="rating">
+    <div class="rating">
       <input type="radio" id="star5" name="rating" value="5">
       <label for="star5">★</label>
       
@@ -830,6 +933,42 @@ word-wrap: break-word;
       <label for="star1">★</label>
   </div>
 </div>
+
+  
+</div>
+
+    </div>
+
+
+<!-- Hidden Checkbox to Trigger Modal -->
+<input type="checkbox" id="termsCheckbox" class="modal-toggle">
+
+<!-- Modal Structure -->
+<div class="modal">
+    <div class="modal-content">
+        <h3>Comments</h3>
+        <label for="termsCheckbox" class="close">&times;</label>
+        <div class="label-section">
+            <!-- <h3>Comments</h3> -->
+            <div class="modal-scroll">
+                <?php
+                foreach ($feedbackData as $comm) {
+                    echo '<div class="comment-box">';
+                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                    echo '<div class="comment-text">';
+                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                    echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
+                    echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
 </div>
 
     <script src="js/sidebar.js"></script>
