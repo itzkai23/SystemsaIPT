@@ -865,8 +865,7 @@ word-wrap: break-word;
                     <div>
                     <img src="<?php echo htmlspecialchars($current_image); ?>" alt="picture">
                     <p>Name of user</p>
-                    </div>
-                   
+                    </div>                  
                     <textarea name="" id="" placeholder="What's your concern?"></textarea>
                     
                     <button>Comment</button>
