@@ -548,9 +548,15 @@ flex-wrap: wrap;
 gap: 15px;
 } */
 
+.boxes{
+  display: flex;
+  flex-direction: row;
+  gap:148px;
+}
+
 /* Individual Cards */
 .section {
-width: 45%;
+width: 135%;
 height: 150px;
 padding: 15px;
 background: #ffffff;
@@ -561,10 +567,26 @@ vertical-align: top;
 transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.section2{
+  width: 45%;
+  height: 150px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
 .section:hover {
 transform: translateY(-5px);
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+.section2:hover {
+transform: translateY(-5px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 
 .con-rate {
   display: flex;
@@ -755,10 +777,9 @@ word-wrap: break-word;
           
           </div>  
         </div>
-        
+
+        <div class="boxes">
         <!-- Display Submitted Data -->
-        
-          
 
           <div class="comdent">
           <label for="termsCheckbox" class="section">
@@ -780,8 +801,9 @@ word-wrap: break-word;
           </div>
 
           </div>
-                <!-- Rating Section -->
-                <div class="section">
+
+    <!-- Rating Section -->
+                <div class="section2">
   <h3>Rating</h3>
   <p></p>
 
@@ -808,16 +830,7 @@ word-wrap: break-word;
       <label for="star1">★</label>
   </div>
 </div>
-
-
-
-                
-
-    
-
-
-
-  
+</div>
 
     <script src="js/sidebar.js"></script>
     <script src="js/logs.js"></script>
