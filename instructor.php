@@ -745,7 +745,7 @@ word-wrap: break-word;
   max-height: 80px; 
   overflow-y: scroll; 
   border: 1px solid #ccc; 
-  padding: 10px; 
+  padding: 2px; 
   width: 92%;
   cursor: pointer; 
 }
@@ -771,13 +771,13 @@ word-wrap: break-word;
 /* Comment box layout */
   .comment-box {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start; /* Align items to the top */
   gap: 10px;
   background: #f9f9f9;
-  padding: 10px;
+  padding: 5px;
   border-radius: 8px;
-  margin-top: 10px;
-  
+  margin-top: 5px;
   }
 
 
@@ -785,26 +785,31 @@ word-wrap: break-word;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  flex-shrink: 0; /* Prevent shrinking */
   }
 
   .comment-text {
   flex-grow: 1;
+  
   }
 
   .comment-text strong {
   font-size: 14px;
+  display: block; /* Ensures it appears above */
   }
 
   .comment-text p {
   font-size: 15px;
   font-weight: 800;
-  margin: 5px 0;
+  margin-top: -15px;
+  margin-bottom: 0px;
   }
 
   .comment-text small {
   font-size: 11px;
   color: gray;
+  margin-top: 2px;
+  display: block;
   }
 
   .user {
