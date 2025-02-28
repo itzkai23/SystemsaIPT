@@ -23,41 +23,52 @@ if ($profQuery->num_rows > 0) {
     die("Invalid professor selected. <a href='instructorsProfiles.php'>Go back</a>");
 }
 
-// Prepare SQL query to fetch feedback for the logged-in user
-$query = "SELECT ie.feedback, c.comment,c.created_at AS comment_created_at, ie.submitted_at, r.fname AS student_name, lname, r.picture AS student_image
-          FROM instructor_evaluation ie
-          JOIN registration r ON ie.user_id = r.id
-           LEFT JOIN comments c ON ie.user_id = c.user_id AND ie.professor_id = c.professor_id
-          WHERE ie.professor_id = ?
-          ORDER BY ie.submitted_at DESC";  // Show latest feedback first";
+$query = "
+SELECT 
+    ie.feedback, 
+    ie.submitted_at AS date_posted, 
+    NULL AS comment, 
+    r.fname AS student_name, 
+    r.lname, 
+    r.picture AS student_image
+FROM instructor_evaluation ie
+JOIN registration r ON ie.user_id = r.id
+WHERE ie.professor_id = ?
+
+UNION ALL
+
+SELECT 
+    NULL AS feedback, 
+    c.created_at AS date_posted,
+    c.comment, 
+    r.fname AS student_name, 
+    r.lname, 
+    r.picture AS student_image
+FROM comments c
+JOIN registration r ON c.user_id = r.id
+WHERE c.professor_id = ?
+
+ORDER BY date_posted DESC;";  // Latest entries first
+
+
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $professor_id);
+$stmt->bind_param("ii", $professor_id, $professor_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
 $feedbackData = [];
 
 while ($row = $result->fetch_assoc()) {
-  // Store feedback
-  $feedbackData[] = [
-      'feedback' => $row['feedback'],
-      'submitted_at' => $row['submitted_at'],
-      'student_name' => $row['student_name'],
-      'lname' => $row['lname'],
-      'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
-  ];
-
-  // Only store comment if it exists
-  if (!empty($row['comment'])) {
-      $feedbackData[] = [
-          'feedback' => $row['comment'], // Store comment as a separate entry
-          'submitted_at' => $row['comment_created_at'],
-          'student_name' => $row['student_name'],
-          'lname' => $row['lname'],
-          'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
-      ];
-  }
+    $feedbackData[] = [
+        'feedback' => !empty($row['feedback']) ? $row['feedback'] : null, // Store NULL if empty
+        'comment' => !empty($row['comment']) ? $row['comment'] : null, // Store NULL if empty
+        'date_posted' => $row['date_posted'], // Common date field for sorting
+        'student_name' => $row['student_name'],
+        'lname' => $row['lname'],
+        'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
+    ];
 }
+
 
 
 $defimage = 'images/facultyb.png';
@@ -596,12 +607,6 @@ flex-wrap: wrap;
 gap: 15px;
 }
 
-/* .boxes{
-  display: flex;
-  flex-direction: row;
-  gap:148px;
-} */
-
 /* Individual Cards */
 .section {
 width: 45%;
@@ -620,42 +625,6 @@ transform: translateY(-5px);
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.section2:hover {
-transform: translateY(-5px);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-
-.con-rate {
-display: flex;
-justify-content: space-between;
-align-items: center;
-background: #f8f9fa;
-padding: 15px;
-border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-font-family: Arial, sans-serif;
-max-width: 400px;
-margin: 10px auto;
-}
-
-.rate-total, .rate-stars {
-display: flex;
-align-items: center;
-gap: 2px;
-font-size: 15px;
-color: #333;
-}
-
-.rate-total strong {
-color: #007bff;
-font-size: 18px;
-}
-
-.stars {
-font-size: 18px;
-color: #f1c40f; /* Gold color for stars */
-}
 
 .user-participant {
 background: #eef2f3;
@@ -665,10 +634,10 @@ font-size: 16px;
 color: #333;
 display: flex;
 align-items: center;
-gap: 6px;
+gap: 15px;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 max-width: 328px;
-
+justify-content: center;
 }
 
 .user-participant strong {
@@ -724,13 +693,21 @@ font-size: 18px;
     color: gold;
 }
 
-/* Headings */
+/* Comments and Average Container */
 h3 {
 font-size: 18px;
 color: #1976d2;
 margin-bottom: 10px;
 border-bottom: 2px solid #64b5f6;
 padding-bottom: 5px;
+}
+
+h4 {
+font-size: 18px;
+color:rgb(255, 152, 33);
+margin-bottom: 10px;
+padding-bottom: 5px;
+text-align: center;
 }
 
 /* Text */
@@ -744,7 +721,7 @@ word-wrap: break-word;
   max-height: 80px; 
   overflow-y: scroll; 
   border: 1px solid #ccc; 
-  padding: 10px; 
+  padding: 2px; 
   width: 92%;
   cursor: pointer; 
 }
@@ -770,13 +747,13 @@ word-wrap: break-word;
 /* Comment box layout */
   .comment-box {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start; /* Align items to the top */
   gap: 10px;
   background: #f9f9f9;
-  padding: 10px;
+  padding: 5px;
   border-radius: 8px;
-  margin-top: 10px;
-  
+  margin-top: 5px;
   }
 
 
@@ -784,26 +761,31 @@ word-wrap: break-word;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  flex-shrink: 0; /* Prevent shrinking */
   }
 
   .comment-text {
   flex-grow: 1;
+  
   }
 
   .comment-text strong {
   font-size: 14px;
+  display: block; /* Ensures it appears above */
   }
 
   .comment-text p {
   font-size: 15px;
   font-weight: 800;
-  margin: 5px 0;
+  margin-top: -15px;
+  margin-bottom: 0px;
   }
 
   .comment-text small {
   font-size: 11px;
   color: gray;
+  margin-top: 2px;
+  display: block;
   }
 
   .user {
@@ -891,73 +873,48 @@ word-wrap: break-word;
 
         
     <!-- Display Submitted Data -->
-    <div class="comdent">
-        <label for="termsCheckbox" class="section">
-            <h3>Comments</h3>
-            <div class="com-scroll">
-                <?php
-                foreach ($feedbackData as $comm) {
-                    echo '<div class="comment-box">';
-                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                    echo '<div class="comment-text">';
-                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-                    echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                    echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
-                    echo '</div>';
-                    echo '</div>';
+<div class="comdent">
+    <label for="termsCheckbox" class="section">
+        <h3>Comments</h3>
+        <div class="com-scroll">
+                      <?php
+              foreach ($feedbackData as $comm) {
+                  // Display feedback if it exists
+                  if (!empty($comm['feedback'])) {
+                      echo '<div class="comment-box">';
+                      echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                      echo '<div class="comment-text">';
+                      echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                      echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
+                      echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
+                      echo '</div>';
+                      echo '</div>';
+                  }
 
-                     // Display comment as its own post (separate from feedback)
-                    if (!empty($comm['comment'])) {
+                  // Display comment if it exists
+                  if (!empty($comm['comment'])) {
                       echo '<div class="comment-box">';
                       echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
                       echo '<div class="comment-text">';
                       echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
                       echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-                      echo '<small>Commented on: ' . htmlspecialchars($comm['comment_created_at']) . '</small>';
+                      echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
                       echo '</div>';
                       echo '</div>';
                   }
               }
               ?>
-            </div>
-        </label>
-
-<!-- Rating Section -->
-<div class="section">
-  <h3>Rating</h3>
-  <p></p>
-
-  <div class="con-rate">
-    <div class="rate-total">
-        <span>Ratings:</span> <strong>120</strong>
-    </div>
-    <div class="rate-stars">
-        <span>Stars Rating:</span> 
-        <div class="stars">
-            ⭐⭐⭐⭐☆
         </div>
-    </div>
-</div>
-  
-<div class="user-participant">
-    <span>Users Participating:</span> <strong>150</strong>
+    </label>
 
-    <div class="rating">
-      <input type="radio" id="star5" name="rating" value="5">
-      <label for="star5">★</label>
-      
-      <input type="radio" id="star4" name="rating" value="4">
-      <label for="star4">★</label>
-      
-      <input type="radio" id="star3" name="rating" value="3">
-      <label for="star3">★</label>
-      
-      <input type="radio" id="star2" name="rating" value="2">
-      <label for="star2">★</label>
-      
-      <input type="radio" id="star1" name="rating" value="1">
-      <label for="star1">★</label>
-  </div>
+
+<!-- Professors Average -->
+<div class="section">
+  <h3>Average Evaluation Points</h3>
+  <h4>Current Status</h4>
+<div class="user-participant">
+    <span>Number of Evaluation:</span> <strong>150</strong>
+    <span>Average:</span> <strong>89.55</strong>
 </div>
 
   
@@ -977,29 +934,33 @@ word-wrap: break-word;
         <div class="label-section">
             <!-- <h3>Comments</h3> -->
             <div class="modal-scroll">
-                <?php
-                foreach ($feedbackData as $comm) {
+            <?php
+            foreach ($feedbackData as $comm) {
+                // Display feedback if it exists
+                if (!empty($comm['feedback'])) {
                     echo '<div class="comment-box">';
                     echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
                     echo '<div class="comment-text">';
                     echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
                     echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                    echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
+                    echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
                     echo '</div>';
                     echo '</div>';
-                     // Display comment as its own post (separate from feedback)
-                    if (!empty($comm['comment'])) {
-                      echo '<div class="comment-box">';
-                      echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                      echo '<div class="comment-text">';
-                      echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-                      echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-                      echo '<small>Commented on: ' . htmlspecialchars($comm['comment_created_at']) . '</small>';
-                      echo '</div>';
-                      echo '</div>';
-                  }
-              }
-              ?>
+                }
+
+                // Display comment if it exists
+                if (!empty($comm['comment'])) {
+                    echo '<div class="comment-box">';
+                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                    echo '<div class="comment-text">';
+                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                    echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
+                    echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
+                    echo '</div>';
+                    echo '</div>';
+                }
+            }
+            ?>
             </div>
         </div>
     </div>

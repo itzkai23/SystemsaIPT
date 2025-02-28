@@ -392,7 +392,8 @@ h2 {
 p {
     font-size: 1rem;
     margin-bottom: 15px;
-}
+}      
+
     </style>
 
 </head>
@@ -511,7 +512,6 @@ p {
         <p>For inquiries or concerns regarding the Faculty Evaluation Management System, please contact us at [Your Contact Email].</p>
     </div>
 </div>
-
 
 <script src="js/script.js"></script>
 <script src="js/faeye.js"></script>
