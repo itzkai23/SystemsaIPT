@@ -23,42 +23,52 @@ if ($profQuery->num_rows > 0) {
     die("Invalid professor selected. <a href='instructorsProfiles.php'>Go back</a>");
 }
 
-// Prepare SQL query to fetch feedback for the logged-in user
-$query = "SELECT ie.feedback, c.comment, c.created_at AS comment_created_at, ie.submitted_at, r.fname AS student_name, lname, r.picture AS student_image
-          FROM instructor_evaluation ie
-          JOIN registration r ON ie.user_id = r.id
-          LEFT JOIN comments c ON ie.user_id = c.user_id AND ie.professor_id = c.professor_id
-          WHERE ie.professor_id = ?
-          ORDER BY ie.submitted_at DESC";  // Show latest feedback first";
+$query = "
+SELECT 
+    ie.feedback, 
+    ie.submitted_at AS date_posted, 
+    NULL AS comment, 
+    r.fname AS student_name, 
+    r.lname, 
+    r.picture AS student_image
+FROM instructor_evaluation ie
+JOIN registration r ON ie.user_id = r.id
+WHERE ie.professor_id = ?
+
+UNION ALL
+
+SELECT 
+    NULL AS feedback, 
+    c.created_at AS date_posted,
+    c.comment, 
+    r.fname AS student_name, 
+    r.lname, 
+    r.picture AS student_image
+FROM comments c
+JOIN registration r ON c.user_id = r.id
+WHERE c.professor_id = ?
+
+ORDER BY date_posted DESC;";  // Latest entries first
+
 
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $professor_id);
+$stmt->bind_param("ii", $professor_id, $professor_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
 $feedbackData = [];
 
 while ($row = $result->fetch_assoc()) {
-  // Store feedback
-  $feedbackData[] = [
-      'feedback' => $row['feedback'],
-      'submitted_at' => $row['submitted_at'],
-      'student_name' => $row['student_name'],
-      'lname' => $row['lname'],
-      'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
-  ];
-
-  // Only store comment if it exists
-  if (!empty($row['comment'])) {
-      $feedbackData[] = [
-          'feedback' => $row['comment'], // Store comment as a separate entry
-          'submitted_at' => $row['comment_created_at'],
-          'student_name' => $row['student_name'],
-          'lname' => $row['lname'],
-          'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
-      ];
-  }
+    $feedbackData[] = [
+        'feedback' => !empty($row['feedback']) ? $row['feedback'] : null, // Store NULL if empty
+        'comment' => !empty($row['comment']) ? $row['comment'] : null, // Store NULL if empty
+        'date_posted' => $row['date_posted'], // Common date field for sorting
+        'student_name' => $row['student_name'],
+        'lname' => $row['lname'],
+        'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
+    ];
 }
+
 
 
 $defimage = 'images/facultyb.png';
@@ -897,36 +907,40 @@ word-wrap: break-word;
 
         
     <!-- Display Submitted Data -->
-    <div class="comdent">
-        <label for="termsCheckbox" class="section">
-            <h3>Comments</h3>
-            <div class="com-scroll">
-                <?php
-                foreach ($feedbackData as $comm) {
-                    echo '<div class="comment-box">';
-                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                    echo '<div class="comment-text">';
-                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-                    echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                    echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
-                    echo '</div>';
-                    echo '</div>';
+<div class="comdent">
+    <label for="termsCheckbox" class="section">
+        <h3>Comments</h3>
+        <div class="com-scroll">
+                      <?php
+              foreach ($feedbackData as $comm) {
+                  // Display feedback if it exists
+                  if (!empty($comm['feedback'])) {
+                      echo '<div class="comment-box">';
+                      echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                      echo '<div class="comment-text">';
+                      echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                      echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
+                      echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
+                      echo '</div>';
+                      echo '</div>';
+                  }
 
-                     // Display comment as its own post (separate from feedback)
-                    if (!empty($comm['comment'])) {
+                  // Display comment if it exists
+                  if (!empty($comm['comment'])) {
                       echo '<div class="comment-box">';
                       echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
                       echo '<div class="comment-text">';
                       echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
                       echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-                      echo '<small>Commented on: ' . htmlspecialchars($comm['comment_created_at']) . '</small>';
+                      echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
                       echo '</div>';
                       echo '</div>';
                   }
               }
               ?>
-            </div>
-        </label>
+        </div>
+    </label>
+
 
 <!-- Rating Section -->
 <div class="section">
@@ -983,29 +997,33 @@ word-wrap: break-word;
         <div class="label-section">
             <!-- <h3>Comments</h3> -->
             <div class="modal-scroll">
-                <?php
-                foreach ($feedbackData as $comm) {
+            <?php
+            foreach ($feedbackData as $comm) {
+                // Display feedback if it exists
+                if (!empty($comm['feedback'])) {
                     echo '<div class="comment-box">';
                     echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
                     echo '<div class="comment-text">';
                     echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
                     echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                    echo '<small>' . htmlspecialchars($comm['submitted_at']) . '</small>';
+                    echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
                     echo '</div>';
                     echo '</div>';
-                     // Display comment as its own post (separate from feedback)
-                    if (!empty($comm['comment'])) {
-                      echo '<div class="comment-box">';
-                      echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                      echo '<div class="comment-text">';
-                      echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-                      echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-                      echo '<small>Commented on: ' . htmlspecialchars($comm['comment_created_at']) . '</small>';
-                      echo '</div>';
-                      echo '</div>';
-                  }
-              }
-              ?>
+                }
+
+                // Display comment if it exists
+                if (!empty($comm['comment'])) {
+                    echo '<div class="comment-box">';
+                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                    echo '<div class="comment-text">';
+                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                    echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
+                    echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
+                    echo '</div>';
+                    echo '</div>';
+                }
+            }
+            ?>
             </div>
         </div>
     </div>
