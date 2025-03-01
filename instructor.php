@@ -72,7 +72,6 @@ while ($row = $result->fetch_assoc()) {
 $totalCount = count($feedbackData);
 
 
-
 $defimage = 'images/facultyb.png';
 
 // Keep your existing default image
@@ -877,11 +876,7 @@ word-wrap: break-word;
     <!-- Display Submitted Data -->
 <div class="comdent">
     <label for="termsCheckbox" class="section">
-<<<<<<< HEAD
-        <h3>Comments</h3>
-=======
       <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
->>>>>>> origin/kai
         <div class="com-scroll">
                       <?php
               foreach ($feedbackData as $comm) {
@@ -910,26 +905,6 @@ word-wrap: break-word;
                   }
               }
               ?>
-<<<<<<< HEAD
-        </div>
-    </label>
-
-
-<!-- Rating Section -->
-<div class="section">
-  <h3>Rating</h3>
-  <p></p>
-
-  <div class="con-rate">
-    <div class="rate-total">
-        <span>Ratings:</span> <strong>120</strong>
-    </div>
-    <div class="rate-stars">
-        <span>Stars Rating:</span> 
-        <div class="stars">
-            ⭐⭐⭐⭐☆
-=======
->>>>>>> origin/kai
         </div>
     </label>
 
