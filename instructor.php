@@ -69,6 +69,7 @@ while ($row = $result->fetch_assoc()) {
     ];
 }
 
+$totalCount = count($feedbackData);
 
 
 $defimage = 'images/facultyb.png';
@@ -875,7 +876,7 @@ word-wrap: break-word;
     <!-- Display Submitted Data -->
 <div class="comdent">
     <label for="termsCheckbox" class="section">
-        <h3>Comments</h3>
+      <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
         <div class="com-scroll">
                       <?php
               foreach ($feedbackData as $comm) {
@@ -929,7 +930,7 @@ word-wrap: break-word;
 <!-- Modal Structure -->
 <div class="modal">
     <div class="modal-content">
-        <h3>Comments</h3>
+        <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
         <label for="termsCheckbox" class="close">&times;</label>
         <div class="label-section">
             <!-- <h3>Comments</h3> -->

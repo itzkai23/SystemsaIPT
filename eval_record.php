@@ -34,6 +34,8 @@ $query .= " ORDER BY ie.submitted_at DESC";
 
 $result = mysqli_query($conn, $query);
 
+$eval_count = ($result) ? mysqli_num_rows($result) : 0;
+
 
 // Keep your existing default image
 $default_image = "images/icon.jpg";
@@ -369,6 +371,8 @@ tr:hover {
 
 <div class="container">
         <h2>Evaluation Record</h2>
+        <!-- Display Total Evaluation Count -->
+        <p class="student-count">Total Evaluation: <strong><?php echo $eval_count; ?></strong></p>
         <!-- Search Bar -->
           <div class="search-container">
               <form method="GET" action="">
