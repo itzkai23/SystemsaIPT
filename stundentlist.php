@@ -395,8 +395,8 @@ tr:hover {
                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['contact']) . "</td>";
                         echo "<td>
-                                <form action='delete_record.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this record?\");'>
-                                    <input type='hidden' name='record_id' value='" . htmlspecialchars($row['id']) . "'>
+                                <form action='delete_students.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this account?\");'>
+                                    <input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>
                                     <button type='submit' style='background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Delete</button>
                                 </form>
                                 </td>";
