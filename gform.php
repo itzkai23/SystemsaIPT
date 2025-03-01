@@ -17,6 +17,15 @@ if (isset($_GET['professor_id'])) {
     die("No professor selected. <a href='instructorsEval.php'>Go back</a>");
 }
 
+// Keep your existing default image
+$default_image = "images/icon.jpg";
+
+// Use session to get the latest profile picture
+$current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
+
+// Force-refresh the image to prevent caching issues
+$current_image .= "?t=" . time();
+
 // Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
     die("You must be logged in to evaluate. <a href='login.php'>Login</a>");
