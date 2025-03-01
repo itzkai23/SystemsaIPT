@@ -24,8 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
             $stmt->close();
-            header("Location: instructorsProfiles.php"); // Redirect on success
-            exit();
+               // Redirect back to the same page
+                header("Location: ".$_SERVER['HTTP_REFERER']);
+                exit(); // Ensure script stops execution after redirect
         } else {
             echo "Error: " . $stmt->error;
         }

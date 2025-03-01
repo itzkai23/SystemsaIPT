@@ -1,5 +1,6 @@
 <?php
 require 'connect.php';
+require 'functions.php'; // Include the functions file
 session_start();
 
 // Prevent browser from caching the page
@@ -16,16 +17,32 @@ if (isset($_GET['professor_id'])) {
     die("No professor selected. <a href='instructorsEval.php'>Go back</a>");
 }
 
+// Ensure user is logged in
+if (!isset($_SESSION['user_id'])) {
+    die("You must be logged in to evaluate. <a href='login.php'>Login</a>");
+}
+
+$user_id = $_SESSION['user_id']; // Consistently use user_id
+
+// ✅ Check if the user can evaluate *ONLY* on initial page load (GET request)
+if ($_SERVER["REQUEST_METHOD"] === "GET" && !canEvaluate($conn, $user_id, $professor_id)) {
+    die("❌ You have already evaluated this professor. Please wait 30 days before evaluating again. <a href='instructorsEval.php'>Go back</a>");
+}
+
 // Fetch professor name
-$profQuery = $conn->query("SELECT name FROM professors WHERE id = '$professor_id'");
-if ($profQuery->num_rows > 0) {
-    $profData = $profQuery->fetch_assoc();
+$profQuery = $conn->prepare("SELECT name FROM professors WHERE id = ?");
+$profQuery->bind_param("i", $professor_id);
+$profQuery->execute();
+$result = $profQuery->get_result();
+
+if ($result->num_rows > 0) {
+    $profData = $result->fetch_assoc();
     $professor_name = $profData['name'];
 } else {
     die("Invalid professor selected. <a href='instructorsEval.php'>Go back</a>");
 }
 
-// Keep your existing default image
+// Default profile image
 $default_image = "images/icon.jpg";
 
 // Use session to get the latest profile picture
@@ -34,10 +51,37 @@ $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION
 // Force-refresh the image to prevent caching issues
 $current_image .= "?t=" . time();
 
+// ✅ Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST['comments'])) {
+        die("All fields are required. <a href='gform.php?professor_id=$professor_id'>Go back</a>");
+    }
+
+    $comments = $conn->real_escape_string($_POST['comments']);
+    $submitted_at = date("Y-m-d H:i:s");
+
+    // ✅ Ensure user_id is used in the database insert query
+    $stmt = $conn->prepare("INSERT INTO instructor_evaluation (user_id, professor_id, comments, submitted_at) VALUES (?, ?, ?, ?)");
+    if (!$stmt) {
+        die("Query preparation failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("iiss", $user_id, $professor_id, $comments, $submitted_at);
+
+    if ($stmt->execute()) {
+        // ✅ Redirect after successful evaluation
+        echo "<script>alert('✅ Evaluation submitted successfully!'); window.location.href = 'instructorsEval.php';</script>";
+        exit;
+    } else {
+        die("❌ Error submitting evaluation. <a href='gform.php?professor_id=$professor_id'>Try again</a>");
+    }
+}
+
 // Fetch professors from the database
-$sql = "SELECT id, name FROM professors"; // Assuming your professor table is named 'professors'
+$sql = "SELECT id, name FROM professors";
 $result = $conn->query($sql);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

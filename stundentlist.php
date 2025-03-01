@@ -23,6 +23,9 @@ if (!empty($search)) {
 
 $result = mysqli_query($conn, $query);
 
+// Get the total number of students
+$student_count = ($result) ? mysqli_num_rows($result) : 0;
+
 // Keep your existing default image
 $default_image = "images/icon.jpg";
 
@@ -275,6 +278,13 @@ h2 {
     margin-bottom: 20px;
 }
 
+  /* Styling for student count */
+  .student-count {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
 /* Table Styling */
 table {
     width: 100%;
@@ -355,6 +365,8 @@ tr:hover {
 
 <div class="container">
         <h2>Student List</h2>
+         <!-- Display Total Student Count -->
+         <p class="student-count">Total Students: <strong><?php echo $student_count; ?></strong></p>
         <!-- Search Bar -->
         <div class="search-container">
               <form method="GET" action="">
@@ -376,7 +388,7 @@ tr:hover {
             </thead>
             <tbody>
                 <?php
-                if ($result && mysqli_num_rows($result) > 0) {
+                if ($student_count > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['fname'] . " " . $row['lname']) . "</td>";

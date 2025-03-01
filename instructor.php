@@ -69,6 +69,8 @@ while ($row = $result->fetch_assoc()) {
     ];
 }
 
+$totalCount = count($feedbackData);
+
 
 
 $defimage = 'images/facultyb.png';
@@ -607,12 +609,6 @@ flex-wrap: wrap;
 gap: 15px;
 }
 
-/* .boxes{
-  display: flex;
-  flex-direction: row;
-  gap:148px;
-} */
-
 /* Individual Cards */
 .section {
 width: 45%;
@@ -631,42 +627,6 @@ transform: translateY(-5px);
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.section2:hover {
-transform: translateY(-5px);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-
-.con-rate {
-display: flex;
-justify-content: space-between;
-align-items: center;
-background: #f8f9fa;
-padding: 15px;
-border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-font-family: Arial, sans-serif;
-max-width: 400px;
-margin: 10px auto;
-}
-
-.rate-total, .rate-stars {
-display: flex;
-align-items: center;
-gap: 2px;
-font-size: 15px;
-color: #333;
-}
-
-.rate-total strong {
-color: #007bff;
-font-size: 18px;
-}
-
-.stars {
-font-size: 18px;
-color: #f1c40f; /* Gold color for stars */
-}
 
 .user-participant {
 background: #eef2f3;
@@ -676,10 +636,10 @@ font-size: 16px;
 color: #333;
 display: flex;
 align-items: center;
-gap: 6px;
+gap: 15px;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 max-width: 328px;
-
+justify-content: center;
 }
 
 .user-participant strong {
@@ -735,13 +695,21 @@ font-size: 18px;
     color: gold;
 }
 
-/* Headings */
+/* Comments and Average Container */
 h3 {
 font-size: 18px;
 color: #1976d2;
 margin-bottom: 10px;
 border-bottom: 2px solid #64b5f6;
 padding-bottom: 5px;
+}
+
+h4 {
+font-size: 18px;
+color:rgb(255, 152, 33);
+margin-bottom: 10px;
+padding-bottom: 5px;
+text-align: center;
 }
 
 /* Text */
@@ -909,7 +877,11 @@ word-wrap: break-word;
     <!-- Display Submitted Data -->
 <div class="comdent">
     <label for="termsCheckbox" class="section">
+<<<<<<< HEAD
         <h3>Comments</h3>
+=======
+      <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
+>>>>>>> origin/kai
         <div class="com-scroll">
                       <?php
               foreach ($feedbackData as $comm) {
@@ -938,6 +910,7 @@ word-wrap: break-word;
                   }
               }
               ?>
+<<<<<<< HEAD
         </div>
     </label>
 
@@ -955,29 +928,19 @@ word-wrap: break-word;
         <span>Stars Rating:</span> 
         <div class="stars">
             ⭐⭐⭐⭐☆
+=======
+>>>>>>> origin/kai
         </div>
-    </div>
-</div>
-  
-<div class="user-participant">
-    <span>Users Participating:</span> <strong>150</strong>
+    </label>
 
-    <div class="rating">
-      <input type="radio" id="star5" name="rating" value="5">
-      <label for="star5">★</label>
-      
-      <input type="radio" id="star4" name="rating" value="4">
-      <label for="star4">★</label>
-      
-      <input type="radio" id="star3" name="rating" value="3">
-      <label for="star3">★</label>
-      
-      <input type="radio" id="star2" name="rating" value="2">
-      <label for="star2">★</label>
-      
-      <input type="radio" id="star1" name="rating" value="1">
-      <label for="star1">★</label>
-  </div>
+
+<!-- Professors Average -->
+<div class="section">
+  <h3>Average Evaluation Points</h3>
+  <h4>Current Status</h4>
+<div class="user-participant">
+    <span>Number of Evaluation:</span> <strong>150</strong>
+    <span>Average:</span> <strong>89.55</strong>
 </div>
 
   
@@ -992,7 +955,7 @@ word-wrap: break-word;
 <!-- Modal Structure -->
 <div class="modal">
     <div class="modal-content">
-        <h3>Comments</h3>
+        <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
         <label for="termsCheckbox" class="close">&times;</label>
         <div class="label-section">
             <!-- <h3>Comments</h3> -->

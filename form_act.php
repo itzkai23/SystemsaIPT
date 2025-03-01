@@ -34,8 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['professor_id'] = null; // Clear professor session
             $stmt->close();
             $conn->close();
-            header("Location: instructorsEval.php"); // Redirect after success
-            exit();
+            // Redirect back to the same page
+            header("Location: ".$_SERVER['HTTP_REFERER']);
+            exit(); // Ensure script stops execution after redirect
         } else {
             echo "Error: " . $stmt->error;
         }
