@@ -355,7 +355,7 @@ body {
         </div>
         
         <div class="divider">
-            <a href="#" class="divider-link">Report</a>
+            <a href="admin_reports.php" class="divider-link">Report</a>
             <img src="images/reportb.png" alt="icon">
         </div>
     </div>

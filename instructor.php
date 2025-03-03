@@ -28,6 +28,8 @@ SELECT
     ie.feedback, 
     ie.submitted_at AS date_posted, 
     NULL AS comment, 
+    ie.id AS evaluation_id,  -- Ensure feedback has an ID
+    NULL AS comment_id,  
     r.fname AS student_name, 
     r.lname, 
     r.picture AS student_image
@@ -41,6 +43,8 @@ SELECT
     NULL AS feedback, 
     c.created_at AS date_posted,
     c.comment, 
+    NULL AS evaluation_id,  
+    c.id AS comment_id,  -- Ensure comments have an ID
     r.fname AS student_name, 
     r.lname, 
     r.picture AS student_image
@@ -60,9 +64,11 @@ $feedbackData = [];
 
 while ($row = $result->fetch_assoc()) {
     $feedbackData[] = [
-        'feedback' => !empty($row['feedback']) ? $row['feedback'] : null, // Store NULL if empty
-        'comment' => !empty($row['comment']) ? $row['comment'] : null, // Store NULL if empty
-        'date_posted' => $row['date_posted'], // Common date field for sorting
+        'feedback' => !empty($row['feedback']) ? $row['feedback'] : null,
+        'comment' => !empty($row['comment']) ? $row['comment'] : null,
+        'comment_id' => isset($row['comment_id']) ? $row['comment_id'] : null,
+        'evaluation_id' => isset($row['evaluation_id']) ? $row['evaluation_id'] : null,
+        'date_posted' => $row['date_posted'],
         'student_name' => $row['student_name'],
         'lname' => $row['lname'],
         'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
@@ -792,6 +798,53 @@ word-wrap: break-word;
   .user {
   color: white;
   }
+
+  .menu-container {
+    position: relative;
+    display:flexbox;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    /* display: inline-block; */
+    position: absolute;
+    top: -35px;
+    right: 10px;
+}
+
+.menu-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 100px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.menu-options form {
+    margin: 0;
+    padding: 5px;
+}
+
+.menu-options button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.menu-options button:hover {
+    background: #f2f2f2;
+}
+
     </style>
 </head>
 <body>
@@ -873,7 +926,7 @@ word-wrap: break-word;
         </div>
 
         
-    <!-- Display Submitted Data -->
+<!-- Display Submitted Data -->
 <div class="comdent">
     <label for="termsCheckbox" class="section">
       <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
@@ -936,32 +989,63 @@ word-wrap: break-word;
             <!-- <h3>Comments</h3> -->
             <div class="modal-scroll">
             <?php
-            foreach ($feedbackData as $comm) {
-                // Display feedback if it exists
-                if (!empty($comm['feedback'])) {
-                    echo '<div class="comment-box">';
-                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                    echo '<div class="comment-text">';
-                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-                    echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                    echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
-                    echo '</div>';
-                    echo '</div>';
-                }
+foreach ($feedbackData as $comm) {
+    echo '<div class="comment-box">';
+    
+    // Profile Image
+    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+    
+    echo '<div class="comment-text">';
+    
+    // Student Name
+    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+    
+    // Display Feedback or Comment
+    if (!empty($comm['feedback'])) {
+        echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
+        echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>';
+        $comment_id = $comm['evaluation_id']; // Use evaluation_id for feedback
+    } elseif (!empty($comm['comment'])) {
+        echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
+        echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>';
+        $comment_id = $comm['comment_id']; // Use comment_id for comments
+    } else {
+        $comment_id = null; // No valid ID
+    }
 
-                // Display comment if it exists
-                if (!empty($comm['comment'])) {
-                    echo '<div class="comment-box">';
-                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                    echo '<div class="comment-text">';
-                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-                    echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-                    echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
-                    echo '</div>';
-                    echo '</div>';
-                }
-            }
-            ?>
+    // Three-dot menu button container
+    echo '<div class="menu-container">';
+    
+    // Three-dot button
+    echo '<button class="menu-btn" onclick="toggleMenu(this)">&#x22EE;</button>';
+    
+    // Dropdown menu options
+    echo '<div class="menu-options">';
+
+    if (!empty($comment_id)) { 
+        if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+            // Admin: Show delete button
+            echo '<form action="delete_comment.php" method="post">
+                    <input type="hidden" name="comment_id" value="' . htmlspecialchars($comment_id) . '">
+                    <button type="submit" onclick="return confirm(\'Are you sure you want to delete this?\');">Delete</button>
+                  </form>';
+        } else {
+            // Regular users: Show report button
+            echo '<form action="report_comment.php" method="post">
+                    <input type="hidden" name="comment_id" value="' . htmlspecialchars($comment_id) . '">
+                    <button type="submit">Report</button>
+                  </form>';
+        }
+    }
+
+    echo '</div>'; // Close .menu-options
+    echo '</div>'; // Close .menu-container
+
+    echo '</div>'; // Close .comment-text
+    echo '</div>'; // Close .comment-box
+}
+?>
+
             </div>
         </div>
     </div>
@@ -973,5 +1057,28 @@ word-wrap: break-word;
     <script src="js/sidebar.js"></script>
     <script src="js/logs.js"></script>
     <script src="js/logs.js"></script>
+
+<script>
+      function toggleMenu(button) {
+    var menu = button.nextElementSibling; // Get the corresponding menu
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+
+    // Close other open menus
+    document.querySelectorAll(".menu-options").forEach(function (otherMenu) {
+        if (otherMenu !== menu) {
+            otherMenu.style.display = "none";
+        }
+    });
+}
+
+// Close menu when clicking outside
+document.addEventListener("click", function (event) {
+    if (!event.target.matches(".menu-btn")) {
+        document.querySelectorAll(".menu-options").forEach(function (menu) {
+            menu.style.display = "none";
+        });
+    }
+});
+    </script>
 </body>
 </html>
