@@ -165,7 +165,7 @@ $current_image .= "?t=" . time();
 
 .logpos {
     position: absolute;
-    top: 2px;
+    top: 8px;
     right: 30px;
     display: flex;
     align-items: center;
@@ -176,7 +176,13 @@ $current_image .= "?t=" . time();
     position: relative;
     display: inline-block;
       }
-      
+.logout-container img {
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    object-fit: cover;
+    border: 1px solid goldenrod;
+} 
       /* Style for the logo/image */
       .logout-logo {
     width: 40px;  /* Adjust the size of the logo */
