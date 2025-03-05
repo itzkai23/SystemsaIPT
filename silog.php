@@ -579,5 +579,6 @@ p {
 
 <script src="js/script.js"></script>
 <script src="js/faeye.js"></script>
+<script src="js/cbot.js"></script>
 </body>
 </html>
