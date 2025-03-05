@@ -62,7 +62,7 @@ $current_image .= "?t=" . time();
 
    <div class="mid-section">
    <a href="home.php" class="home">Home</a>
-   <a href="freedomwall.html" class="pf">Newsfeed</a>
+   <a href="freedomwall.php" class="pf">Newsfeed</a>
    <a href="instructorsProfiles.php" class="pf">Faculty</a>
    </div>
    
