@@ -1,0 +1,357 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Container for the whole page */
+.page-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* List of Professors */
+.con-profs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+/* Professort (Row Layout) */
+.con-prof {
+    display: flex;           /* Use flex to arrange items in a row */
+    align-items: center;     /* Vertically center items */
+    background-color: #fff;
+    border: 1px solid #e0e4e8;  /* Light border */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.con-prof:hover {
+    background-color: #f7f7f7;
+    transform: scale(1.02);
+}
+
+/* Image Styling */
+.con-prof img {
+    width: 60px;             /* Set width and height of image */
+    height: 60px;
+    border-radius: 50%;      /* Circle shape */
+    object-fit: cover;       /* Ensure the image fits within the circle */
+    margin-right: 20px;      /* Space between image and text */
+}
+
+/* Title and Player Details */
+h1 {
+    font-size: 2rem;
+    color: #2d3a47;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h5 {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+/* Specific Styles for Player's Name and Type */
+.con-prof h5:first-of-type {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #5a5ec1; /* Light Purple color */
+}
+
+.con-prof h5:last-of-type {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #58a5d7; /* Light Blue color */
+}
+
+/* Alternate Background Color for Even Entries */
+.con-prof:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+h2 {
+    margin: auto;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+}
+/* Specific Styles for Player's Name and Type */
+.con-prof h2:first-of-type {
+    font-size: 20px;
+    font-weight: 700;
+    color: #5a5ec1; /* Light Purple color */
+}
+
+.con-prof h2:last-of-type {
+    font-size: 18px;
+    font-weight: 600;
+    color: #58a5d7; /* Light Blue color */
+}
+
+
+
+/* Back to Home Button */
+a {
+    display: inline-block;
+    /* background-color: #58a5d7; */
+    background-color: #5a5ec1;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+a:hover {
+    background-color: #4a90b1; /* Darker blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .con-prof {
+        padding: 15px;
+        flex-direction: row;  /* Keep the row layout on mobile */
+        align-items: center;
+    }
+
+    .con-prof img {
+        margin-bottom: 0; /* Remove extra space between image and text */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    a {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+
+/* POP-UP each Professor */
+
+/* Hidden Checkbox */
+.modal-toggle_usercom {
+    display: none;
+}
+
+/* Modal Styles */
+.modal_usercom {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Content */
+.modal-content_usercom {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    /* text-align: left;
+    max-height: 70vh; 
+    overflow-y: auto;  */
+}
+
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 8.5px 20px;
+    border-radius: 28px;
+}
+
+.close:hover {
+    color: black;
+    background-color: rgb(196, 192, 192);
+}
+
+/* Show Modal When Checkbox is Checked */
+.modal-toggle_usercom:checked + .modal_usercom {
+    display: block;
+}
+
+.modal-content-usercom {
+  text-align: center;
+  background-color: white;
+  margin: auto;
+  margin-top: 6%;
+  border-radius: 10px;
+  max-width: 70%;
+  max-height: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding: 25px 0px 20px 10px;
+}
+
+/* Main Container */
+.container {
+width: 95%;
+margin: 40px 15px 20px 20px;
+background: rgba(255, 255, 255, 0.1); 
+backdrop-filter: blur(5px);
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+z-index: 0;
+}
+
+/* Avatar & Name Section */
+.avnamecon {
+background: linear-gradient(135deg, #1976d2, #64b5f6); /* Blue gradient */
+padding: 15px;
+margin-bottom: 20px;
+border-radius: 10px;
+color: white;
+display: flex;
+flex-direction: column;
+}
+
+.avname {
+display: flex;
+align-items: center;
+}
+
+.avname img {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+background: white;
+padding: 3px;
+margin-right: 10px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.pc {
+display: flex;
+gap: 10px;
+}
+
+.prof-name{
+font-size: 18px;
+font-weight: bold;
+}
+
+.subject {
+margin-top: 10px;
+font-size: 16px;
+margin-left: 23px;
+opacity: 0.9;
+}
+
+/* User comments to instructor profile (Only Text) */
+.comment-post {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    transition: box-shadow 0.3s;
+}
+
+.comment-post:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.comment-post label {
+    border: 1px solid #e6e6e6;
+    border-radius: 30px;
+    /* width: 65%;
+    height: 50%;
+    padding: 10px 0px 10px 15px; */
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    transition: background 0.3s;
+}
+
+.comment-post label:hover {
+    background-color: #e6e6e6;
+}
+
+.comment-post img {
+  width: 40px;
+}
+
+/* Comment & Details Section */
+.comdent {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 15px;
+}
+
+/* Individual Cards */
+.section {
+width: 45%;
+height: 150px;
+padding: 15px;
+background: #ffffff;
+border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+display: inline-block;
+vertical-align: top;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+transform: translateY(-5px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+font-size: 18px;
+color: #1976d2;
+margin-bottom: 10px;
+border-bottom: 2px solid #64b5f6;
+padding-bottom: 5px;
+text-align: left;
+}
