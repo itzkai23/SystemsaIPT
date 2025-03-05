@@ -49,3 +49,5 @@ closereg.addEventListener('click', () => {
   registerForm.reset();
   showHText(); // Show .h-text when login/register form closes  
 });
+
+
