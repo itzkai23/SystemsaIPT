@@ -11,6 +11,7 @@ include("connect.php");
     <title>Silog</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/silog.css">
+    <link rel="stylesheet" href="css/cbot.css">
     <style>
     
 /* cmu logo sa form */
