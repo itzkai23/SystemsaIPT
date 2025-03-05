@@ -255,6 +255,9 @@ margin-left: auto;
     backdrop-filter: blur(5px); /* Glassmorphism effect */
     margin-top: 50px;
     margin-left: 19%;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
 }
 
 .h-text h2 {
@@ -264,7 +267,10 @@ margin-left: auto;
     color: white;
     display: block;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease-in-out;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 .h-text h3 {
@@ -272,8 +278,22 @@ margin-left: auto;
     font-weight: 500;
     color: white;
     margin-bottom: 25px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}      
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animation for smooth entrance */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
 
 .h-text a {
     color: white;
