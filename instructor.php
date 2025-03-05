@@ -903,6 +903,10 @@ word-wrap: break-word;
                  width="150" height="150">
          <div class="pc">
          <h5 class="prof-name"> <?php echo $professor_name; ?></h5>
+         <!-- Add a Report Button -->
+          <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
+        class="report-btn">Report</a>
+
          </div>
         </div>
         <h5 class="subject"><?php echo $profrole; ?></h5>
