@@ -392,7 +392,66 @@ h2 {
 p {
     font-size: 1rem;
     margin-bottom: 15px;
-}      
+}
+
+/* for TEXT-CONTAINER */
+
+/* Improved TEXT-CONTAINER */
+.h-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px; /* Reduced width for better readability */
+    width: 90%;
+    padding: 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95); /* Slightly more opaque */
+    border-radius: 15px; /* Softer edges */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    backdrop-filter: blur(12px); /* Stronger blur */
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Ensures smooth fade-in/out */
+.h-text.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -55%);
+}
+
+/* Heading Styles */
+.h-text h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #012362;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Subheading Styles */
+.h-text h3 {
+    font-size: 1.1rem;
+    color: #162938;
+    font-weight: 500;
+    line-height: 1.6; /* Improved readability */
+    margin-bottom: 0;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animation for smooth entrance */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
     </style>
 
@@ -512,6 +571,11 @@ p {
         <p>For inquiries or concerns regarding the Faculty Evaluation Management System, please contact us at [Your Contact Email].</p>
     </div>
 </div>
+
+<div class="h-text">
+    <h2>Welcome to the Faculty Evaluation Management System!</h2>
+    <h3>Take a moment to share your thoughts on your professors and courses. Your input helps shape a better learning experience for you and future students!</h3>
+    </div>
 
 <script src="js/script.js"></script>
 <script src="js/faeye.js"></script>
