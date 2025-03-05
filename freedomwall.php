@@ -2,25 +2,28 @@
 session_start();
 include 'connect.php'; // Ensure this contains the connectDatabase() function
 
-// Keep your existing default image
 $default_image = "images/icon.jpg";
-
-// Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
+$current_image .= "?t=" . time(); // Prevent caching issues
 
-// Force-refresh the image to prevent caching issues
-$current_image .= "?t=" . time();
-
-// Fetch all users from the registration table
+// Fetch all students (excluding admins)
 $studentsQuery = "SELECT fname, lname, picture FROM registration WHERE is_admin = 0 ORDER BY fname ASC";
 $studentsResult = $conn->query($studentsQuery);
 
-// Fetch posts from the database
+// Fetch all posts
 $query = "SELECT p.id, p.content, p.image_url, p.created_at, r.fname, r.lname, r.picture 
           FROM posts p 
           JOIN registration r ON p.user_id = r.id 
           ORDER BY p.created_at DESC";
 $result = $conn->query($query);
+
+// Prepare the comments query (to be executed inside the loop)
+$commentsQuery = "SELECT c.comment, c.created_at, r.fname, r.lname, r.picture 
+                  FROM nf_comments c 
+                  JOIN registration r ON c.user_id = r.id 
+                  WHERE c.post_id = ? 
+                  ORDER BY c.created_at ASC";
+$stmt = $conn->prepare($commentsQuery); // Prepare once
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,50 +93,68 @@ $result = $conn->query($query);
                 </div>
             </form>
 
-            <!-- Display Posts from Database -->
-            <?php while ($row = $result->fetch_assoc()) { ?>
-                <article class="news-item">
-                    <div class="users-posted">
-                        <img src="<?php echo htmlspecialchars($row['picture'] ? $row['picture'] : 'images/icon.jpg'); ?>" alt="user-photo">
-                        <p><?php echo htmlspecialchars($row['fname']) . " " . htmlspecialchars($row['lname']); ?></p>
-                    </div>
-                    <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
-                    <?php if (!empty($row['image_url'])) { ?>
-                        <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="Post Image" class="post-image">
-                    <?php } ?>
-                    <small>Posted on: <?php echo htmlspecialchars($row['created_at']); ?></small>
+<!-- Display Posts from Database -->
+<?php while ($row = $result->fetch_assoc()) { ?>
+    <article class="news-item">
+        <div class="users-posted">
+            <img src="<?php echo htmlspecialchars($row['picture'] ? $row['picture'] : 'images/icon.jpg'); ?>" alt="user-photo">
+            <p><?php echo htmlspecialchars($row['fname']) . " " . htmlspecialchars($row['lname']); ?></p>
+        </div>
+        <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
+        <?php if (!empty($row['image_url'])) { ?>
+            <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="Post Image" class="post-image">
+        <?php } ?>
+        <small>Posted on: <?php echo htmlspecialchars($row['created_at']); ?></small>
 
-                    <!-- Comments Section -->
-                    <div class="comments">
-                        <h3>Comments</h3>
-                        <div class="textarea-btn-con">
-                            <textarea type="text" placeholder="comment..."></textarea>
-                            <button><img src="images/sends.png" alt=""></button>
-                        </div>
-                    </div>
-                </article><br>
-            <?php } ?>
+        <!-- Comments Section -->
+        <div class="comments">
+            <h3>Comments</h3>
+
+            <!-- Fetch and Display Comments for Each Post -->
+            <div class="comment-list">
+                <?php
+                $post_id = $row['id'];
+                $stmt->bind_param("i", $post_id);
+                $stmt->execute();
+                $commentsResult = $stmt->get_result();
+
+                if ($commentsResult->num_rows > 0) {
+                    while ($commentRow = $commentsResult->fetch_assoc()) {
+                        $commenterPic = !empty($commentRow['picture']) ? $commentRow['picture'] : 'images/icon.jpg';
+                        echo "<div class='comment'>";
+                        echo "<img src='" . htmlspecialchars($commenterPic) . "' alt='User Profile' class='comment-profile'>";
+                        echo "<p><strong>" . htmlspecialchars($commentRow['fname'] . " " . $commentRow['lname']) . ":</strong> " . nl2br(htmlspecialchars($commentRow['comment'])) . "</p>";
+                        echo "<small>Posted on: " . htmlspecialchars($commentRow['created_at']) . "</small>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>No comments yet.</p>";
+                }
+                ?>
+            </div>
+
+            <!-- Comment Form -->
+            <form action="add_comment.php" method="POST" class="comment-form">
+                <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
+                <textarea name="comment" placeholder="Write a comment..." required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </article><br>
+<?php } ?>
+
         </main>
 
          <!-- Sidebar for Categories -->
          <aside class="sidebar">
             <h3>Students</h3>          
-                <?php
-                if ($studentsResult->num_rows > 0) {
-                    while ($row = $studentsResult->fetch_assoc()) {
-                        // Use the stored profile picture or default if empty
-                        $profilePic = !empty($row['picture']) ? $row['picture'] : 'images/icon.jpg';
-
-                        echo "<div class='sidebar-pfp'>";
-                        echo "<img src='" . htmlspecialchars($profilePic) . "' alt='Profile pic'>";
-                        echo "<p>" . htmlspecialchars($row['fname'] . " " . $row['lname']) . "</p>";
-                        echo "</div>";
-                    }
-                } else {
-                    echo "<p>No students found.</p>";
-                }
-                ?>
-            </aside>
+                <?php while ($row = $studentsResult->fetch_assoc()) { ?>
+                    <div class='sidebar-pfp'>
+                        <img src='<?php echo htmlspecialchars($row['picture'] ?: 'images/icon.jpg'); ?>' alt='Profile pic'>
+                        <p><?php echo htmlspecialchars($row['fname'] . " " . $row['lname']); ?></p>
+                    </div>
+                <?php } ?>
+         </aside>
 
     </div>
 
