@@ -352,11 +352,10 @@ h1 {
 
 <ul class="sidebar" id="sidebar">
       
-  <li><a class="a-bar"href="home.php">Home</a></li>
-  <li><a class="a-bar"href="#">Objectives</a></li>
-  <li><a class="a-bar"href="#">Announcement</a></li>
-  <li><a class="a-bar"href="#">Rules and Regulation</a></li>
-  <li><a class="a-bar"href="upf.php">Profile</a></li>
+     <li><a class="a-bar"href="#">Home</a></li>
+     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
+     <li><a class="a-bar"href="freedomwall.html">Newsfeed</a></li>
+     <li><a class="a-bar"href="upf.php">Profile</a></li>
        
 </ul>
 
