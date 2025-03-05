@@ -10,96 +10,9 @@ include("connect.php");
     <!-- <link rel="stylesheet" href="css/silog.css"> -->
     <title>Silog</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="./css/silog.css">
     <style>
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: 
-        linear-gradient(rgb(76, 76, 209), rgba(125, 125, 233, 0.5)), /* Gradient overlay */
-        url('images/malabon-1.jpg') no-repeat; /* Background image */
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: multiply; /* Blending the gradient with the image */
-    /* header */
-    header {
-        position: fixed;
-        top:0px;
-        left: 0px;
-        width: 100%;
-        padding: 2px 100px;
-        display: flex;
-        background-color: #012362;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 99;
     
-    }
-    .logo{
-        height: 90px;
-        width: 260px;
-        padding: 0px;
-    }
-}
-
-/* nav */
-.navigation a{
-    position: relative;
-    font-size: 1.1em;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 400;
-    margin-left: 40px;
-}
-
-.navigation a::after {
-    content: '';
-    position: absolute;
-    width: 100%; 
-    height: 3px;
-    background: #fff;
-    border-radius: 5px;
-    bottom: -5px;
-    left: 0;
-    transform:scaleX(0);
-    transition: transform 0.7s ease; 
-}
-
-.navigation a:hover::after {
-    width: 100%; 
-    transform: scaleX(1);
-}
-
-/* login button form pop up */
-.navigation .btn-popup{
-    width: 130px;
-    height: 50px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: #fff;
-    font-weight: bolder;
-    margin-left: 40px;
-    transition: .2s;
-    background-color:  #162938;
-}
-
-.navigation .btn-popup:hover{
-    /* background: #fbff01; */
-    background-color:rgb(252, 214, 2);
-    color:#190561;
-}
-
 /* cmu logo sa form */
 .image{
     display: block;
@@ -578,8 +491,60 @@ p {
     <h3>Take a moment to share your thoughts on your professors and courses. Your input helps shape a better learning experience for you and future students!</h3>
     </div>
 
-<script src="js/script.js"></script>
 <script src="js/faeye.js"></script>
 <script src="js/cbot.js"></script>
+<script>
+const wrapper = document.querySelector('.wrapper');
+const loginlink = document.querySelector('.login-link');
+const registerlink = document.querySelector('.register-link');
+const loginButton = document.querySelector('.btn-popup');
+const closelog = document.getElementById('logi');
+const closereg = document.getElementById('regi');
+const loginForm = document.getElementById('login');
+const registerForm = document.getElementById('register');
+const hText = document.querySelector('.h-text'); // Selecting the .h-text element
+
+// Function to hide .h-text
+function hideHText() {
+  hText.style.display = 'none';
+}
+
+// Function to show .h-text
+function showHText() {
+  hText.style.display = 'block';
+}
+
+// login button sa nav
+loginButton.addEventListener('click', () => {
+  wrapper.classList.add('active-popup');
+  hideHText(); // Hide .h-text when login/register form opens
+});
+
+//papuntang signup
+registerlink.addEventListener('click', () => {
+  wrapper.classList.add('active');
+  loginForm.reset();
+});
+
+// papuntang login
+loginlink.addEventListener('click', () => {
+  wrapper.classList.remove('active');
+  registerForm.reset(); 
+});
+
+//close button sa login
+closelog.addEventListener('click', () => {
+  wrapper.classList.remove('active-popup');
+  loginForm.reset();
+  showHText(); // Show .h-text when login/register form closes
+});
+
+//close button sa signup
+closereg.addEventListener('click', () => {
+  wrapper.classList.remove('active-popup');
+  registerForm.reset();
+  showHText(); // Show .h-text when login/register form closes  
+});
+</script>
 </body>
 </html>
