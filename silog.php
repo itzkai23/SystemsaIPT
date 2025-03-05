@@ -491,6 +491,30 @@ p {
     <h3>Take a moment to share your thoughts on your professors and courses. Your input helps shape a better learning experience for you and future students!</h3>
     </div>
 
+<button class="chat-button" onclick="toggleChat()">
+    <div class="notification-dot"></div>
+
+    <!-- <img src="https://cdn-icons-png.flaticon.com/512/134/134914.png" alt="Chat"> -->
+    <img src="images/transbot2.png" alt="imgbot">
+</button>   
+
+<div class="chat-popup" id="chat-popup">
+        <div class="botmage">
+            <img src="images/transbot.png" alt="imgbot">
+        </div>
+        <div class="chat-header">UP-CHAT</div>
+        <label for="chat-popup" class="close">&times;</label>
+        <div class="chat-body" id="chat-body">
+            <div class="chat-message bot-message">Hello! How can I help you?</div>
+        </div>
+        <div class="chat-footer">
+            <textarea type="text" id="user-input" placeholder="Type a message..."></textarea>
+            <button onclick="sendMessage()">
+                <img class="send-image" src="images/sends.png" alt="">
+            </button>
+        </div>
+    </div>
+
 <script src="js/faeye.js"></script>
 <script src="js/cbot.js"></script>
 <script>
@@ -546,5 +570,6 @@ closereg.addEventListener('click', () => {
   showHText(); // Show .h-text when login/register form closes  
 });
 </script>
+
 </body>
 </html>

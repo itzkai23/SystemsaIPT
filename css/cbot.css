@@ -1,0 +1,210 @@
+/* .chat-button {
+    position: fixed;
+    bottom: 100px;
+    right: 110px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.chat-button img {
+    width: 120px;
+    height: 120px;
+    
+    border-radius: 60px;
+} */
+.chat-button {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    background: linear-gradient(45deg, #ffd000, #fd8f00);
+    background-size: 200% 200%;
+    padding: 55px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    animation: gradientLoop 3s infinite linear, pulseGlow 1.5s infinite alternate;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 65, 108, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-button img {
+    width: 120px;  /* Adjusted for better placement */
+    height: 120px;
+    border-radius: 50%;
+}
+
+.notification-dot {
+    position: absolute;
+    /* top: -10px;
+    right: -10px; */
+    top: -10px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
+    background: rgb(255, 28, 28);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgb(255, 198, 41);
+    animation: pulseNotification 1.5s infinite alternate;
+}
+
+@keyframes pulseNotification {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0.7;
+    }
+}
+.chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    overflow: hidden;
+}
+.botmage {
+    position: absolute;
+    top: 3px;
+    left: 10px;
+}
+.botmage img {
+    width: 55px;
+}
+.chat-header {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #0050a5;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.close:hover {
+    color: #004085;
+}
+.chat-body {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+}
+.chat-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+    background: #007BFF;
+    border-radius: 5px;
+}
+
+.chat-body::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+.chat-message {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word; /* Ensures long words break and wrap */
+}
+.bot-message {
+    background: #007bff;
+    color: white;
+    align-self: flex-start;
+    word-wrap: break-word; /* Ensures long words break and wrap */
+}
+.user-message {
+    background: #ddd;
+    align-self: flex-end;
+}
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+textarea {
+    flex: 1;
+    min-width: 50px;
+    max-width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    word-wrap: break-word; /* Ensures long words break and wrap */
+    outline: none;
+    resize: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+/* WebKit Scrollbar Styling */
+textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: #007BFF;
+    border-radius: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+button {
+    margin-left: 5px;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+/* button:hover {
+    background-color: #76b6fc;
+    transition: background-color 0.5s ease;
+} */
+
+.send-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+
+.send-image:hover {
+    background-color: #76b6fc;
+    transition: background-color 0.5s ease;
+}
