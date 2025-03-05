@@ -377,7 +377,7 @@ p {
     <nav class="navigation">
        <a href="#">Regulations</a>
        <a href="#">Objective</a>
-       <a href="#">About Us</a>
+       <a href="profstatus.php">Faculties</a>
        <button class="btn-popup">Login</button>      
     </nav>
 </header>
