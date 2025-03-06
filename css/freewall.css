@@ -488,10 +488,6 @@ textarea:not(:placeholder-shown) + button {
     cursor: not-allowed;
 }
 
-.com-send {
-    width: 30px;
-}
-
 .comments textarea:not(:placeholder-shown) + button {
     background-color: rgb(168, 168, 255);
     color: white;
@@ -527,7 +523,7 @@ main::-webkit-scrollbar-track {
         width: 80%;
     }
 }
-/* 
+
 .comments {
     margin-top: 10px;
     padding: 10px;
@@ -543,8 +539,8 @@ main::-webkit-scrollbar-track {
     display: flex;
     align-items: flex-start;
     margin-bottom: 10px;
-} */
-/* 
+}
+
 .comment img.comment-profile {
     width: 40px;
     height: 40px;
@@ -575,10 +571,6 @@ main::-webkit-scrollbar-track {
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-} */
-
-.pfsec{
-    height: 100px;
-    width: 40px;
-    border-radius:20px ;
 }
+
+
