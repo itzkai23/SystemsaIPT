@@ -74,7 +74,32 @@ $current_image .= "?t=" . time();
          <div class="logout-container"> 
            <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
            <div class="logout-dropdown" id="logoutDropdown">
-               <div class="logoutbb">
+                <a href="#" class="logpf-con">
+                  <img src="images/icon.jpg" alt="picture">
+                  <h4>name</h4>
+                </a>
+              
+               <div class="dlog-icon">
+                <Img src="images/nfeed.png">
+                <a class="a-pf" href="#">Newsfeed</a>
+                </div>
+
+               <div class="dlog-icon">
+                 <Img src="images/offweb.png" alt="log">
+                <a class="a-pf" href="#">Visit Official Website</a>
+                </div>
+
+                <div class="dlog-icon">
+                 <img src="images/announcement.png" alt="">
+                <a class="a-pf" href="#">Announcement</a>
+                </div>
+                
+                <div class="dlog-icon">
+                 <img src="images/facultyb.png" alt="">
+                <a class="a-pf" href="#">Faculty</a>
+                </div>
+
+           <div class="logoutbb">
              <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
              <a href="logout.php" class="logout-link">Logout</a>
            </div>

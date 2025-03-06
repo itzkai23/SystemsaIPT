@@ -222,7 +222,9 @@ margin-left: auto;
 .logoutbb {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 23px;
+    margin-left: 2px;
+    margin-top: 7px;
       }
       
 .logoutb2 {
@@ -234,7 +236,7 @@ margin-left: auto;
 .logout-link {
     color: #f00;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 17.5px;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
     cursor: pointer;
@@ -244,6 +246,56 @@ margin-left: auto;
 .logout-link:hover {
     color: #c00;
       }
+ 
+.logpf-con {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 95%;
+  border-radius: 5px;
+  padding: 5px 0px 5px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.a-pf:hover,.logpf-con:hover {
+  background-color: rgb(236, 236, 236);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.logpf-con img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid blue;
+}     
+.logpf-con h4 {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+}
+.dlog-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dlog-icon img {
+  width: 30px;
+  border-radius: 15px;
+}
+.a-pf {
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  display: block;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}      
 
 .h-text {
     text-align: center;
