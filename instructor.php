@@ -28,7 +28,6 @@ SELECT
     ie.feedback, 
     ie.submitted_at AS date_posted, 
     NULL AS comment, 
-    ie.id AS evaluation_id,  -- Ensure feedback has an ID
     NULL AS comment_id,  
     r.fname AS student_name, 
     r.lname, 
@@ -43,8 +42,7 @@ SELECT
     NULL AS feedback, 
     c.created_at AS date_posted,
     c.comment, 
-    NULL AS evaluation_id,  
-    c.id AS comment_id,  -- Ensure comments have an ID
+    c.id AS comment_id,  
     r.fname AS student_name, 
     r.lname, 
     r.picture AS student_image
@@ -53,7 +51,6 @@ JOIN registration r ON c.user_id = r.id
 WHERE c.professor_id = ?
 
 ORDER BY date_posted DESC;";  // Latest entries first
-
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param("ii", $professor_id, $professor_id);
@@ -67,7 +64,6 @@ while ($row = $result->fetch_assoc()) {
         'feedback' => !empty($row['feedback']) ? $row['feedback'] : null,
         'comment' => !empty($row['comment']) ? $row['comment'] : null,
         'comment_id' => isset($row['comment_id']) ? $row['comment_id'] : null,
-        'evaluation_id' => isset($row['evaluation_id']) ? $row['evaluation_id'] : null,
         'date_posted' => $row['date_posted'],
         'student_name' => $row['student_name'],
         'lname' => $row['lname'],
@@ -865,11 +861,10 @@ word-wrap: break-word;
 
 <ul class="sidebar" id="sidebar">
       
-  <li><a class="a-bar"href="home.php">Home</a></li>
-  <li><a class="a-bar"href="HTML/gallery.html">Objectives</a></li>
-  <li><a class="a-bar"href="#">Announcement</a></li>
-  <li><a class="a-bar"href="HTML/profile.html">Rules and Regulation</a></li>
-  <li><a class="a-bar"href="upf.php">Profile</a></li>
+     <li><a class="a-bar"href="#">Home</a></li>
+     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
+     <li><a class="a-bar"href="freedomwall.html">Newsfeed</a></li>
+     <li><a class="a-bar"href="upf.php">Profile</a></li>
        
 </ul>
 
@@ -998,63 +993,47 @@ word-wrap: break-word;
         <div class="label-section">
             <!-- <h3>Comments</h3> -->
             <div class="modal-scroll">
-            <?php
-foreach ($feedbackData as $comm) {
-    echo '<div class="comment-box">';
-    
-    // Profile Image
-    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-    
-    echo '<div class="comment-text">';
-    
-    // Student Name
-    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-    
-    // Display Feedback or Comment
-    if (!empty($comm['feedback'])) {
-        echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-        echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>';
-        $comment_id = $comm['evaluation_id']; // Use evaluation_id for feedback
-    } elseif (!empty($comm['comment'])) {
-        echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-        echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>';
-        $comment_id = $comm['comment_id']; // Use comment_id for comments
-    } else {
-        $comment_id = null; // No valid ID
-    }
+           <?php
+            foreach ($feedbackData as $comm) {
+                echo '<div class="comment-box">';
+                echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                echo '<div class="comment-text">';
+                echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
 
-    // Three-dot menu button container
-    echo '<div class="menu-container">';
-    
-    // Three-dot button
-    echo '<button class="menu-btn" onclick="toggleMenu(this)">&#x22EE;</button>';
-    
-    // Dropdown menu options
-    echo '<div class="menu-options">';
+                if (!empty($comm['feedback'])) {
+                    // Display feedback without delete/report options
+                    echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
+                    echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>';
+                } elseif (!empty($comm['comment'])) {
+                    // Display comment WITH delete/report options
+                    echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
+                    echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>';
 
-    if (!empty($comment_id)) { 
-        if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-            // Admin: Show delete button
-            echo '<form action="delete_comment.php" method="post">
-                    <input type="hidden" name="comment_id" value="' . htmlspecialchars($comment_id) . '">
-                    <button type="submit" onclick="return confirm(\'Are you sure you want to delete this?\');">Delete</button>
-                  </form>';
-        } else {
-            // Regular users: Show report button
-            echo '<form action="report_comment.php" method="post">
-                    <input type="hidden" name="comment_id" value="' . htmlspecialchars($comment_id) . '">
-                    <button type="submit">Report</button>
-                  </form>';
-        }
-    }
+                    // Three-dot menu for comments ONLY
+                    echo '<div class="menu-container">';
+                    echo '<button class="menu-btn" onclick="toggleMenu(this)">&#x22EE;</button>';
+                    echo '<div class="menu-options">';
 
-    echo '</div>'; // Close .menu-options
-    echo '</div>'; // Close .menu-container
+                    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+                        echo '<form action="delete_comment.php" method="post">
+                                <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
+                                <button type="submit" onclick="return confirm(\'Are you sure you want to delete this?\');">Delete</button>
+                              </form>';
+                    } else {
+                        echo '<form action="report_comment.php" method="post">
+                                <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
+                                <button type="submit">Report</button>
+                              </form>';
+                    }
 
-    echo '</div>'; // Close .comment-text
-    echo '</div>'; // Close .comment-box
-}
-?>
+                    echo '</div>'; // Close .menu-options
+                    echo '</div>'; // Close .menu-container
+                }
+
+                echo '</div>'; // Close .comment-text
+                echo '</div>'; // Close .comment-box
+            }
+            ?>
 
             </div>
         </div>

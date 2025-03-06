@@ -11,6 +11,7 @@ include("connect.php");
     <title>Silog</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/silog.css">
+    <link rel="stylesheet" href="css/cbot.css">
     <style>
     
 /* cmu logo sa form */
@@ -376,7 +377,7 @@ p {
     <nav class="navigation">
        <a href="#">Regulations</a>
        <a href="#">Objective</a>
-       <a href="#">About Us</a>
+       <a href="profstatus.php">Faculties</a>
        <button class="btn-popup">Login</button>      
     </nav>
 </header>

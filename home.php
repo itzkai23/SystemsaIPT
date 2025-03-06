@@ -54,16 +54,15 @@ $current_image .= "?t=" . time();
    <ul class="sidebar" id="sidebar">
          
      <li><a class="a-bar"href="#">Home</a></li>
-     <li><a class="a-bar"href="HTML/gallery.html">Objectives</a></li>
-     <li><a class="a-bar"href="#">Announcement</a></li>
-     <li><a class="a-bar"href="HTML/profile.html">Rules and Regulation</a></li>
+     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
+     <li><a class="a-bar"href="freedomwall.html">Newsfeed</a></li>
      <li><a class="a-bar"href="upf.php">Profile</a></li>
           
    </ul>
 
    <div class="mid-section">
-   <a href="#home" class="home">Home</a>
-   <a href="upf.php" class="pf">Profile</a>
+   <a href="home.php" class="home">Home</a>
+   <a href="freedomwall.php" class="pf">Newsfeed</a>
    <a href="instructorsProfiles.php" class="pf">Faculty</a>
    </div>
    
