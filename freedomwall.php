@@ -123,8 +123,8 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                         $commenterPic = !empty($commentRow['picture']) ? $commentRow['picture'] : 'images/icon.jpg';
                         echo "<div class='comment'>";
                         echo "<img src='" . htmlspecialchars($commenterPic) . "' alt='User Profile' class='comment-profile'>";
-                        echo "<p><strong>" . htmlspecialchars($commentRow['fname'] . " " . $commentRow['lname']) . ":</strong> " . nl2br(htmlspecialchars($commentRow['comment'])) . "</p>";
-                        echo "<small>Posted on: " . htmlspecialchars($commentRow['created_at']) . "</small>";
+                        echo "<p><strong>" . htmlspecialchars($commentRow['fname'] . " " . $commentRow['lname']) . ":</strong> " . nl2br(htmlspecialchars($commentRow['comment'])) . "</p>" ;
+                        echo "<small>" . "<br>" . htmlspecialchars($commentRow['created_at']) . "</small>";
                         echo "</div>";
                     }
                 } else {
@@ -150,7 +150,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             <h3>Students</h3>          
                 <?php while ($row = $studentsResult->fetch_assoc()) { ?>
                     <div class='sidebar-pfp'>
-                        <img src='<?php echo htmlspecialchars($row['picture'] ?: 'images/icon.jpg'); ?>' alt='Profile pic'>
+                        <img class="pfsec" src='<?php echo htmlspecialchars($row['picture'] ?: 'images/icon.jpg'); ?>' alt='Profile pic'>
                         <p><?php echo htmlspecialchars($row['fname'] . " " . $row['lname']); ?></p>
                     </div>
                 <?php } ?>

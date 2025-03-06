@@ -573,4 +573,8 @@ main::-webkit-scrollbar-track {
     cursor: pointer;
 }
 
-
+.pfsec{
+    height: 100px;
+    width: 40px;
+    border-radius:20px ;
+}
