@@ -488,6 +488,10 @@ textarea:not(:placeholder-shown) + button {
     cursor: not-allowed;
 }
 
+.com-send {
+    width: 30px;
+}
+
 .comments textarea:not(:placeholder-shown) + button {
     background-color: rgb(168, 168, 255);
     color: white;

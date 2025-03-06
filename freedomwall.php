@@ -137,7 +137,9 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             <form action="add_comment.php" method="POST" class="comment-form">
                 <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
                 <textarea name="comment" placeholder="Write a comment..." required></textarea>
-                <button type="submit">Post</button>
+                <button type="submit">
+                <img  class="com-send" src="images/sends.png" alt="">
+                </button>
             </form>
         </div>
     </article><br>
