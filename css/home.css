@@ -210,13 +210,13 @@ margin-left: auto;
     display: none;
     position: absolute;
     right: 0;
-    top: 45px;  /* Adjust as per the size of your logo */
-    background-color: orange;
+    top: 50px;  /* Adjust as per the size of your logo */
+    background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 8px;
-    min-width: 100px;
+    min-width:  250px;
       }
       
 .logoutbb {
