@@ -68,7 +68,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             <!-- Posting New Article (Only Text) -->
             <form action="create_post.php" method="POST" enctype="multipart/form-data">
                 <section class="freewall-post">
-                    <img src="<?php echo htmlspecialchars($current_image); ?>" class="picture" title="Click to upload image"/>
+                    <img src="<?php echo htmlspecialchars($current_image); ?>" class="fp-pic" title="Click to upload image"/>
                     <label for="termsCheckbox" class="rant-post">What's on your mind?</label>
                 </section>
                 <input type="checkbox" id="termsCheckbox" class="modal-toggle">
@@ -98,13 +98,16 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
     <article class="news-item">
         <div class="users-posted">
             <img src="<?php echo htmlspecialchars($row['picture'] ? $row['picture'] : 'images/icon.jpg'); ?>" alt="user-photo">
-            <p><?php echo htmlspecialchars($row['fname']) . " " . htmlspecialchars($row['lname']); ?></p>
+            <div>
+            <h3><?php echo htmlspecialchars($row['fname']) . " " . htmlspecialchars($row['lname']); ?></h3>
+            <small>Posted on: <?php echo htmlspecialchars($row['created_at']); ?></small>
+            </div>
         </div>
         <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
         <?php if (!empty($row['image_url'])) { ?>
             <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="Post Image" class="post-image">
         <?php } ?>
-        <small>Posted on: <?php echo htmlspecialchars($row['created_at']); ?></small>
+        
 
         <!-- Comments Section -->
         <div class="comments">
@@ -138,7 +141,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                 <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
                 <textarea name="comment" placeholder="Write a comment..." required></textarea>
                 <button type="submit">
-                <img  class="com-send" src="images/sends.png" alt="">
+                <img src="images/sends.png" alt="">
                 </button>
             </form>
         </div>

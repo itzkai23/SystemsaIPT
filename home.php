@@ -220,32 +220,31 @@ margin-left: auto;
       }
 
 .logpos {
-    position: absolute;
-    top: 10px;
-    right: 30px;
     display: flex;
     align-items: center;
     gap: 10px;
+    margin: auto;
       }
       /* Container for the logo and dropdown */
 .logout-container {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+    cursor: pointer;
       }
-.logout-container img {
+/* .logout-container img {
     width: 35px;
     height: 35px;
     border-radius: 17.5px;
-    /* object-fit: cover;
-    border: 1px solid goldenrod; */
-}      
-      /* Style for the logo/image */
-      .logout-logo {
-    width: 40px;  /* Adjust the size of the logo */
-    cursor: pointer;
-    border-radius: 20px;
+    object-fit: cover;
     border: 1px solid goldenrod;
-      }
+} */
+.piclog {
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    object-fit: cover;
+    border: 1px solid goldenrod; 
+}      
       
       /* Style for the dropdown (initially hidden) */
 .logout-dropdown {
@@ -440,10 +439,10 @@ margin-left: auto;
      <div class="logpos">
          
          <div class="logout-container"> 
-           <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
+           <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
            <div class="logout-dropdown" id="logoutDropdown">
                 <a href="#" class="logpf-con">
-                  <img src="<?php echo htmlspecialchars($current_image); ?>" alt="picture">
+                  <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
                   <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
                 </a>
               

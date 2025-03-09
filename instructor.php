@@ -95,6 +95,11 @@ $current_image .= "?t=" . time();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructor</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
     <style>
     body {
     margin: 0;
@@ -213,9 +218,8 @@ $current_image .= "?t=" . time();
       }
 
 .logpos {
-    position: absolute;
-    top: 4px;
-    right: 30px;
+    margin-top: 3px;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -223,40 +227,40 @@ $current_image .= "?t=" . time();
       /* Container for the logo and dropdown */
 .logout-container {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+    
       }
-.logout-container img {
-    width: 35px;
-    height: 35px;
-    border-radius: 17.5px;
-    object-fit: cover;
-    border: 1px solid goldenrod;
-}      
+
       /* Style for the logo/image */
-      .logout-logo {
-    width: 40px;  /* Adjust the size of the logo */
-    cursor: pointer;
-    border-radius: 20px;
-      }
+.piclog {
+width: 35px;
+height: 35px;
+border-radius: 17.5px;
+object-fit: cover;
+border: 1px solid goldenrod;
+cursor: pointer;
+  }
       
       /* Style for the dropdown (initially hidden) */
 .logout-dropdown {
     display: none;
     position: absolute;
     right: 0;
-    top: 45px;  /* Adjust as per the size of your logo */
-    background-color: #fff;
+    top: 50px;  /* Adjust as per the size of your logo */
+    background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 8px;
-    min-width: 100px;
+    min-width:  250px;
       }
       
 .logoutbb {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 23px;
+    margin-left: 2px;
+    margin-top: 7px;
       }
       
 .logoutb2 {
@@ -268,7 +272,7 @@ $current_image .= "?t=" . time();
 .logout-link {
     color: #f00;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 17.5px;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
     cursor: pointer;
@@ -278,7 +282,60 @@ $current_image .= "?t=" . time();
 .logout-link:hover {
     color: #c00;
       }
+.logpf-con {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 95%;
+  border-radius: 5px;
+  padding: 0px 0px 0px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.a-pf:hover,.logpf-con:hover {
+  background-color: rgb(236, 236, 236);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.logpf-con img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid blue;
+}     
+.logpf-con h4 {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+}
+.dlog-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dlog-icon img {
+  width: 30px;
+  border-radius: 15px;
+}
+.a-pf {
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  display: block;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
 
+.user {
+    color: white;
+    margin-top: 15px;
+  }
 
 /* Main Container */
 .container {
@@ -356,9 +413,6 @@ opacity: 0.9;
 .comment-post label {
     border: 1px solid #e6e6e6;
     border-radius: 30px;
-    /* width: 65%;
-    height: 50%;
-    padding: 10px 0px 10px 15px; */
     cursor: pointer;
     width: 100%;
     padding: 10px 15px;
@@ -371,8 +425,10 @@ opacity: 0.9;
 }
 
 .comment-post img {
-  width: 40px;
-  border-radius: 20px;
+  width: 35px;
+  height: 35px;
+  border-radius: 17.5px;
+  object-fit: cover;
 }
 
 /* POP-UP USER COMMENT */
@@ -406,9 +462,6 @@ opacity: 0.9;
     max-width: 600px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
-    /* text-align: left;
-    max-height: 70vh; 
-    overflow-y: auto;  */
 }
 
 
@@ -449,18 +502,6 @@ opacity: 0.9;
   position: relative;
 }
 
-/* .comment-label-section {
-  width: 80%;
-  padding: 15px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  vertical-align: top;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 50px;
-} */
-
 .modal-content-usercom div {
   display: flex;
   gap: 10px;
@@ -468,27 +509,24 @@ opacity: 0.9;
   align-items: center;
 }
 
-.modal-content-usercom img {
-  width: 40px;
-  border-radius: 20px;
+.your-com {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  object-fit: cover;
 }
 
 .modal-content-usercom textarea {
     font-size: 15px;
-    /* font-weight: 700;
-    font-family: Roboto, sans-serif;
-    color: rgb(122, 122, 122); */
+    
     border-radius: 5px;
     width: 97%;
     height: 100px;
-    /* cursor: text;
-    display: block; */
     border: 1px solid #ccc;
     padding: 5px;
     outline: none;
     resize: none;
-    /* overflow: auto;
-    margin-bottom: 20px; */
+    
 }
 
 /* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
@@ -551,17 +589,6 @@ textarea:not(:placeholder-shown) + button {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0px;
   border-radius: 13px;
-
-  /* display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); */
 }
 /* Modal Content */
 .modal-content {
@@ -767,9 +794,10 @@ word-wrap: break-word;
 
 
   .comment-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  object-fit: cover;
   flex-shrink: 0; /* Prevent shrinking */
   }
 
@@ -795,10 +823,6 @@ word-wrap: break-word;
   color: gray;
   margin-top: 2px;
   display: block;
-  }
-
-  .user {
-  color: white;
   }
 
   .menu-container {
@@ -873,14 +897,40 @@ word-wrap: break-word;
   <div class="logpos">
   
       <div class="logout-container"> 
-        <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
+        <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
         <div class="logout-dropdown" id="logoutDropdown">
-            <div class="logoutbb">
-          <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-          <a href="logout.php" class="logout-link">Logout</a>
-        </div>
+                <a href="#" class="logpf-con">
+                  <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
+                  <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+                </a>
+              
+               <div class="dlog-icon">
+                <Img src="images/nfeed.png">
+                <a class="a-pf" href="freedomwall.php">Newsfeed</a>
+                </div>
+
+               <div class="dlog-icon">
+                 <Img src="images/offweb.png" alt="log">
+                <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
+                </div>
+
+                <div class="dlog-icon">
+                 <img src="images/announcement.png" alt="">
+                <a class="a-pf" href="#">Announcement</a>
+                </div>
+                
+                <div class="dlog-icon">
+                 <img src="images/facultyb.png" alt="">
+                <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                </div>
+
+           <div class="logoutbb">
+             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="logout.php" class="logout-link">Logout</a>
+           </div>
     
         </div>
+       
       </div>
       <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
     </div>
@@ -918,7 +968,7 @@ word-wrap: break-word;
             
               <h3>Your comment/concerns</h3>
                     <div>
-                    <img src="<?php echo htmlspecialchars($current_image); ?>" alt="picture">
+                    <img src="<?php echo htmlspecialchars($current_image); ?>" class="your-com" alt="picture">
                     <p>Name of user</p>
                     </div>
                     <form action="comment.php" method="post">
