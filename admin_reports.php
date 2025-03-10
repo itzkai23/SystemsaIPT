@@ -52,12 +52,15 @@ $reportsQuery = $conn->query("
     <div class="rec-com-container">
         <!-- Buttons to reveal content -->
         <div>
-            <a href="#report1">ComReport</a>
-            <a href="#report2">Report</a>
+            <!-- <a href="#report1">ComReport</a>
+            <a href="#report2">Report</a> -->
+            <a href="#report2">ComReport</a>
+            <a href="#report1">Report</a>
         </div>
 
+    <div id="report1" class="report-container">
     <?php while ($report = $reportsQuery->fetch_assoc()) : ?>
-        <div id="report1" class='report-box'>
+        <div class='report-box'>
             <p><strong><?php echo htmlspecialchars($report['fname'] . " " . $report['lname']); ?></strong> reported:</p>
             <div class="reported-text"><?php echo htmlspecialchars($report['reported_text']); ?></div>
             <small>Reported on: <?php echo htmlspecialchars($report['reported_at']); ?></small>
@@ -73,12 +76,13 @@ $reportsQuery = $conn->query("
         </div>
     <?php endwhile; ?>
 
-        <div id="report2" class="report-box">
+        <div class="report-box1">
             <p><strong>Jane Smith</strong> reported:</p>
             <div class="reported-text">Another reported comment here.</div>
             <small>Reported on: 2024-03-09</small>
             <span class="reviewed">Reviewed</span>
         </div>
+    </div>
 
     </div>
 
