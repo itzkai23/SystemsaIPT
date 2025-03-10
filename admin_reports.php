@@ -51,7 +51,8 @@ $reportsQuery = $conn->query("
             padding: 15px; 
             margin-bottom: 15px; 
             border-radius: 8px; 
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 50%;    
         }
         .reviewed { color: green; font-weight: bold; }
         .reported-text { 
@@ -76,6 +77,7 @@ $reportsQuery = $conn->query("
 
     <h3>Reported Comments & Evaluations</h3>
 
+    <div class="rec-com-container">
     <?php while ($report = $reportsQuery->fetch_assoc()) : ?>
         <div class='report-box'>
             <p><strong><?php echo htmlspecialchars($report['fname'] . " " . $report['lname']); ?></strong> reported:</p>
@@ -92,6 +94,7 @@ $reportsQuery = $conn->query("
             <?php endif; ?>
         </div>
     <?php endwhile; ?>
+    </div>
 
 </body>
 </html>
