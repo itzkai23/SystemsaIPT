@@ -43,43 +43,21 @@ $reportsQuery = $conn->query("
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reported Comments</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
-        .report-box { 
-            border: 1px solid #ccc; 
-            background: white; 
-            padding: 15px; 
-            margin-bottom: 15px; 
-            border-radius: 8px; 
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 50%;    
-        }
-        .reviewed { color: green; font-weight: bold; }
-        .reported-text { 
-            background: #f9f9f9; 
-            padding: 10px; 
-            border-radius: 5px; 
-            white-space: pre-wrap; /* Keeps text formatting */
-        }
-        button { 
-            background-color: blue; 
-            color: white; 
-            border: none; 
-            padding: 8px 12px; 
-            cursor: pointer; 
-            border-radius: 5px; 
-            margin-top: 5px; 
-        }
-        button:hover { background-color: darkblue; }
-    </style>
+    <link rel="stylesheet" href="css/repcom.css">
 </head>
 <body>
 
     <h3>Reported Comments & Evaluations</h3>
 
     <div class="rec-com-container">
+        <!-- Buttons to reveal content -->
+        <div>
+            <a href="#report1">ComReport</a>
+            <a href="#report2">Report</a>
+        </div>
+
     <?php while ($report = $reportsQuery->fetch_assoc()) : ?>
-        <div class='report-box'>
+        <div id="report1" class='report-box'>
             <p><strong><?php echo htmlspecialchars($report['fname'] . " " . $report['lname']); ?></strong> reported:</p>
             <div class="reported-text"><?php echo htmlspecialchars($report['reported_text']); ?></div>
             <small>Reported on: <?php echo htmlspecialchars($report['reported_at']); ?></small>
@@ -94,6 +72,14 @@ $reportsQuery = $conn->query("
             <?php endif; ?>
         </div>
     <?php endwhile; ?>
+
+        <div id="report2" class="report-box">
+            <p><strong>Jane Smith</strong> reported:</p>
+            <div class="reported-text">Another reported comment here.</div>
+            <small>Reported on: 2024-03-09</small>
+            <span class="reviewed">Reviewed</span>
+        </div>
+
     </div>
 
 </body>
