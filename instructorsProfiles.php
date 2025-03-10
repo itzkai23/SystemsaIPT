@@ -174,40 +174,37 @@ $current_image .= "?t=" . time();
       /* Container for the logo and dropdown */
 .logout-container {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+    cursor: pointer;
       }
-.logout-container img {
+.piclog {
     width: 35px;
     height: 35px;
     border-radius: 17.5px;
     object-fit: cover;
-    border: 1px solid goldenrod;
-} 
-      /* Style for the logo/image */
-      .logout-logo {
-    width: 40px;  /* Adjust the size of the logo */
-    cursor: pointer;
-    border-radius: 20px;
-      }
+    border: 1px solid goldenrod; 
+}  
       
       /* Style for the dropdown (initially hidden) */    
 .logout-dropdown {
     display: none;
     position: absolute;
     right: 0;
-    top: 45px;  /* Adjust as per the size of your logo */
-    background-color: orange;
+    top: 50px;  /* Adjust as per the size of your logo */
+    background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 8px;
-    min-width: 100px;
+    min-width:  250px;
       }
       
 .logoutbb {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 23px;
+    margin-left: 2px;
+    margin-top: 7px;
       }
       
 .logoutb2 {
@@ -229,6 +226,56 @@ $current_image .= "?t=" . time();
 .logout-link:hover {
     color: #c00;
       }
+  .logpf-con {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 95%;
+  border-radius: 5px;
+  padding: 5px 0px 5px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.a-pf:hover,.logpf-con:hover {
+  background-color: rgb(236, 236, 236);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.logpf-con img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid blue;
+}     
+.logpf-con h4 {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+}
+.dlog-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dlog-icon img {
+  width: 30px;
+  border-radius: 15px;
+}
+.a-pf {
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  display: block;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
+      
 .adhome {
     color: white;
     text-emphasis: none;
@@ -364,12 +411,37 @@ h1 {
   <div class="logpos">
   
       <div class="logout-container"> 
-      <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
+      <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
         <div class="logout-dropdown" id="logoutDropdown">
-            <div class="logoutbb">
-          <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-          <a href="logout.php" class="logout-link">Logout</a>
-        </div>
+                <a href="#" class="logpf-con">
+                  <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
+                  <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+                </a>
+              
+               <div class="dlog-icon">
+                <Img src="images/nfeed.png">
+                <a class="a-pf" href="freedomwall.php">Newsfeed</a>
+                </div>
+
+               <div class="dlog-icon">
+                 <Img src="images/offweb.png" alt="log">
+                <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
+                </div>
+
+                <div class="dlog-icon">
+                 <img src="images/announcement.png" alt="">
+                <a class="a-pf" href="#">Announcement</a>
+                </div>
+                
+                <div class="dlog-icon">
+                 <img src="images/facultyb.png" alt="">
+                <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                </div>
+
+           <div class="logoutbb">
+             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="logout.php" class="logout-link">Logout</a>
+           </div>
     
         </div>
       </div>
