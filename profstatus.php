@@ -58,7 +58,7 @@
         </div>
     
         <!-- Back to Home Button -->
-        <a href="silog.html">Back</a>
+        <a href="silog.php">Back</a>
   
           <input type="checkbox" id="termsCheckbox_usercomment" class="modal-toggle_usercom">
           <div class="modal_usercom">

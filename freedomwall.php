@@ -44,7 +44,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
         <div class="nav-container">
             <div class="logo">
                 <a href="#">
-                    <img src="images/logo.png" alt="Logo">
+                    <img src="images/jpcs.jpg" alt="Logo">
                 </a>
             </div>
             <input type="checkbox" id="menu-toggle" class="menu-checkbox">

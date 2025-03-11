@@ -9,7 +9,8 @@ body {
 
 /* Navigation Bar Styles */
 .navbar {
-    background-color: #333;
+    /* background-color: #333; */
+    background-color: #001F3F;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -31,6 +32,7 @@ body {
 .logo img {
     width: 40px;
     height: 40px;
+    border-radius: 50%;
 }
 
 .nav-links {
@@ -131,7 +133,8 @@ body {
 
 /* Header */
 header {
-    background: linear-gradient(90deg, #007bff, #0056b3);
+    /* background: linear-gradient(90deg, #007bff, #0056b3); */
+    background: linear-gradient(90deg, #FF5733, #CC5500);
     color: white;
     text-align: center;
     padding: 5px;
