@@ -81,7 +81,7 @@ body {
 display: flex;
 align-items: center;
 gap: 30px;
-margin-left: 60%;
+margin-left: 70%;
 }
 
 .mid-section a{
@@ -118,7 +118,7 @@ margin-left: 60%;
   
 .right-section {
       width: 120px;
-      margin-right: 40px;
+      margin-right: 25px;
       display: flex;
       align-items: center;
       justify-content: space-between;

@@ -37,6 +37,10 @@ $current_image .= "?t=" . time();
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    
+}
+body {
+  background-color: black;
 }
 
 .home-header {
@@ -298,7 +302,7 @@ $current_image .= "?t=" . time();
 }
 h1 {
     font-size: 28px;
-    color:rgb(11, 72, 146);
+    color: #FF8C00;
     margin-bottom: 20px;
 }
 
@@ -323,7 +327,7 @@ h1 {
   border-radius: 5px;
   padding: 10px;
   text-align: center;
-  background: linear-gradient(145deg, #ffffff, #bbdefb);
+  background: rgb(32, 29, 29);
   /* border: 1px solid #1565c0; */
   font-family: "Roboto", sans-serif;
   font-weight: 600;
@@ -331,7 +335,10 @@ h1 {
 }
 
 .card {
-    background: linear-gradient(145deg, #ffffff, #bbdefb); /* Soft blue gradient */
+    /* background: linear-gradient(145deg, #ffffff, #bbdefb);  */
+    /* Soft blue gradient */
+    background: linear-gradient(145deg, #ffffff, #FF8C00);
+    background: #FF8C00;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     padding: 20px;
@@ -354,7 +361,9 @@ h1 {
     height: 100px;
     object-fit: cover;
     margin-bottom: 10px;
-    border: 3px solid #1565c0; /* Blue border */
+    border: 3px solid rgb(0, 54, 116);
+    
+     /* Blue border */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -367,7 +376,8 @@ h1 {
 .card h2 {
     font-size: 20px;
     margin-bottom: 5px;
-    color: #0d47a1;
+    /* color: #0d47a1; */
+    color: black;
 }
 
 /* Role */
