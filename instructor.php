@@ -932,7 +932,7 @@ word-wrap: break-word;
         </div>
        
       </div>
-      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
+      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></span></h4> 
     </div>
          
 </div>
@@ -969,7 +969,7 @@ word-wrap: break-word;
               <h3>Your comment/concerns</h3>
                     <div>
                     <img src="<?php echo htmlspecialchars($current_image); ?>" class="your-com" alt="picture">
-                    <p>Name of user</p>
+                    <p><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></p>
                     </div>
                     <form action="comment.php" method="post">
                         <input type="hidden" name="professor_id" value="<?php echo htmlspecialchars($professor_id); ?>">
