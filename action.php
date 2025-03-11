@@ -1,71 +1,57 @@
 <?php
 session_start();
-include 'connect.php'; // Database connection
+include 'connect.php';
 
-// DELETE FUNCTIONALITY
-if (isset($_POST['delete_post_id'])) {
-    $post_id = intval($_POST['delete_post_id']);
-    $deleteQuery = "DELETE FROM posts WHERE id = ?";
-    $stmt = $conn->prepare($deleteQuery);
-    $stmt->bind_param("i", $post_id);
+if (isset($_POST['action'])) {
+    $action = $_POST['action'];
+    $post_id = $_POST['post_id'] ?? null;
+    $comment_id = $_POST['comment_id'] ?? null;
 
-    if ($stmt->execute()) {
-        header("Location: freedom_wall.php?success=Post deleted successfully");
-        exit();
-    } else {
-        header("Location: freedom_wall.php?error=Failed to delete post");
-        exit();
+    if ($action === 'delete_post') {
+        if (!empty($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+            $query = "DELETE FROM posts WHERE id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $post_id);
+            $stmt->execute();
+            echo "Post deleted successfully.";
+        } else {
+            echo "You do not have permission to delete posts.";
+        }
+    }
+
+    if ($action === 'delete_comment') {
+        if (!empty($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+            $query = "DELETE FROM nf_comments WHERE id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $comment_id);
+            $stmt->execute();
+            echo "Comment deleted successfully.";
+        } else {
+            echo "You do not have permission to delete comments.";
+        }
+    }
+
+    if ($action === 'report_post') {
+        if (empty($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+            $query = "INSERT INTO newsfeed_report (post_id, reported_by) VALUES (?, ?)";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ii", $post_id, $_SESSION['user_id']);
+            $stmt->execute();
+            echo "Post reported successfully.";
+        } else {
+            echo "Admins cannot report posts.";
+        }
+    }
+
+    if ($action === 'report_comment') {
+        if (empty($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+            $query = "INSERT INTO newsfeed_report (comment_id, reported_by) VALUES (?, ?)";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ii", $comment_id, $_SESSION['user_id']);
+            $stmt->execute();
+            echo "Comment reported successfully.";
+        } else {
+            echo "Admins cannot report comments.";
+        }
     }
 }
-
-if (isset($_POST['delete_comment_id'])) {
-    $comment_id = intval($_POST['delete_comment_id']);
-    $deleteQuery = "DELETE FROM nf_comments WHERE id = ?";
-    $stmt = $conn->prepare($deleteQuery);
-    $stmt->bind_param("i", $comment_id);
-
-    if ($stmt->execute()) {
-        header("Location: freedom_wall.php?success=Comment deleted successfully");
-        exit();
-    } else {
-        header("Location: freedom_wall.php?error=Failed to delete comment");
-        exit();
-    }
-}
-
-// REPORT FUNCTIONALITY
-if (isset($_POST['report_post_id'])) {
-    $post_id = intval($_POST['report_post_id']);
-    $reason = htmlspecialchars($_POST['report_reason']);
-
-    $reportQuery = "INSERT INTO reports (content_id, type, reason) VALUES (?, 'post', ?)";
-    $stmt = $conn->prepare($reportQuery);
-    $stmt->bind_param("is", $post_id, $reason);
-
-    if ($stmt->execute()) {
-        header("Location: freedom_wall.php?success=Post reported successfully");
-        exit();
-    } else {
-        header("Location: freedom_wall.php?error=Failed to report post");
-        exit();
-    }
-}
-
-if (isset($_POST['report_comment_id'])) {
-    $comment_id = intval($_POST['report_comment_id']);
-    $reason = htmlspecialchars($_POST['report_reason']);
-
-    $reportQuery = "INSERT INTO reports (content_id, type, reason) VALUES (?, 'comment', ?)";
-    $stmt = $conn->prepare($reportQuery);
-    $stmt->bind_param("is", $comment_id, $reason);
-
-    if ($stmt->execute()) {
-        header("Location: freedom_wall.php?success=Comment reported successfully");
-        exit();
-    } else {
-        header("Locationwou: freedom_wall.php?error=Failed to report comment");
-        exit();
-    }
-}
-
-header("Location: freedom_wall.php");
