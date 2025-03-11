@@ -81,7 +81,7 @@ body {
 display: flex;
 align-items: center;
 gap: 30px;
-margin-left: auto;
+margin-left: 60%;
 }
 
 .mid-section a{
@@ -118,7 +118,7 @@ margin-left: auto;
   
 .right-section {
       width: 120px;
-      margin-right: 20px;
+      margin-right: 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -223,7 +223,7 @@ margin-left: auto;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: auto;
+    white-space: nowrap;
       }
       /* Container for the logo and dropdown */
 .logout-container {
@@ -473,7 +473,7 @@ margin-left: auto;
        
            </div>
          </div>
-         <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></h4> 
+         <p class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></p> 
        </div>
             
    </div>
