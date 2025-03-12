@@ -492,29 +492,33 @@ p {
     <h3>Take a moment to share your thoughts on your professors and courses. Your input helps shape a better learning experience for you and future students!</h3>
     </div>
 
-<button class="chat-button" onclick="toggleChat()">
+    <button class="chat-button" onclick="toggleChat()">
     <div class="notification-dot"></div>
-
-    <!-- <img src="https://cdn-icons-png.flaticon.com/512/134/134914.png" alt="Chat"> -->
     <img src="images/transbot2.png" alt="imgbot">
-</button>   
+</button>  
 
 <div class="chat-popup" id="chat-popup">
-        <div class="botmage">
-            <img src="images/transbot.png" alt="imgbot">
-        </div>
-        <div class="chat-header">UP-CHAT</div>
-        <label for="chat-popup" class="close">&times;</label>
-        <div class="chat-body" id="chat-body">
-            <div class="chat-message bot-message">Hello! How can I help you?</div>
-        </div>
-        <div class="chat-footer">
-            <textarea type="text" id="user-input" placeholder="Type a message..."></textarea>
-            <button onclick="sendMessage()">
-                <img class="send-image" src="images/sends.png" alt="">
-            </button>
-        </div>
+    <div class="botmage">
+        <img src="images/transbot.png" alt="imgbot">
     </div>
+    <div class="chat-header">UP-CHAT</div>
+    <label for="chat-popup" class="close">&times;</label>
+    <!-- <div class="chat-body" id="chat-body">
+        <div class="chat-message bot-message">Hello! How can I help you?</div>
+    </div> -->
+    <iframe src="https://www.chatbase.co/chatbot-iframe/5cyDdC8pYxitCeWBRtzVm" frameborder="0" class="chat-body" id="chat-body">
+        <!-- <div class="chat-message bot-message">Hello! How can I help you?</div> -->
+    </iframe>
+    <!-- <div class="chat-footer">
+        <textarea id="user-input" placeholder="Type a message..."></textarea>
+        <button onclick="sendMessage()">
+            <img class="send-image" src="images/sends.png" alt="Send">
+        </button>
+    </div> -->
+</div>
+
+<script src="js/cbot.js"></script> <!-- Ensure correct path to cbot.js -->
+
 
 <script src="js/faeye.js"></script>
 <script src="js/cbot.js"></script>

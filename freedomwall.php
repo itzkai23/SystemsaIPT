@@ -99,21 +99,35 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
         <div class="users-posted">
             <img src="<?php echo htmlspecialchars($row['picture'] ? $row['picture'] : 'images/icon.jpg'); ?>" alt="user-photo">
             <div>
-            <h3><?php echo htmlspecialchars($row['fname']) . " " . htmlspecialchars($row['lname']); ?></h3>
-            <small>Posted on: <?php echo htmlspecialchars($row['created_at']); ?></small>
+                <h3><?php echo htmlspecialchars($row['fname']) . " " . htmlspecialchars($row['lname']); ?></h3>
+                <small>Posted on: <?php echo htmlspecialchars($row['created_at']); ?></small>
+            </div>
+
+            <!-- Three-dot Menu for Posts -->
+            <div class="ellipsis-menu">
+                <button class="ellipsis-btn" onclick="toggleMenu('menu-post-<?php echo $row['id']; ?>')">&#8942;</button>
+                <div class="menu-dropdown" id="menu-post-<?php echo $row['id']; ?>">
+                    <form action="action.php" method="POST">
+                    <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
+                    <?php if ($_SESSION['is_admin']) { ?>
+                        <button type="submit" name="action" value="delete_post">Delete Post</button>
+                    <?php } ?>
+                    <?php if (!$_SESSION['is_admin']) { ?>
+                        <button type="submit" name="action" value="report_post">Report Post</button>
+                    <?php } ?>
+                    </form>
+                </div>
             </div>
         </div>
+
         <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
         <?php if (!empty($row['image_url'])) { ?>
             <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="Post Image" class="post-image">
         <?php } ?>
         
-
-        <!-- Comments Section -->
-        <div class="comments">
+ <!-- Comments Section -->
+ <div class="comments">
             <h3>Comments</h3>
-
-            <!-- Fetch and Display Comments for Each Post -->
             <div class="comment-list">
                 <?php
                 $post_id = $row['id'];
@@ -123,25 +137,45 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
 
                 if ($commentsResult->num_rows > 0) {
                     while ($commentRow = $commentsResult->fetch_assoc()) {
+                        $comment_id = $commentRow['id'] ?? null; // Ensures 'id' is defined
                         $commenterPic = !empty($commentRow['picture']) ? $commentRow['picture'] : 'images/icon.jpg';
+
                         echo "<div class='comment'>";
                         echo "<img src='" . htmlspecialchars($commenterPic) . "' alt='User Profile' class='comment-profile'>";
-                        echo "<p><strong>" . htmlspecialchars($commentRow['fname'] . " " . $commentRow['lname']) . ":</strong> " . nl2br(htmlspecialchars($commentRow['comment'])) . "</p>" ;
+                        echo "<p><strong>" . htmlspecialchars($commentRow['fname'] . " " . $commentRow['lname']) . ":</strong> " . nl2br(htmlspecialchars($commentRow['comment'])) . "</p>";
                         echo "<small>" . "<br>" . htmlspecialchars($commentRow['created_at']) . "</small>";
+
+                        // Three-dot Menu for Comments
+                        if ($comment_id) {
+                        echo "<div class='ellipsis-menu'>";
+                        echo "<button class='ellipsis-btn' onclick=\"toggleMenu('menu-comm-{$commentRow['id']}')\">&#8942;</button>";
+                        echo "<div class='menu-dropdown' id='menu-comm-{$commentRow['id']}'>";
+                        echo "<form action='action.php' method='POST'>";
+                        echo "<input type='hidden' name='comment_id' value='{$commentRow['id']}'>";
+                        if ($_SESSION['is_admin']) {
+                            echo "<button type='submit' name='action' value='delete_comment'>Delete Comment</button>";
+                        } elseif (!$_SESSION['is_admin']) {
+                            echo "<button type='submit' name='action' value='report_comment'>Report Comment</button>";
+                         }
+
+                        echo "</form>";
+                        echo "</div>";
+                        echo "</div>";
+                        }
                         echo "</div>";
                     }
                 } else {
                     echo "<p>No comments yet.</p>";
                 }
-                ?>
-            </div>
+            ?>
 
+            
             <!-- Comment Form -->
             <form action="add_comment.php" method="POST" class="comment-form">
                 <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
                 <textarea name="comment" placeholder="Write a comment..." required></textarea>
-                <button type="submit">
-                <img src="images/sends.png" alt="">
+                <button class="butt" type="submit">
+                    <img src="images/sends.png" alt="">
                 </button>
             </form>
         </div>
@@ -162,6 +196,24 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
          </aside>
 
     </div>
+
+<script>
+    function toggleMenu(menuId) {
+        var menu = document.getElementById(menuId);
+        menu.classList.toggle("show");
+    }
+
+    // Close menu when clicking outside
+    window.onclick = function(event) {
+        if (!event.target.matches('.ellipsis-btn')) {
+            var dropdowns = document.getElementsByClassName("menu-dropdown");
+            for (var i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].classList.remove('show');
+            }
+        }
+    }
+</script>
+
 
 </body>
 </html>
