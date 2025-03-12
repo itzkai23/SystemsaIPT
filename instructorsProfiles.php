@@ -37,6 +37,11 @@ $current_image .= "?t=" . time();
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    
+}
+
+body {
+  max-height: 100vh;
 }
 
 .home-header {
@@ -296,11 +301,11 @@ $current_image .= "?t=" . time();
     border: solid 1px orange;
     transition: ease 0.5s;
 }
-h1 {
+/* h1 {
     font-size: 28px;
-    color:rgb(11, 72, 146);
+    color: #FF8C00;
     margin-bottom: 20px;
-}
+} */
 
 /* Container */
 .group-container {
@@ -312,18 +317,26 @@ h1 {
 
 /* Profile Card */
 .whole{
-  margin-top: 70px;
-  padding: 20px;
+  margin: auto;
+  margin-top: 60px;
+  padding: 50px 50px 20px 50px;
+  background-color: rgb(32, 31, 31);
+  max-width: 80%;
+  border-radius: 40px;
+  white-space: nowrap;
 }
 
 .whole h1 {
+  font-size: 28px;
+  color: #FF8C00;
+  margin-bottom: 20px;
   margin-top: 20px;
   margin-left: 32.5%;
   width: 35%;
   border-radius: 5px;
   padding: 10px;
   text-align: center;
-  background: linear-gradient(145deg, #ffffff, #bbdefb);
+  background: #333333;
   /* border: 1px solid #1565c0; */
   font-family: "Roboto", sans-serif;
   font-weight: 600;
@@ -331,7 +344,9 @@ h1 {
 }
 
 .card {
-    background: linear-gradient(145deg, #ffffff, #bbdefb); /* Soft blue gradient */
+    /* background: linear-gradient(145deg, #ffffff, #bbdefb);  */
+    /* Soft blue gradient */
+    background: #FF8C00;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     padding: 20px;
@@ -354,7 +369,9 @@ h1 {
     height: 100px;
     object-fit: cover;
     margin-bottom: 10px;
-    border: 3px solid #1565c0; /* Blue border */
+    border: 3px solid rgb(0, 54, 116);
+    
+     /* Blue border */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -367,16 +384,19 @@ h1 {
 .card h2 {
     font-size: 20px;
     margin-bottom: 5px;
-    color: #0d47a1;
+    /* color: #0d47a1; */
+    color: rgb(0, 25, 51);
 }
 
 /* Role */
 .card .role {
     font-size: 16px;
     font-weight: bold;
-    color: #1565c0;
     font-family: 'Times New Roman', Times, serif;
-    background-color: #bbdefb;
+    /* color: #1565c0;
+    background-color: #bbdefb; */
+    color:rgb(0, 25, 51);
+    background-color:rgb(255, 173, 72);
     padding: 5px 10px;
     border-radius: 5px;
     display: inline-block;

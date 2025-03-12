@@ -3,9 +3,15 @@ body {
     margin: 20px; 
     background-color: #f4f4f4; 
 }
+.repcomcon-btn {
+    text-align: center;
+    margin-bottom: 20px;
+}
 /* Show the targeted report-box */
 .report-container {
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 .report-box, .report-box1 { 
     border: 1px solid #ccc; 

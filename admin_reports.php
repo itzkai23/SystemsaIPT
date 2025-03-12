@@ -51,7 +51,7 @@ $reportsQuery = $conn->query("
 
     <div class="rec-com-container">
         <!-- Buttons to reveal content -->
-        <div>
+        <div class="repcomcon-btn">
             <!-- <a href="#report1">ComReport</a>
             <a href="#report2">Report</a> -->
             <a href="#report2">ComReport</a>
