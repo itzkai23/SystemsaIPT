@@ -143,22 +143,6 @@ while ($prof = $profResult->fetch_assoc()) {
                         <h5><?php echo htmlspecialchars($prof['name']); ?></h5>
                         <h5><?php echo htmlspecialchars($prof['role']); ?></h5>
                     </div>
-<<<<<<< HEAD
-                </label>    
-           
-        </div>
-    
-        <!-- Back to Home Button -->
-        <a href="silog.php">Back</a>
-  
-          <input type="checkbox" id="termsCheckbox_usercomment" class="modal-toggle_usercom">
-          <div class="modal_usercom">
-            <div class="modal-content-usercom">
-              <label for="termsCheckbox_usercomment" class="close">&times;</label>
-              
-              <div class="container">
-        
-=======
                 </div>
             </div>
         <?php endforeach; ?>
@@ -173,7 +157,6 @@ while ($prof = $profResult->fetch_assoc()) {
             <span class="close">&times;</span>
             
             <div class="container">
->>>>>>> origin/bago
                 <div class="avnamecon">
                     <div class="avname">
                         <img id="profImg" src="" alt="Professor Image" width="150" height="150">
