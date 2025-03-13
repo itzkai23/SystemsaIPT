@@ -281,7 +281,7 @@ body {
   border-radius: 5px;
 }
       
-.adhome {
+/* .adhome {
     color: white;
     text-emphasis: none;
     font-family: Roboto, sans-serif;
@@ -300,12 +300,26 @@ body {
     color: orange;
     border: solid 1px orange;
     transition: ease 0.5s;
-}
+} */
 /* h1 {
     font-size: 28px;
     color: #FF8C00;
     margin-bottom: 20px;
 } */
+
+.back-button {
+    display: inline-block;
+}
+
+.back-button img {
+    width: 50px; /* Adjust size as needed */
+    transition: 0.3s ease;
+}
+
+.back-button:hover img {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(93%) saturate(473%) hue-rotate(5deg) brightness(104%) contrast(103%);
+    /* This changes the white image to an orange-like color */
+}
 
 /* Container */
 .group-container {
@@ -472,7 +486,11 @@ body {
 </nav>
 
 <div class="whole">
-        <a class="adhome" href="admin.php">Back</a>
+
+        <a href="#" class="back-button">
+                <img src="images/backmage1.png" alt="Back" class="back-image">
+        </a>
+
         <h1>Instructor's Profiles</h1>
         <div class="group-container"> 
                 <?php if ($result->num_rows > 0) { ?>
