@@ -49,14 +49,15 @@ $reportsQuery = $conn->query("
 
     <h3>Reported Comments & Evaluations</h3>
 
-    <div class="rec-com-container">
-        <!-- Buttons to reveal content -->
-        <div class="repcomcon-btn">
+    <!-- Buttons to reveal content -->
+    <div class="repcomcon-btn">
             <!-- <a href="#report1">ComReport</a>
             <a href="#report2">Report</a> -->
-            <a href="#report2">ComReport</a>
-            <a href="#report1">Report</a>
+            <a href="#report2">Student Reports</a>
+            <a href="#report1">Professor Reports</a>
         </div>
+
+    <div class="rec-com-container">
 
     <div id="report1" class="report-container">
     <?php while ($report = $reportsQuery->fetch_assoc()) : ?>

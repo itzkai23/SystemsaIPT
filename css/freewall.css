@@ -41,7 +41,7 @@ body {
     gap: 80px;
     padding: 0;
     margin: 0;
-    margin-right: 40%;
+    margin-right: 38%;
 }
 
 .nav-links li {
@@ -137,7 +137,7 @@ header {
     background: linear-gradient(90deg, #FF5733, #CC5500);
     color: white;
     text-align: center;
-    padding: 5px;
+    height: 80px;
     font-size: 26px;
     font-weight: bold;
     letter-spacing: 1.5px;
@@ -173,7 +173,7 @@ header {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background: #007bff;
+    background: #FFA500;
     border-radius: 10px;
 }
 
@@ -517,7 +517,7 @@ main::-webkit-scrollbar {
 }
 
 main::-webkit-scrollbar-thumb {
-    background: #007bff;
+    background: #E69500;
     border-radius: 4px;
 }
 
