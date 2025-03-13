@@ -319,7 +319,7 @@ body {
 .whole{
   margin: auto;
   margin-top: 60px;
-  padding: 50px 50px 20px 50px;
+  padding: 20px;
   background-color: rgb(32, 31, 31);
   max-width: 80%;
   border-radius: 40px;
