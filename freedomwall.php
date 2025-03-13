@@ -46,6 +46,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                 <a href="#">
                     <img src="images/jpcs.jpg" alt="Logo">
                 </a>
+                <h1>Freedom Wall</h1>
             </div>
             <input type="checkbox" id="menu-toggle" class="menu-checkbox">
             <label for="menu-toggle" class="menu-icon">&#9776;</label>
@@ -57,10 +58,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             </ul>
         </div>
     </nav>
- 
-    <header>
-        <h1>Freedom Wall</h1>
-    </header>
+
     <div class="container">
 
         <!-- Main Content Section -->
