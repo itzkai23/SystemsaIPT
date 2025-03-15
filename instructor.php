@@ -386,6 +386,25 @@ font-size: 18px;
 font-weight: bold;
 }
 
+.report-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between icon & text */
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  background: red; /* Flat red background */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+}
+
+.report-btn:hover {
+  background: darkred;
+}
+
 .subject {
 margin-top: 10px;
 font-size: 16px;
@@ -950,7 +969,8 @@ word-wrap: break-word;
          <h5 class="prof-name"> <?php echo $professor_name; ?></h5>
          <!-- Add a Report Button -->
           <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
-        class="report-btn">Report</a>
+        class="report-btn">
+        <i class="fas fa-flag">Report</a>
 
          </div>
         </div>
