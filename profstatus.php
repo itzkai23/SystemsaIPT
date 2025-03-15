@@ -1,40 +1,9 @@
 <?php
 require 'connect.php';
 
-// Initialize variables
-$professor_id = null;
-$professor_name = $profrole = $prof_img = null;
-$feedbackData = [];
+if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
+    $professor_id = intval($_GET['professor_id']);
 
-// Check if professor_id is set
-if (isset($_GET['professor_id'])) {
-    $professor_id = $_GET['professor_id'];
-} elseif (isset($_POST['professor_id'])) {
-    $professor_id = $_POST['professor_id'];
-}
-
-// Validate professor_id before proceeding
-if ($professor_id) {
-    // Fetch professor details
-    $profQuery = $conn->prepare("SELECT name, role, prof_img FROM professors WHERE id = ?");
-    $profQuery->bind_param("i", $professor_id);
-    $profQuery->execute();
-    $profResult = $profQuery->get_result();
-
-    if ($profResult->num_rows > 0) {
-        $profData = $profResult->fetch_assoc();
-        $professor_name = $profData['name'];
-        $profrole = $profData['role'];
-        $prof_img = !empty($profData['prof_img']) ? $profData['prof_img'] : "images/default_prof.jpg";
-    } else {
-        $professor_name = "Unknown Professor";
-        $profrole = "N/A";
-        $prof_img = "images/default_prof.jpg";
-    }
-
-    $profQuery->close();
-
-    // Fetch feedback and comments
     $query = "
     SELECT 
         ie.feedback, 
@@ -54,26 +23,37 @@ if ($professor_id) {
     FROM comments c
     WHERE c.professor_id = ?
 
-    ORDER BY date_posted DESC;";  // Latest entries first
+    ORDER BY date_posted DESC;";
 
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ii", $professor_id, $professor_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    while ($row = $result->fetch_assoc()) {
-        $feedbackData[] = [
-            'feedback' => $row['feedback'] ?: null,
-            'comment' => $row['comment'] ?: null,
-            'comment_id' => $row['comment_id'] ?: null,
-            'date_posted' => $row['date_posted']
-        ];
+    $output = "";
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $output .= '<div class="comment-box">';
+            $output .= '<div class="comment-text">';
+            $output .= '<strong>Anonymous</strong><br>';
+            if (!empty($row['feedback'])) {
+                $output .= '<p>' . htmlspecialchars($row['feedback']) . '</p>';
+            } elseif (!empty($row['comment'])) {
+                $output .= '<p>' . htmlspecialchars($row['comment']) . '</p>';
+            }
+            $output .= '<small>' . htmlspecialchars($row['date_posted']) . '</small>';
+            $output .= '</div></div>';
+        }
+    } else {
+        $output = "<p>No comments or feedback available.</p>";
     }
 
-    $stmt->close();
+    echo $output;
+    exit(); // Stop execution after sending JSON response
 }
 
-// Fetch all professors
+// Fetch all professors (normal page load)
 $professors = [];
 $profResult = $conn->query("SELECT id, name, role, prof_img FROM professors");
 while ($prof = $profResult->fetch_assoc()) {
@@ -84,8 +64,8 @@ while ($prof = $profResult->fetch_assoc()) {
         'prof_img' => !empty($prof['prof_img']) ? $prof['prof_img'] : "images/default_prof.jpg"
     ];
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -111,7 +91,7 @@ while ($prof = $profResult->fetch_assoc()) {
                 data-role="<?php echo htmlspecialchars($prof['role']); ?>"
                 data-image="<?php echo htmlspecialchars($prof['prof_img']); ?>">
                 <div class="con-prof">
-                    <img src="<?php echo htmlspecialchars($prof['prof_img']); ?>" alt="Professor Image">
+                    <img src="<?php echo htmlspecialchars($prof['prof_img']); ?>" alt="Professor Image" width="150" height="150">
                     <div>
                         <h5><?php echo htmlspecialchars($prof['name']); ?></h5>
                         <h5><?php echo htmlspecialchars($prof['role']); ?></h5>
@@ -135,7 +115,7 @@ while ($prof = $profResult->fetch_assoc()) {
                         <img id="profImg" src="" alt="Professor Image" width="150" height="150">
                         <div class="pc">
                             <h5 id="profName"></h5>
-                            
+                            <h5 id="profRole"></h5>
                         </div>
                     </div>
                     <h5 id="profRole"></h5>
@@ -182,15 +162,27 @@ while ($prof = $profResult->fetch_assoc()) {
 
         document.querySelectorAll(".rant-post").forEach(item => {
             item.addEventListener("click", function () {
+                const profId = this.getAttribute("data-id");
                 const name = this.getAttribute("data-name");
                 const role = this.getAttribute("data-role");
                 const image = this.getAttribute("data-image");
-                
+
                 document.getElementById("profName").textContent = name;
                 document.getElementById("profRole").textContent = role;
                 document.getElementById("profImg").src = image;
-                
+
                 modal.style.display = "block";
+
+                // Fetch comments using AJAX from the same file
+                fetch(`profstatus.php?fetch_comments=1&professor_id=${profId}`)
+                    .then(response => response.text()) 
+                    .then(data => {
+                        commentsContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching comments:", error);
+                        commentsContainer.innerHTML = "<p>Failed to load comments.</p>";
+                    });
             });
         });
 
@@ -205,6 +197,7 @@ while ($prof = $profResult->fetch_assoc()) {
         });
     });
 </script>
+
 
 </body>
 </html>
