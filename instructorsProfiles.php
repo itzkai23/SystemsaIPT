@@ -487,7 +487,7 @@ body {
 
 <div class="whole">
 
-        <a href="#" class="back-button">
+        <a href="home.php" class="back-button">
                 <img src="images/backmage1.png" alt="Back" class="back-image">
         </a>
 
