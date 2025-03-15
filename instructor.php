@@ -99,7 +99,7 @@ $current_image .= "?t=" . time();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
     body {
     margin: 0;
@@ -387,6 +387,9 @@ font-weight: bold;
 }
 
 .report-btn {
+  position: absolute;
+  top: 35px;
+  right: 35px;
   display: inline-flex;
   align-items: center;
   gap: 8px; /* Space between icon & text */
@@ -967,14 +970,15 @@ word-wrap: break-word;
                  width="150" height="150">
          <div class="pc">
          <h5 class="prof-name"> <?php echo $professor_name; ?></h5>
-         <!-- Add a Report Button -->
-          <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
-        class="report-btn">
-        <i class="fas fa-flag">Report</a>
-
+         
          </div>
+         <!-- Add a Report Button -->
+        <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
+        class="report-btn">Report</a>
+        <!-- <i class="fas fa-flag"> -->
         </div>
         <h5 class="subject"><?php echo $profrole; ?></h5>
+        
         </div>
         
         <section class="comment-post">
