@@ -73,8 +73,8 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                 <div class="modal">
                     <div class="modal-content">
                         <label for="termsCheckbox" class="close">&times;</label>
-                        <h3>Create Post</h3>
-                        <div>
+                        <h3 class="cpost">Create Post</h3>
+                        <div class="pfn">
                             <img src="<?php echo htmlspecialchars($current_image); ?>" class="picture" title="Click to upload image"/>
                             <h3><?php echo htmlspecialchars($_SESSION['f_name']) . " " . htmlspecialchars($_SESSION['l_name']); ?></h3>
                         </div>
@@ -86,7 +86,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                             <input type="file" id="fileinput" name="image_url" accept="image/*" style="display:none;"/>
                         </div>
                         <textarea name="content" placeholder="What's on your mind?" required></textarea>
-                        <button type="submit" name="submit">Post</button>
+                        <button type="submit" name="submit" class="btnpost">Post</button>
                     </div>
                 </div>
             </form>
@@ -139,9 +139,15 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                         $commenterPic = !empty($commentRow['picture']) ? $commentRow['picture'] : 'images/icon.jpg';
 
                         echo "<div class='comment'>";
+                        echo "<div class='imgcom'>";
                         echo "<img src='" . htmlspecialchars($commenterPic) . "' alt='User Profile' class='comment-profile'>";
-                        echo "<p><strong>" . htmlspecialchars($commentRow['fname'] . " " . $commentRow['lname']) . ":</strong> " . nl2br(htmlspecialchars($commentRow['comment'])) . "</p>";
-                        echo "<small>" . "<br>" . htmlspecialchars($commentRow['created_at']) . "</small>";
+                        echo "<div class='incom1'>";
+                        echo "<div class='incom2'>";
+                        echo "<strong>" . htmlspecialchars($commentRow['fname'] . " " . $commentRow['lname']) . "</strong> " . "<br>" . "<p class='currentcom'>" . nl2br(htmlspecialchars($commentRow['comment'])) . "</p>";
+                        echo "</div>";
+                        echo "<small class='ditcom'>" . htmlspecialchars($commentRow['created_at']) . "</small>";
+                        echo "</div>";
+                        echo "</div>";
 
                         // Three-dot Menu for Comments
                         if ($comment_id) {
