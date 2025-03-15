@@ -19,7 +19,7 @@ $professor_img = isset($_GET['img']) ? htmlspecialchars($_GET['img']) : 'images/
 <body>
     <div class="box">
         <!-- Display Professor's Image -->
-        <img src="<?php echo $professor_img; ?>" alt="<?php echo $professor_name; ?>" width="50" height="50"> 
+        <img src="<?php echo $professor_img; ?>" alt="<?php echo $professor_name; ?>"> 
         <h2>Report a Professor</h2>    
         <h4><?php echo $professor_name; ?></h4>  
         <p>Select one or more reasons for your report:</p>
