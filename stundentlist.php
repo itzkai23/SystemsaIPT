@@ -335,7 +335,7 @@ tr:hover {
 
 <ul class="sidebar" id="sidebar">
       
-     <li><a class="a-bar"href="#">Home</a></li>
+     <li><a class="a-bar"href="admin.php">Home</a></li>
      <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
      <li><a class="a-bar"href="freedomwall.html">Newsfeed</a></li>
      <li><a class="a-bar"href="upf.php">Profile</a></li>
@@ -409,5 +409,6 @@ tr:hover {
             </tbody>
         </table>
     </div>
+    <script src="js/sidebar.js"></script>
 </body>
 </html>
