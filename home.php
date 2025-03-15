@@ -81,7 +81,7 @@ body {
 display: flex;
 align-items: center;
 gap: 30px;
-margin-left: 70%;
+margin-left: 65%;
 }
 
 .mid-section a{

@@ -22,20 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['report_id'])) {
     $updateQuery->close();
 }
 
-// Fetch reported comments and evaluations
+// Fetch reported comments
 $reportsQuery = $conn->query("
     SELECT r.id AS report_id, 
-           COALESCE(c.comment, ie.feedback) AS reported_text, 
+           c.comment AS reported_text, 
            u.fname, u.lname, 
            r.reported_at, 
            r.status 
     FROM reports r 
     LEFT JOIN comments c ON r.comment_id = c.id 
-    LEFT JOIN instructor_evaluation ie ON r.evaluation_id = ie.id 
     JOIN registration u ON r.user_id = u.id
     ORDER BY r.reported_at DESC
 ");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,14 +49,15 @@ $reportsQuery = $conn->query("
 
     <h3>Reported Comments & Evaluations</h3>
 
-    <div class="rec-com-container">
-        <!-- Buttons to reveal content -->
-        <div class="repcomcon-btn">
+    <!-- Buttons to reveal content -->
+    <div class="repcomcon-btn">
             <!-- <a href="#report1">ComReport</a>
             <a href="#report2">Report</a> -->
-            <a href="#report2">ComReport</a>
-            <a href="#report1">Report</a>
+            <a href="#report2">Student Reports</a>
+            <a href="#report1">Professor Reports</a>
         </div>
+
+    <div class="rec-com-container">
 
     <div id="report1" class="report-container">
     <?php while ($report = $reportsQuery->fetch_assoc()) : ?>
