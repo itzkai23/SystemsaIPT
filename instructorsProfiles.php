@@ -314,6 +314,7 @@ body {
 .back-button img {
     width: 50px; /* Adjust size as needed */
     transition: 0.3s ease;
+    filter: invert(100%) brightness(100%);
 }
 
 .back-button:hover img {
@@ -330,15 +331,40 @@ body {
 }
 
 /* Profile Card */
-.whole{
+.whole {
   margin: auto;
   margin-top: 60px;
   padding: 20px;
   background-color: rgb(32, 31, 31);
   max-width: 80%;
+  height: 560px; /* Set a fixed height */
   border-radius: 40px;
   white-space: nowrap;
+  overflow: auto; /* Enable scrolling if needed */
 }
+
+/* Styling the scrollbar */
+.whole::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+  opacity: 0; /* Make it invisible by default */
+  transition: opacity 0.3s ease; /* Smooth transition for showing the scrollbar */
+}
+
+.whole::-webkit-scrollbar-thumb {
+  background-color: orange; /* Orange color for the thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.whole::-webkit-scrollbar-track {
+  background-color: #333; /* Dark background for the track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+/* Show the scrollbar when the user starts scrolling */
+.whole:hover::-webkit-scrollbar {
+  opacity: 1; /* Make it visible when hovering over the container */
+}
+
 
 .whole h1 {
   font-size: 28px;
@@ -487,7 +513,7 @@ body {
 
 <div class="whole">
 
-        <a href="#" class="back-button">
+        <a href="home.php" class="back-button">
                 <img src="images/backmage1.png" alt="Back" class="back-image">
         </a>
 

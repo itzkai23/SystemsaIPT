@@ -12,10 +12,14 @@ if (isset($_GET['professor_id'])) {
   die("No professor selected. <a href='instructorsProfiles.php'>Go back</a>");
 }
 
-// Fetch professor name
-$profQuery = $conn->query("SELECT name, role, prof_img FROM professors WHERE id = '$professor_id'");
-if ($profQuery->num_rows > 0) {
-    $profData = $profQuery->fetch_assoc();
+// Fetch professor details
+$profQuery = $conn->prepare("SELECT name, role, prof_img FROM professors WHERE id = ?");
+$profQuery->bind_param("i", $professor_id);
+$profQuery->execute();
+$profResult = $profQuery->get_result();
+
+if ($profResult->num_rows > 0) {
+    $profData = $profResult->fetch_assoc();
     $professor_name = $profData['name'];
     $profrole = $profData['role'];
     $prof_img = $profData['prof_img'];
@@ -23,6 +27,26 @@ if ($profQuery->num_rows > 0) {
     die("Invalid professor selected. <a href='instructorsProfiles.php'>Go back</a>");
 }
 
+// Query to calculate average score and evaluation count
+$avgQuery = "
+SELECT 
+    AVG((q1 + q2 + q3 + q4 + q5) / 5.0) AS professor_avg_score,
+    COUNT(*) AS evaluation_count
+FROM instructor_evaluation
+WHERE professor_id = ?;
+";
+
+$avgStmt = $conn->prepare($avgQuery);
+$avgStmt->bind_param("i", $professor_id);
+$avgStmt->execute();
+$avgResult = $avgStmt->get_result();
+$avgData = $avgResult->fetch_assoc();
+
+// Extract average score and evaluation count
+$professor_avg_score = $avgData['professor_avg_score'];
+$evaluation_count = $avgData['evaluation_count'];
+
+// Prepare the main query to fetch feedback and comments
 $query = "
 SELECT 
     ie.feedback, 
@@ -73,7 +97,6 @@ while ($row = $result->fetch_assoc()) {
 
 $totalCount = count($feedbackData);
 
-
 $defimage = 'images/facultyb.png';
 
 // Keep your existing default image
@@ -86,7 +109,6 @@ $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION
 $current_image .= "?t=" . time();
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -1045,10 +1067,20 @@ word-wrap: break-word;
 <div class="section">
   <h3>Average Evaluation Points</h3>
   <h4>Current Status</h4>
-<div class="user-participant">
-    <span>Number of Evaluation:</span> <strong>150</strong>
-    <span>Average:</span> <strong>89.55</strong>
+  <div class="user-participant">
+      <span>Number of Evaluations:</span> <strong><?php echo htmlspecialchars($evaluation_count); ?></strong>
+      <span>Average:</span> <strong>
+        <?php
+        if ($evaluation_count > 0) {
+            echo number_format($professor_avg_score, 2);
+        } else {
+            echo "No evaluations yet.";
+        }
+        ?>
+      </strong>
+  </div>
 </div>
+
 
   
 </div>

@@ -284,8 +284,7 @@ body {
 .divider img {
     width: 60px;
     height: 60px;
-    object-fit: cover;
-    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.1));
+    object-fit: cover; 
 }
 
     </style>
