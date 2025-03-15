@@ -954,7 +954,7 @@ word-wrap: break-word;
         </div>
        
       </div>
-      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></span></h4> 
+      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']);?></span></h4> 
     </div>
          
 </div>
