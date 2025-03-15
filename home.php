@@ -13,10 +13,10 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
-if (isset($_SESSION['is_admin'])){
-  header('location:admin.php');
-  exit();
-}
+// if (isset($_SESSION['is_admin'])){
+//   header('location:admin.php');
+//   exit();
+// }
 
 // Keep your existing default image
 $default_image = "images/icon.jpg";

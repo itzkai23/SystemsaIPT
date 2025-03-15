@@ -374,7 +374,9 @@ z-index: 0;
 
 /* Avatar & Name Section */
 .avnamecon {
-background: linear-gradient(135deg, #1976d2, #64b5f6); /* Blue gradient */
+/* background: linear-gradient(135deg, #1976d2, #64b5f6);  */
+/* Blue gradient */
+background-color: #FFA500;
 padding: 15px;
 margin-bottom: 20px;
 border-radius: 10px;
@@ -399,13 +401,26 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .pc {
-display: flex;
-gap: 10px;
+display: block;
 }
 
 .prof-name{
 font-size: 18px;
 font-weight: bold;
+color: black;
+font-family: "Roboto", sans-serif;
+font-weight: 600;
+margin-bottom: 5px;
+margin-top: auto;
+}
+
+.pro-role {
+margin-top: 2px;
+margin-bottom: 0px;
+font-size: 16px;
+font-family: "Roboto",sans-serif;
+font-weight: 600;
+opacity: 0.9;
 }
 
 .report-btn {
@@ -430,19 +445,12 @@ font-weight: bold;
   background: darkred;
 }
 
-.subject {
-margin-top: 10px;
-font-size: 16px;
-margin-left: 23px;
-opacity: 0.9;
-}
-
 /* User comments to instructor profile (Only Text) */
 .comment-post {
-    background: #fff;
+    background: rgb(31, 31, 31);
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     border-radius: 10px;
     display: flex;
     gap: 15px;
@@ -534,7 +542,7 @@ opacity: 0.9;
 
 .modal-content-usercom {
   text-align: center;
-  background-color: white;
+  background-color: rgb(31, 31, 31);
   margin: auto;
   margin-top: 9%;
   padding: 20px;
@@ -636,7 +644,7 @@ textarea:not(:placeholder-shown) + button {
 }
 /* Modal Content */
 .modal-content {
-  background-color: white;
+  background-color: rgb(31, 31, 31);
   margin: auto;
   margin-top: 80px;
   padding: 20px;
@@ -677,6 +685,10 @@ textarea:not(:placeholder-shown) + button {
     background-color: rgb(196, 192, 192);
 }
 
+.cname {
+  color: white;
+}
+
 /* Show Modal When Checkbox is Checked */
 
 /* Comment & Details Section */
@@ -692,7 +704,7 @@ gap: 15px;
 width: 45%;
 height: 170px;
 padding: 15px;
-background: #ffffff;
+background: rgb(26, 26, 26);
 border-radius: 10px;
 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 display: inline-block;
@@ -776,9 +788,9 @@ font-size: 18px;
 /* Comments and Average Container */
 h3 {
 font-size: 18px;
-color: #1976d2;
+color: white;
 margin-bottom: 10px;
-border-bottom: 2px solid #64b5f6;
+border-bottom: 2px solid white;
 padding-bottom: 5px;
 }
 
@@ -992,14 +1004,13 @@ word-wrap: break-word;
                  width="150" height="150">
          <div class="pc">
          <h5 class="prof-name"> <?php echo $professor_name; ?></h5>
-         
+         <h5 class="pro-role"><?php echo $profrole; ?></h5>
          </div>
          <!-- Add a Report Button -->
         <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
         class="report-btn">Report</a>
         <!-- <i class="fas fa-flag"> -->
         </div>
-        <h5 class="subject"><?php echo $profrole; ?></h5>
         
         </div>
         
@@ -1015,7 +1026,7 @@ word-wrap: break-word;
               <h3>Your comment/concerns</h3>
                     <div>
                     <img src="<?php echo htmlspecialchars($current_image); ?>" class="your-com" alt="picture">
-                    <p><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></p>
+                    <p class="cname"><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></p>
                     </div>
                     <form action="comment.php" method="post">
                         <input type="hidden" name="professor_id" value="<?php echo htmlspecialchars($professor_id); ?>">

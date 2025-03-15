@@ -96,7 +96,7 @@ body {
         left: 50%;
         transform: translate(-50%, -50%);
         transition: .3s ease;
-        z-index: 15;
+        z-index: 105;
       }
       
   .ham-menu span:nth-child(1) {
@@ -130,7 +130,7 @@ body {
         width: 250px;
         padding-top: 55px;
         padding-left: 0px;
-        z-index: 10;
+        z-index: 100;
         background-color: rgb(11, 0, 114);
         backdrop-filter: blur(5px);
         box-shadow: -10px 0 10px rgb(0,0,0,0.1);
@@ -140,7 +140,7 @@ body {
         list-style: none;
         transition: left 0.3s ease;
         margin-top: 0px;
-  
+        
       }
       
 .sidebar.active {
@@ -280,35 +280,10 @@ body {
   padding: 8px;
   border-radius: 5px;
 }
-      
-/* .adhome {
-    color: white;
-    text-emphasis: none;
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    border: solid 1px white;
-    border-radius: 20px;
-    padding: 10px 20px;
-    background-color: orange;
-    margin-left: 20px;
-}
-
-.adhome:hover {
-    background-color: white;
-    color: orange;
-    border: solid 1px orange;
-    transition: ease 0.5s;
-} */
-/* h1 {
-    font-size: 28px;
-    color: #FF8C00;
-    margin-bottom: 20px;
-} */
 
 .back-button {
     display: inline-block;
+    margin-left: 5%;
 }
 
 .back-button img {
@@ -336,7 +311,7 @@ body {
   margin-top: 60px;
   padding: 20px;
   background-color: rgb(32, 31, 31);
-  max-width: 80%;
+  max-width: 70%;
   height: 560px; /* Set a fixed height */
   border-radius: 40px;
   white-space: nowrap;

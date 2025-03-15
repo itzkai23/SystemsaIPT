@@ -122,7 +122,7 @@ while ($prof = $profResult->fetch_assoc()) {
     </div>
 
     <!-- Back to Home Button -->
-    <a href="silog.html">Back</a>
+    <a href="silog.php">Back</a>
 
     <!-- Modal for Comments -->
     <div class="modal_usercom">
@@ -135,9 +135,10 @@ while ($prof = $profResult->fetch_assoc()) {
                         <img id="profImg" src="" alt="Professor Image" width="150" height="150">
                         <div class="pc">
                             <h5 id="profName"></h5>
-                            <h5 id="profRole"></h5>
+                            
                         </div>
                     </div>
+                    <h5 id="profRole"></h5>
                 </div>
 
                 <form method="GET">

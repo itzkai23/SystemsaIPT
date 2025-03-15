@@ -217,7 +217,7 @@ a:hover {
 
 .modal-content-usercom {
   text-align: center;
-  background-color: white;
+  background-color: rgb(20, 20, 20);
   margin: auto;
   margin-top: 6%;
   border-radius: 10px;
@@ -242,7 +242,9 @@ z-index: 0;
 
 /* Avatar & Name Section */
 .avnamecon {
-background: linear-gradient(135deg, #1976d2, #64b5f6); /* Blue gradient */
+/* background: linear-gradient(135deg, #1976d2, #64b5f6);  */
+/* Blue gradient */
+background-color: #FFA500; /* Standard Orange */
 padding: 15px;
 margin-bottom: 20px;
 border-radius: 10px;
@@ -269,6 +271,19 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 .pc {
 display: flex;
 gap: 10px;
+}
+
+#profName {
+    color: black;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+}
+
+#profRole {
+    text-align: left;
+    margin-left: 12px;
+    margin-bottom: 0px;
+    color: white;
 }
 
 .prof-name{
@@ -349,9 +364,9 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
 h3 {
 font-size: 18px;
-color: #1976d2;
+color: white;
 margin-bottom: 10px;
-border-bottom: 2px solid #64b5f6;
+border-bottom: 2px solid white;
 padding-bottom: 5px;
 text-align: left;
 }
