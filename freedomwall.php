@@ -51,9 +51,9 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             <input type="checkbox" id="menu-toggle" class="menu-checkbox">
             <label for="menu-toggle" class="menu-icon">&#9776;</label>
             <ul class="nav-links">
-                <li><a href="#" class="tooltip"><img src="images/homer1.png" alt="Home"><span class="tooltip-text">Home</span></a></li>
-                <li><a href="#" class="tooltip"><img src="images/newsfeed1.png" alt="Newsfeed"><span class="tooltip-text">Newsfeed</span></a></li>
-                <li><a href="#" class="tooltip"><img src="images/fapro1.png" alt="Faculty Profiles"><span class="tooltip-text">Faculty Profiles</span></a></li>
+                <li><a href="home.php" class="tooltip"><img src="images/homer1.png" alt="Home"><span class="tooltip-text">Home</span></a></li>
+                <li><a href="freedomwall.php" class="tooltip"><img src="images/newsfeed1.png" alt="Newsfeed"><span class="tooltip-text">Newsfeed</span></a></li>
+                <li><a href="instructorsProfiles.php" class="tooltip"><img src="images/fapro1.png" alt="Faculty Profiles"><span class="tooltip-text">Faculty Profiles</span></a></li>
                 <li><a href="#" class="tooltip"><img src="images/annce.png" alt="Announcement"><span class="tooltip-text">Announcement</span></a></li>
             </ul>
         </div>

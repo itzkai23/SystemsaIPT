@@ -91,7 +91,7 @@ while ($row = $result->fetch_assoc()) {
         'date_posted' => $row['date_posted'],
         'student_name' => $row['student_name'],
         'lname' => $row['lname'],
-        'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/default_user.jpg"
+        'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/icon.jpg"
     ];
 }
 
@@ -603,7 +603,7 @@ background: #555; /* Darker thumb on hover */
 
 .modal-content-usercom button {
     width: 100%;
-    background-color: #007bff;
+    background-color: #1C1E21;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -612,11 +612,11 @@ background: #555; /* Darker thumb on hover */
     font-size: 15px;
     font-weight: 700;
     font-family: Roboto, sans-serif;
-
+    margin-top: 5px;
 }
 
 textarea:not(:placeholder-shown) + button {
-    background-color: rgb(57, 57, 255);
+    background-color: #333639;
     color: white;
     cursor: pointer;
     border: none;
@@ -741,7 +741,7 @@ font-size: 18px;
   width: 95%;
   height: 78%;
   padding: 15px;
-  background: #ffffff;
+  background:rgb(31, 31, 31);
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: inline-block;
@@ -757,15 +757,15 @@ font-size: 18px;
 }
 
 .label-section::-webkit-scrollbar-thumb {
-  background: #007bff;
+  background: #888;
   border-radius: 10px;
 }
 
-.label-section::-webkit-scrollbar-track {
-  background: #f1f1f1
-}
+/* .label-section::-webkit-scrollbar-track {
+  background: #555;
+} */
 
-.rating {
+/* .rating {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -783,7 +783,7 @@ font-size: 18px;
 .rating label:hover,
 .rating label:hover ~ label {
     color: gold;
-}
+} */
 
 /* Comments and Average Container */
 h3 {
@@ -810,11 +810,11 @@ word-wrap: break-word;
 }
 
 .com-scroll {
-  max-height: 80px; 
+  max-height: 100px; 
   overflow-y: scroll; 
   border: 1px solid #ccc; 
   padding: 2px; 
-  width: 92%;
+  width: 100%;
   cursor: pointer; 
 }
 
@@ -822,10 +822,10 @@ word-wrap: break-word;
   width: 8px;
 }
 
-.com-scroll::-webkit-scrollbar-track {
+/* .com-scroll::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
-}
+} */
 
 .com-scroll::-webkit-scrollbar-thumb {
   background: #888;
@@ -836,13 +836,59 @@ word-wrap: break-word;
   background: #555;
 }
 
-/* Comment box layout */
+/* Comment box layout 111111 */
+.comment-box1 {
+  display: flex;
+  /* align-items: center; */
+  align-items: flex-start; /* Align items to the top */
+  gap: 10px;
+  background:rgb(31, 31, 31);
+  padding: 5px;
+  border-radius: 8px;
+  margin-top: 5px;
+  }
+
+  .comment-text1 {
+  background-color:rgb(43, 43, 43);
+  margin-bottom: 0px;
+  padding: 10px;
+  border-radius: 15px;
+  max-width: 270px;
+  max-height: none; /* Remove max-height if no limit is needed */
+  word-wrap: break-word; /* Ensure words break properly */
+  white-space: normal; /* Prevent the text from overflowing horizontally */
+  }
+
+  .comment-text1 strong {
+  font-size: 14px;
+  display: block; /* Ensures it appears above */
+  color: white;
+  }
+
+  .comment-text1 p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: -15px;
+  margin-bottom: 0px;
+  color: white;
+  }
+
+  .comment-text1 small {
+  font-size: 8px;
+  color: gray;
+  margin-top: 2px;
+  display: block;
+  color: white;
+  }
+
+
+/* Comment box layout*/
   .comment-box {
   display: flex;
   /* align-items: center; */
   align-items: flex-start; /* Align items to the top */
   gap: 10px;
-  background: #f9f9f9;
+  background:rgb(31, 31, 31);
   padding: 5px;
   border-radius: 8px;
   margin-top: 5px;
@@ -858,28 +904,37 @@ word-wrap: break-word;
   }
 
   .comment-text {
-  flex-grow: 1;
+  max-width: 490px;
+  background-color:rgb(43, 43, 43);
+  margin-bottom: 0px;
   
+  padding: 10px;
+  border-radius: 15px;
   }
 
   .comment-text strong {
   font-size: 14px;
   display: block; /* Ensures it appears above */
+  color: white;
   }
 
   .comment-text p {
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 300;
   margin-top: -15px;
   margin-bottom: 0px;
+  color: white;
   }
 
   .comment-text small {
-  font-size: 11px;
+  font-size: 8px;
   color: gray;
   margin-top: 2px;
   display: block;
+  color: white;
   }
+
+
 
   .menu-container {
     position: relative;
@@ -1047,9 +1102,9 @@ word-wrap: break-word;
               foreach ($feedbackData as $comm) {
                   // Display feedback if it exists
                   if (!empty($comm['feedback'])) {
-                      echo '<div class="comment-box">';
+                      echo '<div class="comment-box1">';
                       echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                      echo '<div class="comment-text">';
+                      echo '<div class="comment-text1">';
                       echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
                       echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
                       echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
@@ -1059,9 +1114,9 @@ word-wrap: break-word;
 
                   // Display comment if it exists
                   if (!empty($comm['comment'])) {
-                      echo '<div class="comment-box">';
+                      echo '<div class="comment-box1">';
                       echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                      echo '<div class="comment-text">';
+                      echo '<div class="comment-text1">';
                       echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
                       echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
                       echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field

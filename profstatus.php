@@ -1,6 +1,25 @@
 <?php
 require 'connect.php';
 
+// Query to calculate average score and evaluation count
+$avgQuery = "
+SELECT 
+    AVG((q1 + q2 + q3 + q4 + q5) / 5.0) AS professor_avg_score,
+    COUNT(*) AS evaluation_count
+FROM instructor_evaluation
+WHERE professor_id = ?;
+";
+
+$avgStmt = $conn->prepare($avgQuery);
+$avgStmt->bind_param("i", $professor_id);
+$avgStmt->execute();
+$avgResult = $avgStmt->get_result();
+$avgData = $avgResult->fetch_assoc();
+
+// Extract average score and evaluation count
+$professor_avg_score = $avgData['professor_avg_score'];
+$evaluation_count = $avgData['evaluation_count'];
+
 if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     $professor_id = intval($_GET['professor_id']);
 
@@ -36,7 +55,6 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
         while ($row = $result->fetch_assoc()) {
             $output .= '<div class="comment-box">';
             $output .= '<div class="comment-text">';
-            $output .= '<strong>Anonymous</strong><br>';
             if (!empty($row['feedback'])) {
                 $output .= '<p>' . htmlspecialchars($row['feedback']) . '</p>';
             } elseif (!empty($row['comment'])) {
@@ -53,19 +71,22 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     exit(); // Stop execution after sending JSON response
 }
 
-// Fetch all professors (normal page load)
+// Initialize the $professors array
 $professors = [];
+
+// Fetch all professors (normal page load)
 $profResult = $conn->query("SELECT id, name, role, prof_img FROM professors");
-while ($prof = $profResult->fetch_assoc()) {
-    $professors[] = [
-        'id' => $prof['id'],
-        'name' => $prof['name'],
-        'role' => $prof['role'],
-        'prof_img' => !empty($prof['prof_img']) ? $prof['prof_img'] : "images/default_prof.jpg"
-    ];
+if ($profResult && $profResult->num_rows > 0) {
+    while ($prof = $profResult->fetch_assoc()) {
+        $professors[] = [
+            'id' => $prof['id'],
+            'name' => $prof['name'],
+            'role' => $prof['role'],
+            'prof_img' => !empty($prof['prof_img']) ? $prof['prof_img'] : "images/facultyb.png"
+        ];
+    }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,8 +139,22 @@ while ($prof = $profResult->fetch_assoc()) {
                             <h5 id="profRole"></h5>
                         </div>
                     </div>
-                    <h5 id="profRole"></h5>
+                    <div class="rate"><h3>Average Evaluation Points</h3>
+                    <h4>Current Status</h4>
+                    <div class="user-participant">
+                        <span>Number of Evaluations:</span> <strong><?php echo htmlspecialchars($evaluation_count); ?></strong>
+                        <span>Average:</span> <strong>
+                            <?php
+                            if ($evaluation_count > 0) {
+                                echo number_format($professor_avg_score, 2);
+                            } else {
+                                echo "No evaluations yet.";
+                            }
+                            ?>
+                        </strong>
+                    </div>
                 </div>
+            </div>
 
                 <form method="GET">
                   <input type="hidden" name="professor_id" value="<?php echo $professor_id; ?>">
@@ -133,7 +168,6 @@ while ($prof = $profResult->fetch_assoc()) {
                             foreach ($feedbackData as $comm) {
                                 echo '<div class="comment-box">';
                                 echo '<div class="comment-text">';
-                                echo '<strong>Anonymous</strong><br>';
                                 if (!empty($comm['feedback'])) {
                                     echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
                                 } elseif (!empty($comm['comment'])) {
