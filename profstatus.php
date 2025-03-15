@@ -122,7 +122,7 @@ while ($prof = $profResult->fetch_assoc()) {
     </div>
 
     <!-- Back to Home Button -->
-    <a href="silog.html">Back</a>
+    <a href="silog.php">Back</a>
 
     <!-- Modal for Comments -->
     <div class="modal_usercom">
