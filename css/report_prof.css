@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, black, orange, white);
+    /* background: linear-gradient(135deg, black, orange, white); */
 }
 
 .box {
@@ -108,7 +108,7 @@ textarea {
     cursor: pointer;
     font-size: 16px;
     font-family: "Roboto", sans-serif;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     font-weight: bold;
     transition: background 0.3s, color 0.3s;
 }

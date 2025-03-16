@@ -22,7 +22,6 @@ $professor_img = isset($_GET['img']) ? htmlspecialchars($_GET['img']) : 'images/
         <img src="<?php echo $professor_img; ?>" alt="<?php echo $professor_name; ?>"> 
         <h2>Report a Professor</h2>    
         <h4><?php echo $professor_name; ?></h4>  
-        <p>Select one or more reasons for your report:</p>
 
         <form action="submit_report.php" method="post">
             <input type="hidden" name="professor_id" value="<?php echo $professor_id; ?>">
