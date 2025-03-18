@@ -15,6 +15,14 @@ if (isset($_GET['search'])) {
 }
 
 $query = "SELECT
+              ie.id,
+              CONCAT(r.fname, ' ', r.lname) AS student_name,
+              p.name AS professor_name,
+              ie.q1, ie.q2, ie.q3, ie.q4, ie.q5,
+              ie.feedback,
+              ie.submitted_at,
+              (ie.q1 + ie.q2 + ie.q3 + ie.q4 + ie.q5) / 5 AS evaluation_avg_score,
+              avg_scores.professor_avg_score
             ie.id,
             CONCAT(r.fname, ' ', r.lname) AS student_name,
             p.name AS professor_name,
@@ -27,6 +35,15 @@ $query = "SELECT
           JOIN registration r ON ie.user_id = r.id
           JOIN professors p ON ie.professor_id = p.id
           LEFT JOIN (
+              SELECT
+                  professor_id,
+                  AVG((q1 + q2 + q3 + q4 + q5) / 5) AS professor_avg_score
+              FROM instructor_evaluation
+              GROUP BY professor_id
+          ) AS avg_scores ON ie.professor_id = avg_scores.professor_id";
+
+          JOIN professors p ON ie.professor_id = p.id
+          LEFT JOIN (
             SELECT
               professor_id,
               AVG((q1 + q2 + q3 + q4 + q5) / 5) AS professor_avg_score
@@ -36,7 +53,9 @@ $query = "SELECT
 
 
 // If there's a search input, filter by professor's or student's name
+// If there's a search input, filter by professor's or student's name
 if (!empty($search)) {
+    $query .= " WHERE p.name LIKE '%$search%' OR r.fname LIKE '%$search%' OR r.lname LIKE '%$search%'";
     $query .= " WHERE p.name LIKE '%$search%' OR r.fname LIKE '%$search%' OR r.lname LIKE '%$search%'";
 }
 
@@ -45,6 +64,23 @@ $query .= " ORDER BY ie.submitted_at DESC";
 $result = mysqli_query($conn, $query);
 $eval_count = ($result) ? mysqli_num_rows($result) : 0;
 
+// Query to calculate averages for each question
+$avg_query = "SELECT 
+                AVG(q1) AS avg_q1, 
+                AVG(q2) AS avg_q2, 
+                AVG(q3) AS avg_q3, 
+                AVG(q4) AS avg_q4, 
+                AVG(q5) AS avg_q5 
+              FROM instructor_evaluation";
+
+
+// If there's a search input, ensure the average calculation matches the filtered records
+if (!empty($search)) {
+  $avg_query .= " WHERE professor_id IN (SELECT id FROM professors WHERE name LIKE '%$search%')";
+}
+
+$avg_result = mysqli_query($conn, $avg_query);
+$averages = mysqli_fetch_assoc($avg_result);
 // Query to calculate averages for each question
 $avg_query = "SELECT 
                 AVG(q1) AS avg_q1, 
@@ -277,6 +313,7 @@ body {
 /* Container Styling */
 .container {
     
+    
     margin: auto;
     margin-top: 60px;
     background: white;
@@ -371,6 +408,10 @@ tr:hover {
      <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
      <li><a class="a-bar"href="freedomwall.html">Newsfeed</a></li>
      <li><a class="a-bar"href="upf.php">Profile</a></li>
+     <li><a class="a-bar"href="admin.php">Home</a></li>
+     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
+     <li><a class="a-bar"href="freedomwall.html">Newsfeed</a></li>
+     <li><a class="a-bar"href="upf.php">Profile</a></li>
        
 </ul>
 
@@ -398,6 +439,7 @@ tr:hover {
         <h2>Evaluation Record</h2>
         <!-- Display Total Evaluation Count -->
         <p class="student-count">Total Evaluations: <strong><?php echo $eval_count; ?></strong></p>
+        <p class="student-count">Total Evaluations: <strong><?php echo $eval_count; ?></strong></p>
         <!-- Search Bar -->
         <div class="search-container">
             <form method="GET" action="">
@@ -408,7 +450,72 @@ tr:hover {
                 <?php endif; ?>
             </form>
         </div>
+        <div class="search-container">
+            <form method="GET" action="">
+                <input type="text" name="search" placeholder="Search name" value="<?php echo htmlspecialchars($search); ?>">
+                <button type="submit">Search</button>
+                <?php if (!empty($search)) : ?>
+                    <a href="eval_record.php"><button type="button">Clear</button></a>
+                <?php endif; ?>
+            </form>
+        </div>
         <table id="studentTable">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Professor</th>
+            <th>q1</th>
+            <th>q2</th>
+            <th>q3</th>
+            <th>q4</th>
+            <th>q5</th>
+            <th>Feedback</th>
+            <th>Submitted</th>
+            <th>Evaluation Average</th>
+            <th>Professor Avg Score</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            <?php
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    // Cast numeric fields to appropriate types
+                    $row['q1'] = (int)$row['q1'];
+                    $row['q2'] = (int)$row['q2'];
+                    $row['q3'] = (int)$row['q3'];
+                    $row['q4'] = (int)$row['q4'];
+                    $row['q5'] = (int)$row['q5'];
+                    $row['evaluation_avg_score'] = (float)$row['evaluation_avg_score'];
+                    $row['professor_avg_score'] = (float)$row['professor_avg_score'];
+
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['student_name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['professor_name']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q1']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q2']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q3']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q4']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q5']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['feedback']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['submitted_at']) . "</td>";
+                    echo "<td>" . number_format($row['evaluation_avg_score'], 2) . "</td>";
+                    echo "<td>" . number_format($row['professor_avg_score'], 2) . "</td>";
+                    echo "<td>
+                            <form action='delete_record.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this record?\");'>
+                                <input type='hidden' name='record_id' value='" . htmlspecialchars($row['id']) . "'>
+                                <button type='submit' style='background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Delete</button>
+                            </form>
+                          </td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='12'>No records found.</td></tr>";
+            }
+            ?>
+    </tbody>
+</table>
+
     <thead>
         <tr>
             <th>Student</th>
@@ -457,6 +564,7 @@ tr:hover {
 </table>
 
     </div>
+    <script src="js/sidebar.js"></script>
     <script src="js/sidebar.js"></script>
 </body>
 </html>
