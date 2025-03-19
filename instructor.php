@@ -1217,7 +1217,6 @@ word-wrap: break-word;
 
     <script src="js/sidebar.js"></script>
     <script src="js/logs.js"></script>
-    <script src="js/logs.js"></script>
 
 <script>
       function toggleMenu(button) {
