@@ -21,7 +21,7 @@ $query = "SELECT
             ie.q1, ie.q2, ie.q3, ie.q4, ie.q5,
             ie.feedback,
             ie.submitted_at,
-            (ie.q1 + ie.q2 + ie.q3 + ie.q4 + ie.q5) / 5 AS student_avg_score,
+            (ie.q1 + ie.q2 + ie.q3 + ie.q4 + ie.q5) / 5.0 AS student_avg_score,
             avg_scores.professor_avg_score
           FROM instructor_evaluation ie
           JOIN registration r ON ie.user_id = r.id
@@ -29,7 +29,7 @@ $query = "SELECT
           LEFT JOIN (
             SELECT
               professor_id,
-              AVG((q1 + q2 + q3 + q4 + q5) / 5) AS professor_avg_score
+              AVG((q1 + q2 + q3 + q4 + q5) / 5.0) AS professor_avg_score
             FROM instructor_evaluation
             GROUP BY professor_id
           ) AS avg_scores ON ie.professor_id = avg_scores.professor_id";

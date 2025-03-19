@@ -118,7 +118,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             </div>
         </div>
 
-        <p class="content-post"><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
+        <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
         <?php if (!empty($row['image_url'])) { ?>
             <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="Post Image" class="post-image">
         <?php } ?>
