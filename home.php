@@ -18,7 +18,6 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
   exit();
 }
 
-
 // Keep your existing default image
 $default_image = "images/icon.jpg";
 
@@ -428,9 +427,9 @@ margin-left: 65%;
    <ul class="sidebar" id="sidebar">
          
      <li><a class="a-bar"href="#">Home</a></li>
-     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
-     <li><a class="a-bar"href="freedomwall.html">Newsfeed</a></li>
-     <li><a class="a-bar"href="upf.php">Profile</a></li>
+     <li><a class="a-bar"href="../instructorsProfiles.php">Faculty</a></li>
+     <li><a class="a-bar"href="../freedomwall.php">Newsfeed</a></li>
+     <li><a class="a-bar"href="../upf.php">Profile</a></li>
           
    </ul>
 
@@ -473,8 +472,8 @@ margin-left: 65%;
                 </div>
 
            <div class="logoutbb">
-             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-             <a href="logout.php" class="logout-link">Logout</a>
+             <a href="LoginCredentials/logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="LoginCredentials/logout.php" class="logout-link">Logout</a>
            </div>
        
            </div>

@@ -1,12 +1,12 @@
 <?php
 session_start();
-include "connect.php"; // Ensure this contains a valid MySQLi connection
+include "connect.php"; 
 
 if(isset($_POST["btnup"])){
     $user_id = $_POST["id"]; // Use "id" as per your database
     $name = $_FILES['picture_url']['name'];
     $tmp_name = $_FILES['picture_url']['tmp_name'];
-    $upload_dir = "up_image/";
+    $upload_dir = "../up_image/";
 
     // Validate if a file was uploaded
     if($name){

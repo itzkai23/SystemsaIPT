@@ -1036,8 +1036,8 @@ word-wrap: break-word;
                 </div>
 
            <div class="logoutbb">
-             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-             <a href="logout.php" class="logout-link">Logout</a>
+             <a href="LoginCredentials/logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="LoginCredentials/logout.php" class="logout-link">Logout</a>
            </div>
     
         </div>

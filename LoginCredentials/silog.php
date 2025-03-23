@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../connect.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +10,8 @@ include("connect.php");
     <!-- <link rel="stylesheet" href="css/silog.css"> -->
     <title>Silog</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/silog.css">
-    <link rel="stylesheet" href="css/cbot.css">
+    <link rel="stylesheet" href="../css/silog.css">
+    <link rel="stylesheet" href="../css/cbot.css">
     <style>
     
 /* cmu logo sa form */
@@ -373,11 +373,11 @@ p {
 </head>
 <body>
 <header>
-    <img src="images/head.png" alt="headerlogo" class="logo">
+    <img src="../images/head.png" alt="headerlogo" class="logo">
     <nav class="navigation">
        <a href="#">Regulations</a>
        <a href="#">Objective</a>
-       <a href="profstatus.php">Faculties</a>
+       <a href="../profstatus.php">Faculties</a>
        <button class="btn-popup">Login</button>      
     </nav>
 </header>
@@ -385,9 +385,9 @@ p {
 <div class="wrapper">
     <div class="form-box login">
         <span class="close login" id="logi" >
-            <img src="images/close.png" alt="close">
+            <img src="../images/close.png" alt="close">
         </span>
-        <img src="images/logo.png" alt="City of Malabon University" class="image">
+        <img src="../images/logo.png" alt="City of Malabon University" class="image">
         <form id="login" action="log.php" method="post">
             <div class="input-group">
             <span class="icon"><i class="fas fa-user"></i></span>
@@ -412,9 +412,9 @@ p {
 
     <div class="form-box register">
         <span class="close register" id="regi">
-            <img src="images/close.png" alt="close">
+            <img src="../images/close.png" alt="close">
         </span>
-        <img src="images/logo.png" alt="City of Malabon University" class="image">
+        <img src="../images/logo.png" alt="City of Malabon University" class="image">
         <form id="register" action="reg.php" method="post">
             <div class="register-input-wrapper">
                 <div class="input-group">
@@ -494,12 +494,12 @@ p {
 
     <button class="chat-button" onclick="toggleChat()">
     <div class="notification-dot"></div>
-    <img src="images/transbot2.png" alt="imgbot">
+    <img src="../images/transbot2.png" alt="imgbot">
 </button>  
 
 <div class="chat-popup" id="chat-popup">
     <div class="botmage">
-        <img src="images/transbot.png" alt="imgbot">
+        <img src="../images/transbot.png" alt="imgbot">
     </div>
     <div class="chat-header">UP-CHAT</div>
     <label for="chat-popup" class="close">&times;</label>
@@ -520,8 +520,8 @@ p {
 <script src="js/cbot.js"></script> <!-- Ensure correct path to cbot.js -->
 
 
-<script src="js/faeye.js"></script>
-<script src="js/cbot.js"></script>
+<script src="../js/faeye.js"></script>
+<script src="../js/cbot.js"></script>
 <script>
 const wrapper = document.querySelector('.wrapper');
 const loginlink = document.querySelector('.login-link');

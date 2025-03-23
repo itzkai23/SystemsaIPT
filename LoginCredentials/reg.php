@@ -1,5 +1,5 @@
 <?php
-require 'connect.php';
+require '../connect.php';
 
 if(isset($_POST['submit'])){
     $fname = trim($_POST["fname"]);

@@ -123,7 +123,7 @@ if ($profResult && $profResult->num_rows > 0) {
     </div>
 
     <!-- Back to Home Button -->
-    <a href="silog.php">Back</a>
+    <a href="LoginCredentials/silog.php">Back</a>
 
     <!-- Modal for Comments -->
     <div class="modal_usercom">
