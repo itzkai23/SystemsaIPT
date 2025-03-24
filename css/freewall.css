@@ -598,6 +598,8 @@ main::-webkit-scrollbar-track {
 
 .comment-list {
     margin-top: 10px;
+    overflow-y: scroll;
+    max-height: 100px;
 }
 
 .comment {
@@ -765,4 +767,21 @@ main::-webkit-scrollbar-track {
 
 
 
-
+/* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
+.comment-list::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+    }
+    
+    .comment-list::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the track */
+    border-radius: 5px;
+    }
+    
+    .comment-list::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scroll thumb */
+    border-radius: 5px; /* Round edges */
+    }
+    
+    .comment-list::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker thumb on hover */
+    }
