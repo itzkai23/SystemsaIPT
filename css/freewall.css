@@ -369,7 +369,7 @@ background: #555; /* Darker thumb on hover */
 }
 
 
-.butt {
+/* .butt {
     width: 100%;
     background-color: #007bff;
     color: white;
@@ -380,8 +380,9 @@ background: #555; /* Darker thumb on hover */
     font-size: 15px;
     font-weight: 700;
     font-family: Roboto, sans-serif;
-
-}
+    display: flex;
+    align-items: flex-end;
+} */
 
 .btnpost {
     width: 100%;
@@ -403,43 +404,6 @@ textarea:not(:placeholder-shown) + button {
     cursor: pointer;
     border: none;
     transition: background-color 0.2s ease;
-}
-
-.text-box {
-    display: flex;
-    gap: 10px;
-    border-radius: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background: #f0f2f5;
-    width: 100%;
-    max-width: 500px;
-    min-height: 45px;
-    transition: all 0.2s ease;
-  }
-  
-.text-box img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    align-items: flex-start;
-  }
-
-.text-box textarea {
-    flex: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    resize: none;
-    font-size: 14px;
-    padding: 8px;
-    min-height: 20px;
-    max-height: 200px;
-    overflow-y: hidden;
-  }
-
-.text-box textarea::placeholder {
-    color: #65676b;
 }  
 
 .sidebar h3 {
@@ -686,39 +650,59 @@ main::-webkit-scrollbar-track {
     margin-top: 0px;
 }
 
-.comment-form {
+.text-box {
     display: flex;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.comment-form textarea {
-    flex: 1;
-    resize: none;
-    padding: 5px;
-}
-
-.comment-form button {
-    background-color: #a4cffd;
-    border: none;
-    width: 45px;
-    height: 45px;
+    gap: 10px;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #f0f2f5;
+    width: 100%;
+    max-width: 500px;
+    min-height: 45px;
+    transition: all 0.2s ease;
+    align-items: flex-start; /* Keep the text and user icon aligned at the top */
+  }
+  
+.usbox {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    cursor: not-allowed;
+    align-items: flex-start;
+  }
+.bot {
+    display: flex;
+    align-items: flex-end; /* Align button to the bottom */
+    margin-top: auto; /* Push the button to the bottom of the text box */
+}
+.text-box textarea {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    resize: none;
+    font-size: 14px;
+    padding: 8px;
+    min-height: 20px;
+    max-height: 200px;
+    overflow-y: hidden;
+  }
+
+.text-box textarea::placeholder {
+    color: #65676b;
 }
 
-.comment-form textarea:not(:placeholder-shown) + button {
+.text-box textarea:not(:placeholder-shown) + button {
     transition: 0.5s ease;
     cursor: pointer;
     background-color: #003369;
 }
 
-.comment-form textarea:not(:placeholder-shown) + img:hover {
+.text-box textarea:not(:placeholder-shown) + .btnmage:hover {
     filter: none;
 }
 
-
-.comment-form img {
+.btnmage {
     width: 40px;
     height: 40px;
     border-radius: 50%;

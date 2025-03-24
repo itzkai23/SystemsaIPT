@@ -177,15 +177,16 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
            
         </div>
          <!-- Comment Form -->
-         <form action="add_comment.php" method="POST" class="comment-form">
+         <form action="add_comment.php" method="POST">
                 <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
                 <div class="text-box">
-                <img src="images/icon.jpg" alt="User Profile">
+                <img class="usbox" src="images/icon.jpg" alt="User Profile">
                 <textarea id="commentInput" name="comment" placeholder="Write a comment..." required></textarea>
-                <button class="butt" type="submit">
-                    <img src="images/sends.png" alt="">
+                <button class="bot" type="submit">
+                    <img class="btnmage" src="images/sends.png" alt="">
                 </button>
                 </div>
+                
             </form>
     </article><br>
 <?php } ?>
