@@ -57,6 +57,52 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                 <li><a href="#" class="tooltip"><img src="images/annce.png" alt="Announcement"><span class="tooltip-text">Announcement</span></a></li>
             </ul>
         </div>
+
+        <div class="right-section">                              
+   
+   <div class="logpos">
+   
+       <div class="logout-container"> 
+         <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
+         <div class="logout-dropdown" id="logoutDropdown">
+                 <a href="home.php" class="logpf-con">
+                   <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
+                   <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+                 </a>
+               
+                <div class="dlog-icon">
+                 <Img src="images/nfeed.png">
+                 <a class="a-pf" href="freedomwall.php">Newsfeed</a>
+                 </div>
+ 
+                <div class="dlog-icon">
+                  <Img src="images/offweb.png" alt="log">
+                 <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
+                 </div>
+ 
+                 <div class="dlog-icon">
+                  <img src="images/announcement.png" alt="">
+                 <a class="a-pf" href="#">Announcement</a>
+                 </div>
+                 
+                 <div class="dlog-icon">
+                  <img src="images/facultyb.png" alt="">
+                 <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                 </div>
+ 
+            <div class="logoutbb">
+              <a href="LoginCredentials/logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+              <a href="LoginCredentials/logout.php" class="logout-link">Logout</a>
+            </div>
+     
+         </div>
+        
+       </div>
+       <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']);?></span></h4> 
+     </div>
+          
+ </div>
+
     </nav>
 
     <div class="container">
@@ -174,16 +220,15 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             ?>
 
             
-           
-        </div>
-         <!-- Comment Form -->
-         <form action="add_comment.php" method="POST" class="comment-form">
+            <!-- Comment Form -->
+            <form action="add_comment.php" method="POST" class="comment-form">
                 <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
                 <textarea name="comment" placeholder="Write a comment..." required></textarea>
                 <button class="butt" type="submit">
                     <img src="images/sends.png" alt="">
                 </button>
             </form>
+        </div>
     </article><br>
 <?php } ?>
 
@@ -218,7 +263,7 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
         }
     }
 </script>
-
+<script src="js/logs.js"></script>
 
 </body>
 </html>
