@@ -34,112 +34,112 @@ body {
 }
 
 .home-header {
-      height: 55px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: rgb(10, 0, 104);
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(10, 0, 104);
       }
     
 .left-section {
-      width: 400px;
-      display: flex;
-      align-items: center;
-      font-size: 21px;
-      font-family: Racing Sans One;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+    font-family: Racing Sans One;
       }
   
 .right-section {
-      width: 120px;
-      margin-right: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-      background-color: rgb(10, 0, 104);
+    width: 120px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    background-color: rgb(10, 0, 104);
       }
 
 .user {
-      color: white;
+    color: white;
      } 
     
 .ham-menu {
-        height: 20px;
-        width: 20px;
-        margin: 15px 0px 0px 15px;
-        position: relative;
-        cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin: 15px 0px 0px 15px;
+    position: relative;
+    cursor: pointer;
       }
       
 .ham-menu span {
-        height: 2px;
-        width: 15px;
-        background-color: white;
-        border-radius: 7.5px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        transition: .3s ease;
-        z-index: 15;
+    height: 2px;
+    width: 15px;
+    background-color: white;
+    border-radius: 7.5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: .3s ease;
+    z-index: 15;
       }
       
-  .ham-menu span:nth-child(1) {
-        top: 25%;
+.ham-menu span:nth-child(1) {
+    top: 25%;
       }
       
-  .ham-menu span:nth-child(3) {
-        top: 75%;
+.ham-menu span:nth-child(3) {
+    top: 75%;
       }
       
-  .ham-menu.active span:nth-child(1) {
-        top: 50%;
-        transform: translate(-50%,-50%) rotate(45deg);
+.ham-menu.active span:nth-child(1) {
+    top: 50%;
+    transform: translate(-50%,-50%) rotate(45deg);
       }
       
-  .ham-menu.active span:nth-child(2) {
-        opacity: 0;
+.ham-menu.active span:nth-child(2) {
+    opacity: 0;
       }
       
-  .ham-menu.active span:nth-child(3) {
-        top: 50%;
-        transform: translate(-50%,-50%) rotate(-45deg);
+.ham-menu.active span:nth-child(3) {
+    top: 50%;
+    transform: translate(-50%,-50%) rotate(-45deg);
       }  
   
     
 .sidebar {
-        position: fixed;
-        top: 0;
-        left: -250px;
-        height: 100%;
-        width: 250px;
-        padding-top: 55px;
-        padding-left: 0px;
-        z-index: 10;
-        background-color: rgb(11, 0, 114);
-        backdrop-filter: blur(5px);
-        box-shadow: -10px 0 10px rgb(0,0,0,0.1);
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        list-style: none;
-        transition: left 0.3s ease;
-        margin-top: 0px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    height: 100%;
+    width: 250px;
+    padding-top: 55px;
+    padding-left: 0px;
+    z-index: 10;
+    background-color: rgb(11, 0, 114);
+    backdrop-filter: blur(5px);
+    box-shadow: -10px 0 10px rgb(0,0,0,0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    list-style: none;
+    transition: left 0.3s ease;
+    margin-top: 0px;
   
       }
       
 .sidebar.active {
-        left: 0;
+    left: 0;
       }
       
 .sidebar li {
-        list-style: none;
-        height: 54px;
-        width: 100%;
+    list-style: none;
+    height: 54px;
+    width: 100%;
       }
       
 .sidebar a {
@@ -158,44 +158,48 @@ body {
       }
 
 .logpos {
-    position: absolute;
-    top: 2px;
-    right: 30px;
+    margin-top: 3px;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
       }
-      /* Container for the logo and dropdown */
+
+/* Container for the logo and dropdown */
 .logout-container {
     position: relative;
-    display: inline-block;
       }
-      
-      /* Style for the logo/image */
-      .logout-logo {
-    width: 40px;  /* Adjust the size of the logo */
+
+/* Style for the logo/image */
+.piclog {
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    object-fit: cover;
+    border: 1px solid goldenrod;
     cursor: pointer;
-    border-radius: 20px;
-      }
+  }
       
-      /* Style for the dropdown (initially hidden) */    
+/* Style for the dropdown (initially hidden) */
 .logout-dropdown {
     display: none;
     position: absolute;
     right: 0;
-    top: 45px;  /* Adjust as per the size of your logo */
-    background-color: orange;
+    top: 50px;  /* Adjust as per the size of your logo */
+    background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 8px;
-    min-width: 100px;
+    min-width:  250px;
       }
       
 .logoutbb {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 23px;
+    margin-left: 2px;
+    margin-top: 7px;
       }
       
 .logoutb2 {
@@ -207,16 +211,71 @@ body {
 .logout-link {
     color: #f00;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 17.5px;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
     cursor: pointer;
       }
       
-      /* Change color on hover */
+/* Change color on hover */
 .logout-link:hover {
     color: #c00;
       }
+
+.logpf-con {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 95%;
+  border-radius: 5px;
+  padding: 0px 0px 0px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.a-pf:hover,.logpf-con:hover {
+  background-color: rgb(236, 236, 236);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.logpf-con img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid blue;
+}     
+.logpf-con h4 {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+}
+.dlog-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dlog-icon img {
+  width: 30px;
+  border-radius: 15px;
+}
+.a-pf {
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  display: block;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.user {
+    color: white;
+    margin-top: 15px;
+  }
 
 /* Admin Section */
 .admin-sec {
@@ -315,16 +374,42 @@ body {
   <div class="logpos">
   
       <div class="logout-container"> 
-      <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
+        <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
         <div class="logout-dropdown" id="logoutDropdown">
-            <div class="logoutbb">
-          <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-          <a href="logout.php" class="logout-link">Logout</a>
-        </div>
+                <a href="home.php" class="logpf-con">
+                  <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
+                  <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+                </a>
+              
+               <div class="dlog-icon">
+                <Img src="images/nfeed.png">
+                <a class="a-pf" href="freedomwall.php">Newsfeed</a>
+                </div>
+
+               <div class="dlog-icon">
+                 <Img src="images/offweb.png" alt="log">
+                <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
+                </div>
+
+                <div class="dlog-icon">
+                 <img src="images/announcement.png" alt="">
+                <a class="a-pf" href="#">Announcement</a>
+                </div>
+                
+                <div class="dlog-icon">
+                 <img src="images/facultyb.png" alt="">
+                <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                </div>
+
+           <div class="logoutbb">
+             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="logout.php" class="logout-link">Logout</a>
+           </div>
     
         </div>
+       
       </div>
-      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
+      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']);?></span></h4> 
     </div>
          
 </div>
