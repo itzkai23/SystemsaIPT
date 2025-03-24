@@ -220,6 +220,15 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             }
         }
     }
+
+    const textarea = document.getElementById("commentInput");
+    const textBox = document.querySelector(".text-box");
+
+  textarea.addEventListener("input", function () {
+    this.style.height = "20px"; // Reset height
+    this.style.height = this.scrollHeight + "px"; // Set new height based on content
+    textBox.style.height = this.scrollHeight + 30 + "px"; // Adjust .comment-box height
+  });
 </script>
 
 
