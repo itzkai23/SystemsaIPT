@@ -220,13 +220,19 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             ?>
 
             
-            <!-- Comment Form -->
-            <form action="add_comment.php" method="POST" class="comment-form">
+           
+        </div>
+         <!-- Comment Form -->
+         <form action="add_comment.php" method="POST">
                 <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
-                <textarea name="comment" placeholder="Write a comment..." required></textarea>
-                <button class="butt" type="submit">
-                    <img src="images/sends.png" alt="">
+                <div class="text-box">
+                <img class="usbox" src="images/icon.jpg" alt="User Profile">
+                <textarea id="commentInput" name="comment" placeholder="Write a comment..." required></textarea>
+                <button class="bot" type="submit">
+                    <img class="btnmage" src="images/sends.png" alt="">
                 </button>
+                </div>
+                
             </form>
         </div>
     </article><br>
@@ -262,6 +268,15 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
             }
         }
     }
+
+    const textarea = document.getElementById("commentInput");
+    const textBox = document.querySelector(".text-box");
+
+  textarea.addEventListener("input", function () {
+    this.style.height = "20px"; // Reset height
+    this.style.height = this.scrollHeight + "px"; // Set new height based on content
+    textBox.style.height = this.scrollHeight + 30 + "px"; // Adjust .comment-box height
+  });
 </script>
 <script src="js/logs.js"></script>
 
