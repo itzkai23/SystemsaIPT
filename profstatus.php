@@ -63,7 +63,6 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     $result = $stmt->get_result();
 
     $output = "";
-
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $output .= '<div class="comment-box">';
@@ -76,10 +75,10 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
             $output .= '<small>' . htmlspecialchars($row['date_posted']) . '</small>';
             $output .= '</div></div>';
         }
+        
     } else {
         $output = "<p>No comments or feedback available.</p>";
     }
-
     echo $output;
     exit();
 }
@@ -152,7 +151,7 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
 
                 <!-- Display Submitted Data -->
                 <div class="comdent">
-                    <h3>Comments</h3>
+                <h3>Comments</h3> 
                     <div class="com-scroll" id="commentsContainer">
                         <p>No comments or feedback available.</p>
                     </div>
