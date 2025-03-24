@@ -134,15 +134,17 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
                             <h5 id="profName"></h5>
                             <h5 id="profRole"></h5>
                         </div>
-                    </div>
-                    <div class="rate">
+
+                        <div class="rate">
                         <h3>Average Evaluation Points</h3>
-                        <h4>Current Status</h4>
+                        <h4>Current Status:</h4>
                         <div class="user-participant">
                             <span>Number of Evaluations:</span> <strong id="evaluationCount"></strong>
                             <span>Average:</span> <strong id="averageScore"></strong>
                         </div>
                     </div>
+                    </div>
+                    
                 </div>
 
                 <form method="GET">
