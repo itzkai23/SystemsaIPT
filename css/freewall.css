@@ -598,8 +598,6 @@ main::-webkit-scrollbar-track {
 
 .comment-list {
     margin-top: 10px;
-    overflow-y: scroll;
-    max-height: 100px;
 }
 
 .comment {
@@ -765,23 +763,126 @@ main::-webkit-scrollbar-track {
     display: block;         /* Makes dropdown visible */
 }
 
+.logpos {
+    top: 20px;
+    right:100px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+      }
+
+/* Container for the logo and dropdown */
+.logout-container {
+    position: relative;
+      }
+
+/* Style for the logo/image */
+.piclog {
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    object-fit: cover;
+    border: 1px solid goldenrod;
+    cursor: pointer;
+  }
+      
+/* Style for the dropdown (initially hidden) */
+.logout-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;  /* Adjust as per the size of your logo */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    min-width:  250px;
+      }
+      
+.logoutbb {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    margin-left: 2px;
+    margin-top: 7px;
+      }
+      
+.logoutb2 {
+    width: 25px;  /* Adjust the size of the logo */
+    cursor: pointer;
+      }
+      
+      /* Style for the logout link */
+.logout-link {
+    color: #f00;
+    text-decoration: none;
+    font-size: 17.5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+      }
+      
+/* Change color on hover */
+.logout-link:hover {
+    color: #c00;
+      }
+
+.logpf-con {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 95%;
+  border-radius: 5px;
+  padding: 0px 0px 0px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.a-pf:hover,.logpf-con:hover {
+  background-color: rgb(236, 236, 236);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.logpf-con img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid blue;
+}     
+.logpf-con h4 {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+}
+.dlog-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+.dlog-icon img {
+  width: 30px;
+  border-radius: 15px;
+}
+.a-pf {
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  display: block;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.user {
+    color: white;
+    margin-top: 15px;
+  }
 
 
-/* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
-.comment-list::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
-    }
-    
-    .comment-list::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Background of the track */
-    border-radius: 5px;
-    }
-    
-    .comment-list::-webkit-scrollbar-thumb {
-    background: #888; /* Color of the scroll thumb */
-    border-radius: 5px; /* Round edges */
-    }
-    
-    .comment-list::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Darker thumb on hover */
-    }
