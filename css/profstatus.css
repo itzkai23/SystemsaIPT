@@ -173,6 +173,7 @@ a:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 /* Modal Content */
@@ -285,6 +286,33 @@ display: block;
     margin-top: 2px;
     color: white;
     font-weight: 600;
+}
+
+.rate {
+    max-width: 40%;
+    margin-left: 25%;
+}
+
+.rate h3 {
+    text-align: center;
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.rate h4 {
+    color: black;
+}
+
+.user-participant {
+    display: flex;
+    gap: 10px;
+}
+
+.user-participant span {
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
 }
 
 /* User comments to instructor profile (Only Text) */
@@ -409,6 +437,9 @@ text-align: left;
     .comment-text {
     flex-grow: 1;
     text-align: left;
+    word-wrap: break-word; /* Ensure words break properly */
+    white-space: normal; /* Prevent the text from overflowing horizontally */
+    max-width: 100%;
     }
   
     .comment-text p {

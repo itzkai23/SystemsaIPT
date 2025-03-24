@@ -1,24 +1,37 @@
 <?php
 require 'connect.php';
 
-// Query to calculate average score and evaluation count
-$avgQuery = "
-SELECT 
-    AVG((q1 + q2 + q3 + q4 + q5) / 5.0) AS professor_avg_score,
-    COUNT(*) AS evaluation_count
-FROM instructor_evaluation
-WHERE professor_id = ?;
-";
+// Initialize the $professors array
+$professors = [];
 
-$avgStmt = $conn->prepare($avgQuery);
-$avgStmt->bind_param("i", $professor_id);
-$avgStmt->execute();
-$avgResult = $avgStmt->get_result();
-$avgData = $avgResult->fetch_assoc();
+// Fetch all professors (normal page load)
+$profResult = $conn->query("SELECT id, name, role, prof_img FROM professors");
+if ($profResult && $profResult->num_rows > 0) {
+    while ($prof = $profResult->fetch_assoc()) {
+        $avgQuery = "
+        SELECT 
+            AVG((q1 + q2 + q3 + q4 + q5) / 5.0) AS professor_avg_score,
+            COUNT(*) AS evaluation_count
+        FROM instructor_evaluation
+        WHERE professor_id = ?;
+        ";
 
-// Extract average score and evaluation count
-$professor_avg_score = $avgData['professor_avg_score'];
-$evaluation_count = $avgData['evaluation_count'];
+        $avgStmt = $conn->prepare($avgQuery);
+        $avgStmt->bind_param("i", $prof['id']);
+        $avgStmt->execute();
+        $avgResult = $avgStmt->get_result();
+        $avgData = $avgResult->fetch_assoc();
+
+        $professors[] = [
+            'id' => $prof['id'],
+            'name' => $prof['name'],
+            'role' => $prof['role'],
+            'prof_img' => !empty($prof['prof_img']) ? $prof['prof_img'] : "images/facultyb.png",
+            'evaluation_count' => $avgData['evaluation_count'] ?? 0,
+            'professor_avg_score' => $avgData['professor_avg_score'] ? number_format($avgData['professor_avg_score'], 2) : "No evaluations yet."
+        ];
+    }
+}
 
 if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     $professor_id = intval($_GET['professor_id']);
@@ -50,7 +63,6 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     $result = $stmt->get_result();
 
     $output = "";
-
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $output .= '<div class="comment-box">';
@@ -63,28 +75,12 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
             $output .= '<small>' . htmlspecialchars($row['date_posted']) . '</small>';
             $output .= '</div></div>';
         }
+        
     } else {
         $output = "<p>No comments or feedback available.</p>";
     }
-
     echo $output;
-    exit(); // Stop execution after sending JSON response
-}
-
-// Initialize the $professors array
-$professors = [];
-
-// Fetch all professors (normal page load)
-$profResult = $conn->query("SELECT id, name, role, prof_img FROM professors");
-if ($profResult && $profResult->num_rows > 0) {
-    while ($prof = $profResult->fetch_assoc()) {
-        $professors[] = [
-            'id' => $prof['id'],
-            'name' => $prof['name'],
-            'role' => $prof['role'],
-            'prof_img' => !empty($prof['prof_img']) ? $prof['prof_img'] : "images/facultyb.png"
-        ];
-    }
+    exit();
 }
 ?>
 
@@ -95,9 +91,7 @@ if ($profResult && $profResult->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professors Status</title>
     <link rel="stylesheet" href="css/profstatus.css">
-
 </head>
-
 <body>
 
 <div class="page-container">
@@ -110,7 +104,9 @@ if ($profResult && $profResult->num_rows > 0) {
                 data-id="<?php echo $prof['id']; ?>" 
                 data-name="<?php echo htmlspecialchars($prof['name']); ?>"
                 data-role="<?php echo htmlspecialchars($prof['role']); ?>"
-                data-image="<?php echo htmlspecialchars($prof['prof_img']); ?>">
+                data-image="<?php echo htmlspecialchars($prof['prof_img']); ?>"
+                data-evaluations="<?php echo htmlspecialchars($prof['evaluation_count']); ?>"
+                data-average="<?php echo htmlspecialchars($prof['professor_avg_score']); ?>">
                 <div class="con-prof">
                     <img src="<?php echo htmlspecialchars($prof['prof_img']); ?>" alt="Professor Image" width="150" height="150">
                     <div>
@@ -138,49 +134,28 @@ if ($profResult && $profResult->num_rows > 0) {
                             <h5 id="profName"></h5>
                             <h5 id="profRole"></h5>
                         </div>
+
+                        <div class="rate">
+                        <h3>Average Evaluation Points</h3>
+                        <h4>Current Status:</h4>
+                        <div class="user-participant">
+                            <span>Number of Evaluations:</span> <strong id="evaluationCount"></strong>
+                            <span>Average:</span> <strong id="averageScore"></strong>
+                        </div>
                     </div>
-                    <div class="rate"><h3>Average Evaluation Points</h3>
-                    <h4>Current Status</h4>
-                    <div class="user-participant">
-                        <span>Number of Evaluations:</span> <strong><?php echo htmlspecialchars($evaluation_count); ?></strong>
-                        <span>Average:</span> <strong>
-                            <?php
-                            if ($evaluation_count > 0) {
-                                echo number_format($professor_avg_score, 2);
-                            } else {
-                                echo "No evaluations yet.";
-                            }
-                            ?>
-                        </strong>
                     </div>
+                    
                 </div>
-            </div>
 
                 <form method="GET">
-                  <input type="hidden" name="professor_id" value="<?php echo $professor_id; ?>">
+                  <input type="hidden" name="professor_id" value="">
                 </form>
+
                 <!-- Display Submitted Data -->
                 <div class="comdent">
-                    <h3>Comments</h3>
+                <h3>Comments</h3> 
                     <div class="com-scroll" id="commentsContainer">
-                        <?php
-                        if (!empty($feedbackData)) {
-                            foreach ($feedbackData as $comm) {
-                                echo '<div class="comment-box">';
-                                echo '<div class="comment-text">';
-                                if (!empty($comm['feedback'])) {
-                                    echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                                } elseif (!empty($comm['comment'])) {
-                                    echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-                                }
-                                echo '<small>' . htmlspecialchars($comm['date_posted']) . '</small>';
-                                echo '</div>';
-                                echo '</div>';
-                            }
-                        } else {
-                            echo "<p>No comments or feedback available.</p>";
-                        }
-                        ?>
+                        <p>No comments or feedback available.</p>
                     </div>
                 </div>
             </div>
@@ -200,14 +175,17 @@ if ($profResult && $profResult->num_rows > 0) {
                 const name = this.getAttribute("data-name");
                 const role = this.getAttribute("data-role");
                 const image = this.getAttribute("data-image");
+                const evaluationCount = this.getAttribute("data-evaluations");
+                const averageScore = this.getAttribute("data-average");
 
                 document.getElementById("profName").textContent = name;
                 document.getElementById("profRole").textContent = role;
                 document.getElementById("profImg").src = image;
+                document.getElementById("evaluationCount").textContent = evaluationCount;
+                document.getElementById("averageScore").textContent = averageScore;
 
                 modal.style.display = "block";
 
-                // Fetch comments using AJAX from the same file
                 fetch(`profstatus.php?fetch_comments=1&professor_id=${profId}`)
                     .then(response => response.text()) 
                     .then(data => {
@@ -231,7 +209,6 @@ if ($profResult && $profResult->num_rows > 0) {
         });
     });
 </script>
-
 
 </body>
 </html>
