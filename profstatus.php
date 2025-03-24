@@ -8,7 +8,6 @@ $professors = [];
 $profResult = $conn->query("SELECT id, name, role, prof_img FROM professors");
 if ($profResult && $profResult->num_rows > 0) {
     while ($prof = $profResult->fetch_assoc()) {
-        // Query to calculate average score and evaluation count for each professor
         $avgQuery = "
         SELECT 
             AVG((q1 + q2 + q3 + q4 + q5) / 5.0) AS professor_avg_score,
