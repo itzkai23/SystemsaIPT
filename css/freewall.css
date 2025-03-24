@@ -405,6 +405,43 @@ textarea:not(:placeholder-shown) + button {
     transition: background-color 0.2s ease;
 }
 
+.text-box {
+    display: flex;
+    gap: 10px;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #f0f2f5;
+    width: 100%;
+    max-width: 500px;
+    min-height: 45px;
+    transition: all 0.2s ease;
+  }
+  
+.text-box img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    align-items: flex-start;
+  }
+
+.text-box textarea {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    resize: none;
+    font-size: 14px;
+    padding: 8px;
+    min-height: 20px;
+    max-height: 200px;
+    overflow-y: hidden;
+  }
+
+.text-box textarea::placeholder {
+    color: #65676b;
+}  
+
 .sidebar h3 {
     color: white;
 }
