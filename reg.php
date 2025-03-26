@@ -9,6 +9,15 @@ if(isset($_POST['submit'])){
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
 
+    // Define the allowed email domain
+    $allowed_domain = "@cityofmalabonuniversity.edu.ph";
+
+    // Check if the email ends with the allowed domain
+    if (substr($email, -strlen($allowed_domain)) !== $allowed_domain) {
+        echo "<script>alert('Invalid email! Only emails with @cityofmalabonuniversity.edu.ph are allowed.'); window.location.href='silog.php';</script>";
+        exit();
+    }
+
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 

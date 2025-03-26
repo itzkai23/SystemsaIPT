@@ -574,6 +574,16 @@ closereg.addEventListener('click', () => {
   registerForm.reset();
   showHText(); // Show .h-text when login/register form closes  
 });
+
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+    var email = document.getElementById("email").value;
+    var allowedDomain = "@cityofmalabonuniversity.edu.ph";
+
+    if (!email.endsWith(allowedDomain)) {
+        alert("Invalid email! Use your @cityofmalabonuniversity.edu.ph gmail");
+        event.preventDefault(); // Prevents form submission
+    }
+});
 </script>
 
 </body>
