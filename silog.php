@@ -399,7 +399,7 @@ p {
             <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="toggle-eye" onclick="togglePassword()"><i class="fas fa-eye" id="pass-eyecon"></i></span>
             </div>
-            <h5><a href="#">Forgot password?</a></h5>
+            <h5><a href="forgotpass.php">Forgot password?</a></h5>
             <button type="submit" name="sub">Login</button>
             <p>Don't have an account? <a href="#" class="register-link" >SignUp</a></p>
             
