@@ -35,12 +35,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Verify OTP</title>
+    <link rel="stylesheet" href="css/verify.css">
 </head>
 <body>
-    <h2>Enter OTP</h2>
+    <div class="buo">
+    <h2>Account Verification</h2>
+    <p>Go to Gmail using the CMU account you register. If you can't find the otp on your inbox, check your spam messages and look for "University Registration", that's where you'll find your otp.</p>
+    <p>This is the last step of your registration. It's a necessary step to verify that you're the real owner of the Gmail you are using to register in order to avoid unwanted risks such as identity theft. Thank you for understanding.</p>
+    <div class="lalagyanan">
     <form method="post">
         <input type="text" name="otp" placeholder="Enter OTP" required>
         <button type="submit">Verify</button>
     </form>
+    </div>
+    </div>
 </body>
 </html>

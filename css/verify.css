@@ -1,0 +1,110 @@
+/* General Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #80d6ff);  /* Light gradient background */
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.buo{
+   margin: 5% 25% -5% 25%;
+   position: absolute;
+}
+
+p {
+    text-align: center;
+}
+
+.lalagyanan{
+    display: flex;
+    justify-content: center;
+}
+
+/* Styling the Form Header */
+h2 {
+    text-align: center;
+    color: #003366;  /* Strong blue text color */
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Form Container Styling */
+form {
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 380px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+/* Hover effect for form */
+form:hover {
+    transform: scale(1.02);  /* Slightly increase form size on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+/* Input Field Styling */
+input[type="text"] {
+    width: 91.5%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 2px solid #cfe2ff;  /* Light blue border */
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9faff;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;  /* Stronger blue on focus */
+    background-color: #e3f2ff;  /* Lighter background */
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #007bff;  /* Vibrant blue button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.3s ease;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color: #0056b3;  /* Darker blue on hover */
+    transform: translateY(-4px); /* Button lifts up */
+}
+
+button:active {
+    transform: translateY(2px); /* Slightly push button down when clicked */
+}
+
+/* Accessibility Focus Styles */
+input[type="text"]:focus, button:focus {
+    box-shadow: 0 0 10px 2px rgba(0, 123, 255, 0.7); /* Glow effect for focus */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 480px) {
+    form {
+        padding: 20px;
+    }
+    
+    h2 {
+        font-size: 1.8em;
+    }
+    
+    button, input[type="text"] {
+        font-size: 15px;
+    }
+}
