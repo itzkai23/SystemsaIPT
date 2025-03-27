@@ -170,7 +170,6 @@ header {
     margin-top: 92px;
 }
 
-
 /* Sidebar with Scrollbar */
 .sidebar {
     flex: 1;
@@ -180,21 +179,48 @@ header {
     max-height: 450px; /* Adjust height as needed */
     overflow-y: auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.5s ease; /* Smoother transition */
 }
 
-/* Custom Scrollbar for Sidebar */
+/* Initially hide scrollbar */
 .sidebar::-webkit-scrollbar {
     width: 6px;
+    opacity: 0;  /* Hide scrollbar by default */
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in/out */
 }
 
+/* Show scrollbar when hovering over the sidebar */
+.sidebar:hover::-webkit-scrollbar {
+    opacity: 1;  /* Show scrollbar on hover */
+}
+
+/* Styling for the scrollbar thumb */
 .sidebar::-webkit-scrollbar-thumb {
     background: #FFA500;
     border-radius: 10px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;  /* Smooth transition for thumb color */
 }
 
+/* Styling for the scrollbar track */
 .sidebar::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
+
+/* Hover effect on the scrollbar thumb */
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #ff8c00;  /* Slightly darker orange when hovered */
+    transform: scale(1.1); /* Slightly grow the thumb on hover */
+}
+
+/* Styling for smoother transition effect */
+.sidebar::-webkit-scrollbar-thumb:active {
+    background: #ff6a00; /* Even darker orange when actively scrolling */
+    transform: scale(1.05); /* Slightly scale down for feedback */
+}
+
+
+
 
 
 

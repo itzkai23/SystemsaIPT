@@ -274,6 +274,27 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
     this.style.height = this.scrollHeight + "px"; // Set new height based on content
     textBox.style.height = this.scrollHeight + 30 + "px"; // Adjust .comment-box height
   });
+
+
+  // Get the sidebar element
+const sidebar = document.querySelector('.sidebar');
+
+// Function to show scrollbar
+const showScrollbar = () => {
+    sidebar.style.overflowY = 'auto'; // Show the scrollbar
+};
+
+// Function to hide scrollbar
+const hideScrollbar = () => {
+    sidebar.style.overflowY = 'hidden'; // Hide the scrollbar
+};
+
+// Event listener to detect when the user hovers over the sidebar
+sidebar.addEventListener('mouseenter', showScrollbar);
+
+// Event listener to detect when the user leaves the sidebar
+sidebar.addEventListener('mouseleave', hideScrollbar);
+
 </script>
 <script src="js/logs.js"></script>
 
