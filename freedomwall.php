@@ -219,9 +219,6 @@ $stmt = $conn->prepare($commentsQuery); // Prepare once
                 }
             ?>
 
-            
-           
-        </div>
          <!-- Comment Form -->
          <form action="add_comment.php" method="POST">
                 <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
