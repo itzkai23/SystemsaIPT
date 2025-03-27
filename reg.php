@@ -1,5 +1,8 @@
 <?php
 require 'connect.php';
+require 'vendor/autoload.php'; // Load PHPMailer if using Composer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if(isset($_POST['submit'])){
     $fname = trim($_POST["fname"]);
@@ -9,8 +12,14 @@ if(isset($_POST['submit'])){
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
 
-    // Hash the password
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // Define the allowed email domain
+    $allowed_domain = "@cityofmalabonuniversity.edu.ph";
+
+    // Check if the email ends with the allowed domain
+    if (substr($email, -strlen($allowed_domain)) !== $allowed_domain) {
+        echo "<script>alert('Invalid email! Only emails with @cityofmalabonuniversity.edu.ph are allowed.'); window.location.href='silog.php';</script>";
+        exit();
+    }
 
     // Check if the email already exists
     $select = "SELECT * FROM registration WHERE email = ?";
@@ -23,18 +32,40 @@ if(isset($_POST['submit'])){
         echo 'The email has already been used.';
         exit();
     } else {
-        // Insert new user into the database with hashed password
-        $query = "INSERT INTO registration (fname, lname, uname, contact, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $query);
-        
-        // Use "ssssss" to match data types (contact should be string if storing as varchar)
-        mysqli_stmt_bind_param($stmt, "ssssss", $fname, $lname, $uname, $contact, $email, $hashed_password);
-        
-        if (mysqli_stmt_execute($stmt)) {
-            header("Location: silog.php"); // Redirect to login page
+        // Generate OTP
+        $otp = rand(100000, 999999);
+        session_start();
+        $_SESSION['otp'] = $otp;
+        $_SESSION['temp_user'] = [
+            'fname' => $fname,
+            'lname' => $lname,
+            'uname' => $uname,
+            'contact' => $contact,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        ];
+
+        // Send OTP to email
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; 
+            $mail->SMTPAuth = true;
+            $mail->Username = 'imnotkairri@gmail.com'; // Your Gmail
+            $mail->Password = 'ivgu sjgc bznw ssxr'; // Your Gmail App Password
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('your-email@gmail.com', 'University Registration');
+            $mail->addAddress($email);
+            $mail->Subject = 'Your OTP Code';
+            $mail->Body = "Your OTP code is: $otp. Please enter this code to complete your registration.";
+
+            $mail->send();
+            header("Location: verify_otp.php");
             exit();
-        } else {
-            echo 'Error inserting data.';
+        } catch (Exception $e) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
         }
     }
 }

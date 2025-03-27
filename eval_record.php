@@ -379,20 +379,65 @@ h2 {
 }
 
 /* Table Styling */
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
+} */
+
+/* Container for scrolling the table body */
+.table-container {
+    max-height: 320px;
+    overflow: hidden;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    /* max-height: 300px; */
+    table-layout: fixed;
+}
+
+tbody {
+  /* max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    table-layout: fixed; */
+    display: block;  /* Make the tbody a block element to allow scrolling */
+    max-height: 300px; /* Set the maximum height of the tbody */
+    overflow-y: auto; /* Make the tbody scrollable */
+    width: 100%;
+}
+
+/* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
+tbody::-webkit-scrollbar {
+width: 10px; /* Width of the scrollbar */
+}
+
+tbody::-webkit-scrollbar-track {
+background: #f1f1f1; /* Background of the track */
+border-radius: 5px;
+}
+
+tbody::-webkit-scrollbar-thumb {
+background: #1e88e5; /* Color of the scroll thumb */
+border-radius: 5px; /* Round edges */
+}
+
+tbody::-webkit-scrollbar-thumb:hover {
+background: #555; /* Darker thumb on hover */
 }
 
 /* Table Header */
 th {
     background: linear-gradient(145deg, #1e88e5, #1565c0);
     color: white;
-    font-size: 16px;
-    padding: 14px;
-    text-align: left;
+    font-size: 12px;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
 }
 
 /* Table Rows */
@@ -401,6 +446,20 @@ td {
     border-bottom: 1px solid #ddd;
     font-size: 15px;
     color: #333;
+    word-wrap: break-word; /* Ensure long words are wrapped */
+    word-break: break-word; /* Break long words when necessary */
+}
+
+/* Apply custom padding to td with the 'numeric' class */
+td.numeric {
+    padding: 8px;  /* Adjust padding for numeric data */
+    text-align: right;  /* Right-align numbers */
+}
+
+tr {
+    display: table; /* Keep rows as table elements */
+    width: 100%;
+    table-layout: fixed;
 }
 
 /* Alternating Row Colors */
@@ -413,6 +472,21 @@ tr:hover {
     background-color: #e3f2fd;
     transition: background 0.3s ease-in-out;
 }
+
+tbody button {
+  background-color: red; 
+  color: white; 
+  border: none; 
+  padding: 5px 10px; 
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+tbody button:hover {
+  background-color: #c00;
+}
+
+
 
     </style>
 </head>
@@ -495,6 +569,8 @@ tr:hover {
                 <?php endif; ?>
             </form>
         </div>
+        
+        <div class="table-container">
         <table id="studentTable">
     <thead>
         <tr>
@@ -509,7 +585,7 @@ tr:hover {
             <th>Submitted</th>
             <th>Evaluation Average</th>
             <th>Professor Avg Score</th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -540,7 +616,7 @@ tr:hover {
                     echo "<td>
                             <form action='delete_record.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this record?\");'>
                                 <input type='hidden' name='record_id' value='" . htmlspecialchars($row['id']) . "'>
-                                <button type='submit' style='background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;'>Delete</button>
+                                <button type='submit'>Delete</button>
                             </form>
                           </td>";
                     echo "</tr>";
@@ -551,6 +627,7 @@ tr:hover {
             ?>
     </tbody>
 </table>
+        </div>
 
     </div>
     <script src="js/sidebar.js"></script>

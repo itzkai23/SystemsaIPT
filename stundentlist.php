@@ -299,6 +299,7 @@ body {
 /* Container Styling */
 .container {
     max-width: 800px;
+    max-height: 500px;
     margin: auto;
     margin-top: 60px;
     background: white;
@@ -346,11 +347,50 @@ h2 {
         }
 
 /* Table Styling */
+
+/* Container for scrolling the table body */
+.table-container {
+    max-height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
-    overflow: hidden;
+    /* max-height: 300px; */
+    table-layout: fixed;
+}
+
+tbody {
+  /* max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    table-layout: fixed; */
+    display: block;  /* Make the tbody a block element to allow scrolling */
+    max-height: 300px; /* Set the maximum height of the tbody */
+    overflow-y: auto; /* Make the tbody scrollable */
+    width: 100%;
+}
+
+/* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
+tbody::-webkit-scrollbar {
+width: 10px; /* Width of the scrollbar */
+}
+
+tbody::-webkit-scrollbar-track {
+background: #f1f1f1; /* Background of the track */
+border-radius: 5px;
+}
+
+tbody::-webkit-scrollbar-thumb {
+background: #1e88e5; /* Color of the scroll thumb */
+border-radius: 5px; /* Round edges */
+}
+
+tbody::-webkit-scrollbar-thumb:hover {
+background: #555; /* Darker thumb on hover */
 }
 
 /* Table Header */
@@ -368,6 +408,14 @@ td {
     border-bottom: 1px solid #ddd;
     font-size: 15px;
     color: #333;
+    word-wrap: break-word; /* Ensure long words are wrapped */
+    word-break: break-word; /* Break long words when necessary */
+}
+
+tr {
+    display: table; /* Keep rows as table elements */
+    width: 100%;
+    table-layout: fixed;
 }
 
 /* Alternating Row Colors */
@@ -462,13 +510,14 @@ tr:hover {
                   <?php endif; ?>
               </form>
           </div> 
+        <div class="table-container">
         <table id="studentTable">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Contact</th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -494,6 +543,8 @@ tr:hover {
                 ?>
             </tbody>
         </table>
+        </div>
+
     </div>
     <script src="js/sidebar.js"></script>
     <script src="js/logs.js"></script>
