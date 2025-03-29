@@ -284,49 +284,20 @@ body {
 .logout-link:hover {
     color: #c00;
       }
-
-.navigation .home {
-    background-color: goldenrod;
-    color:rgb(11, 0, 114);
-}
-.navigation {
-    position: absolute;
-    top: 13%;
-    right: 0%;
-    display: flex;
-    justify-content: flex-end;
-    background-color: transparent;
-    padding: 10px 20px;
-    width: 100%;
-    text-align: center;
-}
-.navigation a {
-    margin-left: 30px;
-    text-decoration: none;
+.user {
     color: white;
-    font-weight: 700;
-    transition: color 0.3s ease;
-    font-size: 18px;
-    border: solid 1px white;
-    width: 7%;
-    height: 28px;
-    border-radius: 5px;     
-    padding-top: 5px;
-}
-.navigation .pf:hover {
-  background-color: goldenrod;
-  color:rgb(11, 0, 114);
-  transition: ease 0.5s;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
 }
 
 .form-container {
     background-color: white;
-    width: 90%;
-    max-width: 600px;
+    max-width: 650px;
     padding: 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     border-radius: 12px;
-    margin: 150px auto;
+    margin-top: 5%;
 }
 
 .form-title {
@@ -339,12 +310,14 @@ body {
 
 .p-val {
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .description {
     font-size: 14px;
     color: #555;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .rating-scale {
@@ -352,11 +325,9 @@ body {
     padding: 10px;
     border-radius: 8px;
     font-size: 14px;
-    /* margin-bottom: 15px; */
     color: #154360;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .rating-scale p {
@@ -382,6 +353,12 @@ label {
     display: block;
     margin-bottom: 6px;
 }
+
+.scrollable-table-container {
+        max-height: 300px; /* Adjust the height to your needs */
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
 
 .question-table {
     width: 100%;
@@ -429,7 +406,8 @@ textarea {
     border-radius: 6px;
     font-size: 16px;
     height: 100px;
-    resize: vertical;
+    resize: none;
+    margin-bottom: 20px;
 }
 
 .btn-con {
@@ -453,6 +431,21 @@ button:hover {
     background-color: #154360;
 }
 
+@media (max-width: 768px) {
+        .form-container {
+            width: 100%;
+            padding: 20px;
+        }
+
+        button {
+            width: 100%;
+        }
+
+        .radio-group {
+            justify-content: center;
+        }
+    }
+
     </style>
 </head>
 <body>
@@ -468,7 +461,7 @@ button:hover {
 
 <ul class="sidebar" id="sidebar">
       
-  <li><a class="a-bar"href="#">Home</a></li>
+  <li><a class="a-bar"href="home.php">Home</a></li>
   <li><a class="a-bar"href="HTML/gallery.html">Objectives</a></li>
   <li><a class="a-bar"href="#">Announcement</a></li>
   <li><a class="a-bar"href="HTML/profile.html">Rules and Regulation</a></li>
@@ -496,12 +489,6 @@ button:hover {
 </div>
 </nav>
 
-<div class="navigation">
-    <a href="home.php" class="pf">Home</a>
-    <a href="upf.php" class="pf">Profile</a>
-    <a href="instructor.php" class="pf">Faculty</a>
-   </div>
-
    <div class="form-container">
         <h1 class="form-title">Faculty Evaluation</h1>
         <p class="p-val">Evaluating: <?php echo $professor_name; ?></p>
@@ -512,6 +499,7 @@ button:hover {
         </div>
         
         <form action="form_act.php" method="post">
+           <div class="scrollable-table-container">
             <table class="question-table">
             <input type="hidden" name="professor_id" value="<?php echo htmlspecialchars($professor_id); ?>">
             <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
@@ -591,6 +579,8 @@ button:hover {
             
             <div class="btn-con">
             <button type="submit">Submit</button>
+        </div>
+        
         </div>
         </form>
     </div>

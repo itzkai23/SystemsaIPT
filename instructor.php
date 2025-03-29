@@ -363,13 +363,13 @@ cursor: pointer;
 .container {
 width: 90%;
 max-width: 800px;
-margin: 80px auto;
-background: rgba(255, 255, 255, 0.1); 
-backdrop-filter: blur(5px);
+margin: 80px auto; 
+background-color:black;
 padding: 20px;
 border-radius: 12px;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
 z-index: 0;
+font-family: "Roboto", sans-serif;
 }
 
 /* Avatar & Name Section */
@@ -383,6 +383,7 @@ border-radius: 10px;
 color: white;
 display: flex;
 flex-direction: column;
+position: relative;
 }
 
 .avname {
@@ -425,8 +426,8 @@ opacity: 0.9;
 
 .report-btn {
   position: absolute;
-  top: 35px;
-  right: 35px;
+  top: 20px;
+  right: 25px;
   display: inline-flex;
   align-items: center;
   gap: 8px; /* Space between icon & text */
@@ -499,6 +500,7 @@ opacity: 0.9;
     top: 0;
     width: 100%;
     height: 100%;
+    backdrop-filter: blur(10px);
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 14px;
 }
@@ -641,6 +643,7 @@ textarea:not(:placeholder-shown) + button {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0px;
   border-radius: 13px;
+  font-family: "Roboto", sans-serif;
 }
 /* Modal Content */
 .modal-content {
@@ -652,7 +655,6 @@ textarea:not(:placeholder-shown) + button {
   width: 80%;
   height: 60%;
   max-width: 600px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 /* Hide the modal by default */
@@ -662,6 +664,7 @@ textarea:not(:placeholder-shown) + button {
 #termsCheckbox:checked ~ .modal {
     visibility: visible;
     opacity: 1;
+    backdrop-filter: blur(10px);
 }
 
 /* Smooth pop effect */
@@ -733,7 +736,9 @@ justify-content: center;
 }
 
 .user-participant strong {
-color: #28a745; /* Green color to highlight the number */
+/* color: #28a745;  */
+color: black;
+/* Green color to highlight the number */
 font-size: 18px;
 }
 
