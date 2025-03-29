@@ -18,10 +18,10 @@ $query = "SELECT
               ie.id,
               CONCAT(r.fname, ' ', r.lname) AS student_name,
               p.name AS professor_name,
-              ie.q1, ie.q2, ie.q3, ie.q4, ie.q5,
+              ie.q1, ie.q2, ie.q3, ie.q4, ie.q5, ie.q6, ie.q7, ie.q8, ie.q9, ie.q10, ie.q11, ie.q12, ie.q13, ie.q14, ie.q15, ie.q16, ie.q17, ie.q18, ie.q19, ie.q20,
               ie.feedback,
               ie.submitted_at,
-              (ie.q1 + ie.q2 + ie.q3 + ie.q4 + ie.q5) / 5 AS evaluation_avg_score,
+              (ie.q1 + ie.q2 + ie.q3 + ie.q4 + ie.q5 + ie.q6 + ie.q7 + ie.q8 + ie.q9 + ie.q10 + ie.q11 + ie.q12 + ie.q13 + ie.q14 + ie.q15 + ie.q16 + ie.q17 + ie.q18 + ie.q19 + ie.q20 ) / 20 AS evaluation_avg_score,
               avg_scores.professor_avg_score
           FROM instructor_evaluation ie
           JOIN registration r ON ie.user_id = r.id
@@ -29,7 +29,7 @@ $query = "SELECT
           LEFT JOIN (
               SELECT
                   professor_id,
-                  AVG((q1 + q2 + q3 + q4 + q5) / 5) AS professor_avg_score
+                  AVG((q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13 + q14 + q15 + q16 + q17 + q18 + q19 + q20) / 20) AS professor_avg_score
               FROM instructor_evaluation
               GROUP BY professor_id
           ) AS avg_scores ON ie.professor_id = avg_scores.professor_id";
@@ -51,7 +51,22 @@ $avg_query = "SELECT
                 AVG(q2) AS avg_q2, 
                 AVG(q3) AS avg_q3, 
                 AVG(q4) AS avg_q4, 
-                AVG(q5) AS avg_q5 
+                AVG(q5) AS avg_q5,
+                AVG(q5) AS avg_q6,
+                AVG(q5) AS avg_q7,
+                AVG(q5) AS avg_q8,
+                AVG(q5) AS avg_q9,
+                AVG(q5) AS avg_q10,
+                AVG(q5) AS avg_q11,
+                AVG(q5) AS avg_q12,
+                AVG(q5) AS avg_q13,
+                AVG(q5) AS avg_q14,
+                AVG(q5) AS avg_q15,
+                AVG(q5) AS avg_q16,
+                AVG(q5) AS avg_q17,
+                AVG(q5) AS avg_q18,
+                AVG(q5) AS avg_q19,
+                AVG(q5) AS avg_q20
               FROM instructor_evaluation";
 
 
@@ -434,7 +449,7 @@ background: #555; /* Darker thumb on hover */
 th {
     background: linear-gradient(145deg, #1e88e5, #1565c0);
     color: white;
-    font-size: 12px;
+    font-size: 8px;
     padding: 10px 0px 10px 0px;
     text-align: center;
 }
@@ -580,10 +595,24 @@ tbody button:hover {
             <th>q3</th>
             <th>q4</th>
             <th>q5</th>
+            <th>q6</th>
+            <th>q7</th>
+            <th>q8</th>
+            <th>q9</th>
+            <th>q10</th>
+            <th>q11</th>
+            <th>q12</th>
+            <th>q13</th>
+            <th>q14</th>
+            <th>q15</th>
+            <th>q16</th>
+            <th>q17</th>
+            <th>q18</th>
+            <th>q19</th>
+            <th>q20</th>
             <th>Feedback</th>
             <th>Submitted</th>
             <th>Evaluation Average</th>
-            <th>Professor Avg Score</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -597,8 +626,22 @@ tbody button:hover {
                     $row['q3'] = (int)$row['q3'];
                     $row['q4'] = (int)$row['q4'];
                     $row['q5'] = (int)$row['q5'];
+                    $row['q5'] = (int)$row['q6'];
+                    $row['q5'] = (int)$row['q7'];
+                    $row['q5'] = (int)$row['q8'];
+                    $row['q5'] = (int)$row['q9'];
+                    $row['q5'] = (int)$row['q10'];
+                    $row['q5'] = (int)$row['q11'];
+                    $row['q5'] = (int)$row['q12'];
+                    $row['q5'] = (int)$row['q13'];
+                    $row['q5'] = (int)$row['q14'];
+                    $row['q5'] = (int)$row['q15'];
+                    $row['q5'] = (int)$row['q16'];
+                    $row['q5'] = (int)$row['q17'];
+                    $row['q5'] = (int)$row['q18'];
+                    $row['q5'] = (int)$row['q19'];
+                    $row['q5'] = (int)$row['q20'];
                     $row['evaluation_avg_score'] = (float)$row['evaluation_avg_score'];
-                    $row['professor_avg_score'] = (float)$row['professor_avg_score'];
 
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($row['student_name']) . "</td>";
@@ -608,10 +651,24 @@ tbody button:hover {
                     echo "<td>" . htmlspecialchars($row['q3']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['q4']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['q5']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q6']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q7']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q8']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q9']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q10']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q11']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q12']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q13']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q14']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q15']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q16']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q17']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q18']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q19']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['q20']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['feedback']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['submitted_at']) . "</td>";
                     echo "<td>" . number_format($row['evaluation_avg_score'], 2) . "</td>";
-                    echo "<td>" . number_format($row['professor_avg_score'], 2) . "</td>";
                     echo "<td>
                             <form action='delete_record.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this record?\");'>
                                 <input type='hidden' name='record_id' value='" . htmlspecialchars($row['id']) . "'>

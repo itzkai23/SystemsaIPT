@@ -224,9 +224,9 @@ body {
     color: rgb(248, 171, 27);
       }
 
-.logpos {
+      .logpos {
     position: absolute;
-    top: 10px;
+    top: 8px;
     right: 30px;
     display: flex;
     align-items: center;
@@ -235,34 +235,37 @@ body {
       /* Container for the logo and dropdown */
 .logout-container {
     position: relative;
-    display: inline-block;
-      }
-      
-      /* Style for the logo/image */
-      .logout-logo {
-    width: 40px;  /* Adjust the size of the logo */
+    /* display: inline-block; */
     cursor: pointer;
-    border-radius: 20px;
       }
+.piclog {
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    object-fit: cover;
+    border: 1px solid goldenrod; 
+}  
       
-      /* Style for the dropdown (initially hidden) */
+      /* Style for the dropdown (initially hidden) */    
 .logout-dropdown {
     display: none;
     position: absolute;
     right: 0;
-    top: 45px;  /* Adjust as per the size of your logo */
-    background-color: #fff;
+    top: 50px;  /* Adjust as per the size of your logo */
+    background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 8px;
-    min-width: 100px;
+    min-width:  250px;
       }
       
 .logoutbb {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 23px;
+    margin-left: 2px;
+    margin-top: 7px;
       }
       
 .logoutb2 {
@@ -284,6 +287,72 @@ body {
 .logout-link:hover {
     color: #c00;
       }
+  .logpf-con {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 95%;
+  border-radius: 5px;
+  padding: 5px 0px 5px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.a-pf:hover,.logpf-con:hover {
+  background-color: rgb(236, 236, 236);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.logpf-con img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid blue;
+}     
+.logpf-con h4 {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+}
+.dlog-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dlog-icon img {
+  width: 30px;
+  border-radius: 15px;
+}
+.a-pf {
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  display: block;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-left: 0px;
+}
+
+.back-button img {
+    width: 30px; /* Adjust size as needed */
+    transition: 0.3s ease;
+    filter: invert(20%) brightness(60%) sepia(50%) saturate(400%) hue-rotate(180deg);
+}
+
+.back-button:hover img {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(93%) saturate(473%) hue-rotate(5deg) brightness(104%) contrast(103%);
+    /* This changes the white image to an orange-like color */
+}
+
 .user {
     color: white;
     font-family: "Roboto", sans-serif;
@@ -355,10 +424,25 @@ label {
 }
 
 .scrollable-table-container {
-        max-height: 300px; /* Adjust the height to your needs */
-        overflow-y: auto;
-        margin-bottom: 20px;
-    }
+    max-height: 300px; /* Adjust the height to your needs */
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+/* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
+.scrollable-table-container::-webkit-scrollbar {
+width: 10px; /* Width of the scrollbar */
+}
+
+.scrollable-table-container::-webkit-scrollbar-track {
+background: #f1f1f1; /* Background of the track */
+border-radius: 5px;
+}
+
+.scrollable-table-container::-webkit-scrollbar-thumb {
+background: #1e88e5; /* Color of the scroll thumb */
+border-radius: 5px; /* Round edges */
+}
 
 .question-table {
     width: 100%;
@@ -412,6 +496,7 @@ textarea {
 
 .btn-con {
     text-align: right;
+    margin-right: 20px;
 }
 
 button {
@@ -471,25 +556,55 @@ button:hover {
 
 <div class="right-section">                              
    
-  <div class="logpos">
-      
-      <div class="logout-container"> 
-        <img src="<?php echo htmlspecialchars($current_image); ?>" class="logout-logo" id="logoutButton">
-        <div class="logout-dropdown" id="logoutDropdown">
-            <div class="logoutbb">
-          <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-          <a href="logout.php" class="logout-link">Logout</a>
-        </div>
-    
-        </div>
-      </div>
-      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
+<div class="logpos">
+  
+  <div class="logout-container"> 
+  <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
+    <div class="logout-dropdown" id="logoutDropdown">
+            <a href="#" class="logpf-con">
+              <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
+              <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+            </a>
+          
+           <div class="dlog-icon">
+            <Img src="images/nfeed.png">
+            <a class="a-pf" href="freedomwall.php">Newsfeed</a>
+            </div>
+
+           <div class="dlog-icon">
+             <Img src="images/offweb.png" alt="log">
+            <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
+            </div>
+
+            <div class="dlog-icon">
+             <img src="images/announcement.png" alt="">
+            <a class="a-pf" href="#">Announcement</a>
+            </div>
+            
+            <div class="dlog-icon">
+             <img src="images/facultyb.png" alt="">
+            <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+            </div>
+
+       <div class="logoutbb">
+         <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+         <a href="logout.php" class="logout-link">Logout</a>
+       </div>
+
     </div>
+  </div>
+  <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
+</div>
          
 </div>
 </nav>
 
    <div class="form-container">
+    
+        <a href="instructorsEval.php" class="back-button">
+                <img src="images/backmage1.png" alt="Back" class="back-image">
+        </a>
+
         <h1 class="form-title">Faculty Evaluation</h1>
         <p class="p-val">Evaluating: <?php echo $professor_name; ?></p>
         <p class="description">Your feedback helps us improve our teaching standards. Please rate the instructor based on the following criteria.</p>
@@ -572,6 +687,217 @@ button:hover {
                         <label><input type="radio" name="q5" value="1"> 1</label>
                     </td>
                 </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor communicated the course material clearly and effectively.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q6" value="5" required> 5</label>
+                        <label><input type="radio" name="q6" value="4"> 4</label>
+                        <label><input type="radio" name="q6" value="3"> 3</label>
+                        <label><input type="radio" name="q6" value="2"> 2</label>
+                        <label><input type="radio" name="q6" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor encouraged and facilitated student participation and interaction.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q7" value="5" required> 5</label>
+                        <label><input type="radio" name="q7" value="4"> 4</label>
+                        <label><input type="radio" name="q7" value="3"> 3</label>
+                        <label><input type="radio" name="q7" value="2"> 2</label>
+                        <label><input type="radio" name="q7" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor demonstrated a strong understanding of the course content.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q8" value="5" required> 5</label>
+                        <label><input type="radio" name="q8" value="4"> 4</label>
+                        <label><input type="radio" name="q8" value="3"> 3</label>
+                        <label><input type="radio" name="q8" value="2"> 2</label>
+                        <label><input type="radio" name="q8" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor showed enthusiasm and passion for the subject matter.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q9" value="5" required> 5</label>
+                        <label><input type="radio" name="q9" value="4"> 4</label>
+                        <label><input type="radio" name="q9" value="3"> 3</label>
+                        <label><input type="radio" name="q9" value="2"> 2</label>
+                        <label><input type="radio" name="q9" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The course was well-organized and followed a logical sequence.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q10" value="5" required> 5</label>
+                        <label><input type="radio" name="q10" value="4"> 4</label>
+                        <label><input type="radio" name="q10" value="3"> 3</label>
+                        <label><input type="radio" name="q10" value="2"> 2</label>
+                        <label><input type="radio" name="q10" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The grading criteria were clear, and the grading process was fair.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q11" value="5" required> 5</label>
+                        <label><input type="radio" name="q11" value="4"> 4</label>
+                        <label><input type="radio" name="q11" value="3"> 3</label>
+                        <label><input type="radio" name="q11" value="2"> 2</label>
+                        <label><input type="radio" name="q11" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor was accessible and available to provide support outside of class hours.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q12" value="5" required> 5</label>
+                        <label><input type="radio" name="q12" value="4"> 4</label>
+                        <label><input type="radio" name="q12" value="3"> 3</label>
+                        <label><input type="radio" name="q12" value="2"> 2</label>
+                        <label><input type="radio" name="q12" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The pace of the course was appropriate, allowing adequate time for understanding the material.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q13" value="5" required> 5</label>
+                        <label><input type="radio" name="q13" value="4"> 4</label>
+                        <label><input type="radio" name="q13" value="3"> 3</label>
+                        <label><input type="radio" name="q13" value="2"> 2</label>
+                        <label><input type="radio" name="q13" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The feedback provided on assignments and exams was timely and helpful in improving my understanding.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q14" value="5" required> 5</label>
+                        <label><input type="radio" name="q14" value="4"> 4</label>
+                        <label><input type="radio" name="q14" value="3"> 3</label>
+                        <label><input type="radio" name="q14" value="2"> 2</label>
+                        <label><input type="radio" name="q14" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor effectively utilized technology and online resources to enhance learning.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q15" value="5" required> 5</label>
+                        <label><input type="radio" name="q15" value="4"> 4</label>
+                        <label><input type="radio" name="q15" value="3"> 3</label>
+                        <label><input type="radio" name="q15" value="2"> 2</label>
+                        <label><input type="radio" name="q15" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor demonstrated respect for diverse opinions and perspectives in class discussions.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q16" value="5" required> 5</label>
+                        <label><input type="radio" name="q16" value="4"> 4</label>
+                        <label><input type="radio" name="q16" value="3"> 3</label>
+                        <label><input type="radio" name="q16" value="2"> 2</label>
+                        <label><input type="radio" name="q16" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The required course materials (e.g., textbooks, readings) were useful and relevant to the course objectives.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q17" value="5" required> 5</label>
+                        <label><input type="radio" name="q17" value="4"> 4</label>
+                        <label><input type="radio" name="q17" value="3"> 3</label>
+                        <label><input type="radio" name="q17" value="2"> 2</label>
+                        <label><input type="radio" name="q17" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor helped students connect course content to real-world applications and examples.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q18" value="5" required> 5</label>
+                        <label><input type="radio" name="q18" value="4"> 4</label>
+                        <label><input type="radio" name="q18" value="3"> 3</label>
+                        <label><input type="radio" name="q18" value="2"> 2</label>
+                        <label><input type="radio" name="q18" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>The instructor fostered a positive and respectful classroom environment.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q19" value="5" required> 5</label>
+                        <label><input type="radio" name="q19" value="4"> 4</label>
+                        <label><input type="radio" name="q19" value="3"> 3</label>
+                        <label><input type="radio" name="q19" value="2"> 2</label>
+                        <label><input type="radio" name="q19" value="1"> 1</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label-column">
+                        <label>Overall, I would rate the instructor's teaching effectiveness as excellent.</label>
+                    </td>
+                
+                    <td class="radio-group">
+                        <label><input type="radio" name="q20" value="5" required> 5</label>
+                        <label><input type="radio" name="q20" value="4"> 4</label>
+                        <label><input type="radio" name="q20" value="3"> 3</label>
+                        <label><input type="radio" name="q20" value="2"> 2</label>
+                        <label><input type="radio" name="q20" value="1"> 1</label>
+                    </td>
+                </tr>
+
             </table>
             
             <label for="feedback">Optional Feedback</label>
