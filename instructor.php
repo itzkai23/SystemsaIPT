@@ -30,7 +30,7 @@ if ($profResult->num_rows > 0) {
 // Query to calculate average score and evaluation count
 $avgQuery = "
 SELECT 
-    AVG((q1 + q2 + q3 + q4 + q5) / 5.0) AS professor_avg_score,
+    AVG((q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13 + q14 + q15 + q16 + q17 + q18 + q19 + q20) / 20.0) AS professor_avg_score,
     COUNT(*) AS evaluation_count
 FROM instructor_evaluation
 WHERE professor_id = ?;
@@ -361,7 +361,6 @@ cursor: pointer;
 
 /* Main Container */
 .container {
-width: 90%;
 max-width: 800px;
 margin: 80px auto; 
 background-color:black;
@@ -370,6 +369,23 @@ border-radius: 12px;
 
 z-index: 0;
 font-family: "Roboto", sans-serif;
+}
+
+.back-button {
+    position: absolute;
+    left: 15px;
+    top: 5px;
+}
+
+.back-button img {
+    width: 30px; /* Adjust size as needed */
+    transition: 0.3s ease;
+    filter: invert(20%) brightness(60%) sepia(50%) saturate(400%) hue-rotate(180deg);
+}
+
+.back-button:hover img {
+  filter: invert(100%) brightness(100%);
+    /* This changes the white image to an orange-like color */
 }
 
 /* Avatar & Name Section */
@@ -389,6 +405,7 @@ position: relative;
 .avname {
 display: flex;
 align-items: center;
+margin-left: 35px;
 }
 
 .avname img {
@@ -1056,7 +1073,12 @@ word-wrap: break-word;
 
     <div class="container">
         
+
         <div class="avnamecon">
+        <a href="instructorsProfiles.php" class="back-button">
+                <img src="images/backmage1.png" alt="Back" class="back-image">
+        </a>
+
         <div class="avname">
             
         <img src="<?php echo !empty($prof_img) ? htmlspecialchars($prof_img) : $defimage; ?>" 
