@@ -82,7 +82,7 @@
         <input type="email" id="email" placeholder="Enter your email" required>
         <button>Send</button>
         <p class="message">Password reset will be sent to your email.</p>
-        <a href="silog.html" class="back-link">Back to Login</a>
+        <a href="silog.php" class="back-link">Back to Login</a>
     </div>
 </body>
 </html>
