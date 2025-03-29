@@ -6,8 +6,7 @@
     <title>Forgot Password</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: "Roboto", sans-serif;
@@ -33,11 +32,6 @@
             border-radius: 5px;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        input:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
         button {
             width: 100%;
@@ -48,10 +42,6 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
         }
         .message {
             margin-top: 10px;
@@ -65,24 +55,18 @@
             color: #007BFF;
             font-size: 14px;
         }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 400px) {
-            .container {
-                width: 90%;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Forgot Password</h2>
         <p>Enter your email to reset your password</p>
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <button>Send</button>
+        <form action="otppass.php" method="post">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Send</button>
+        </form>
         <p class="message">Password reset will be sent to your email.</p>
-        <a href="silog.html" class="back-link">Back to Login</a>
+        <a href="silog.php" class="back-link">Back to Login</a>
     </div>
 </body>
 </html>
