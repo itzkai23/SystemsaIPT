@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connection.php'; // Ensure this file correctly connects to your database
+include 'connect.php'; // Ensure this file correctly connects to your database
 
 // Check if the user has an email stored from OTP verification
 if (!isset($_SESSION['reset_email'])) {

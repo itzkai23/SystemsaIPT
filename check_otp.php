@@ -1,27 +1,36 @@
 <?php
 session_start();
-require 'connect.php';
+include 'connect.php'; // Ensure database connection
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $entered_otp = $_POST["otp"];
+    $entered_otp = trim($_POST["otp"]);
+
+    // Check if session OTP exists
+    if (!isset($_SESSION['otp']) || !isset($_SESSION['email'])) {
+        echo "<script>alert('Session expired. Please try again.'); window.location.href='forgotpass.php';</script>";
+        exit();
+    }
+
+    $stored_otp = $_SESSION['otp'];
     $email = $_SESSION['email'];
 
-    // Check if OTP matches
-    $query = "SELECT * FROM registration WHERE email = ? AND otp = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ss", $email, $entered_otp);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+    // Verify OTP
+    if ($entered_otp == $stored_otp) {
+        // OTP is correct, set session variable for password reset
+        $_SESSION['reset_email'] = $email;  // Ensure resetpass.php can access the email
+        unset($_SESSION['otp']); // Remove OTP after successful verification
 
-    if (mysqli_num_rows($result) > 0) {
-        $_SESSION['verified'] = true; // Allow reset password
+        // Redirect to reset password page
         header("Location: resetpass.php");
         exit();
     } else {
-        echo "<script>alert('Invalid OTP!'); window.location.href='check_otp.php';</script>";
+        // Wrong OTP, redirect back with an error
+        echo "<script>alert('Invalid OTP. Please try again.'); window.location.href='check_otp.php';</script>";
+        exit();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
