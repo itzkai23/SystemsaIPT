@@ -43,7 +43,8 @@ if (!empty($search)) {
 
 $query .= " ORDER BY ie.submitted_at DESC";
 
-$result = mysqli_query($conn, $query);
+// $result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query) or die("Query Failed: " . mysqli_error($conn));
 $eval_count = ($result) ? mysqli_num_rows($result) : 0;
 
 // Query to calculate averages for each question
@@ -53,27 +54,28 @@ $avg_query = "SELECT
                 AVG(q3) AS avg_q3, 
                 AVG(q4) AS avg_q4, 
                 AVG(q5) AS avg_q5,
-                AVG(q5) AS avg_q6,
-                AVG(q5) AS avg_q7,
-                AVG(q5) AS avg_q8,
-                AVG(q5) AS avg_q9,
-                AVG(q5) AS avg_q10,
-                AVG(q5) AS avg_q11,
-                AVG(q5) AS avg_q12,
-                AVG(q5) AS avg_q13,
-                AVG(q5) AS avg_q14,
-                AVG(q5) AS avg_q15,
-                AVG(q5) AS avg_q16,
-                AVG(q5) AS avg_q17,
-                AVG(q5) AS avg_q18,
-                AVG(q5) AS avg_q19,
-                AVG(q5) AS avg_q20
+                AVG(q6) AS avg_q6,
+                AVG(q7) AS avg_q7,
+                AVG(q8) AS avg_q8,
+                AVG(q9) AS avg_q9,
+                AVG(q10) AS avg_q10,
+                AVG(q11) AS avg_q11,
+                AVG(q12) AS avg_q12,
+                AVG(q13) AS avg_q13,
+                AVG(q14) AS avg_q14,
+                AVG(q15) AS avg_q15,
+                AVG(q16) AS avg_q16,
+                AVG(q17) AS avg_q17,
+                AVG(q18) AS avg_q18,
+                AVG(q19) AS avg_q19,
+                AVG(q20) AS avg_q20
               FROM instructor_evaluation";
 
 
 // If there's a search input, ensure the average calculation matches the filtered records
 if (!empty($search)) {
-  $avg_query .= " WHERE professor_id IN (SELECT id FROM professors WHERE name LIKE '%$search%')";
+  $avg_query .= " WHERE professor_id IN (SELECT id FROM professors WHERE name LIKE '%$search%')
+                  OR user_id IN (SELECT id FROM registration WHERE fname LIKE '%$search%' OR lname LIKE '%$search%')";
 }
 
 $avg_result = mysqli_query($conn, $avg_query);
@@ -450,9 +452,8 @@ background: #555; /* Darker thumb on hover */
 th {
     background: linear-gradient(145deg, #1e88e5, #1565c0);
     color: white;
-    font-size: 8px;
-    padding: 10px 0px 10px 0px;
-    text-align: center;
+    font-size: 12px;
+    padding: 10px 3px 10px 3px;
 }
 
 /* Table Rows */
@@ -495,12 +496,111 @@ tbody button {
   padding: 5px 10px; 
   cursor: pointer;
   border-radius: 3px;
+  margin-top: 10px;
 }
 
 tbody button:hover {
   background-color: #c00;
 }
 
+.view-btn {
+  cursor: pointer;
+  pointer-events: auto;
+  background-color: #1565c0; 
+  color: white; 
+  border: none; 
+  padding: 5px 13px; 
+  cursor: pointer;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.view-btn:hover {
+  background-color:rgb(10, 84, 168); 
+}
+
+
+/* POP-UP POST */
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.4); /* Dim background */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 95%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-content h3 {
+    font-family: "Roboto",sans-serif;
+    color: #1565c0;
+}
+
+/* Target columns 3 to 6 for both th and td */
+.modal-content th:nth-child(n+1):nth-child(-n+20),
+.modal-content td:nth-child(n+1):nth-child(-n+20) {
+  width: 20px;
+  text-align: center; /* Center the content of these columns */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    padding: 7.5px 14px;
+    border-radius: 20px;
+}
+
+.close:hover {
+    color: black;
+    background-color: rgb(196, 192, 192);
+}
+
+.stud-prof {
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+}
+.stud-prof h4 {
+    font-weight: 600;
+    font-family: Roboto, sans-serif;
+    color: #1565c0;
+}
+
+.delete-btn {
+    display: none;
+    background-color: red; 
+    color: white; 
+    border: none; 
+    padding: 5px 10px; 
+    cursor: pointer;
+    border-radius: 3px;
+    position: absolute;
+    top: 8em;
+    right: 1.5em;
+}
+
+.delete-btn:hover {
+  background-color: #c00;
+}
+
+/* Table Header */
 
 
     </style>
@@ -571,122 +671,133 @@ tbody button:hover {
 </nav>
 
 <div class="container">
-        <h2>Evaluation Record</h2>
-        <!-- Display Total Evaluation Count -->
-        <p class="student-count">Total Evaluations: <strong><?php echo $eval_count; ?></strong></p>
-        <!-- Search Bar -->
-        <div class="search-container">
-            <form method="GET" action="">
-                <input type="text" name="search" placeholder="Search name" value="<?php echo htmlspecialchars($search); ?>">
-                <button type="submit">Search</button>
-                <?php if (!empty($search)) : ?>
-                    <a href="eval_record.php"><button type="button">Clear</button></a>
-                <?php endif; ?>
+    <h2>Evaluation Record</h2>
+    <p class="student-count">Total Evaluations: <strong><?php echo $eval_count; ?></strong></p>
+    <div class="search-container">
+        <form method="GET" action="">
+            <input type="text" name="search" placeholder="Search name" value="<?php echo htmlspecialchars($search); ?>">
+            <button type="submit">Search</button>
+            <?php if (!empty($search)) : ?>
+                <a href="eval_record.php"><button type="button">Clear</button></a>
+            <?php endif; ?>
+        </form>
+    </div>
+    <div class="table-container">
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Professor</th>
+                    <th>q1</th>
+                    <th>q2</th>
+                    <th>q3</th>
+                    <th>q4</th>
+                    <th>q5</th>
+                    <th>Feedback</th>
+                    <th>Submitted</th>
+                    <th>Evaluation Average</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['student_name']); ?></td>
+                        <td><?php echo htmlspecialchars($row['professor_name']); ?></td>
+                        <td><?php echo htmlspecialchars($row['q1']); ?></td>
+                        <td><?php echo htmlspecialchars($row['q2']); ?></td>
+                        <td><?php echo htmlspecialchars($row['q3']); ?></td>
+                        <td><?php echo htmlspecialchars($row['q4']); ?></td>
+                        <td><?php echo htmlspecialchars($row['q5']); ?></td>
+                        <td><?php echo htmlspecialchars($row['feedback']); ?></td>
+                        <td><?php echo htmlspecialchars($row['submitted_at']); ?></td>
+                        <td><?php echo number_format($row['evaluation_avg_score'], 2); ?></td>
+                        <td>
+                            <label class='view-btn' onclick='openModal(<?php echo json_encode($row, JSON_HEX_APOS | JSON_HEX_QUOT); ?>)'>View</label>
+                            <form action='delete_record.php' method='POST' onsubmit='return confirm("Are you sure you want to delete this record?");'>
+                                <input type='hidden' name='record_id' value='<?php echo htmlspecialchars($row['id']); ?>'>
+                                <button type='submit'>Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Instructor Evaluation Records</h3>
+        <div class="stud-prof">
+            <h4>Student: <strong id="modal-student"></strong></h4>
+            <h4>Professor: <strong id="modal-professor"></strong></h4>
+            <h4>Evaluation Average: <strong id="modal-score"></strong></h4>
+            <h4>Professor's Average Score: <strong id="modal-avg"></strong></h4>
+            </div>
+            <!-- Place the delete button outside of the table -->
+         <div id="delete-button-container">
+            <form id="delete-record-form" action="delete_record.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                <input type="hidden" name="record_id" id="delete-record-id">
+                <button type="submit" id="delete-button" class="delete-btn">Delete</button>
             </form>
         </div>
         
-        <div class="table-container">
-        <table id="studentTable">
-    <thead>
-        <tr>
-            <th>Student</th>
-            <th>Professor</th>
-            <th>q1</th>
-            <th>q2</th>
-            <th>q3</th>
-            <th>q4</th>
-            <th>q5</th>
-            <th>q6</th>
-            <th>q7</th>
-            <th>q8</th>
-            <th>q9</th>
-            <th>q10</th>
-            <th>q11</th>
-            <th>q12</th>
-            <th>q13</th>
-            <th>q14</th>
-            <th>q15</th>
-            <th>q16</th>
-            <th>q17</th>
-            <th>q18</th>
-            <th>q19</th>
-            <th>q20</th>
-            <th>Feedback</th>
-            <th>Submitted</th>
-            <th>Evaluation Average</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-            <?php
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    // Cast numeric fields to appropriate types
-                    $row['q1'] = (int)$row['q1'];
-                    $row['q2'] = (int)$row['q2'];
-                    $row['q3'] = (int)$row['q3'];
-                    $row['q4'] = (int)$row['q4'];
-                    $row['q5'] = (int)$row['q5'];
-                    $row['q5'] = (int)$row['q6'];
-                    $row['q5'] = (int)$row['q7'];
-                    $row['q5'] = (int)$row['q8'];
-                    $row['q5'] = (int)$row['q9'];
-                    $row['q5'] = (int)$row['q10'];
-                    $row['q5'] = (int)$row['q11'];
-                    $row['q5'] = (int)$row['q12'];
-                    $row['q5'] = (int)$row['q13'];
-                    $row['q5'] = (int)$row['q14'];
-                    $row['q5'] = (int)$row['q15'];
-                    $row['q5'] = (int)$row['q16'];
-                    $row['q5'] = (int)$row['q17'];
-                    $row['q5'] = (int)$row['q18'];
-                    $row['q5'] = (int)$row['q19'];
-                    $row['q5'] = (int)$row['q20'];
-                    $row['evaluation_avg_score'] = (float)$row['evaluation_avg_score'];
 
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['student_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['professor_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q1']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q2']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q3']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q4']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q5']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q6']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q7']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q8']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q9']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q10']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q11']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q12']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q13']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q14']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q15']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q16']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q17']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q18']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q19']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['q20']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['feedback']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['submitted_at']) . "</td>";
-                    echo "<td>" . number_format($row['evaluation_avg_score'], 2) . "</td>";
-                    echo "<td>
-                            <form action='delete_record.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this record?\");'>
-                                <input type='hidden' name='record_id' value='" . htmlspecialchars($row['id']) . "'>
-                                <button type='submit'>Delete</button>
-                            </form>
-                          </td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='12'>No records found.</td></tr>";
-            }
-            ?>
-    </tbody>
-</table>
-        </div>
-
+        <table>
+            <thead>
+                <tr>
+                    <?php for ($i = 1; $i <= 20; $i++) { echo "<th>q$i</th>"; } ?>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="modal-questions"></tr>
+            </tbody>
+        </table>
+        
     </div>
+</div>
+
+<script>
+function openModal(data) {
+    // Set student and professor names, and evaluation average
+    document.getElementById("modal-student").textContent = data.student_name;
+    document.getElementById("modal-professor").textContent = data.professor_name;
+    document.getElementById("modal-score").textContent = parseFloat(data.evaluation_avg_score).toFixed(2);
+    document.getElementById("modal-avg").textContent = parseFloat(data.professor_avg_score).toFixed(2);
+
+    // Populate the 20 question responses
+    let questionsRow = "";
+    for (let i = 1; i <= 20; i++) {
+        questionsRow += `<td>${data['q' + i] || 'N/A'}</td>`;
+    }
+
+    // Add delete button at the end of the row
+    // questionsRow += `
+    //     <td>
+    //         <form action='delete_record.php' method='POST' onsubmit='return confirm("Are you sure you want to delete this record?");'>
+    //             <input type='hidden' name='record_id' value='${data.id}'>
+    //             <button type='submit'>Delete</button>
+    //         </form>
+    //     </td>`;
+
+    document.getElementById("modal-questions").innerHTML = questionsRow;
+
+    // Show the delete button
+    document.getElementById("delete-record-id").value = data.id;  // Set the record id for deletion
+    document.getElementById("delete-button").style.display = "block";  // Show delete button
+    
+    // Display the modal
+    document.getElementById("modal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+</script>
+
     <script src="js/sidebar.js"></script>
     <script src="js/logs.js"></script>
 </body>

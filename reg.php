@@ -21,6 +21,12 @@ if(isset($_POST['submit'])){
         exit();
     }
 
+    // Validate password strength (Minimum 8 characters, at least one letter and one number)
+    if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', $password)) {
+        echo "<script>alert('Password must be at least 8 characters long and include at least one letter and one number.'); window.location.href='silog.php';</script>";
+        exit();
+    }
+
     // Check if the email already exists
     $select = "SELECT * FROM registration WHERE email = ?";
     $stmt = mysqli_prepare($conn, $select);
@@ -29,7 +35,7 @@ if(isset($_POST['submit'])){
     $result = mysqli_stmt_get_result($stmt);
 
     if(mysqli_num_rows($result) > 0){
-        echo 'The email has already been used.';
+        echo "<script>alert('The email has already been used.'); window.location.href='silog.php';</script>";
         exit();
     } else {
         // Generate OTP

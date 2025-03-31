@@ -41,7 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
             }
             exit();
         } else {
-            echo 'Incorrect password!';
+            echo "<script> 
+            alert('Incorrect Password!');
+            window.location.href = 'silog.php';
+             </script>";
         }
     } else {
         echo 'User not found!';

@@ -17,7 +17,7 @@ if (isset($_POST['comment_id'])) {
     $check->store_result();
     
     if ($check->num_rows > 0) {
-        die("<script>alert('You already reported this comment.'); window.history.back();</script>");
+        die("<script>alert('You already reported this comment.');  window.location.href = 'freedomwall.php';</script>");
     }
     
     $check->close();
@@ -28,6 +28,6 @@ if (isset($_POST['comment_id'])) {
     $stmt->execute();
     $stmt->close();
 
-    echo "<script>alert('Reported successfully!'); window.history.back();</script>";
+    echo "<script>alert('Reported successfully!'); window.location.href = 'freedomwall.php';</script>";
 }
 ?>

@@ -35,8 +35,15 @@ $user_id = $_SESSION['user_id']; // Consistently use user_id
 
 // ✅ Check if the user can evaluate *ONLY* on initial page load (GET request)
 if ($_SERVER["REQUEST_METHOD"] === "GET" && !canEvaluate($conn, $user_id, $professor_id)) {
-    die("❌ You have already evaluated this professor. Please wait 30 days before evaluating again. <a href='instructorsEval.php'>Go back</a>");
+    // Show JavaScript alert and redirect
+    echo "<script>
+            alert('❌ You have already evaluated this professor. Please wait 30 days before evaluating again.');
+            window.location.href = 'instructorsEval.php'; 
+          </script>";
+    exit; // Make sure the script stops executing here
 }
+
+
 
 // Fetch professor name
 $profQuery = $conn->prepare("SELECT name FROM professors WHERE id = ?");
@@ -531,6 +538,25 @@ button:hover {
         }
     }
 
+    .alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.alert a {
+    color: #004085;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.alert a:hover {
+    text-decoration: underline;
+}
+
     </style>
 </head>
 <body>
@@ -910,6 +936,7 @@ button:hover {
         </div>
         </form>
     </div>
+
 <script src="js/sidebar.js"></script>
 <script src="js/logs.js"></script>
 </body>
