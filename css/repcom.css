@@ -45,7 +45,7 @@ body {
     display: block; /* Show this by default */
 }
 .report-box1 { 
-    display: none; /* Hide this by default */
+    display: block; 
 }
 a {
     background-color: #E69500; 
