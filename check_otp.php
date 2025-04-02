@@ -38,12 +38,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
+    <link rel="stylesheet" href="css/verify.css">
 </head>
 <body>
+<div class="buo">
     <h2>Enter OTP</h2>
-    <form action="" method="POST">
-        <input type="number" name="otp" placeholder="Enter OTP" required>
-        <button type="submit">Verify</button>
+    <form method="post">
+        <!-- <input type="text" name="otp" placeholder="Enter OTP" required> -->
+        <div class="otp-container">
+        <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
+        <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
+        <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
+        <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
+        <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
+        <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
+        </div>
+        <button class="verify-btn" type="submit">Verify</button>
+        <a href="silog.php" class="resend">Back to Register</a>
     </form>
+    
+    </div>
+
+    <script>
+        function moveToNext(input) {
+            if (input.value.length === 1) {
+                let nextInput = input.nextElementSibling;
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        }
+
+        function moveToPrev(event, input) {
+            if (event.key === "Backspace" && input.value === "") {
+                let prevInput = input.previousElementSibling;
+                if (prevInput) {
+                    prevInput.focus();
+                }
+            }
+        }
+    </script>
 </body>
 </html>
