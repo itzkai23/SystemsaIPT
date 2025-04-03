@@ -59,24 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     </div>
 
-    <script>
-        function moveToNext(input) {
-            if (input.value.length === 1) {
-                let nextInput = input.nextElementSibling;
-                if (nextInput) {
-                    nextInput.focus();
-                }
-            }
-        }
-
-        function moveToPrev(event, input) {
-            if (event.key === "Backspace" && input.value === "") {
-                let prevInput = input.previousElementSibling;
-                if (prevInput) {
-                    prevInput.focus();
-                }
-            }
-        }
-    </script>
+    <script src="js/check_otp.js"></script>
 </body>
 </html>

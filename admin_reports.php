@@ -31,6 +31,15 @@ $reportsQuery = $conn->query("SELECT r.id AS report_id, c.comment AS reported_te
 
 // Fetch reported professors
 $profReportsQuery = $conn->query("SELECT rp.id AS prof_report_id, p.name AS professor_name, u.fname, u.lname, rp.reasons, rp.report_date, rp.status FROM reports_prof rp JOIN professors p ON rp.professor_id = p.id JOIN registration u ON rp.user_id = u.id ORDER BY rp.report_date DESC");
+
+// Keep your existing default image
+$default_image = "images/icon.jpg";
+
+// Use session to get the latest profile picture
+$current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
+
+// Force-refresh the image to prevent caching issues
+$current_image .= "?t=" . time();
 ?>
 
 <!DOCTYPE html>
@@ -155,14 +164,8 @@ $profReportsQuery = $conn->query("SELECT rp.id AS prof_report_id, p.name AS prof
         </div>
     </div>
     </div>
-
-<script>
-    function showReport(section) {
-    document.getElementById('report1').style.display = section === 'prof' ? 'block' : 'none';
-    document.getElementById('report2').style.display = section === 'comm' ? 'block' : 'none';
-}
-</script>
-<script src="js/sidebar.js"></script>
-<script src="js/logs.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="js/logs.js"></script>
+        <script src="js/admin.js"></script>
 </body>
 </html>

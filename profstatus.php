@@ -93,11 +93,30 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     <link rel="stylesheet" href="css/profstatus.css">
 </head>
 <body>
+<header>
+    <img src="images/head.png" alt="headerlogo" class="logo">
+    <nav class="navigation">
+       <a href="#">Regulations</a>
+       <a href="#">Objective</a>
+       <a href="profstatus.php">Faculties</a>
+       <button class="btn-popup">Login</button>      
+    </nav>
+</header>
 
 <div class="page-container">
     <h1>Professors</h1>
 
-    <!-- Display Professors List -->
+    <!-- Wrapper for Professors List with Slide Button -->
+    <div class="slide-container">
+         <!-- Slide Button -->
+         <!-- <button class="slide-btn left" id="slideLeft">&#8592;</button> -->
+         <button class="slide-btn left" id="slideLeft">&#8592;</button>
+<button class="slide-btn right" id="slideRight">&#8594;</button>
+
+
+        <!-- Professors List Wrapper -->
+        <div class="con-profs-wrapper">
+            <!-- Display Professors List -->
     <div class="con-profs">
         <?php foreach ($professors as $prof): ?>
             <div class="rant-post" 
@@ -109,9 +128,9 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
                 data-average="<?php echo htmlspecialchars($prof['professor_avg_score']); ?>">
                 <div class="con-prof">
                     <img src="<?php echo htmlspecialchars($prof['prof_img']); ?>" alt="Professor Image" width="150" height="150">
-                    <div>
-                        <h5><?php echo htmlspecialchars($prof['name']); ?></h5>
-                        <h5><?php echo htmlspecialchars($prof['role']); ?></h5>
+                    <div class="prof-details">
+                        <h5 class="prof-name"><?php echo htmlspecialchars($prof['name']); ?></h5>
+                        <h5 class="prof-role"><?php echo htmlspecialchars($prof['role']); ?></h5>
                     </div>
                 </div>
             </div>
@@ -161,52 +180,33 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
             </div>
         </div>  
     </div>
+
+        </div>
+    </div>
+
 </div>
 
+<script src="js/profstatus.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const modal = document.querySelector(".modal_usercom");
-        const closeModal = document.querySelector(".modal_usercom .close");
-        const commentsContainer = document.getElementById("commentsContainer");
+    const slideLeftButton = document.getElementById('slideLeft');
+    const slideRightButton = document.getElementById('slideRight');
+    const conProfsWrapper = document.querySelector('.con-profs-wrapper');
+    
+    let scrollAmount = 0;
+    const slideWidth = 200;
 
-        document.querySelectorAll(".rant-post").forEach(item => {
-            item.addEventListener("click", function () {
-                const profId = this.getAttribute("data-id");
-                const name = this.getAttribute("data-name");
-                const role = this.getAttribute("data-role");
-                const image = this.getAttribute("data-image");
-                const evaluationCount = this.getAttribute("data-evaluations");
-                const averageScore = this.getAttribute("data-average");
+    slideLeftButton.addEventListener('click', () => {
+        if (scrollAmount > 0) {
+            scrollAmount -= slideWidth;
+            conProfsWrapper.scrollLeft = scrollAmount;
+        }
+    });
 
-                document.getElementById("profName").textContent = name;
-                document.getElementById("profRole").textContent = role;
-                document.getElementById("profImg").src = image;
-                document.getElementById("evaluationCount").textContent = evaluationCount;
-                document.getElementById("averageScore").textContent = averageScore;
-
-                modal.style.display = "block";
-
-                fetch(`profstatus.php?fetch_comments=1&professor_id=${profId}`)
-                    .then(response => response.text()) 
-                    .then(data => {
-                        commentsContainer.innerHTML = data;
-                    })
-                    .catch(error => {
-                        console.error("Error fetching comments:", error);
-                        commentsContainer.innerHTML = "<p>Failed to load comments.</p>";
-                    });
-            });
-        });
-
-        closeModal.addEventListener("click", function () {
-            modal.style.display = "none";
-        });
-
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
+    slideRightButton.addEventListener('click', () => {
+        if (scrollAmount < conProfsWrapper.scrollWidth - conProfsWrapper.clientWidth) {
+            scrollAmount += slideWidth;
+            conProfsWrapper.scrollLeft = scrollAmount;
+        }
     });
 </script>
 

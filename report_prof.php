@@ -6,6 +6,15 @@ include 'connect.php';
 $professor_id = isset($_GET['id']) ? $_GET['id'] : '';
 $professor_name = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : 'Unknown Professor';
 $professor_img = isset($_GET['img']) ? htmlspecialchars($_GET['img']) : 'images/facultyb.png';
+
+// Keep your existing default image
+$default_image = "images/icon.jpg";
+
+// Use session to get the latest profile picture
+$current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
+
+// Force-refresh the image to prevent caching issues
+$current_image .= "?t=" . time();
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +26,75 @@ $professor_img = isset($_GET['img']) ? htmlspecialchars($_GET['img']) : 'images/
     <link rel="stylesheet" href="css/report_prof.css">
 </head>
 <body>
+
+<nav class="home-header">
+
+   <div class="ham-menu">
+     <span></span>
+     <span></span>
+     <span></span>
+   </div>
+
+   <ul class="sidebar" id="sidebar">
+         
+     <li><a class="a-bar"href="home.php">Home</a></li>
+     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
+     <li><a class="a-bar"href="freedomwall.php">Newsfeed</a></li>
+     <li><a class="a-bar"href="upf.php">Profile</a></li>
+          
+   </ul>
+
+   <div class="mid-section">
+   <a href="home.php" class="home">Home</a>
+   <a href="freedomwall.php" class="pf">Newsfeed</a>
+   <a href="instructorsProfiles.php" class="pf">Faculty</a>
+   </div>
+   
+   <div class="right-section">                              
+      
+     <div class="logpos">
+         
+         <div class="logout-container"> 
+           <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
+           <div class="logout-dropdown" id="logoutDropdown">
+                <a href="#" class="logpf-con">
+                  <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
+                  <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+                </a>
+              
+               <div class="dlog-icon">
+                <Img src="images/nfeed.png">
+                <a class="a-pf" href="freedomwall.php">Newsfeed</a>
+                </div>
+
+               <div class="dlog-icon">
+                 <Img src="images/offweb.png" alt="log">
+                <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
+                </div>
+
+                <div class="dlog-icon">
+                 <img src="images/announcement.png" alt="">
+                <a class="a-pf" href="#">Announcement</a>
+                </div>
+                
+                <div class="dlog-icon">
+                 <img src="images/facultyb.png" alt="">
+                <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                </div>
+
+           <div class="logoutbb">
+             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="logout.php" class="logout-link">Logout</a>
+           </div>
+       
+           </div>
+         </div>
+         <p class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></p> 
+       </div>
+            
+   </div>
+</nav>
+
     <div class="box">
         <!-- Display Professor's Image -->
         <img src="<?php echo $professor_img; ?>" alt="<?php echo $professor_name; ?>"> 
@@ -42,24 +120,8 @@ $professor_img = isset($_GET['img']) ? htmlspecialchars($_GET['img']) : 'images/
         </form>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const otherCheckbox = document.getElementById("otherCheckbox");
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#otherCheckbox)');
-
-            otherCheckbox.addEventListener("change", function () {
-                if (this.checked) {
-                    checkboxes.forEach(checkbox => {
-                        checkbox.checked = false;
-                        checkbox.disabled = true;
-                    });
-                } else {
-                    checkboxes.forEach(checkbox => {
-                        checkbox.disabled = false;
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="js/report_prof.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/logs.js"></script>
 </body>
 </html>
