@@ -37,6 +37,7 @@ body {
     align-items: center;
     gap: 30px;
     margin-left: auto;
+    margin-right: 20px;
 }
 
 .mid-section a{
@@ -175,91 +176,130 @@ body {
     color: rgb(248, 171, 27);
       }
 
-.logpos {
-    position: absolute;
-    top: 2px;
-    right: 30px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-      }
-      /* Container for the logo and dropdown */
-.logout-container {
-    position: relative;
-    display: inline-block;
-      }
-.logout-container img {
-    width: 35px;
-    height: 35px;
-    border-radius: 17.5px;
-    object-fit: cover;
-    border: 1px solid goldenrod;
-}     
-      /* Style for the logo/image */
-      .logout-logo {
-    width: 40px;  /* Adjust the size of the logo */
-    cursor: pointer;
-    border-radius: 20px;
-      }
+      .logpos {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+          }
+          /* Container for the logo and dropdown */
+    .logout-container {
+        position: relative;
+        /* display: inline-block; */
+        cursor: pointer;
+          }
+    /* .logout-container img {
+        width: 35px;
+        height: 35px;
+        border-radius: 17.5px;
+        object-fit: cover;
+        border: 1px solid goldenrod;
+    } */
+    .piclog {
+        width: 35px;
+        height: 35px;
+        border-radius: 17.5px;
+        object-fit: cover;
+        border: 1px solid goldenrod; 
+    }      
+          
+          /* Style for the dropdown (initially hidden) */
+    .logout-dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 50px;  /* Adjust as per the size of your logo */
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        border-radius: 8px;
+        min-width:  250px;
+          }
+          
+    .logoutbb {
+        display: flex;
+        align-items: center;
+        gap: 23px;
+        margin-left: 2px;
+        margin-top: 7px;
+        padding: 5px 0px 5px 10px;
+          }
+          
+    .logoutb2 {
+        width: 25px;  /* Adjust the size of the logo */
+        cursor: pointer;
+          }
+          
+          /* Style for the logout link */
+    .logout-link {
+        color: #f00;
+        text-decoration: none;
+        font-size: 17.5px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+          }
+          
+          /* Change color on hover */
+    .logout-link:hover {
+        color: #c00;
+          }
+     
+    .logpf-con {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-radius: 5px;
+      padding: 5px 0px 5px 10px;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
       
-      /* Style for the dropdown (initially hidden) */    
-.logout-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 45px;  /* Adjust as per the size of your logo */
-    background-color: orange;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 8px;
-    min-width: 100px;
+    .logpf-con h4 {
+        margin: 0; /* Reset margin on h4 */
       }
-      
-.logoutbb {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-      }
-      
-.logoutb2 {
-    width: 25px;  /* Adjust the size of the logo */
-    cursor: pointer;
-      }
-      
-      /* Style for the logout link */
-.logout-link {
-    color: #f00;
-    text-decoration: none;
-    font-size: 16px;
-    font-family: "Roboto", sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-      }
-      
-      /* Change color on hover */
-.logout-link:hover {
-    color: #c00;
-      }
-.box{
-    width: 100%;
-    height: 80vh;
-    padding-top: 20px;
-    position: relative;
-}
 
-.box {
-    height: 50%;
-    width: 90%;
-}        
-
-.repcomcon {
-    background-color: lightblue;
-    margin: 20px;
-    width: 40%;
-    padding: 10px;
-    display: inline-block;
-}
+    .a-pf:hover,.logpf-con:hover {
+      background-color: rgb(236, 236, 236);
+      transition: 0.5s ease;
+      cursor: pointer;
+    }
+    .logpf-con img {
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      border: 1px solid blue;
+    }     
+    .logpf-con h4 {
+      font-size: 18px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 500;
+      color: rgb(54, 54, 54);
+    }
+    .dlog-icon {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 0px 5px 10px;
+    }
+    .dlog-icon img {
+      width: 30px;
+      border-radius: 15px;
+    }
+    .a-pf {
+      font-size: 17px;
+      font-weight: 400;
+      font-family: "Roboto", sans-serif;
+      text-decoration: none;
+      color: rgb(19, 19, 19);
+      display: block;
+      margin-bottom: 2px;
+      margin-left: 2px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+    }
 
 /* Comments Section */
 /* #comments-container, #report-container {
@@ -370,20 +410,4 @@ body {
 .profile-right p {
     margin: 5px 0;
     font-size: 14px;
-}
-.social-icons {
-    margin-top: 15px;
-}
-.social-icons a {
-    display: inline-block;
-    background: #3498db;
-    color: white;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    text-align: center;
-    margin: 0 5px;
-    text-decoration: none;
-    font-size: 16px;
 }
