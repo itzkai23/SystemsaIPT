@@ -1,0 +1,880 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: 
+        linear-gradient(rgb(76, 76, 209), rgba(125, 125, 233, 0.5)),
+        url('../images/malabon-1.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply; 
+}
+
+
+.home-header {
+      height: 55px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgb(10, 0, 104);
+      z-index: 99;
+      }
+    
+    
+.ham-menu {
+        height: 20px;
+        width: 20px;
+        margin: 15px 0px 0px 15px;
+        position: relative;
+        cursor: pointer;
+      }
+      
+.ham-menu span {
+        height: 2px;
+        width: 15px;
+        background-color: white;
+        border-radius: 7.5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: .3s ease;
+        z-index: 15;
+      }
+      
+  .ham-menu span:nth-child(1) {
+        top: 25%;
+      }
+      
+  .ham-menu span:nth-child(3) {
+        top: 75%;
+      }
+      
+  .ham-menu.active span:nth-child(1) {
+        top: 50%;
+        transform: translate(-50%,-50%) rotate(45deg);
+      }
+      
+  .ham-menu.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+  .ham-menu.active span:nth-child(3) {
+        top: 50%;
+        transform: translate(-50%,-50%) rotate(-45deg);
+      }  
+  
+    
+.sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        width: 250px;
+        padding-top: 55px;
+        padding-left: 0px;
+        z-index: 10;
+        background-color: rgb(11, 0, 114);
+        backdrop-filter: blur(5px);
+        box-shadow: -10px 0 10px rgb(0,0,0,0.1);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        list-style: none;
+        transition: left 0.3s ease;
+        margin-top: 0px;
+  
+      }
+      
+.sidebar.active {
+        left: 0;
+      }
+      
+.sidebar li {
+        list-style: none;
+        height: 54px;
+        width: 100%;
+      }
+      
+.sidebar a {
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Roboto, sans-serif;
+    color: white;
+    display: flex;
+    padding: 15px 0px 15px 30px;
+    transition: background-color 0.3s ease;
+    transition: color 0.3s ease;
+      }
+      
+.a-bar:hover {
+    color: rgb(248, 171, 27);
+      }
+
+.logpos {
+    margin-top: 3px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+      }
+      /* Container for the logo and dropdown */
+.logout-container {
+    position: relative;
+    /* display: inline-block; */
+    
+      }
+
+      /* Style for the logo/image */
+.piclog {
+width: 35px;
+height: 35px;
+border-radius: 17.5px;
+object-fit: cover;
+border: 1px solid goldenrod;
+cursor: pointer;
+  }
+      
+      /* Style for the dropdown (initially hidden) */
+.logout-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;  /* Adjust as per the size of your logo */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    min-width:  250px;
+      }
+      
+.logoutbb {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    margin-left: 2px;
+    margin-top: 7px;
+      }
+      
+.logoutb2 {
+    width: 25px;  /* Adjust the size of the logo */
+    cursor: pointer;
+      }
+      
+      /* Style for the logout link */
+.logout-link {
+    color: #f00;
+    text-decoration: none;
+    font-size: 17.5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+      }
+      
+      /* Change color on hover */
+.logout-link:hover {
+    color: #c00;
+      }
+.logpf-con {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 95%;
+  border-radius: 5px;
+  padding: 0px 0px 0px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.a-pf:hover,.logpf-con:hover {
+  background-color: rgb(236, 236, 236);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+.logpf-con img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid blue;
+}     
+.logpf-con h4 {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+}
+.dlog-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dlog-icon img {
+  width: 30px;
+  border-radius: 15px;
+}
+.a-pf {
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  display: block;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.user {
+    color: white;
+    margin-top: 15px;
+  }
+
+/* Main Container */
+.container {
+max-width: 800px;
+margin: 80px auto; 
+background-color:black;
+padding: 20px;
+border-radius: 12px;
+
+z-index: 0;
+font-family: "Roboto", sans-serif;
+}
+
+.back-button {
+    position: absolute;
+    left: 15px;
+    top: 5px;
+}
+
+.back-button img {
+    width: 30px; /* Adjust size as needed */
+    transition: 0.3s ease;
+    filter: invert(20%) brightness(60%) sepia(50%) saturate(400%) hue-rotate(180deg);
+}
+
+.back-button:hover img {
+  filter: invert(100%) brightness(100%);
+    /* This changes the white image to an orange-like color */
+}
+
+/* Avatar & Name Section */
+.avnamecon {
+/* background: linear-gradient(135deg, #1976d2, #64b5f6);  */
+/* Blue gradient */
+background-color: #FFA500;
+padding: 15px;
+margin-bottom: 20px;
+border-radius: 10px;
+color: white;
+display: flex;
+flex-direction: column;
+position: relative;
+}
+
+.avname {
+display: flex;
+align-items: center;
+margin-left: 35px;
+}
+
+.avname img {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+background: white;
+padding: 3px;
+margin-right: 10px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.pc {
+display: block;
+}
+
+.prof-name{
+font-size: 18px;
+font-weight: bold;
+color: black;
+font-family: "Roboto", sans-serif;
+font-weight: 600;
+margin-bottom: 5px;
+margin-top: auto;
+}
+
+.pro-role {
+margin-top: 2px;
+margin-bottom: 0px;
+font-size: 16px;
+font-family: "Roboto",sans-serif;
+font-weight: 600;
+opacity: 0.9;
+}
+
+.report-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between icon & text */
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  background: red; /* Flat red background */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+}
+
+.report-btn:hover {
+  background: darkred;
+}
+
+/* User comments to instructor profile (Only Text) */
+.comment-post {
+    background: rgb(31, 31, 31);
+    padding: 15px;
+    margin-bottom: 20px;
+    /* border: 1px solid #ddd; */
+    border-radius: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    transition: box-shadow 0.3s;
+}
+
+.comment-post:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.comment-post label {
+    border: 1px solid #e6e6e6;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    transition: background 0.3s;
+}
+
+.comment-post label:hover {
+    background-color: #e6e6e6;
+}
+
+.comment-post img {
+  width: 35px;
+  height: 35px;
+  border-radius: 17.5px;
+  object-fit: cover;
+}
+
+/* POP-UP USER COMMENT */
+
+/* Hidden Checkbox */
+.modal-toggle_usercom {
+    display: none;
+}
+
+/* Modal Styles */
+.modal_usercom {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 14px;
+}
+
+/* Modal Content */
+.modal-content_usercom {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    height: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 7.5px 15px;
+    border-radius: 20px;
+}
+
+.close:hover {
+    color: black;
+    background-color: rgb(196, 192, 192);
+}
+
+/* Show Modal When Checkbox is Checked */
+.modal-toggle_usercom:checked + .modal_usercom {
+    display: block;
+}
+
+.modal-content-usercom {
+  text-align: center;
+  background-color: rgb(31, 31, 31);
+  margin: auto;
+  margin-top: 9%;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-content-usercom div {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.your-com {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.modal-content-usercom textarea {
+    font-size: 15px;
+    
+    border-radius: 5px;
+    width: 97%;
+    height: 100px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    outline: none;
+    resize: none;
+    
+}
+
+/* Customize the scrollbar (For WebKit browsers like Chrome, Edge, Safari) */
+textarea::-webkit-scrollbar {
+width: 10px; /* Width of the scrollbar */
+}
+
+textarea::-webkit-scrollbar-track {
+background: #f1f1f1; /* Background of the track */
+border-radius: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+background: #888; /* Color of the scroll thumb */
+border-radius: 5px; /* Round edges */
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+background: #555; /* Darker thumb on hover */
+}
+
+
+.modal-content-usercom button {
+    width: 100%;
+    background-color: #1C1E21;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Roboto, sans-serif;
+    margin-top: 5px;
+}
+
+textarea:not(:placeholder-shown) + button {
+    background-color: #333639;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+/* POP-UP ALL USERS COMMENTS */
+
+/* Hidden Checkbox */
+.modal-toggle {
+  display: none;
+}
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0px;
+  border-radius: 13px;
+  font-family: "Roboto", sans-serif;
+}
+/* Modal Content */
+.modal-content {
+  background-color: rgb(31, 31, 31);
+  margin: auto;
+  margin-top: 80px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  height: 60%;
+  max-width: 600px;
+  position: relative;
+}
+/* Hide the modal by default */
+
+
+/* Show modal when checkbox is checked */
+#termsCheckbox:checked ~ .modal {
+    visibility: visible;
+    opacity: 1;
+    backdrop-filter: blur(10px);
+}
+
+/* Smooth pop effect */
+#termsCheckbox:checked ~ .modal .modal-content {
+    transform: scale(1);
+}
+
+.modal-toggle:checked + .modal {
+    display: block;
+}
+
+/* Close button */
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+    background-color: rgb(196, 192, 192);
+}
+
+.cname {
+  color: white;
+}
+
+/* Show Modal When Checkbox is Checked */
+
+/* Comment & Details Section */
+.comdent {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 15px;
+}
+
+/* Individual Cards */
+.section {
+width: 45%;
+height: 170px;
+padding: 15px;
+background: rgb(26, 26, 26);
+border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+display: inline-block;
+vertical-align: top;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+transform: translateY(-5px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+.user-participant {
+background: #eef2f3;
+padding: 10px 15px;
+border-radius: 8px;
+font-size: 16px;
+color: #333;
+display: flex;
+align-items: center;
+gap: 15px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+max-width: 328px;
+justify-content: center;
+}
+
+.user-participant strong {
+/* color: #28a745;  */
+color: black;
+/* Green color to highlight the number */
+font-size: 18px;
+}
+
+.label-section {
+  width: 95%;
+  height: 78%;
+  padding: 15px;
+  background:rgb(31, 31, 31);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  vertical-align: top;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 0px;
+  margin-left: 0px;
+  overflow: scroll;
+}
+
+.label-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.label-section::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* .label-section::-webkit-scrollbar-track {
+  background: #555;
+} */
+
+/* .rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-left: 60px;
+}
+.rating input {
+    display: none;
+}
+.rating label {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+}
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+    color: gold;
+} */
+
+/* Comments and Average Container */
+h3 {
+font-size: 18px;
+color: white;
+margin-bottom: 10px;
+border-bottom: 2px solid white;
+padding-bottom: 5px;
+}
+
+h4 {
+font-size: 18px;
+color:rgb(255, 152, 33);
+margin-bottom: 10px;
+padding-bottom: 5px;
+text-align: center;
+}
+
+/* Text */
+p {
+font-size: 16px;
+color: #333;
+word-wrap: break-word;
+}
+
+.com-scroll {
+  max-height: 100px; 
+  overflow-y: scroll; 
+  border: 1px solid #ccc; 
+  padding: 2px; 
+  width: 100%;
+  cursor: pointer; 
+}
+
+.com-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* .com-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+} */
+
+.com-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.com-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Comment box layout 111111 */
+.comment-box1 {
+  display: flex;
+  /* align-items: center; */
+  align-items: flex-start; /* Align items to the top */
+  gap: 10px;
+  background:rgb(31, 31, 31);
+  padding: 5px;
+  border-radius: 8px;
+  margin-top: 5px;
+  }
+
+  .comment-text1 {
+  background-color:rgb(43, 43, 43);
+  margin-bottom: 0px;
+  padding: 10px;
+  border-radius: 15px;
+  max-width: 270px;
+  max-height: none; /* Remove max-height if no limit is needed */
+  word-wrap: break-word; /* Ensure words break properly */
+  white-space: normal; /* Prevent the text from overflowing horizontally */
+  }
+
+  .comment-text1 strong {
+  font-size: 14px;
+  display: block; /* Ensures it appears above */
+  color: white;
+  }
+
+  .comment-text1 p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: -15px;
+  margin-bottom: 0px;
+  color: white;
+  }
+
+  .comment-text1 small {
+  font-size: 8px;
+  color: gray;
+  margin-top: 2px;
+  display: block;
+  color: white;
+  }
+
+
+/* Comment box layout*/
+  .comment-box {
+  display: flex;
+  /* align-items: center; */
+  align-items: flex-start; /* Align items to the top */
+  gap: 10px;
+  background:rgb(31, 31, 31);
+  padding: 5px;
+  border-radius: 8px;
+  margin-top: 5px;
+  }
+
+
+  .comment-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  object-fit: cover;
+  flex-shrink: 0; /* Prevent shrinking */
+  }
+
+  .comment-text {
+  max-width: 490px;
+  background-color:rgb(43, 43, 43);
+  margin-bottom: 0px;
+  
+  padding: 10px;
+  border-radius: 15px;
+  }
+
+  .comment-text strong {
+  font-size: 14px;
+  display: block; /* Ensures it appears above */
+  color: white;
+  }
+
+  .comment-text p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: -15px;
+  margin-bottom: 0px;
+  color: white;
+  }
+
+  .comment-text small {
+  font-size: 8px;
+  color: gray;
+  margin-top: 2px;
+  display: block;
+  color: white;
+  }
+
+
+
+  .menu-container {
+    position: relative;
+    display:flexbox;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    /* display: inline-block; */
+    position: absolute;
+    top: -35px;
+    right: 10px;
+}
+
+.menu-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 100px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.menu-options form {
+    margin: 0;
+    padding: 5px;
+}
+
+.menu-options button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.menu-options button:hover {
+    background: #f2f2f2;
+}

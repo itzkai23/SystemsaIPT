@@ -1,7 +1,14 @@
-body { 
-    font-family: Arial, sans-serif; 
-    margin: 20px; 
-    background-color: #f4f4f4; 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #e3f2fd; /* Light blue background */
+    padding: 20px;
+    text-align: center;
 }
 
 .home-header {
@@ -23,7 +30,44 @@ body {
     font-size: 21px;
     font-family: Racing Sans One;
     }
-
+.mid-section {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: 65%;
+  }
+  
+  .mid-section a{
+      position: relative;
+      font-size: 1em;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-family: "Roboto", sans-serif;
+  }
+  
+  .mid-section a:hover {
+      color: rgb(250, 149, 54);
+      transition: transform 0.7s ease;
+  }
+  
+  .mid-section a::after {
+      content: '';
+      position: absolute;
+      width: 100%; 
+      height: 3px;
+      background: rgb(255, 143, 39);
+      border-radius: 5px;
+      bottom: -5px;
+      left: 0;
+      transform:scaleX(0);
+      transition: transform 0.7s ease; 
+  }
+  
+  .mid-section a:hover::after {
+      width: 100%; 
+      transform: scaleX(1);
+  }
 .right-section {
     width: 120px;
     margin-right: 20px;
@@ -246,143 +290,93 @@ border-radius: 5px;
 
 .user {
   color: white;
-  margin-top: 15px;
 }
 
-.styled-heading {
-    text-align: center; /* Center the title */
-    font-size: 24px; /* Slightly larger font size for the title */
+h1 {
+    font-size: 28px;
+    color: #1565c0;
+    margin-top: 48px;
+    /* margin-bottom: 0px; */
+}
+
+/* Container */
+.group-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Profile Card */
+.card {
+    background: linear-gradient(145deg, #ffffff, #bbdefb); /* Soft blue gradient */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Image */
+.card img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #1565c0; /* Blue border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Instructor Name */
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #0d47a1;
+}
+
+/* Role */
+.card .role {
+    font-size: 16px;
     font-weight: bold;
-    color: #333; /* Darker text for better readability */
-    margin-bottom: 20px; /* Add some space below the heading */
-    padding: 10px 20px; /* Add padding to make the heading more prominent */
-    background-color: #E69500; /* Highlighted background */
-    border-radius: 8px; /* Rounded corners for the heading */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    width: 50%;
-}
-
-.maincon-repcom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.rec-com-container {
-    overflow-y: auto;
-    background-color: #333;
-    max-height: 450px;
-    
-}
-
-/* Custom Scrollbar for Sidebar */
-.rec-com-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.rec-com-container::-webkit-scrollbar-thumb {
-    background: #FFA500;
-    border-radius: 10px;
-}
-
-.rec-com-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.repcomcon-btn {
-    margin-top: 7%;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-}
-/* Show the targeted report-box */
-/* .report-container {
-    position: relative;
-    overflow-y: auto;
-    max-height: 450px;
-    width: 50%;
-} */
-
-.sticky-heading {
-    position: sticky;
-    top: 0;
-    background-color: white; /* Optional: to prevent overlap */
-    z-index: 10; /* Optional: to make sure it stays above content */
-    padding: 10px;
-    margin: 0;
-    /* margin-bottom: 10px; */
-    border-bottom: 1px solid #ddd; /* Optional: adds a little style */
-}
-
-.report-box, .report-box1 { 
-    border: 1px solid #ccc; 
-    background: white; 
-    padding: 15px; 
-    margin-bottom: 15px; 
-    border-radius: 8px; 
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 92%;   
-}
-.report-box { 
-    display: block; /* Show this by default */
-    margin: 10px;
-}
-.report-box1 { 
-    display: block; 
-    margin: 10px;
-}
-.repcomcon-btn a {
-    background-color: #E69500; 
-    color: white; 
-    border: none; 
-    padding: 8px 12px; 
-    cursor: pointer; 
-    border-radius: 5px; 
-    margin-top: 5px; 
-    text-decoration: none;
+    color: #1565c0;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #bbdefb;
+    padding: 5px 10px;
+    border-radius: 5px;
     display: inline-block;
 }
-.repcomcon-btn a:hover {
-    background-color: #CC8400;
-    transition: 0.5 ease;
+
+
+/* Button Link */
+.btn-link {
+    display: inline-block;
+    background: linear-gradient(145deg, #1e88e5, #1565c0); /* Blue gradient */
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    cursor: pointer;
 }
 
-.reviewed { 
-    color: green; 
-    font-weight: bold; 
-}
-
-.reported-text { 
-    background: #f9f9f9; 
-    padding: 10px; 
-    border-radius: 5px; 
-    max-width: 420px;
-    max-height: none; /* Remove max-height if no limit is needed */
-    word-wrap: break-word; /* Ensure words break properly */
-    white-space: normal; /* Prevent the text from overflowing horizontally */
-    font-size: 15px;
-    font-family: "Roboto", sans-serif;
-}
-button { 
-    background-color: blue; 
-    color: white; 
-    border: none; 
-    padding: 8px 12px; 
-    cursor: pointer; 
-    border-radius: 5px; 
-    margin-top: 5px; 
-}
-button:hover { 
-    background-color: darkblue; 
-}
-
-/* Hide report-box when report2 is targeted */
-.report-container:target .report-box {
-    display: none;
-}
-
-/* Show report-box1 when report2 is targeted */
-.report-container:target .report-box1 {
-    display: block;
+/* Hover Effect */
+.btn-link:hover {
+    background: linear-gradient(145deg, #1565c0, #0d47a1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }

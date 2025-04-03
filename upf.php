@@ -99,12 +99,11 @@ $current_image .= "?t=" . time();
 </div>
 </nav>
     
-    <div class="maincon-userpf">
-
-        <div class="maincon-userpf">
+    
         
-        <div class="pfcon">
-        <section class="profile_section">
+        <div class="main-profile">
+        <div class="profile-card">
+        <section class="profile-left">
         <form action="upload.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
                 <label for="fileinput">
@@ -114,47 +113,27 @@ $current_image .= "?t=" . time();
                 <button class="btnup" name="btnup" style="display:none;">Save</button>
             </form>
 <!-- <div class="message"></div> -->
-        
-                </section>
-                <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+                <h3><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h3>
                 <p class="course"><?php echo htmlspecialchars($_SESSION['em']);?></p>
                 <p class="sec"><?php echo htmlspecialchars($_SESSION['con']);?></p>
-            </div>
-             <!-- Comments Display Section (Static, No Backend) -->
-             <div class="repcomcon">    
-            <div id="comments-container">
-                <h3>Your previous comments</h3>
+                </section>
                 
-                <div id="comments-list">
-                        <div class="comment">
-                        <?php
-                        foreach ($feedbackData as $entry) {
-                            echo "<h4>" . htmlspecialchars($entry['feedback']) . "</h4>";
-                            echo "<h6>" . htmlspecialchars($entry['submitted_at']) . "</h6>";
-                        }
-                        ?>
+                <div class="profile-right">
+            <h3>Profile Details</h3>
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Age:</strong> 35</p>
+            <p><strong>Mobile:</strong> +91 XXXXXXXXXX</p>
+            <p><strong>Email:</strong> john@example.com</p>
+            <div class="social-icons">
+                <a href="#">&#xf09a;</a>
+                <a href="#">&#xf099;</a>
+                <a href="#">&#xf08c;</a>
+                <a href="#">&#xf0e1;</a>
+            </div>
+            </div>
 
-            
-                        </div>         
-                </div>
-                    
             </div>
-            
-            
-            <div id="report-container">
-                <h3>Your previous report</h3>
-                
-                <div id="report-list">
-                        <div class="report">
-                            <p><strong>2025-01-27 12:30:00</strong> - This is a placeholder report from a student.</p>
-                        </div>         
-                </div>
-            
-    </div>
-  </div>
-</div>
-  
-</div>
+        </div>
  
   <script src="js/sidebar.js"></script>
 <script src="js/logs.js"></script>
