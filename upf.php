@@ -31,6 +31,12 @@ while ($row = $result->fetch_assoc()) {
     ];
 }
 
+function calculateAge($bday) {
+    $birthDate = new DateTime($bday);
+    $today = new DateTime();
+    $age = $today->diff($birthDate)->y;
+    return $age;
+}
 
 // Keep your existing default image
 $default_image = "images/icon.jpg";
@@ -131,31 +137,58 @@ $current_image .= "?t=" . time();
         <section class="profile-left">
         <form action="upload.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
-                <label for="fileinput">
+                <label for="fileinput" class="profile-picture-label">
                     <img src="<?php echo htmlspecialchars($current_image); ?>" class="picture" title="Click to upload image"/>
+                    <div class="profile-edit-overlay">Change</div>
                 </label>
                 <input type="file" id="fileinput" name="picture_url" accept="image/*" onchange="previewimage();" style="display:none;"/>
                 <button class="btnup" name="btnup" style="display:none;">Save</button>
             </form>
 <!-- <div class="message"></div> -->
                 <h3><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h3>
-                <p class="course"><?php echo htmlspecialchars($_SESSION['em']);?></p>
-                <p class="sec"><?php echo htmlspecialchars($_SESSION['con']);?></p>
                 </section>
                 
                 <div class="profile-right">
-            <h3>Profile Details</h3>
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Age:</strong> 35</p>
-            <p><strong>Mobile:</strong> +91 XXXXXXXXXX</p>
-            <p><strong>Email:</strong> john@example.com</p>
-            
-            </div>
+                  <h3>Profile Details</h3>
+                  <form action="update_profile.php" method="post">
+                      <div class="profile-grid">
+                          <div class="input-group">
+                              <label><strong>First Name:</strong></label>
+                              <input type="text" name="fname" value="<?php echo htmlspecialchars($_SESSION['fname']); ?>" required>
+                          </div>
 
+                          <div class="input-group">
+                              <label><strong>Last Name:</strong></label>
+                              <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['lname']); ?>" required>
+                          </div>
+
+                          <div class="input-group">
+                              <label><strong>Birthday:</strong></label>
+                              <input type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" required>
+                          </div>
+
+                          <div class="input-group">
+                              <label><strong>Age:</strong></label>
+                              <input type="text" id="age" value="<?php echo isset($_SESSION['Birthday']) ? calculateAge($_SESSION['Birthday']) : ''; ?>" readonly>
+                          </div>
+
+                          <div class="input-group">
+                              <label><strong>Cellphone No.:</strong></label>
+                              <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['contact']); ?>" required>
+                          </div>
+
+                          <div class="input-group">
+                              <label><strong>Email:</strong></label>
+                              <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['email']); ?>" required>
+                          </div>
+                      </div>
+
+                      <button type="submit">Save Changes</button>
+                  </form>
+              </div>
             </div>
         </div>
- 
-  <script src="js/sidebar.js"></script>
+<script src="js/sidebar.js"></script>
 <script src="js/logs.js"></script>
 <script src="js/uploads.js"></script>
 

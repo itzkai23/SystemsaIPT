@@ -18,3 +18,27 @@ const previewimage = () =>{
             "</b> File is not allowed.<br/> Choose a .jpg or .png file only"
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    let bdayInput = document.getElementById("Birthday");
+    let ageInput = document.getElementById("age");
+
+    function calculateAge() {
+        let bdayValue = bdayInput.value;
+        if (!bdayValue) return;
+        
+        let bday = new Date(bdayValue);
+        let today = new Date();
+        let age = today.getFullYear() - bday.getFullYear();
+        let monthDiff = today.getMonth() - bday.getMonth();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < bday.getDate())) {
+            age--;
+        }
+        
+        ageInput.value = age;
+    }
+
+    bdayInput.addEventListener("change", calculateAge);
+    calculateAge(); // Run on page load
+});
