@@ -460,3 +460,7 @@ body {
     font-size: 14px;
     width: 100%;
 }
+
+.hidden-profile {
+    display: none;
+}

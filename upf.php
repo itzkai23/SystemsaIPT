@@ -129,8 +129,6 @@ $current_image .= "?t=" . time();
          
 </div>
 </nav>
-    
-    
         
         <div class="main-profile">
         <div class="profile-card">
@@ -148,44 +146,49 @@ $current_image .= "?t=" . time();
                 <h3><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h3>
                 </section>
                 
-                <div class="profile-right">
-                  <h3>Profile Details</h3>
-                  <form action="update_profile.php" method="post">
-                      <div class="profile-grid">
-                          <div class="input-group">
-                              <label><strong>First Name:</strong></label>
-                              <input type="text" name="fname" value="<?php echo htmlspecialchars($_SESSION['fname']); ?>" required>
-                          </div>
+        <div class="profile-right">
+            <h3>Profile Details</h3>
+            <form action="update_profile.php" method="post" id="profileForm">
+                <div class="profile-grid">
+                    <div class="input-group hidden-profile">
+                        <label><strong>First Name:</strong></label>
+                        <input type="text" name="fname" value="<?php echo htmlspecialchars($_SESSION['fname'] ?? ''); ?>" required readonly>
+                    </div>
 
-                          <div class="input-group">
-                              <label><strong>Last Name:</strong></label>
-                              <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['lname']); ?>" required>
-                          </div>
+                    <div class="input-group hidden-profile">
+                        <label><strong>Last Name:</strong></label>
+                        <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['lname'] ?? ''); ?>" required readonly>
+                    </div>
 
-                          <div class="input-group">
-                              <label><strong>Birthday:</strong></label>
-                              <input type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" required>
-                          </div>
+                    <div class="input-group">
+                        <label><strong>Birthday:</strong></label>
+                        <input type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" required readonly>
+                    </div>
 
-                          <div class="input-group">
-                              <label><strong>Age:</strong></label>
-                              <input type="text" id="age" value="<?php echo isset($_SESSION['Birthday']) ? calculateAge($_SESSION['Birthday']) : ''; ?>" readonly>
-                          </div>
+                    <div class="input-group">
+                        <label><strong>Age:</strong></label>
+                        <input type="text" id="age" value="<?php echo isset($_SESSION['Birthday']) ? calculateAge($_SESSION['Birthday']) : ''; ?>" readonly>
+                    </div>
 
-                          <div class="input-group">
-                              <label><strong>Cellphone No.:</strong></label>
-                              <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['contact']); ?>" required>
-                          </div>
+                    <div class="input-group">
+                        <label><strong>Cellphone No.:</strong></label>
+                        <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['contact'] ?? ''); ?>" required readonly>
+                    </div>
 
-                          <div class="input-group">
-                              <label><strong>Email:</strong></label>
-                              <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['email']); ?>" required>
-                          </div>
-                      </div>
+                    <div class="input-group">
+                        <label><strong>Email:</strong></label>
+                        <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['email'] ?? ''); ?>" required readonly>
+                    </div>
+                </div>
 
-                      <button type="submit">Save Changes</button>
-                  </form>
-              </div>
+                <!-- Edit & Save Buttons -->
+                <div class="profile-buttons">
+                    <button type="button" id="editProfileBtn">Edit Profile</button>
+                    <button type="submit" id="saveProfileBtn" style="display:none;">Save Changes</button>
+                    <button type="button" id="cancelEditBtn" style="display:none;">Cancel</button>
+                </div>
+            </form>
+            </div>
             </div>
         </div>
 <script src="js/sidebar.js"></script>
