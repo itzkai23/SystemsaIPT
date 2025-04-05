@@ -19,64 +19,52 @@ const previewimage = () => {
     }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-    let bdayInput = document.getElementById("Birthday");
-    let ageInput = document.getElementById("age");
+const editBtn = document.getElementById("editProfileBtn");
+const saveBtn = document.getElementById("saveProfileBtn");
+const cancelBtn = document.getElementById("cancelEditBtn");
+const profileTexts = document.querySelectorAll(".profile-text");
+const editInputs = document.querySelectorAll(".edit-input");
+const ageText = document.getElementById("ageText");
+const ageInput = document.getElementById("age");
+const bdayInput = document.getElementById("Birthday");
+const birthdayGroup = document.getElementById("birthdayGroup");
 
-    function calculateAge() {
-        let bdayValue = bdayInput.value;
-        if (!bdayValue) return;
+editBtn.addEventListener("click", () => {
+    profileTexts.forEach(el => el.style.display = "none");
+    editInputs.forEach(el => el.style.display = "inline-block");
+    birthdayGroup.style.display = "inline-block"; // Show birthday input
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+    cancelBtn.style.display = "inline-block";
+    updateAge();
+});
 
-        let bday = new Date(bdayValue);
-        let today = new Date();
-        let age = today.getFullYear() - bday.getFullYear();
-        let monthDiff = today.getMonth() - bday.getMonth();
+cancelBtn.addEventListener("click", () => {
+    profileTexts.forEach(el => el.style.display = "inline-block");
+    editInputs.forEach(el => el.style.display = "none");
+    birthdayGroup.style.display = "none"; // Hide birthday input again
+    editBtn.style.display = "inline-block";
+    saveBtn.style.display = "none";
+    cancelBtn.style.display = "none";
+});
 
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < bday.getDate())) {
-            age--;
-        }
+function updateAge() {
+    const birthday = bdayInput.value;
+    if (!birthday) return;
 
-        ageInput.value = age;
+    const today = new Date();
+    const birthDate = new Date(birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
     }
 
-    if (bdayInput.value) calculateAge();
-    bdayInput.addEventListener("change", calculateAge);
+    if (!isNaN(age)) {
+        ageInput.value = age;
+    }
+}
 
-    // Edit Profile Script
-    let editBtn = document.getElementById("editProfileBtn");
-    let saveBtn = document.getElementById("saveProfileBtn");
-    let cancelBtn = document.getElementById("cancelEditBtn");
-    let form = document.getElementById("profileForm");
-
-    let inputs = form.querySelectorAll("input:not(#age)");
-    let originalValues = {}; 
-    let hiddenFields = document.querySelectorAll(".hidden-profile"); // Select hidden fields
-
-    // When "Edit Profile" is clicked
-    editBtn.addEventListener("click", function () {
-        hiddenFields.forEach(field => field.style.display = "block"); // Show fname & lname
-
-        inputs.forEach(input => {
-            originalValues[input.name] = input.value;
-            input.removeAttribute("readonly"); // Allow editing
-        });
-
-        editBtn.style.display = "none";
-        saveBtn.style.display = "inline-block";
-        cancelBtn.style.display = "inline-block";
-    });
-
-    // When "Cancel" is clicked
-    cancelBtn.addEventListener("click", function () {
-        hiddenFields.forEach(field => field.style.display = "none"); // Hide fname & lname again
-
-        inputs.forEach(input => {
-            input.value = originalValues[input.name];
-            input.setAttribute("readonly", true); // Lock fields again
-        });
-
-        editBtn.style.display = "inline-block";
-        saveBtn.style.display = "none";
-        cancelBtn.style.display = "none";
-    });
-});
+// Real-time age update when user selects date
+bdayInput.addEventListener("change", updateAge);

@@ -32,9 +32,6 @@ $current_image .= "?t=" . time();
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-    Bogh Art
-  </title>
    
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

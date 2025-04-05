@@ -38,13 +38,8 @@ function calculateAge($bday) {
     return $age;
 }
 
-// Keep your existing default image
 $default_image = "images/icon.jpg";
-
-// Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
-
-// Force-refresh the image to prevent caching issues
 $current_image .= "?t=" . time();
 ?>
 
@@ -53,147 +48,139 @@ $current_image .= "?t=" . time();
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/upf.css">
-
 </head>
 <body>
-    
    <nav class="home-header">
+      <div class="ham-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-<div class="ham-menu">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+      <ul class="sidebar" id="sidebar">
+           <li><a class="a-bar"href="home.php">Home</a></li>
+           <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
+           <li><a class="a-bar"href="freedomwall.php">Newsfeed</a></li>
+           <li><a class="a-bar"href="upf.php">Profile</a></li>
+      </ul>
 
-<ul class="sidebar" id="sidebar">
-      
-     <li><a class="a-bar"href="home.php">Home</a></li>
-     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
-     <li><a class="a-bar"href="freedomwall.php">Newsfeed</a></li>
-     <li><a class="a-bar"href="upf.php">Profile</a></li>
-       
-</ul>
+      <div class="mid-section">
+         <a href="home.php" class="home">Home</a>
+         <a href="freedomwall.html" class="pf">Newsfeed</a>
+         <a href="instructorsProfiles.php" class="pf">Faculty</a>
+      </div>
 
-<div class="mid-section">
-   <a href="home.php" class="home">Home</a>
-   <a href="freedomwall.html" class="pf">Newsfeed</a>
-   <a href="instructorsProfiles.php" class="pf">Faculty</a>
+      <div class="right-section">
+        <div class="logpos">
+            <div class="logout-container"> 
+                <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
+                <div class="logout-dropdown" id="logoutDropdown">
+                    <a href="#" class="logpf-con">
+                        <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
+                        <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
+                    </a>
+                    <div class="dlog-icon">
+                        <Img src="images/nfeed.png">
+                        <a class="a-pf" href="freedomwall.php">Newsfeed</a>
+                    </div>
+                    <div class="dlog-icon">
+                        <Img src="images/offweb.png" alt="log">
+                        <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
+                    </div>
+                    <div class="dlog-icon">
+                        <img src="images/announcement.png" alt="">
+                        <a class="a-pf" href="#">Announcement</a>
+                    </div>
+                    <div class="dlog-icon">
+                        <img src="images/facultyb.png" alt="">
+                        <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                    </div>
+                    <div class="logoutbb">
+                        <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+                        <a href="logout.php" class="logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <p class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></p> 
+        </div>
+      </div>
+   </nav>
+
+   <div class="main-profile">
+    <div class="profile-card">
+      <section class="profile-left">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
+            <label for="fileinput" class="profile-picture-label">
+                <img src="<?php echo htmlspecialchars($current_image); ?>" class="picture" title="Click to upload image"/>
+                <div class="profile-edit-overlay">Change</div>
+            </label>
+            <input type="file" id="fileinput" name="picture_url" accept="image/*" onchange="previewimage();" style="display:none;"/>
+            <button class="btnup" name="btnup" style="display:none;">Save</button>
+        </form>
+        <h3><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h3>
+      </section>
+
+      <div class="profile-right">
+        <h3>Profile Details</h3>
+        <form action="update_profile.php" method="post" id="profileForm">
+            <div class="profile-grid">
+                <!-- First name and Last name display -->
+                <div class="input-group">
+                    <label><strong>First Name:</strong></label>
+                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['f_name'] ?? ''); ?></span>
+                    <input type="text" name="fname" value="<?php echo htmlspecialchars($_SESSION['f_name'] ?? ''); ?>" class="edit-input" style="display:none;">
+                </div>
+                <div class="input-group">
+                    <label><strong>Last Name:</strong></label>
+                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['l_name'] ?? ''); ?></span>
+                    <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['l_name'] ?? ''); ?>" class="edit-input" style="display:none;">
+                </div>
+                
+                <!-- Cellphone No and Email (default visible) -->
+                <div class="input-group">
+                    <label><strong>Cellphone No.:</strong></label>
+                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['con']); ?></span>
+                    <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['contact'] ?? ''); ?>" class="edit-input" style="display:none;">
+                </div>
+                <div class="input-group">
+                    <label><strong>Email:</strong></label>
+                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['em']); ?></span>
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['email'] ?? ''); ?>" class="edit-input" style="display:none;">
+                </div>
+                
+                <!-- Birthday, hidden initially and shown only when editing -->
+                <div class="input-group" id="birthdayGroup" style="display:none;">
+                    <label><strong>Birthday:</strong></label>
+                    <input type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" class="edit-input">
+                </div>
+                
+                <!-- Age calculated based on the birthday -->
+                <div class="input-group"  >
+                    <label><strong>Age:</strong></label>
+                    <span class="profile-text" id="ageText">
+                        <?php echo isset($_SESSION['Birthday']) ? calculateAge($_SESSION['Birthday']) : ''; ?>
+                    </span>
+                    <input type="text" id="age" readonly class="edit-input" style="display:none;">
+                </div>
+            </div>
+
+            <div class="profile-buttons">
+                <button type="button" id="editProfileBtn">Edit Profile</button>
+                <button type="submit" id="saveProfileBtn" style="display:none;">Save Changes</button>
+                <button type="button" id="cancelEditBtn" style="display:none;">Cancel</button>
+            </div>
+        </form>
+    </div>
+    </div>
    </div>
 
-<div class="right-section">                              
-   
-<div class="logpos">
-         
-         <div class="logout-container"> 
-           <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
-           <div class="logout-dropdown" id="logoutDropdown">
-                <a href="#" class="logpf-con">
-                  <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
-                  <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
-                </a>
-              
-               <div class="dlog-icon">
-                <Img src="images/nfeed.png">
-                <a class="a-pf" href="freedomwall.php">Newsfeed</a>
-                </div>
-
-               <div class="dlog-icon">
-                 <Img src="images/offweb.png" alt="log">
-                <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
-                </div>
-
-                <div class="dlog-icon">
-                 <img src="images/announcement.png" alt="">
-                <a class="a-pf" href="#">Announcement</a>
-                </div>
-                
-                <div class="dlog-icon">
-                 <img src="images/facultyb.png" alt="">
-                <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
-                </div>
-
-           <div class="logoutbb">
-             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-             <a href="logout.php" class="logout-link">Logout</a>
-           </div>
-       
-           </div>
-         </div>
-         <p class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></p> 
-       </div>
-         
-</div>
-</nav>
-        
-        <div class="main-profile">
-        <div class="profile-card">
-        <section class="profile-left">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
-                <label for="fileinput" class="profile-picture-label">
-                    <img src="<?php echo htmlspecialchars($current_image); ?>" class="picture" title="Click to upload image"/>
-                    <div class="profile-edit-overlay">Change</div>
-                </label>
-                <input type="file" id="fileinput" name="picture_url" accept="image/*" onchange="previewimage();" style="display:none;"/>
-                <button class="btnup" name="btnup" style="display:none;">Save</button>
-            </form>
-<!-- <div class="message"></div> -->
-                <h3><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h3>
-                </section>
-                
-        <div class="profile-right">
-            <h3>Profile Details</h3>
-            <form action="update_profile.php" method="post" id="profileForm">
-                <div class="profile-grid">
-                    <div class="input-group hidden-profile">
-                        <label><strong>First Name:</strong></label>
-                        <input type="text" name="fname" value="<?php echo htmlspecialchars($_SESSION['fname'] ?? ''); ?>" required readonly>
-                    </div>
-
-                    <div class="input-group hidden-profile">
-                        <label><strong>Last Name:</strong></label>
-                        <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['lname'] ?? ''); ?>" required readonly>
-                    </div>
-
-                    <div class="input-group">
-                        <label><strong>Birthday:</strong></label>
-                        <input type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" required readonly>
-                    </div>
-
-                    <div class="input-group">
-                        <label><strong>Age:</strong></label>
-                        <input type="text" id="age" value="<?php echo isset($_SESSION['Birthday']) ? calculateAge($_SESSION['Birthday']) : ''; ?>" readonly>
-                    </div>
-
-                    <div class="input-group">
-                        <label><strong>Cellphone No.:</strong></label>
-                        <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['contact'] ?? ''); ?>" required readonly>
-                    </div>
-
-                    <div class="input-group">
-                        <label><strong>Email:</strong></label>
-                        <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['email'] ?? ''); ?>" required readonly>
-                    </div>
-                </div>
-
-                <!-- Edit & Save Buttons -->
-                <div class="profile-buttons">
-                    <button type="button" id="editProfileBtn">Edit Profile</button>
-                    <button type="submit" id="saveProfileBtn" style="display:none;">Save Changes</button>
-                    <button type="button" id="cancelEditBtn" style="display:none;">Cancel</button>
-                </div>
-            </form>
-            </div>
-            </div>
-        </div>
 <script src="js/sidebar.js"></script>
 <script src="js/logs.js"></script>
 <script src="js/uploads.js"></script>
-
 </body>
 </html>
