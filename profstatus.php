@@ -90,6 +90,10 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professors Status</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/profstatus.css">
 </head>
 <body>
@@ -99,24 +103,24 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
        <a href="#">Regulations</a>
        <a href="#">Objective</a>
        <a href="profstatus.php">Faculties</a>
-       <button class="btn-popup">Login</button>      
+       <a href="silog.php">Signup/Login</a>      
     </nav>
 </header>
 
-<div class="page-container">
-    <h1>Professors</h1>
+
 
     <!-- Wrapper for Professors List with Slide Button -->
-    <div class="slide-container">
+    <!-- <div class="slide-container"> -->
          <!-- Slide Button -->
          <!-- <button class="slide-btn left" id="slideLeft">&#8592;</button> -->
-         <button class="slide-btn left" id="slideLeft">&#8592;</button>
-<button class="slide-btn right" id="slideRight">&#8594;</button>
+         <!-- <button class="slide-btn left" id="slideLeft">&#8592;</button>
+         <button class="slide-btn right" id="slideRight">&#8594;</button> -->
 
-
-        <!-- Professors List Wrapper -->
-        <div class="con-profs-wrapper">
+         <div class="page-container">
+         <h1>Professors</h1>
+        
             <!-- Display Professors List -->
+    <div class="conprofs-container">
     <div class="con-profs">
         <?php foreach ($professors as $prof): ?>
             <div class="rant-post" 
@@ -136,9 +140,11 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
             </div>
         <?php endforeach; ?>
     </div>
+    </div>
+    
+    </div>
 
-    <!-- Back to Home Button -->
-    <a href="silog.php">Back</a>
+    
 
     <!-- Modal for Comments -->
     <div class="modal_usercom">
@@ -181,13 +187,13 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
         </div>  
     </div>
 
-        </div>
-    </div>
+        
+    
 
-</div>
+
 
 <script src="js/profstatus.js"></script>
-<script>
+<!-- <script>
     const slideLeftButton = document.getElementById('slideLeft');
     const slideRightButton = document.getElementById('slideRight');
     const conProfsWrapper = document.querySelector('.con-profs-wrapper');
@@ -208,7 +214,7 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
             conProfsWrapper.scrollLeft = scrollAmount;
         }
     });
-</script>
+</script> -->
 
 </body>
 </html>

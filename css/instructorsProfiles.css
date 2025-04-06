@@ -7,7 +7,17 @@
 }
 
 body {
-  max-height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 97vh;
+    background: 
+        linear-gradient(rgb(76, 76, 209), rgba(125, 125, 233, 0.5)), /* Gradient overlay */
+        url('../images/malabon-1.jpg') no-repeat; /* Background image */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply; /* Blending the gradient with the image */
 }
 
 .home-header {
@@ -29,6 +39,46 @@ body {
       font-size: 21px;
       font-family: Racing Sans One;
       }
+
+.mid-section {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: auto;
+  margin-right: 30px;
+}
+
+.mid-section a{
+  position: relative;
+  font-size: 1em;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+
+.mid-section a:hover {
+  color: rgb(250, 149, 54);
+  transition: transform 0.7s ease;
+}
+
+.mid-section a::after {
+  content: '';
+  position: absolute;
+  width: 100%; 
+  height: 3px;
+  background: rgb(255, 143, 39);
+  border-radius: 5px;
+  bottom: -5px;
+  left: 0;
+  transform:scaleX(0);
+  transition: transform 0.7s ease; 
+}
+
+.mid-section a:hover::after {
+  width: 100%; 
+  transform: scaleX(1);
+}
   
 .right-section {
       width: 120px;
@@ -248,22 +298,6 @@ body {
   border-radius: 5px;
 }
 
-.back-button {
-    display: inline-block;
-    margin-left: 5%;
-}
-
-.back-button img {
-    width: 50px; /* Adjust size as needed */
-    transition: 0.3s ease;
-    filter: invert(100%) brightness(100%);
-}
-
-.back-button:hover img {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(93%) saturate(473%) hue-rotate(5deg) brightness(104%) contrast(103%);
-    /* This changes the white image to an orange-like color */
-}
-
 /* Container */
 .group-container {
     display: flex;
@@ -280,33 +314,9 @@ body {
   background-color: rgb(32, 31, 31);
   max-width: 70%;
   height: 560px; /* Set a fixed height */
-  border-radius: 40px;
+  border-radius: 20px;
   white-space: nowrap;
-  overflow: auto; /* Enable scrolling if needed */
 }
-
-/* Styling the scrollbar */
-.whole::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
-  opacity: 0; /* Make it invisible by default */
-  transition: opacity 0.3s ease; /* Smooth transition for showing the scrollbar */
-}
-
-.whole::-webkit-scrollbar-thumb {
-  background-color: orange; /* Orange color for the thumb */
-  border-radius: 10px; /* Rounded corners for the thumb */
-}
-
-.whole::-webkit-scrollbar-track {
-  background-color: #333; /* Dark background for the track */
-  border-radius: 10px; /* Rounded corners for the track */
-}
-
-/* Show the scrollbar when the user starts scrolling */
-.whole:hover::-webkit-scrollbar {
-  opacity: 1; /* Make it visible when hovering over the container */
-}
-
 
 .whole h1 {
   font-size: 28px;

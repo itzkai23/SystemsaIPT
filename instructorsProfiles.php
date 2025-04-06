@@ -54,6 +54,12 @@ $current_image .= "?t=" . time();
        
 </ul>
 
+<div class="mid-section">
+         <a href="home.php" class="home">Home</a>
+         <a href="freedomwall.php" class="pf">Newsfeed</a>
+         <a href="instructorsProfiles.php" class="pf">Faculty</a>
+</div>
+
 <div class="right-section">                              
    
   <div class="logpos">
@@ -93,17 +99,13 @@ $current_image .= "?t=" . time();
     
         </div>
       </div>
-      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
+      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></h4> 
     </div>
          
 </div>
 </nav>
 
 <div class="whole">
-
-        <a href="home.php" class="back-button">
-                <img src="images/backmage1.png" alt="Back" class="back-image">
-        </a>
 
         <h1>Instructor's Profiles</h1>
         <div class="group-container"> 

@@ -112,10 +112,12 @@ $current_image .= "?t=" . time();
             
    </div>
 </nav>
+       
+        
+        <div class="whole">
         <h1>Faculty Evaluation</h1>
-        <br>
         <div class="group-container">
-
+        
     <?php if ($result->num_rows > 0) { ?>
         <?php while ($row = $result->fetch_assoc()) { ?>
         <div class="card">
@@ -132,6 +134,7 @@ $current_image .= "?t=" . time();
     <?php } ?>
 
 </div>
+        </div>
     
         <script src="js/sidebar.js"></script>
         <script src="js/logs.js"></script>

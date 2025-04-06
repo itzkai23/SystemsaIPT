@@ -306,7 +306,7 @@ $current_image .= "?t=" . time();
 <div class="modal">
     <div class="modal-content">
         <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
-        <label for="termsCheckbox" class="close">&times;</label>
+        <label for="termsCheckbox" class="close-modal">&times;</label>
         <div class="label-section">
             <!-- <h3>Comments</h3> -->
             <div class="modal-scroll">

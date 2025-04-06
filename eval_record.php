@@ -119,6 +119,12 @@ $current_image .= "?t=" . time();
        
 </ul>
 
+<div class="mid-section">
+         <a href="home.php" class="home">Home</a>
+         <a href="freedomwall.php" class="pf">Newsfeed</a>
+         <a href="instructorsProfiles.php" class="pf">Faculty</a>
+</div>
+
 <div class="right-section">                              
    
   <div class="logpos">

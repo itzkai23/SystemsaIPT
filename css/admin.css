@@ -57,7 +57,6 @@
 .container .content .logout:hover{
     background-color: crimson;
 } */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -85,6 +84,46 @@ body {
     font-family: Racing Sans One;
       }
   
+  .mid-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.mid-section a{
+    position: relative;
+    font-size: 1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+}
+
+.mid-section a:hover {
+    color: rgb(250, 149, 54);
+    transition: transform 0.7s ease;
+}
+
+.mid-section a::after {
+    content: '';
+    position: absolute;
+    width: 100%; 
+    height: 3px;
+    background: rgb(255, 143, 39);
+    border-radius: 5px;
+    bottom: -5px;
+    left: 0;
+    transform:scaleX(0);
+    transition: transform 0.7s ease; 
+}
+
+.mid-section a:hover::after {
+    width: 100%; 
+    transform: scaleX(1);
+}
+
 .right-section {
     width: 120px;
     margin-right: 20px;

@@ -377,7 +377,7 @@ body {
     background: #1c1c1c;
     color: white;
     border-radius: 12px;
-    width: 600px;
+    width: 70%;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     margin-top: 10%;
@@ -401,11 +401,15 @@ body {
     margin: 10px 0 5px;
 }
 .profile-right {
-    padding: 20px;
-    width: 60%;
+    width: 100%;
+    padding: 0px 30px 30px 20px;
+    position: relative;
 }
 .profile-right h3 {
     color: #3498db;
+    margin-left: 10px;
+    font-family: "Roboto",sans-serif;
+    font-size: 24px;
 }
 .profile-right p {
     margin: 5px 0;
@@ -440,27 +444,98 @@ body {
 .profile-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px 20px;
+    gap: 10px 40px;
+    width: 100%; /* or any desired width */
+    margin: 20px 20px 30px 20px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+.label-span {
+    display: flex;  /* Ensures the label and input can shrink based on content */
+    align-items: center;
+    gap: 5px;
 }
 
 .input-group label {
     font-weight: bold;
     margin-bottom: 5px;
+    white-space: nowrap; /* Ensures the label does not break into multiple lines */
 }
 
-.input-group input {
+.details {
+    margin: 20px 0px 5px 19px;
+}
+
+.input-group input, .user-input input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    width: 100%;
+    width: 65%;
+    /* margin-top: 0px; */
+}
+
+.bage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 40px;
+    width: 100%; /* or any desired width */
+    margin: 20px;
+    margin-top: 0px;
 }
 
 .hidden-profile {
     display: none;
 }
+
+.profile-buttons {
+    text-align: right;
+
+}
+
+.profile-buttons button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: Arial, sans-serif;   
+}
+
+.edit-btn {
+  background-color: #4caf50;  /* Green for 'Edit' */
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;  /* Darker green on hover */
+  transform: scale(1.05);  /* Slightly enlarge on hover */
+}
+
+.save-btn {
+  background-color: #2196f3;  /* Blue for 'Save' */
+  color: white;
+  margin-right: 5px;
+}
+
+.save-btn:hover {
+  background-color: #1976d2;  /* Darker blue on hover */
+  transform: scale(1.05);  /* Slightly enlarge on hover */
+}
+
+.cancel-btn {
+  background-color: #f44336;  /* Red for 'Cancel' */
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #e53935;  /* Darker red on hover */
+  transform: scale(1.05);  /* Slightly enlarge on hover */
+}
+
