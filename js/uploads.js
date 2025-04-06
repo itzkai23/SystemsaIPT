@@ -27,12 +27,15 @@ const editInputs = document.querySelectorAll(".edit-input");
 const ageText = document.getElementById("ageText");
 const ageInput = document.getElementById("age");
 const bdayInput = document.getElementById("Birthday");
-const birthdayGroup = document.getElementById("birthdayGroup");
+const fname = document.getElementById("fname");
+const lname = document.getElementById("lname");
+
 
 editBtn.addEventListener("click", () => {
     profileTexts.forEach(el => el.style.display = "none");
     editInputs.forEach(el => el.style.display = "inline-block");
-    birthdayGroup.style.display = "inline-block"; // Show birthday input
+    fname.style.display = "inline-block";
+    lname.style.display = "inline-block"; 
     editBtn.style.display = "none";
     saveBtn.style.display = "inline-block";
     cancelBtn.style.display = "inline-block";
@@ -42,7 +45,8 @@ editBtn.addEventListener("click", () => {
 cancelBtn.addEventListener("click", () => {
     profileTexts.forEach(el => el.style.display = "inline-block");
     editInputs.forEach(el => el.style.display = "none");
-    birthdayGroup.style.display = "none"; // Hide birthday input again
+    fname.style.display = "none"; 
+    lname.style.display = "none"; 
     editBtn.style.display = "inline-block";
     saveBtn.style.display = "none";
     cancelBtn.style.display = "none";

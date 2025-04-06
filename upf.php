@@ -79,7 +79,7 @@ $current_image .= "?t=" . time();
             <div class="logout-container"> 
                 <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
                 <div class="logout-dropdown" id="logoutDropdown">
-                    <a href="#" class="logpf-con">
+                    <a href="upf.php" class="logpf-con">
                         <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
                         <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
                     </a>
@@ -130,14 +130,12 @@ $current_image .= "?t=" . time();
         <form action="update_profile.php" method="post" id="profileForm">
             <div class="profile-grid">
                 <!-- First name and Last name display -->
-                <div class="input-group">
+                <div class="input-group" id="fname" style="display:none;">
                     <label><strong>First Name:</strong></label>
-                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['f_name'] ?? ''); ?></span>
                     <input type="text" name="fname" value="<?php echo htmlspecialchars($_SESSION['f_name'] ?? ''); ?>" class="edit-input" style="display:none;">
                 </div>
-                <div class="input-group">
+                <div class="input-group"id="lname" style="display:none;" >
                     <label><strong>Last Name:</strong></label>
-                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['l_name'] ?? ''); ?></span>
                     <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['l_name'] ?? ''); ?>" class="edit-input" style="display:none;">
                 </div>
                 
@@ -145,18 +143,22 @@ $current_image .= "?t=" . time();
                 <div class="input-group">
                     <label><strong>Cellphone No.:</strong></label>
                     <span class="profile-text"><?php echo htmlspecialchars($_SESSION['con']); ?></span>
-                    <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['contact'] ?? ''); ?>" class="edit-input" style="display:none;">
+                    <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['con'] ?? ''); ?>" class="edit-input" style="display:none;">
                 </div>
                 <div class="input-group">
                     <label><strong>Email:</strong></label>
                     <span class="profile-text"><?php echo htmlspecialchars($_SESSION['em']); ?></span>
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['email'] ?? ''); ?>" class="edit-input" style="display:none;">
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['em'] ?? ''); ?>" class="edit-input" style="display:none;">
                 </div>
                 
                 <!-- Birthday, hidden initially and shown only when editing -->
-                <div class="input-group" id="birthdayGroup" style="display:none;">
+                <p>You might also want to add these details:</p><br>
+                <div class="input-group" id="birthdayGroup">
                     <label><strong>Birthday:</strong></label>
-                    <input type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" class="edit-input">
+                    <span class="profile-text">
+                        <?php echo htmlspecialchars($_SESSION['Birthday']); ?>
+                    </span>
+                    <input hidden type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" class="edit-input">
                 </div>
                 
                 <!-- Age calculated based on the birthday -->
@@ -168,7 +170,7 @@ $current_image .= "?t=" . time();
                     <input type="text" id="age" readonly class="edit-input" style="display:none;">
                 </div>
             </div>
-
+            <br>
             <div class="profile-buttons">
                 <button type="button" id="editProfileBtn">Edit Profile</button>
                 <button type="submit" id="saveProfileBtn" style="display:none;">Save Changes</button>

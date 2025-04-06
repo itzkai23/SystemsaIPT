@@ -57,7 +57,7 @@ $current_image .= "?t=" . time();
          <div class="logout-container"> 
            <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
            <div class="logout-dropdown" id="logoutDropdown">
-                <a href="#" class="logpf-con">
+                <a href="upf.php" class="logpf-con">
                   <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
                   <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
                 </a>
