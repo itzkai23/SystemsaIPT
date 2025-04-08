@@ -153,8 +153,8 @@ width: 100%;
     font-size: 18px;
 }
   
-.form-box button {  
-    width: 100%;
+.form-login-btn {  
+    width: 98%;
     padding: 10px;
     background-color: #190561;
     border: none;
@@ -162,9 +162,30 @@ width: 100%;
     color: white;
     font-size: 16px;
     cursor: pointer;
+    margin-left: -1px;
 }
   
-.form-box button:hover {
+.form-login-btn:hover {
+    /* background-color: #fbff01; */
+    background-color:rgb(255, 217, 0);
+    color: #190561;
+    transition: .3s;
+    border: solid 1px #190561;
+}
+
+.form-register-btn {  
+    width: 97%;
+    padding: 10px;
+    background-color: #190561;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: -5px;
+}
+  
+.form-register-btn:hover {
     /* background-color: #fbff01; */
     background-color:rgb(255, 217, 0);
     color: #190561;

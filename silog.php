@@ -43,7 +43,7 @@ include("connect.php");
             <span class="toggle-eye" onclick="togglePassword()"><i class="fas fa-eye" id="pass-eyecon"></i></span>
             </div>
             <h5><a href="forgotpass.php">Forgot password?</a></h5>
-            <button type="submit" name="sub">Login</button>
+            <button type="submit" name="sub" class="form-login-btn">Login</button>
             <p>Don't have an account? <a href="#" class="register-link" >SignUp</a></p>
             
             <div>
@@ -87,7 +87,7 @@ include("connect.php");
                 </div> 
              </div>
 
-          <button type="submit" name="submit">Register</button>
+          <button type="submit" name="submit" class="form-register-btn">Register</button>
           <p>Already have an account? <a href="#" class="login-link">Login</a></p>
           
           <div>

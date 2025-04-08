@@ -324,7 +324,7 @@ border-radius: 5px;
   padding: 20px;
   background-color: rgb(32, 31, 31);
   max-width: 70%;
-  height: 560px; /* Set a fixed height */
+  height: 570px; /* Set a fixed height */
   border-radius: 20px;
   white-space: nowrap;
 }
