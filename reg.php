@@ -11,6 +11,8 @@ if(isset($_POST['submit'])){
     $contact = trim($_POST["contact"]);
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
+    $section = trim($_POST["section"]);
+
 
     // Define the allowed email domain
     $allowed_domain = "@cityofmalabonuniversity.edu.ph";
@@ -48,8 +50,9 @@ if(isset($_POST['submit'])){
             'uname' => $uname,
             'contact' => $contact,
             'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT)
-        ];
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'section' => $section
+        ];        
 
         // Send OTP to email
         $mail = new PHPMailer(true);

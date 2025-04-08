@@ -14,10 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($entered_otp == $_SESSION['otp']) {
         // Save the user data to the database
         $user = $_SESSION['temp_user'];
-        $query = "INSERT INTO registration (fname, lname, uname, contact, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO registration (fname, lname, uname, contact, email, password, section) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssssss", $user['fname'], $user['lname'], $user['uname'], $user['contact'], $user['email'], $user['password']);
-
+        mysqli_stmt_bind_param($stmt, "sssssss", $user['fname'], $user['lname'], $user['uname'], $user['contact'], $user['email'], $user['password'], $user['section']);
         if (mysqli_stmt_execute($stmt)) {
             unset($_SESSION['otp']);
             unset($_SESSION['temp_user']);
