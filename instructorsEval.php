@@ -2,37 +2,45 @@
 require 'connect.php';
 session_start();
 
-// Fetch all professors from the database
-$result = $conn->query("SELECT id, name, role, prof_img FROM professors");
-
-if (!$result) {
-    die("Error fetching professors: " . $conn->error);
-}
-
-// Prevent browser from caching the page
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-
-// Redirect to login page if session is not set
+// Check if the user is logged in
 if (!isset($_SESSION['user_name'])) {
     header('location:silog.php');
     exit();
 }
 
 if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-  header("Location: admin.php");
-  exit();
+    header("Location: admin.php");
+    exit();
 }
 
+// Fetch the logged-in user's section
+$user_id = $_SESSION['user_id'];  // Assuming the user_id is stored in the session
+$section_query = "SELECT section FROM sections WHERE id = ?";
+$stmt = $conn->prepare($section_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($section);
+$stmt->fetch();
+$stmt->close();
 
-// Keep your existing default image
+// Fetch professors associated with the logged-in user's section
+$professor_query = "SELECT p.id, p.name, p.role, p.prof_img 
+                    FROM professors p 
+                    INNER JOIN section_professors ps ON p.id = ps.professor_id 
+                    WHERE ps.section = ?";  // Filter professors by the section of the student
+
+$stmt = $conn->prepare($professor_query);
+$stmt->bind_param("s", $section);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if (!$result) {
+    die("Error fetching professors: " . $conn->error);
+}
+
+// Default image
 $default_image = "images/icon.jpg";
-
-// Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
-
-// Force-refresh the image to prevent caching issues
 $current_image .= "?t=" . time();
 ?>
 
