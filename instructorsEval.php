@@ -48,8 +48,10 @@ $current_image .= "?t=" . time();
 <html>
     <head>
         <Title>Faculty Evaluation</Title>
-
+<!-- Font Awesome CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
      <link rel="stylesheet" href="css/instructors_eval.css">
+     <link rel="stylesheet" href="css/headmenu.css">
     </head>  
 <body>
 
@@ -63,10 +65,13 @@ $current_image .= "?t=" . time();
 
    <ul class="sidebar" id="sidebar">
          
-     <li><a class="a-bar"href="home.php">Home</a></li>
-     <li><a class="a-bar"href="instructorsProfiles.php">Faculty</a></li>
-     <li><a class="a-bar"href="freedomwall.php">Newsfeed</a></li>
-     <li><a class="a-bar"href="upf.php">Profile</a></li>
+   <div class="sidebar-header">
+    <img src="images/head2.png" alt="Sidebar Image" class="sidebar-image">
+   </div>
+     <li><a class="a-bar"href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
+     <li><a class="a-bar"href="instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
+     <li><a class="a-bar"href="freedomwall.php"><i class="fas fa-newspaper"></i><span>Newsfeed</span></a></li>
+     <li><a class="a-bar"href="upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
           
    </ul>
 
