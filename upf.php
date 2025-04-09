@@ -13,6 +13,11 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
+if(isset($_SESSION['is_admin'])){
+    header('location:home.php');
+    exit();
+}
+
 $user_id = $_SESSION['user_id']; // Get user ID from session
 
 // Prepare SQL query to fetch feedback for the logged-in user

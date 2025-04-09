@@ -1,6 +1,4 @@
 function openModal(data) {
-    // Set student and professor names, and evaluation average
-    document.getElementById("modal-student").textContent = data.student_name;
     document.getElementById("modal-professor").textContent = data.professor_name;
     document.getElementById("modal-score").textContent = parseFloat(data.evaluation_avg_score).toFixed(2);
     document.getElementById("modal-avg").textContent = parseFloat(data.professor_avg_score).toFixed(2);

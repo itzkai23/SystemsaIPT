@@ -23,16 +23,22 @@ $stmt->bind_result($section);
 $stmt->fetch();
 $stmt->close();
 
-// Fetch professors associated with the logged-in user's section
-$professor_query = "SELECT p.id, p.name, p.role, p.prof_img 
-                    FROM professors p 
-                    INNER JOIN section_professors ps ON p.id = ps.professor_id 
-                    WHERE ps.section = ?";  // Filter professors by the section of the student
+if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+  // If admin, show all professors
+  $professor_query = "SELECT id, name, role, prof_img FROM professors";
+  $result = $conn->query($professor_query);
+} else {
+  // For regular users, show only professors associated with their section
+  $professor_query = "SELECT p.id, p.name, p.role, p.prof_img 
+                      FROM professors p 
+                      INNER JOIN section_professors ps ON p.id = ps.professor_id 
+                      WHERE ps.section = ?";
+  $stmt = $conn->prepare($professor_query);
+  $stmt->bind_param("s", $section);
+  $stmt->execute();
+  $result = $stmt->get_result();
+}
 
-$stmt = $conn->prepare($professor_query);
-$stmt->bind_param("s", $section);
-$stmt->execute();
-$result = $stmt->get_result();
 
 if (!$result) {
     die("Error fetching professors: " . $conn->error);

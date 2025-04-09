@@ -14,8 +14,36 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
-// Fetch all professors from the database
-$result = $conn->query("SELECT id, name, role, prof_img FROM professors");
+// Fetch the logged-in user's section
+$user_id = $_SESSION['user_id'];  // Assuming the user_id is stored in the session
+$section_query = "SELECT section FROM sections WHERE id = ?";
+$stmt = $conn->prepare($section_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($section);
+$stmt->fetch();
+$stmt->close();
+
+if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+  // If admin, show all professors
+  $professor_query = "SELECT id, name, role, prof_img FROM professors";
+  $result = $conn->query($professor_query);
+} else {
+  // For regular users, show only professors associated with their section
+  $professor_query = "SELECT p.id, p.name, p.role, p.prof_img 
+                      FROM professors p 
+                      INNER JOIN section_professors ps ON p.id = ps.professor_id 
+                      WHERE ps.section = ?";
+  $stmt = $conn->prepare($professor_query);
+  $stmt->bind_param("s", $section);
+  $stmt->execute();
+  $result = $stmt->get_result();
+}
+
+
+if (!$result) {
+  die("Error fetching professors: " . $conn->error);
+}
 
 // Keep your existing default image
 $default_image = "images/icon.jpg";
