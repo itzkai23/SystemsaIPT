@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connect.php';
+include '../connect.php';
 
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     die("Unauthorized access.");
@@ -33,7 +33,7 @@ $reportsQuery = $conn->query("SELECT r.id AS report_id, c.comment AS reported_te
 $profReportsQuery = $conn->query("SELECT rp.id AS prof_report_id, p.name AS professor_name, u.fname, u.lname, rp.reasons, rp.report_date, rp.status FROM reports_prof rp JOIN professors p ON rp.professor_id = p.id JOIN registration u ON rp.user_id = u.id ORDER BY rp.report_date DESC");
 
 // Keep your existing default image
-$default_image = "images/icon.jpg";
+$default_image = "../images/icon.jpg";
 
 // Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
@@ -51,8 +51,8 @@ $current_image .= "?t=" . time();
     <!-- Font Awesome CDN -->
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
  
-    <link rel="stylesheet" href="css/repcom.css">
-    <link rel="stylesheet" href="css/headmenu.css">
+    <link rel="stylesheet" href="../css/repcom.css">
+    <link rel="stylesheet" href="../css/headmenu.css">
 </head>
 <body>
     
@@ -67,19 +67,17 @@ $current_image .= "?t=" . time();
 <ul class="sidebar" id="sidebar">
       
    <div class="sidebar-header">
-    <img src="images/head2.png" alt="Sidebar Image" class="sidebar-image">
+    <img src="../images/head2.png" alt="Sidebar Image" class="sidebar-image">
    </div>
      <li><a class="a-bar"href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
-     <li><a class="a-bar"href="instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
-     <li><a class="a-bar"href="freedomwall.php"><i class="fas fa-newspaper"></i><span>Newsfeed</span></a></li>
+     <li><a class="a-bar"href="../students_interface/instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
      <li><a class="a-bar"href="upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
        
 </ul>
 
 <div class="mid-section">
          <a href="home.php" class="home">Home</a>
-         <a href="freedomwall.php" class="pf">Newsfeed</a>
-         <a href="instructorsProfiles.php" class="pf">Faculty</a>
+         <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
 </div>
 
 <div class="right-section">                              
@@ -95,23 +93,23 @@ $current_image .= "?t=" . time();
                 </a>
 
                <div class="dlog-icon">
-                 <Img src="images/offweb.png" alt="log">
+                 <Img src="../images/offweb.png" alt="log">
                 <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
                 </div>
 
                 <div class="dlog-icon">
-                 <img src="images/announcement.png" alt="">
+                 <img src="../images/announcement.png" alt="">
                 <a class="a-pf" href="#">Announcement</a>
                 </div>
                 
                 <div class="dlog-icon">
-                 <img src="images/facultyb.png" alt="">
-                <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                 <img src="../images/facultyb.png" alt="">
+                <a class="a-pf" href="../students_interface/instructorsProfiles.php">Faculty</a>
                 </div>
 
            <div class="logoutbb">
-             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-             <a href="logout.php" class="logout-link">Logout</a>
+             <a href="../Authentication/logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="../Authentication/logout.php" class="logout-link">Logout</a>
            </div>
     
         </div>
@@ -172,8 +170,8 @@ $current_image .= "?t=" . time();
         </div>
     </div>
     </div>
-        <script src="js/sidebar.js"></script>
-        <script src="js/logs.js"></script>
-        <script src="js/admin.js"></script>
+        <script src="../js/sidebar.js"></script>
+        <script src="../js/logs.js"></script>
+        <script src="../js/admin.js"></script>
 </body>
 </html>

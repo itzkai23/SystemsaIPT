@@ -1,5 +1,5 @@
 <?php
-require 'connect.php';
+require '../connect.php';
 session_start();
 
 // Prevent browser from caching the page
@@ -46,7 +46,7 @@ if (!$result) {
 }
 
 // Keep your existing default image
-$default_image = "images/icon.jpg";
+$default_image = "../images/icon.jpg";
 
 // Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
@@ -60,8 +60,8 @@ $current_image .= "?t=" . time();
         <Title>Instructor's Profiles</Title>
 <!-- Font Awesome CDN -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/instructorsProfiles.css">
-    <link rel="stylesheet" href="css/headmenu.css">
+    <link rel="stylesheet" href="../css/instructorsProfiles.css">
+    <link rel="stylesheet" href="../css/headmenu.css">
 
     </head>
     
@@ -78,7 +78,7 @@ $current_image .= "?t=" . time();
 <ul class="sidebar" id="sidebar">
       
    <div class="sidebar-header">
-    <img src="images/head2.png" alt="Sidebar Image" class="sidebar-image">
+    <img src="../images/head2.png" alt="Sidebar Image" class="sidebar-image">
    </div>
      <li><a class="a-bar"href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
      <li><a class="a-bar"href="instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
@@ -104,23 +104,23 @@ $current_image .= "?t=" . time();
                 </a>
 
                <div class="dlog-icon">
-                 <Img src="images/offweb.png" alt="log">
+                 <Img src="../images/offweb.png" alt="log">
                 <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
                 </div>
 
                 <div class="dlog-icon">
-                 <img src="images/announcement.png" alt="">
+                 <img src="../images/announcement.png" alt="">
                 <a class="a-pf" href="#">Announcement</a>
                 </div>
                 
                 <div class="dlog-icon">
-                 <img src="images/facultyb.png" alt="">
+                 <img src="../images/facultyb.png" alt="">
                 <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
                 </div>
 
            <div class="logoutbb">
-             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-             <a href="logout.php" class="logout-link">Logout</a>
+             <a href="../Authentication/logout.php"><img src="../images/logoutb.png" class="logoutb2"></a>
+             <a href="../Authentication/logout.php" class="logout-link">Logout</a>
            </div>
     
         </div>
@@ -138,7 +138,7 @@ $current_image .= "?t=" . time();
                 <?php if ($result->num_rows > 0) { ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="card">
-                <img src="<?php echo !empty($row['prof_img']) ? htmlspecialchars($row['prof_img']) : 'images/facultyb.png'; ?>" 
+                <img src="<?php echo !empty($row['prof_img']) ? htmlspecialchars($row['prof_img']) : '../images/facultyb.png'; ?>" 
                  alt="<?php echo htmlspecialchars($row['name']); ?>" 
                  width="150" height="150">                    
                  <h2><?php echo htmlspecialchars($row['name']); ?></h2>
@@ -150,7 +150,7 @@ $current_image .= "?t=" . time();
         <?php } ?>
         </div>
         </div>
-        <script src="js/sidebar.js"></script>
-        <script src="js/logs.js"></script>
+        <script src="../js/sidebar.js"></script>
+        <script src="../js/logs.js"></script>
     </body>
 </html>

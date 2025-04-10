@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connect.php';
+include '../connect.php';
 
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     die("Unauthorized access.");

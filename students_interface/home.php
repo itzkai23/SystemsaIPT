@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-  header("Location: admin.php");
+  header("Location: ../admin/admin.php");
   exit();
 }
 

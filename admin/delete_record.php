@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'connect.php';
+require '../connect.php';
 
 // Ensure only admins can delete
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {

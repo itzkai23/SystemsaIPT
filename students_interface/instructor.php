@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require 'connect.php';
+require '../connect.php';
 
 // Check if professor_id is set in either the URL (GET) or the form submission (POST)
 if (isset($_GET['professor_id'])) {
@@ -91,16 +91,16 @@ while ($row = $result->fetch_assoc()) {
         'date_posted' => $row['date_posted'],
         'student_name' => $row['student_name'],
         'lname' => $row['lname'],
-        'student_image' => !empty($row['student_image']) ? $row['student_image'] : "images/icon.jpg"
+        'student_image' => !empty($row['student_image']) ? $row['student_image'] : "../images/icon.jpg"
     ];
 }
 
 $totalCount = count($feedbackData);
 
-$defimage = 'images/facultyb.png';
+$defimage = '../images/facultyb.png';
 
 // Keep your existing default image
-$default_image = "images/icon.jpg";
+$default_image = "../images/icon.jpg";
 
 // Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
@@ -123,8 +123,8 @@ $current_image .= "?t=" . time();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="css/instructor.css">
-    <link rel="stylesheet" href="css/headmenu.css">
+    <link rel="stylesheet" href="../css/instructor.css">
+    <link rel="stylesheet" href="../css/headmenu.css">
 </head>
 <body>
     
@@ -139,7 +139,7 @@ $current_image .= "?t=" . time();
 <ul class="sidebar" id="sidebar">
       
    <div class="sidebar-header">
-    <img src="images/head2.png" alt="Sidebar Image" class="sidebar-image">
+    <img src="../images/head2.png" alt="Sidebar Image" class="sidebar-image">
    </div>
      <li><a class="a-bar"href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
      <li><a class="a-bar"href="instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
@@ -160,23 +160,23 @@ $current_image .= "?t=" . time();
                 </a>
 
                <div class="dlog-icon">
-                 <Img src="images/offweb.png" alt="log">
+                 <Img src="../images/offweb.png" alt="log">
                 <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
                 </div>
 
                 <div class="dlog-icon">
-                 <img src="images/announcement.png" alt="">
+                 <img src="../images/announcement.png" alt="">
                 <a class="a-pf" href="#">Announcement</a>
                 </div>
                 
                 <div class="dlog-icon">
-                 <img src="images/facultyb.png" alt="">
+                 <img src="../images/facultyb.png" alt="">
                 <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
                 </div>
 
            <div class="logoutbb">
-             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-             <a href="logout.php" class="logout-link">Logout</a>
+             <a href="../Authentication/logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="../Authentication/logout.php" class="logout-link">Logout</a>
            </div>
     
         </div>
@@ -193,7 +193,7 @@ $current_image .= "?t=" . time();
 
         <div class="avnamecon">
         <a href="instructorsProfiles.php" class="back-button">
-                <img src="images/backmage1.png" alt="Back" class="back-image">
+                <img src="../images/backmage1.png" alt="Back" class="back-image">
         </a>
 
         <div class="avname">
@@ -361,9 +361,9 @@ $current_image .= "?t=" . time();
     
 </div>
 
-    <script src="js/sidebar.js"></script>
-    <script src="js/logs.js"></script>
-    <script src="js/logs.js"></script>
-    <script src="js/instructor.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/logs.js"></script>
+    <script src="../js/logs.js"></script>
+    <script src="../js/instructor.js"></script>
 </body>
 </html>

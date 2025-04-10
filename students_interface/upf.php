@@ -1,11 +1,6 @@
 <?php
-require 'connect.php';
+require '../connect.php';
 session_start();
-
-// Prevent browser from caching the page
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
 
 // Redirect to login page if session is not set
 if (!isset($_SESSION['user_name'])) {
@@ -13,28 +8,30 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
-if(isset($_SESSION['is_admin'])){
-    header('location:home.php');
+// Redirect admin users to home.php
+if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+    header('Location: home.php');
     exit();
 }
 
+
 $user_id = $_SESSION['user_id']; // Get user ID from session
 
-// Prepare SQL query to fetch feedback for the logged-in user
-$query = "SELECT feedback, submitted_at FROM instructor_evaluation WHERE user_id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
+// // Prepare SQL query to fetch feedback for the logged-in user
+// $query = "SELECT feedback, submitted_at FROM instructor_evaluation WHERE user_id = ?";
+// $stmt = $conn->prepare($query);
+// $stmt->bind_param("i", $user_id);
+// $stmt->execute();
+// $result = $stmt->get_result();
 
-$feedbackData = [];
+// $feedbackData = [];
 
-while ($row = $result->fetch_assoc()) {
-    $feedbackData[] = [
-        'feedback' => $row['feedback'],
-        'submitted_at' => $row['submitted_at']
-    ];
-}
+// while ($row = $result->fetch_assoc()) {
+//     $feedbackData[] = [
+//         'feedback' => $row['feedback'],
+//         'submitted_at' => $row['submitted_at']
+//     ];
+// }
 
 function calculateAge($bday) {
     $birthDate = new DateTime($bday);
@@ -43,7 +40,7 @@ function calculateAge($bday) {
     return $age;
 }
 
-$default_image = "images/icon.jpg";
+$default_image = "../images/icon.jpg";
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
 $current_image .= "?t=" . time();
 ?>
@@ -59,8 +56,8 @@ $current_image .= "?t=" . time();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/upf.css">
-    <link rel="stylesheet" href="css/headmenu.css">
+    <link rel="stylesheet" href="../css/upf.css">
+    <link rel="stylesheet" href="../css/headmenu.css">
 </head>
 <body>
    <nav class="home-header">
@@ -72,7 +69,7 @@ $current_image .= "?t=" . time();
 
       <ul class="sidebar" id="sidebar">
       <div class="sidebar-header">
-       <img src="images/head2.png" alt="Sidebar Image" class="sidebar-image">
+       <img src="../images/head2.png" alt="Sidebar Image" class="sidebar-image">
       </div>
      <li><a class="a-bar"href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
      <li><a class="a-bar"href="instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
@@ -94,20 +91,20 @@ $current_image .= "?t=" . time();
                         <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
                     </a>
                     <div class="dlog-icon">
-                        <Img src="images/offweb.png" alt="log">
+                        <Img src="../images/offweb.png" alt="log">
                         <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
                     </div>
                     <div class="dlog-icon">
-                        <img src="images/announcement.png" alt="">
+                        <img src="../images/announcement.png" alt="">
                         <a class="a-pf" href="#">Announcement</a>
                     </div>
                     <div class="dlog-icon">
-                        <img src="images/facultyb.png" alt="">
+                        <img src="../images/facultyb.png" alt="">
                         <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
                     </div>
                     <div class="logoutbb">
-                        <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-                        <a href="logout.php" class="logout-link">Logout</a>
+                        <a href="../Authentication/logout.php"><img src="../images/logoutb.png" class="logoutb2"></a>
+                        <a href="../Authentication/logout.php" class="logout-link">Logout</a>
                     </div>
                 </div>
             </div>
@@ -197,8 +194,8 @@ $current_image .= "?t=" . time();
     </div>
    </div>
 
-<script src="js/sidebar.js"></script>
-<script src="js/logs.js"></script>
-<script src="js/uploads.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/logs.js"></script>
+<script src="../js/uploads.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'connect.php';
+require '../connect.php';
 
 // Ensure only admins can access this page
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
-    header("Location: home.php");
+    header("Location: ../Authentication/home.php");
     exit();
 }
 
@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $query);
 $student_count = ($result) ? mysqli_num_rows($result) : 0;
 
 // Keep your existing default image
-$default_image = "images/icon.jpg";
+$default_image = "../images/icon.jpg";
 
 // Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
@@ -87,23 +87,23 @@ $current_image .= "?t=" . time();
                 </a>
 
                <div class="dlog-icon">
-                 <Img src="images/offweb.png" alt="log">
+                 <Img src="../images/offweb.png" alt="log">
                 <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
                 </div>
 
                 <div class="dlog-icon">
-                 <img src="images/announcement.png" alt="">
+                 <img src="../images/announcement.png" alt="">
                 <a class="a-pf" href="#">Announcement</a>
                 </div>
                 
                 <div class="dlog-icon">
-                 <img src="images/facultyb.png" alt="">
-                <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
+                 <img src="../images/facultyb.png" alt="">
+                <a class="a-pf" href="../students_interface/instructorsProfiles.php">Faculty</a>
                 </div>
 
            <div class="logoutbb">
-             <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-             <a href="logout.php" class="logout-link">Logout</a>
+             <a href="../Authentication/logout.php"><img src="../images/logoutb.png" class="logoutb2"></a>
+             <a href="../Authentication/logout.php" class="logout-link">Logout</a>
            </div>
     
         </div>
@@ -165,7 +165,7 @@ $current_image .= "?t=" . time();
         </div>
 
     </div>
-    <script src="js/sidebar.js"></script>
-    <script src="js/logs.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/logs.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connect.php';
+include '../connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $professor_id = $_POST['professor_id'];

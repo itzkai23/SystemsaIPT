@@ -1,5 +1,5 @@
 <?php
-require 'connect.php';
+require '../connect.php';
 require 'functions.php'; // Include the functions file
 session_start();
 
@@ -16,15 +16,6 @@ if (isset($_GET['professor_id'])) {
 } else {
     die("No professor selected. <a href='instructorsEval.php'>Go back</a>");
 }
-
-// Keep your existing default image
-$default_image = "images/icon.jpg";
-
-// Use session to get the latest profile picture
-$current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
-
-// Force-refresh the image to prevent caching issues
-$current_image .= "?t=" . time();
 
 // Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -44,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && !canEvaluate($conn, $user_id, $profe
 }
 
 
-
 // Fetch professor name
 $profQuery = $conn->prepare("SELECT name FROM professors WHERE id = ?");
 $profQuery->bind_param("i", $professor_id);
@@ -59,7 +49,7 @@ if ($result->num_rows > 0) {
 }
 
 // Default profile image
-$default_image = "images/icon.jpg";
+$default_image = "../images/icon.jpg";
 
 // Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
@@ -108,8 +98,8 @@ $result = $conn->query($sql);
     <!-- Font Awesome CDN -->
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
  
-    <link rel="stylesheet" href="css/gform.css">
-    <link rel="stylesheet" href="css/headmenu.css">
+    <link rel="stylesheet" href="../css/gform.css">
+    <link rel="stylesheet" href="../css/headmenu.css">
 </head>
 <body>
 
@@ -146,23 +136,23 @@ $result = $conn->query($sql);
             </a>
 
            <div class="dlog-icon">
-             <Img src="images/offweb.png" alt="log">
+             <Img src="../images/offweb.png" alt="log">
             <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
             </div>
 
             <div class="dlog-icon">
-             <img src="images/announcement.png" alt="">
+             <img src="../images/announcement.png" alt="">
             <a class="a-pf" href="#">Announcement</a>
             </div>
             
             <div class="dlog-icon">
-             <img src="images/facultyb.png" alt="">
+             <img src="../images/facultyb.png" alt="">
             <a class="a-pf" href="instructorsProfiles.php">Faculty</a>
             </div>
 
        <div class="logoutbb">
-         <a href="logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
-         <a href="logout.php" class="logout-link">Logout</a>
+         <a href="../Authentication/logout.php"><img src="../images/logoutb.png" class="logoutb2"></a>
+         <a href="../Authentication/logout.php" class="logout-link">Logout</a>
        </div>
 
     </div>
@@ -176,7 +166,7 @@ $result = $conn->query($sql);
    <div class="form-container">
     
         <a href="instructorsEval.php" class="back-button">
-                <img src="images/backmage1.png" alt="Back" class="back-image">
+                <img src="../images/backmage1.png" alt="Back" class="back-image">
         </a>
 
         <h1 class="form-title">Faculty Evaluation</h1>
@@ -514,7 +504,7 @@ $result = $conn->query($sql);
         </form>
     </div>
 
-<script src="js/sidebar.js"></script>
-<script src="js/logs.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/logs.js"></script>
 </body>
 </html>

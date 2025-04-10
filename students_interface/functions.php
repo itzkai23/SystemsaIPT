@@ -1,5 +1,5 @@
 <?php
-require 'connect.php'; // Ensure database connection is available
+require '../connect.php'; // Ensure database connection is available
 
 function canEvaluate($conn, $user_id, $professor_id) {
     $query = "SELECT submitted_at FROM instructor_evaluation 

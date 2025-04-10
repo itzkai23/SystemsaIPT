@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
 
             // Redirect based on user type
             if ($row['is_admin'] == 1) {
-                header('Location: ../admin.php'); // Redirect admin
+                header('Location: ../admin/admin.php'); // Redirect admin
             } else {
                 header('Location: ../students_interface/home.php'); // Redirect regular user
             }
