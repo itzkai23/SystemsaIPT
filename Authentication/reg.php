@@ -1,6 +1,6 @@
 <?php
-require 'connect.php';
-require 'vendor/autoload.php'; // Load PHPMailer if using Composer
+require './connect.php';
+require '../vendor/autoload.php'; // Load PHPMailer if using Composer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 

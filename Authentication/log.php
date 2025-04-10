@@ -6,7 +6,7 @@ if (isset($_SESSION['user_name'])) {
     exit();
 }
 
-require 'connect.php';
+require './connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
     $uname = trim($_POST['uname']);
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
             $_SESSION['em'] = $row['email'];
             $_SESSION['con'] = $row['contact']; 
             $_SESSION['user_id'] = $row['id'];
-            $_SESSION['pic'] = !empty($row['picture']) ? $row['picture'] : "images/icon.jpg";
+            $_SESSION['pic'] = !empty($row['picture']) ? $row['picture'] : "../images/icon.jpg";
             $_SESSION['Birthday'] = $row['Birthday'];
             $_SESSION['is_admin'] = $row['is_admin']; // Store admin status
 
