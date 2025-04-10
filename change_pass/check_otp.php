@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connect.php'; // Ensure database connection
+include '../connect.php'; // Ensure database connection
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $entered_otp = trim($_POST["otp"]);
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
-    <link rel="stylesheet" href="css/verify.css">
+    <link rel="stylesheet" href="../css/verify.css">
 </head>
 <body>
 <div class="buo">
@@ -54,11 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
         </div>
         <button class="verify-btn" type="submit">Verify</button>
-        <a href="silog.php" class="resend">Back to Register</a>
+        <a href="../Authentication/silog.php" class="resend">Back to Register</a>
     </form>
     
     </div>
 
-    <script src="js/check_otp.js"></script>
+    <script src="../js/check_otp.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'connect.php';
-require 'vendor/autoload.php'; // PHPMailer
+require '../connect.php';
+require '../vendor/autoload.php'; // PHPMailer
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;

@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/forgotpass.css">
+    <link rel="stylesheet" href="../css/forgotpass.css">
 </head>
 <body>
     <div class="container">
@@ -18,7 +18,7 @@
             <button type="submit">Send</button>
         </form>
         <p class="message">Password reset will be sent to your email.</p>
-        <a href="silog.php" class="back-link">Back to Login</a>
+        <a href="../Authentication/silog.php" class="back-link">Back to Login</a>
     </div>
 </body>
 </html>

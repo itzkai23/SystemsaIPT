@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connect.php'; // Ensure this file correctly connects to your database
+include '../connect.php'; // Ensure this file correctly connects to your database
 
 // Check if the user has an email stored from OTP verification
 if (!isset($_SESSION['reset_email'])) {
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         if ($stmt->execute()) {
             session_destroy(); // Clear session
-            header('Location: silog.php?reset=success'); // Redirect to login
+            header('Location: ../Authentication/silog.php?reset=success'); // Redirect to login
             exit();
         } else {
             $error = "Something went wrong. Try again.";
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/resetpass.css">
+    <link rel="stylesheet" href="../css/resetpass.css">
 </head>
 <body>
     <div class="container">
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="password" name="confirm-password" placeholder="Confirm Password" required>
             <button type="submit">Reset Password</button>
         </form>
-        <a href="silog.php" class="back-link">Back to Login</a>
+        <a href="../Authentication/silog.php" class="back-link">Back to Login</a>
     </div>
 </body>
 </html>

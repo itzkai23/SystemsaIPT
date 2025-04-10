@@ -1,9 +1,9 @@
 <?php
 session_start();
-require 'connect.php';
+require '../connect.php';
 
 if (!isset($_SESSION['otp']) || !isset($_SESSION['temp_user'])) {
-    header("Location: silog.php");
+    header("Location: ../Authentication/silog.php");
     exit();
 }
 
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Verify OTP</title>
-    <link rel="stylesheet" href="css/verify.css">
+    <link rel="stylesheet" href="../css/verify.css">
 </head>
 <body>
     <div class="buo">
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="otp[]" maxlength="1" oninput="moveToNext(this)" onkeydown="moveToPrev(event, this)" required>
         </div>
         <button class="verify-btn" type="submit">Verify</button>
-        <a href="silog.php" class="resend">Back to Register</a>
+        <a href="../Authentication/silog.php" class="resend">Back to Register</a>
     </form>
     
     </div>
