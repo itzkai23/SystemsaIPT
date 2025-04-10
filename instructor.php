@@ -208,15 +208,17 @@ $current_image .= "?t=" . time();
                  alt="<?php echo htmlspecialchars($row['name']); ?>" 
                  width="150" height="150">
          <div class="pc">
+         <div class="prof-rep-div">
          <h5 class="prof-name"> <?php echo $professor_name; ?></h5>
+         <!-- Add a Report Button -->
+         <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
+        class="report-btn">Report</a>
+         </div>
          <h5 class="pro-role"><?php echo $profrole; ?></h5>
          </div>
-         <!-- Add a Report Button -->
-        <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
-        class="report-btn">Report</a>
-        <!-- <i class="fas fa-flag"> -->
-        </div>
         
+        </div>
+         
         </div>
         
         <section class="comment-post">

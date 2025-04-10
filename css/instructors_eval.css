@@ -226,28 +226,29 @@ border-radius: 5px;
   margin: auto;
   margin-top: 60px;
   padding: 20px;
-  background-color: rgb(32, 31, 31);
+  background-color: white;
   max-width: 70%;
   height: 570px; /* Set a fixed height */
   border-radius: 20px;
   white-space: nowrap;
+  border: solid 2px #aaa;
 }
 
 .whole h1 {
   font-size: 28px;
-  color: #FF8C00;
+  color: black;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 32.5%;
   width: 35%;
   border-radius: 5px;
   padding: 10px;
   text-align: center;
-  background: #333333;
+  background: white;
   /* border: 1px solid #1565c0; */
   font-family: "Roboto", sans-serif;
   font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); */
 }
 
 .card {
@@ -258,15 +259,16 @@ border-radius: 5px;
     text-align: center;
     width: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease; */
-    background: #FF8C00;
+    background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); */
     padding: 20px;
     text-align: center;
     width: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     text-decoration: none;
+    border: solid 2px #aaa;
 }
 
 .card:hover {

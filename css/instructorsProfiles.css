@@ -29,17 +29,18 @@ body {
   padding: 20px;
   background-color: white;
   max-width: 70%;
-  height: 560px; /* Set a fixed height */
+  max-height: 570px; /* Set a fixed height */
   border-radius: 20px;
   white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
+  border: solid 2px #aaa;
 }
 
 .whole h1 {
   font-size: 28px;
   color: rgb(0, 25, 51);
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 32.5%;
   width: 35%;
   border-radius: 5px;
@@ -57,13 +58,14 @@ body {
     /* Soft blue gradient */
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); */
     padding: 20px;
     text-align: center;
     width: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     text-decoration: none;
+    border: solid 2px #aaa;
 }
 
 .card:hover {

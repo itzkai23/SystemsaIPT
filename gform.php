@@ -190,7 +190,7 @@ $result = $conn->query($sql);
         <p class="description">Your feedback helps us improve our teaching standards. Please rate the instructor based on the following criteria.</p>
         
         <div class="rating-scale">
-            <p><strong>5</strong>- Very Satisfactory <strong>4</strong>- Satisfactory <strong>3</strong>- Neutral <strong>2</strong>- Unsatisfactory <strong>1</strong>- Very Unsatisfactory</p>
+            <p><strong>5</strong>- Outstanding <strong>4</strong>- Very Satisfactory <strong>3</strong>- Satisfactory <strong>2</strong>- Unsatisfactory <strong>1</strong>- Very Unsatisfactory</p>
         </div>
         
         <form action="form_act.php" method="post">
@@ -198,9 +198,15 @@ $result = $conn->query($sql);
             <table class="question-table">
             <input type="hidden" name="professor_id" value="<?php echo htmlspecialchars($professor_id); ?>">
             <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
+            
             <tr>
+                <p>II. Teaching Performance</p>
+
+                <tr>
+                    <td><p>III. Course Content</p></td>
+                </tr>
                     <td class="label-column">
-                        <label>How would you rate the instructor's ability to explain concepts clearly?</label>
+                        <label>1. Relevance and currency of course materials</label>
                     </td>
 
                     <td class="radio-group">
@@ -214,7 +220,7 @@ $result = $conn->query($sql);
                 
                 <tr>
                     <td class="label-column">
-                        <label>How engaging was the instructor during lectures?</label>
+                        <label>2. Alignment with course objectives and goals</label>
                     </td>
                 
                     <td class="radio-group">
@@ -228,7 +234,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>How well did the instructor manage the class?</label>
+                        <label>3. Integration of diverse perspectives and real-world examples </label>
                     </td>
                 
                     <td class="radio-group">
@@ -241,8 +247,11 @@ $result = $conn->query($sql);
                 </tr>
 
                 <tr>
+                    <td><p>IV. Instructional Methods</p></td>
+                </tr>
+                <tr>
                     <td class="label-column">
-                        <label>How relevant and useful was the course material?</label>
+                        <label>1. Clarity and effectiveness of presentations</label>
                     </td>
                 
                     <td class="radio-group">
@@ -256,7 +265,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>How would you rate the instructor's overall effectiveness?</label>
+                        <label>2. Use of engaging and active learning strategies</label>
                     </td>
                 
                     <td class="radio-group">
@@ -270,7 +279,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The instructor communicated the course material clearly and effectively.</label>
+                        <label>3. Responsiveness to diverse learning styles and needs</label>
                     </td>
                 
                     <td class="radio-group">
@@ -283,8 +292,11 @@ $result = $conn->query($sql);
                 </tr>
 
                 <tr>
+                    <td><p>V. Assessment and Feedback</p></td>
+                </tr>
+                <tr>
                     <td class="label-column">
-                        <label>The instructor encouraged and facilitated student participation and interaction.</label>
+                        <label>1. Use of varied assessment methods (e.g., exams,papers,presentations,group work):</label>
                     </td>
                 
                     <td class="radio-group">
@@ -298,7 +310,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The instructor demonstrated a strong understanding of the course content.</label>
+                        <label>2. Timeliness and quality of feedback on assignments</label>
                     </td>
                 
                     <td class="radio-group">
@@ -312,7 +324,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The instructor showed enthusiasm and passion for the subject matter.</label>
+                        <label>3. Fairness and consistency in grading</label>
                     </td>
                 
                     <td class="radio-group">
@@ -325,8 +337,11 @@ $result = $conn->query($sql);
                 </tr>
 
                 <tr>
+                    <td><p>VI. Course Organization and Management</p></td>
+                </tr>
+                <tr>
                     <td class="label-column">
-                        <label>The course was well-organized and followed a logical sequence.</label>
+                        <label>1. Clear and well-organized course structure (e.g., syllabus, schedule, materials)</label>
                     </td>
                 
                     <td class="radio-group">
@@ -340,7 +355,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The grading criteria were clear, and the grading process was fair.</label>
+                        <label>2. Effective use of class time and course resources</label>
                     </td>
                 
                     <td class="radio-group">
@@ -354,7 +369,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The instructor was accessible and available to provide support outside of class hours.</label>
+                        <label>3. Promptness and consistency in communications and announcements</label>
                     </td>
                 
                     <td class="radio-group">
@@ -367,8 +382,11 @@ $result = $conn->query($sql);
                 </tr>
 
                 <tr>
+                    <td><p>VII. Faculty Accessibility and Support</p></td>
+                </tr>
+                <tr>
                     <td class="label-column">
-                        <label>The pace of the course was appropriate, allowing adequate time for understanding the material.</label>
+                        <label>1. Availability and responsiveness to student inquiries (e.g., office hours, email) </label>
                     </td>
                 
                     <td class="radio-group">
@@ -382,7 +400,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The feedback provided on assignments and exams was timely and helpful in improving my understanding.</label>
+                        <label>2. Quality of guidance and support provided to students</label>
                     </td>
                 
                     <td class="radio-group">
@@ -396,7 +414,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The instructor effectively utilized technology and online resources to enhance learning.</label>
+                        <label>3. Encouragement of student engagement and participation</label>
                     </td>
                 
                     <td class="radio-group">
@@ -409,8 +427,11 @@ $result = $conn->query($sql);
                 </tr>
 
                 <tr>
+                    <td><p>VIII. Overall Assessment</p></td>
+                </tr>
+                <tr>
                     <td class="label-column">
-                        <label>The instructor demonstrated respect for diverse opinions and perspectives in class discussions.</label>
+                        <label>1. Overall teaching performance rating</label>
                     </td>
                 
                     <td class="radio-group">
@@ -424,7 +445,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The required course materials (e.g., textbooks, readings) were useful and relevant to the course objectives.</label>
+                        <label>2. Overall course content rating</label>
                     </td>
                 
                     <td class="radio-group">
@@ -438,7 +459,7 @@ $result = $conn->query($sql);
 
                 <tr>
                     <td class="label-column">
-                        <label>The instructor helped students connect course content to real-world applications and examples.</label>
+                        <label>3. Overall faculty effectiveness rating</label>
                     </td>
                 
                     <td class="radio-group">
@@ -449,6 +470,13 @@ $result = $conn->query($sql);
                         <label><input type="radio" name="q18" value="1"> 1</label>
                     </td>
                 </tr>
+
+                
+
+
+
+
+
 
                 <tr>
                     <td class="label-column">
@@ -480,7 +508,8 @@ $result = $conn->query($sql);
 
             </table>
             
-            <label for="feedback">Optional Feedback</label>
+            <label for="feedback">IX. Open-Ended Feedback</label>
+            <P>What aspects of the course or the faculty's teaching style did you find most effective or enjoyable?</P>
             <textarea id="feedback" name="feedback"></textarea>
             
             <div class="btn-con">
