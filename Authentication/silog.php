@@ -2,6 +2,11 @@
 require '../connect.php';
 $query = "SELECT section FROM sections ORDER BY section";
 $result = mysqli_query($conn, $query);
+
+if (isset($_SESSION['user_name'])) {
+    header("Location: ../students_interface/home.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

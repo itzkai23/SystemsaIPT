@@ -1,5 +1,5 @@
 <?php
-@include 'connect.php';
+@include '../connect.php';
 
 session_start();
 session_unset(); // Clear all session variables

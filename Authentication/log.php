@@ -2,11 +2,11 @@
 session_start();
 
 if (isset($_SESSION['user_name'])) {
-    header("Location: home.php");
+    header("Location: ../students_interface/home.php");
     exit();
 }
 
-require './connect.php';
+require '../connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
     $uname = trim($_POST['uname']);
@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
 
             // Redirect based on user type
             if ($row['is_admin'] == 1) {
-                header('Location: admin.php'); // Redirect admin
+                header('Location: ../admin.php'); // Redirect admin
             } else {
-                header('Location: home.php'); // Redirect regular user
+                header('Location: ../students_interface/home.php'); // Redirect regular user
             }
             exit();
         } else {
