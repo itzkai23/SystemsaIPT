@@ -93,11 +93,6 @@ $current_image .= "?t=" . time();
                   <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
                   <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
                 </a>
-              
-               <div class="dlog-icon">
-                <Img src="images/nfeed.png">
-                <a class="a-pf" href="freedomwall.php">Newsfeed</a>
-                </div>
 
                <div class="dlog-icon">
                  <Img src="images/offweb.png" alt="log">

@@ -129,7 +129,6 @@ $result = $conn->query($sql);
    </div>
      <li><a class="a-bar"href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
      <li><a class="a-bar"href="instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
-     <li><a class="a-bar"href="freedomwall.php"><i class="fas fa-newspaper"></i><span>Newsfeed</span></a></li>
      <li><a class="a-bar"href="upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
        
 </ul>
@@ -145,11 +144,6 @@ $result = $conn->query($sql);
               <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
               <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
             </a>
-          
-           <div class="dlog-icon">
-            <Img src="images/nfeed.png">
-            <a class="a-pf" href="freedomwall.php">Newsfeed</a>
-            </div>
 
            <div class="dlog-icon">
              <Img src="images/offweb.png" alt="log">
