@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_name'])) {
 
 // Fetch the logged-in user's section
 $user_id = $_SESSION['user_id'];  // Assuming the user_id is stored in the session
-$section_query = "SELECT section FROM sections WHERE id = ?";
+$section_query = "SELECT section FROM registration WHERE id = ?";
 $stmt = $conn->prepare($section_query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
