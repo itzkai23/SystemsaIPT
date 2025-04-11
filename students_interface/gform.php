@@ -115,7 +115,7 @@ $result = $conn->query($sql);
 <ul class="sidebar" id="sidebar">
       
    <div class="sidebar-header">
-    <img src="images/head2.png" alt="Sidebar Image" class="sidebar-image">
+    <img src="../images/head2.png" alt="Sidebar Image" class="sidebar-image">
    </div>
      <li><a class="a-bar"href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
      <li><a class="a-bar"href="instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>

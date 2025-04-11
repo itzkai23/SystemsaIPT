@@ -101,9 +101,8 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     <img src="images/head.png" alt="headerlogo" class="logo">
     <nav class="navigation">
        <a href="#">Regulations</a>
-       <a href="#">Objective</a>
        <a href="profstatus.php">Faculties</a>
-       <a href="silog.php">Signup/Login</a>      
+       <a href="Authentication/silog.php">Signup/Login</a>      
     </nav>
 </header>
 

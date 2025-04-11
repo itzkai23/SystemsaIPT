@@ -333,3 +333,43 @@ transition: background-color 0.3s ease, color 0.3s ease;
   background-color: rgba(255, 255, 255, 0.2); /* Slight background change on hover */
   color: #fff; /* Ensure text color remains white on hover */
 }
+
+/* Hide mid-section nav and show hamburger + user profile only on small screens */
+@media (max-width: 768px) {
+  .mid-section {
+    display: none;
+  }
+
+  .ham-menu {
+    display: block;
+  }
+
+  .right-section {
+    display: flex;
+  }
+
+  .left-section {
+    width: auto;
+    font-size: 18px;
+  }
+
+  .home-header {
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+}
+
+/* Optional tweak for extra-small devices */
+@media (max-width: 480px) {
+  .left-section {
+    font-size: 16px;
+  }
+
+  .logpos {
+    gap: 5px;
+  }
+
+  .user {
+    font-size: 14px;
+  }
+}

@@ -26,8 +26,7 @@ if (isset($_SESSION['user_name'])) {
     <img src="../images/head.png" alt="headerlogo" class="logo">
     <nav class="navigation">
        <a href="#">Regulations</a>
-       <a href="#">Objective</a>
-       <a href="profstatus.php">Faculties</a>
+       <a href="../profstatus.php">Faculties</a>
        <button class="btn-popup">Login</button>      
     </nav>
 </header>
@@ -75,15 +74,17 @@ if (isset($_SESSION['user_name'])) {
                 <span class="icon"><i class="fas fa-signature"></i></span>
                 <input type="text" name="lname" placeholder="Last Name" required>
                 </div>
+
                 <div class="input-group">
                 <span class="icon"><i class="fas fa-users"></i></span>
                 <select name="section" required>
-                <option value="" disabled selected>Select Section</option>
+                <option value="" disabled selected>Select section</option>
                 <?php while($row = mysqli_fetch_assoc($result)): ?>
                     <option value="<?= $row['section']; ?>"><?= $row['section']; ?></option>
                 <?php endwhile; ?>
                 </select>
                 </div>
+
                 <div class="input-group">
                 <span class="icon"><i class="fas fa-user"></i></span>
                 <input type="text" name="uname" placeholder="Username" id="user" required>

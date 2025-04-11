@@ -50,6 +50,7 @@ $current_image .= "?t=" . time();
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font Awesome CDN -->
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
  
@@ -145,7 +146,7 @@ $current_image .= "?t=" . time();
                 <!-- Cellphone No and Email (default visible) -->
                 <div class="user-input">
                     <div class="label-span">
-                    <label><strong>Cellphone No.:</strong></label>
+                    <label><strong>Phone No.:</strong></label>
                     <span class="profile-text"><?php echo htmlspecialchars($_SESSION['con']); ?></span>
                     </div>
                     <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['con'] ?? ''); ?>" class="edit-input" style="display:none;">

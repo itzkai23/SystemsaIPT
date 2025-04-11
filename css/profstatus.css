@@ -24,25 +24,27 @@ body {
     background-size: cover;
     background-position: center;
     background-blend-mode: multiply; /* Blending the gradient with the image */
-    /* header */
-    header {
-        position: fixed;
-        top:0px;
-        left: 0px;
-        width: 100%;
-        padding: 2px 100px;
-        display: flex;
-        background-color: #012362;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 99;
-    
-    }
-    .logo{
-        height: 90px;
-        width: 260px;
-        padding: 0px;
-    }
+}
+
+.logo{
+    height: 90px;
+    width: 260px;
+    padding: 0px;
+}
+
+/* header */
+header {
+    position: fixed;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    padding: 2px 100px;
+    display: flex;
+    background-color: #012362;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+
 }
 
 /* nav */
@@ -532,3 +534,145 @@ text-align: left;
     margin-top: 2px;
     display: block;
     }
+
+
+    /* Mobile Responsiveness */
+@media (max-width: 600px) {
+
+    /* Body: Center content and adjust background for smaller screens */
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 10px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* Header: Adjust padding and logo size */
+    header {
+        padding: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        /* height: 70px;
+        width: 180px; */
+        display: none;
+    }
+
+    /* Navigation links: Stack vertically and reduce padding */
+    .navigation a {
+        margin-left: 0;
+        margin-top: 10px;
+        font-size: 1rem; /* Smaller font */
+    }
+
+    /* Page Container: Adjust width and margin for smaller screens */
+    .page-container {
+        width: 90%;
+        margin-top: 20%;
+        padding: 15px;
+    }
+
+    /* Professors List (Con-Profs) */
+    .con-profs {
+        padding: 0;
+        margin: 0;
+    }
+
+    .con-prof {
+        flex-direction: column; /* Stack content vertically */
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+
+    .con-prof img {
+        margin-right: 0;
+        margin-bottom: 10px; /* Space between image and text */
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Title Font Size for Mobile */
+    h1 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    h5 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    /* Modal: Make modal content take full width */
+    .modal-content_usercom {
+        width: 90%;
+        height: auto;
+        margin-top: 10%;
+        padding: 15px;
+    }
+
+    /* Close button: Reduce size for better mobile experience */
+    .close {
+        font-size: 18px;
+        top: 8px;
+        right: 12px;
+    }
+
+    /* Comment box: Adjust layout for better mobile view */
+    .comment-box {
+        padding: 15px 20px 5px 15px;
+    }
+
+    .comment-img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .comment-text {
+        font-size: 14px;
+    }
+
+    /* Flex containers (like comment sections) */
+    .section {
+        width: 100%; /* Stack sections vertically */
+        margin-bottom: 15px;
+    }
+
+    /* Cards in comment box */
+    .comdent {
+        flex-direction: column;
+    }
+
+    .com-scroll {
+        padding: 10px 15px;
+        max-height: 180px;
+    }
+}
+
+/* Larger than mobile: Tablet / Desktop */
+@media (min-width: 600px) {
+
+    /* Professors list layout */
+    .con-prof {
+        flex-direction: row; /* Keep in row layout */
+        width: 100%;
+    }
+
+    /* Cards and comment box sections */
+    .section {
+        width: 48%; /* 2 per row for desktops */
+    }
+
+    .comdent {
+        flex-direction: row;
+    }
+
+    /* Modal Size on Larger Screens */
+    .modal-content_usercom {
+        width: 600px;
+        height: auto;
+        padding: 20px;
+    }
+}

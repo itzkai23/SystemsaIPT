@@ -7,11 +7,10 @@
 }
 
 body {
-    max-height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 97vh;
 }
 
 /* Container */
@@ -29,7 +28,8 @@ body {
   padding: 20px;
   background-color: white;
   max-width: 70%;
-  max-height: 570px; /* Set a fixed height */
+  /* max-height: 570px;  */
+  /* Set a fixed height */
   border-radius: 20px;
   white-space: nowrap;
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
@@ -41,16 +41,16 @@ body {
   color: rgb(0, 25, 51);
   margin-bottom: 20px;
   margin-top: 10px;
-  margin-left: 32.5%;
-  width: 35%;
-  border-radius: 5px;
+  /* margin-left: 32.5%; */
+  /* width: 35%; */
+  /* border-radius: 5px; */
   padding: 10px;
   text-align: center;
   background: white;
   /* border: 1px solid #1565c0; */
   font-family: "Roboto", sans-serif;
   font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); */
 }
 
 .card {
@@ -112,3 +112,23 @@ body {
     border-radius: 5px;
     display: inline-block;
 }
+
+/* Existing styles above remain the same */
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .group-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      width: 90%; /* Makes cards wider on small screens */
+    }
+  
+    .whole {
+      max-width: 95%;
+      margin-top: 30px;
+      padding: 15px;
+    }
+  }
