@@ -71,7 +71,7 @@ if(isset($_POST['submit'])){
             $mail->Body = "Your OTP code is: $otp. Please enter this code to complete your registration.";
 
             $mail->send();
-            header("Location: verify_otp.php");
+            header("Location: ../account_verification/verify_otp.php");
             exit();
         } catch (Exception $e) {
             echo "Mailer Error: " . $mail->ErrorInfo;

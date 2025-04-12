@@ -3,7 +3,7 @@ session_start();
 include '../connect.php'; // Ensure database connection
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $entered_otp = trim($_POST["otp"]);
+    $entered_otp = trim(implode('', $_POST["otp"]));
 
     // Check if session OTP exists
     if (!isset($_SESSION['otp']) || !isset($_SESSION['email'])) {
