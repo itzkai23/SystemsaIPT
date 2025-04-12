@@ -14,6 +14,7 @@ body {
     background-size: cover;
     background-position: center;
     background-blend-mode: multiply; /* Blending the gradient with the image */
+    font-family: "Roboto", sans-serif;
     }  
 
 .h-text {
@@ -106,28 +107,6 @@ body {
       padding: 10px 18px;
     }
   
-    .home-header {
-      flex-direction: column;
-      align-items: center;
-      height: auto;
-      padding: 10px 0;
-    }
-  
-    .left-section,
-    .mid-section,
-    .right-section {
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      margin: 5px 0;
-      text-align: center;
-    }
-  
-    .mid-section {
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-left: 0;
-    }
   }
   
   @media screen and (max-width: 480px) {

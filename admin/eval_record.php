@@ -102,13 +102,13 @@ $current_image .= "?t=" . time();
     <div class="sidebar-header">
       <img src="../images/head2.png" alt="Sidebar Image" class="sidebar-image"/>
     </div>
-    <li><a class="a-bar" href="home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
+    <li><a class="a-bar" href="../students_interface/home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
     <li><a class="a-bar" href="../students_interface/instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
-    <li><a class="a-bar" href="upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+    <li><a class="a-bar" href="../students_interface/upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
   </ul>
 
   <div class="mid-section">
-    <a href="home.php" class="home">Home</a>
+    <a href="../students_interface/home.php" class="home">Home</a>
     <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
   </div>
 

@@ -90,6 +90,7 @@ $current_image .= "?t=" . time();
 <div class="mid-section">
          <a href="home.php" class="home">Home</a>
          <a href="instructorsProfiles.php" class="pf">Faculty</a>
+         <a href="upf.php" class="pf">Profile</a>
 </div>
 
 <div class="right-section">                              
@@ -126,7 +127,7 @@ $current_image .= "?t=" . time();
     
         </div>
       </div>
-      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></h4> 
+      <p class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></p> 
     </div>
          
 </div>
