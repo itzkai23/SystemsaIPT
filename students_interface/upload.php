@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "connect.php"; // Ensure this contains a valid MySQLi connection
+include "../connect.php"; // Ensure this contains a valid MySQLi connection
 
 if(isset($_POST["btnup"])){
     $user_id = $_POST["id"]; // Use "id" as per your database
