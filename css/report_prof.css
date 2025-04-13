@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -122,4 +122,48 @@ textarea:focus {
 .submit-btn:hover {
     color: white;
     background: black;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px;
+        height: auto;
+        align-items: flex-start; /* Better spacing on smaller screens */
+    }
+
+    .box {
+        width: 100%;
+        margin-top: 60px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .box img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .box h2 {
+        font-size: 18px;
+    }
+
+    label {
+        font-size: 13px;
+    }
+
+    input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        transform: scale(1.1);
+    }
+
+    textarea {
+        height: 70px;
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+        padding: 8px;
+    }
 }

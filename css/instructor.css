@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 /* Main Container */
 .container {
 max-width: 800px;
@@ -193,7 +198,7 @@ color: rgb(255, 152, 33);
 /* Close Button */
  .close {
     position: absolute;
-    top: 10px;
+    top: 2px;
     right: 15px;
     font-size: 24px;
     color: #aaa;
@@ -356,7 +361,7 @@ textarea:not(:placeholder-shown) + button {
     cursor: pointer; */
 
     position: absolute;
-    top: 10px;
+    top: 2px;
     right: 15px;
     font-size: 24px;
     color: #aaa;
@@ -672,3 +677,137 @@ word-wrap: break-word;
 .menu-options button:hover {
     background: #f2f2f2;
 }
+
+/* ---------- MOBILE: 768px and below ---------- */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 100px auto;
+    padding: 15px;
+  }
+
+  .avname {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .avname img {
+    width: 80px;
+    height: 80px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .prof-rep-div {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .report-btn {
+    width: auto;
+    padding: 5px 15px;
+    font-size: 14px;
+  }
+
+  .comment-post {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .section {
+    width: 100%;
+    height: auto;
+  }
+
+  .label-section {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+  }
+
+  .modal-content,
+  .modal-content-usercom {
+    width: 95%;
+    height: auto;
+    max-height: 90vh;
+    padding: 15px;
+    margin-top: 60px;
+  }
+
+  .modal-content-usercom div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comdent {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .comment-text,
+  .comment-text1 {
+    max-width: 100%;
+  }
+
+  .comment-box,
+  .comment-box1 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-btn {
+    top: -25px;
+    right: 5px;
+    font-size: 18px;
+  }
+
+  .user-participant {
+    max-width: 100%;
+    flex-wrap: wrap;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* ---------- SMALL MOBILE: 480px and below ---------- */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+    margin: 90px 10px;
+  }
+
+  .prof-name,
+  .pro-role {
+    font-size: 15px;
+  }
+
+  .report-btn {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  h3, h4 {
+    font-size: 16px;
+  }
+
+  p,
+  .comment-text p,
+  .comment-text1 p {
+    font-size: 14px;
+  }
+
+  .menu-options {
+    min-width: 90px;
+  }
+
+  .comment-img,
+  .your-com {
+    width: 25px;
+    height: 25px;
+  }
+}
+

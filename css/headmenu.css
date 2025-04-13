@@ -9,6 +9,7 @@
     right: 0;
     background-color: rgb(10, 0, 104);
     font-family: "Roboto", sans-serif;
+    z-index: 10000; /* Higher than profile-card */
     }
   
 .left-section {
@@ -22,8 +23,8 @@
 .mid-section {
 display: flex;
 align-items: center;
-gap: 50%;
-/* margin-left: 65%; */
+gap: 25%;
+margin-left: 62%;
 }
 
 .mid-section a{
@@ -66,14 +67,16 @@ gap: 50%;
   padding-right: 25px;
   flex-shrink: 0;
   max-width: 100%;
+  margin-right: 40px;
 }
 
 .user {
   color: white;
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px; /* You can tweak this */
+  max-width: 200px;  */
+  /* You can tweak this */
 } 
     
 .a-bar:hover {
@@ -119,6 +122,7 @@ gap: 50%;
   padding: 10px;
   border-radius: 8px;
   min-width: 250px;
+  z-index: 9999; /* Highest priority */
     }
     
 .logoutbb {
@@ -128,6 +132,7 @@ gap: 50%;
   margin-left: 2px;
   margin-top: 7px;
   padding: 5px 0px 5px 10px;
+  z-index: 9999;        /* higher than .profile-card */
     }
     
 .logoutb2 {
@@ -200,6 +205,7 @@ margin-left: 2px;
 width: 100%;
 padding: 8px;
 border-radius: 5px;
+text-align: left;
 }
 
 .user {
@@ -255,13 +261,13 @@ border-radius: 5px;
   height: 15%; /* Set the height to the same height as your sidebar items */
   overflow: hidden; /* Ensures no overflow from the image */
   position: relative;
-  margin-left:35px;
+  text-align: center;
 }
 
 .sidebar-image {
   width: 70%;
   object-fit: cover; /* Ensures the image covers the area without distortion */
-  border-bottom: 3px solid #ddd; /* Optional border to separate image and sidebar items */
+  border-bottom: 3px solid #ddd !important; /* Optional border to separate image and sidebar items */
   text-align: center;
 }
 
@@ -271,8 +277,8 @@ border-radius: 5px;
     left: -250px;
     height: 100%;
     width: 250px;
-    padding-top: 55px;
-    padding-left: 0px;
+    /* padding-top: 55px; */
+    padding: 55px 0 0 0; /* header height offset only */
     z-index: 10;
     background-color: rgb(11, 0, 114);
     backdrop-filter: blur(5px);

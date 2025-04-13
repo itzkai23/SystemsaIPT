@@ -107,10 +107,10 @@ $current_image .= "?t=" . time();
     <li><a class="a-bar" href="../students_interface/upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
   </ul>
 
-  <div class="mid-section">
+  <!-- <div class="mid-section">
     <a href="../students_interface/home.php" class="home">Home</a>
     <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
-  </div>
+  </div> -->
 
   <div class="right-section">
     <div class="logpos">
@@ -131,7 +131,7 @@ $current_image .= "?t=" . time();
             <Img src="../images/facultyb.png"><a class="a-pf" href="../students_interface/instructorsProfiles.php">Faculty</a>
           </div>
           <div class="logoutbb">
-            <a href="../Authentication/logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+            <a href="../Authentication/logout.php"><img src="../images/logoutb.png" class="logoutb2"></a>
             <a href="../Authentication/logout.php" class="logout-link">Logout</a>
           </div>
         </div>
@@ -211,14 +211,25 @@ $current_image .= "?t=" . time();
 
     <table>
       <thead>
-        <tr><?php for ($i = 1; $i <= 20; $i++) echo "<th>q$i</th>"; ?></tr>
+        <tr>
+          <?php for ($i = 1; $i <= 10; $i++) echo "<th>q$i</th>"; ?>
+        </tr>
       </thead>
       <tbody>
-        <tr id="modal-questions"></tr>
+        <tr id="modal-questions-1-10"></tr>
+      </tbody>
+      <thead>
+        <tr>
+          <?php for ($i = 11; $i <= 20; $i++) echo "<th>q$i</th>"; ?>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="modal-questions-11-20"></tr>
       </tbody>
     </table>
   </div>
 </div>
+
 
 <script src="../js/eval_record.js"></script>
 <script src="../js/sidebar.js"></script>

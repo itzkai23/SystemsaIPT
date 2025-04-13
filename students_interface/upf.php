@@ -143,6 +143,14 @@ $current_image .= "?t=" . time();
                     <label><strong>Last Name:</strong></label>
                     <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['l_name'] ?? ''); ?>" class="edit-input" style="display:none;">
                 </div>
+
+                <div class="user-input">
+                    <div class="label-span">
+                    <label><strong>Email:</strong></label>
+                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['em']); ?></span>
+                    </div>
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['em'] ?? ''); ?>" class="edit-input" style="display:none;">
+                </div>
                 
                 <!-- Cellphone No and Email (default visible) -->
                 <div class="user-input">
@@ -152,17 +160,7 @@ $current_image .= "?t=" . time();
                     </div>
                     <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['con'] ?? ''); ?>" class="edit-input" style="display:none;">
                 </div>
-                <div class="user-input">
-                    <div class="label-span">
-                    <label><strong>Email:</strong></label>
-                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['em']); ?></span>
-                    </div>
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['em'] ?? ''); ?>" class="edit-input" style="display:none;">
-                </div>
-                </div>
-                <!-- Birthday, hidden initially and shown only when editing -->
-                <div class="details"><p>You might also want to add these details:</p></div>
-                <div class="bage">
+
                 <div class="user-input" id="birthdayGroup">
                     <div class="label-span">
                     <label><strong>Birthday:</strong></label>
@@ -172,18 +170,22 @@ $current_image .= "?t=" . time();
                     </div>
                     <input hidden type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" class="edit-input">
                 </div>
-                
-                <!-- Age calculated based on the birthday -->
-                <div  class="user-input">
+
+                <div class="user-input" id="section">
                     <div class="label-span">
-                    <label><strong>Age:</strong></label>
-                    <span class="profile-text" id="ageText">
-                        <?php echo isset($_SESSION['Birthday']) ? calculateAge($_SESSION['Birthday']) : ''; ?>
+                    <label><strong>Section:</strong></label>
+                    <span class="profile-text">
+                        <?php echo htmlspecialchars($_SESSION['Birthday']); ?>
                     </span>
                     </div>
-                    <input type="text" id="age" readonly class="edit-input" style="display:none;">
+                    <input hidden type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" class="edit-input">
                 </div>
+                
                 </div>
+                <!-- Birthday, hidden initially and shown only when editing -->
+                <!-- <div class="details"><p>You might also want to add these details:</p></div> -->
+                <!-- <div class="bage">
+                </div> -->
             
             <br>
             <div class="profile-buttons">

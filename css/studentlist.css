@@ -1,4 +1,9 @@
 /* General Body Styling */
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -138,3 +143,65 @@ tr:hover {
     background-color: #e3f2fd;
     transition: background 0.3s ease-in-out;
 }
+
+@media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+  
+    .container {
+      padding: 15px;
+      margin-top: 40px;
+      max-height: none;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    .student-count {
+      font-size: 16px;
+    }
+  
+    .search-container input {
+      width: 100%;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+  
+    .search-container button {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+    }
+  
+    /* Make table horizontally scrollable */
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  
+    table {
+      min-width: 600px; /* Prevent table from shrinking too small */
+    }
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 18px;
+    }
+  
+    .student-count {
+      font-size: 14px;
+    }
+  
+    td, th {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .search-container button {
+      font-size: 14px;
+    }
+  }
+  

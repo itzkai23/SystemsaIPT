@@ -224,3 +224,82 @@ button:hover {
 .alert a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 480px) {
+    .form-container {
+      width: 100%;
+      margin-top: 60px;
+      padding: 15px;
+      max-height: none; /* allow height to adjust naturally */
+      border-radius: 10px;
+    }
+  
+    .form-title {
+      font-size: 20px;
+    }
+  
+    .rating-scale {
+      font-size: 13px;
+      padding: 8px;
+    }
+  
+    .rating-scale p {
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+  
+    .question-table td {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    .question-table .label-column {
+      font-size: 14px;
+    }
+  
+    .radio-group {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    input[type="radio"] {
+      transform: scale(1.1);
+    }
+  
+    textarea {
+      width: 100%;
+      font-size: 14px;
+      height: 90px;
+    }
+  
+    button {
+      width: 100%;
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .btn-con {
+      margin-right: 0;
+      text-align: center;
+    }
+  
+    .description,
+    .p-val {
+      font-size: 13px;
+    }
+  
+    .back-button img {
+      width: 24px;
+    }
+  
+    .alert {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .scrollable-table-container {
+      max-height: 250px;
+    }
+  }
+  

@@ -7,7 +7,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 97vh;
+    min-height: 100vh;
     background: 
         linear-gradient(rgb(76, 76, 209), rgba(125, 125, 233, 0.5)), /* Gradient overlay */
         url('../images/malabon-1.jpg') no-repeat; /* Background image */

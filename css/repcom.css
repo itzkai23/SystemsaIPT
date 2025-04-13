@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
 body { 
     font-family: Arial, sans-serif; 
     margin: 20px; 
@@ -140,4 +145,36 @@ button:hover {
 /* Show report-box1 when report2 is targeted */
 .report-container:target .report-box1 {
     display: block;
+}
+
+/* For very small screens (max-width: 480px) */
+@media (max-width: 480px) {
+    .styled-heading {
+        font-size: 20px;
+        width: 90%;
+    }
+
+    /* Adjust the layout of report boxes */
+    .report-box, .report-box1 {
+        max-width: 100%;
+        margin: 5px 0px;
+    }
+
+    .repcomcon-btn a {
+        font-size: 14px;
+        padding: 6px 10px;
+        width: 100%; /* Full width on very small screens */
+        margin: 50px 5px 5px 5px;
+    }
+
+    /* Reported text adjustments for small screens */
+    .reported-text {
+        font-size: 13px;
+        padding: 6px;
+    }
+
+    /* Button adjustments */
+    button {
+        padding: 8px 12px;
+    }
 }

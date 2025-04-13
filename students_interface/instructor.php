@@ -175,14 +175,14 @@ $current_image .= "?t=" . time();
                 </div>
 
            <div class="logoutbb">
-             <a href="../Authentication/logout.php"><img src="images/logoutb.png" class="logoutb2"></a>
+             <a href="../Authentication/logout.php"><img src="../images/logoutb.png" class="logoutb2"></a>
              <a href="../Authentication/logout.php" class="logout-link">Logout</a>
            </div>
     
         </div>
        
       </div>
-      <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']);?></span></h4> 
+      <p class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']);?></span></p> 
     </div>
          
 </div>

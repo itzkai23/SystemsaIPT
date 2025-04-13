@@ -3,24 +3,25 @@ function openModal(data) {
     document.getElementById("modal-score").textContent = parseFloat(data.evaluation_avg_score).toFixed(2);
     document.getElementById("modal-avg").textContent = parseFloat(data.professor_avg_score).toFixed(2);
 
-    // Populate the 20 question responses
-    let questionsRow = "";
-    for (let i = 1; i <= 20; i++) {
-        questionsRow += `<td>${data['q' + i] || 'N/A'}</td>`;
+    // Create rows for questions 1-10 and 11-20
+    let questionsRow1_10 = "";
+    let questionsRow11_20 = "";
+
+    // Populate questions 1-10
+    for (let i = 1; i <= 10; i++) {
+        questionsRow1_10 += `<td>${data['q' + i] || 'N/A'}</td>`;
     }
 
-    // Add delete button at the end of the row
-    // questionsRow += `
-    //     <td>
-    //         <form action='delete_record.php' method='POST' onsubmit='return confirm("Are you sure you want to delete this record?");'>
-    //             <input type='hidden' name='record_id' value='${data.id}'>
-    //             <button type='submit'>Delete</button>
-    //         </form>
-    //     </td>`;
+    // Populate questions 11-20
+    for (let i = 11; i <= 20; i++) {
+        questionsRow11_20 += `<td>${data['q' + i] || 'N/A'}</td>`;
+    }
 
-    document.getElementById("modal-questions").innerHTML = questionsRow;
+    // Insert rows into the modal table
+    document.getElementById("modal-questions-1-10").innerHTML = questionsRow1_10;
+    document.getElementById("modal-questions-11-20").innerHTML = questionsRow11_20;
 
-    // Show the delete button
+    // Show the delete button and set record ID for deletion
     document.getElementById("delete-record-id").value = data.id;  // Set the record id for deletion
     document.getElementById("delete-button").style.display = "block";  // Show delete button
     
