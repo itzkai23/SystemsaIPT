@@ -146,8 +146,12 @@ $current_image .= "?t=" . time();
         
         <div class="whole">
         <h1>Faculty Evaluation</h1>
+        <div class="con-year-sem"><strong>AY Term:</strong>
+        <div class="year-semester"> 
+        <p><?php echo htmlspecialchars($row['school_year']); ?>,</p>
         <p> <?php echo htmlspecialchars($row['semester']); ?></p>
-        <p><?php echo htmlspecialchars($row['school_year']); ?></p>
+        </div>
+        </div>
         <div class="group-container">
         
     <?php if ($result->num_rows > 0) { ?>
@@ -156,6 +160,9 @@ $current_image .= "?t=" . time();
             <img src="<?php echo !empty($row['prof_img']) ? htmlspecialchars($row['prof_img']) : '../images/facultyb.png'; ?>" 
                  alt="<?php echo htmlspecialchars($row['name']); ?>" 
                  width="150" height="150">
+
+              
+              
             <h2><?php echo htmlspecialchars($row['name']); ?></h2>
             <p class="role"><?php echo htmlspecialchars($row['role']); ?></p>
             <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">Evaluate</a>

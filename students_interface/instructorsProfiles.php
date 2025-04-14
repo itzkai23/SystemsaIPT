@@ -151,8 +151,12 @@ $current_image .= "?t=" . time();
 <div class="whole">
 
         <h1>Instructor's Profiles</h1>
+        <div class="con-year-sem"><strong>AY Term:</strong>
+        <div class="year-semester"> 
+        <p><?php echo htmlspecialchars($row['school_year']); ?>,</p>
         <p> <?php echo htmlspecialchars($row['semester']); ?></p>
-        <p><?php echo htmlspecialchars($row['school_year']); ?></p>
+        </div>
+        </div>
         <div class="group-container"> 
                 <?php if ($result->num_rows > 0) { ?>
             <?php while ($row = $result->fetch_assoc()) { ?>

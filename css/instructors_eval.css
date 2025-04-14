@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
+    font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -110,6 +111,23 @@ body {
     border: 3px solid #ec407a;
      /* Blue border */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.con-year-sem {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.con-year-sem strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: #04055c;
+}
+
+.year-semester {
+    display: flex;
+    gap: 2px;
+    font-size: 14px;
 }
 
 /* Instructor Name */

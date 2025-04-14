@@ -91,6 +91,23 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.con-year-sem {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.con-year-sem strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: #04055c;
+}
+
+.year-semester {
+    display: flex;
+    gap: 2px;
+    font-size: 14px;
+}
+
 /* Instructor Name */
 .card h2 {
     font-size: 20px;
