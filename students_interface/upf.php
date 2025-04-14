@@ -14,30 +14,19 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
     exit();
 }
 
+$query = "SELECT semester, school_year FROM section_professors LIMIT 1"; 
+$result = mysqli_query($conn, $query);
 
-$user_id = $_SESSION['user_id']; // Get user ID from session
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
 
-// // Prepare SQL query to fetch feedback for the logged-in user
-// $query = "SELECT feedback, submitted_at FROM instructor_evaluation WHERE user_id = ?";
-// $stmt = $conn->prepare($query);
-// $stmt->bind_param("i", $user_id);
-// $stmt->execute();
-// $result = $stmt->get_result();
-
-// $feedbackData = [];
-
-// while ($row = $result->fetch_assoc()) {
-//     $feedbackData[] = [
-//         'feedback' => $row['feedback'],
-//         'submitted_at' => $row['submitted_at']
-//     ];
-// }
-
-function calculateAge($bday) {
-    $birthDate = new DateTime($bday);
-    $today = new DateTime();
-    $age = $today->diff($birthDate)->y;
-    return $age;
+    // Store in session
+    $_SESSION['semester'] = $row['semester'];
+    $_SESSION['school_year'] = $row['school_year'];
+} else {
+    // Default values or handle missing data
+    $_SESSION['semester'] = "N/A";
+    $_SESSION['school_year'] = "N/A";
 }
 
 $default_image = "../images/icon.jpg";
@@ -175,18 +164,32 @@ $current_image .= "?t=" . time();
                     <div class="label-span">
                     <label><strong>Section:</strong></label>
                     <span class="profile-text">
-                        <?php echo htmlspecialchars($_SESSION['Birthday']); ?>
+                        <?php echo htmlspecialchars($_SESSION['section']); ?>
                     </span>
                     </div>
-                    <input hidden type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" class="edit-input">
+                    <input hidden type="text" id="section" name="section" value="<?php echo htmlspecialchars($_SESSION['section'] ?? ''); ?>" class="edit-input">
                 </div>
                 
+                <div class="user-input" id="semester">
+                    <div class="label-span">
+                    <label><strong>Semester:</strong></label>
+                    <span class="profile-text">
+                        <?php echo htmlspecialchars($row['semester']); ?>
+                    </span>
+                    </div>
+                    <input hidden type="text" id="section" name="section" value="<?php echo htmlspecialchars($row['semester'] ?? ''); ?>" class="edit-input">
                 </div>
-                <!-- Birthday, hidden initially and shown only when editing -->
-                <!-- <div class="details"><p>You might also want to add these details:</p></div> -->
-                <!-- <div class="bage">
-                </div> -->
-            
+
+                <div class="user-input" id="school_year">
+                    <div class="label-span">
+                    <label><strong>School_year:</strong></label>
+                    <span class="profile-text">
+                        <?php echo htmlspecialchars($row['school_year']); ?>
+                    </span>
+                    </div>
+                    <input hidden type="text" id="school_year" name="school_year" value="<?php echo htmlspecialchars($row['school_year'] ?? ''); ?>" class="edit-input">
+                </div>
+                </div>
             <br>
             <div class="profile-buttons">
                 <button type="button" id="editProfileBtn" class="edit-btn">Edit</button>

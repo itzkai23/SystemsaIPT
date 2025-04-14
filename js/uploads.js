@@ -24,8 +24,6 @@ const saveBtn = document.getElementById("saveProfileBtn");
 const cancelBtn = document.getElementById("cancelEditBtn");
 const profileTexts = document.querySelectorAll(".profile-text");
 const editInputs = document.querySelectorAll(".edit-input");
-const ageText = document.getElementById("ageText");
-const ageInput = document.getElementById("age");
 const bdayInput = document.getElementById("Birthday");
 const fname = document.getElementById("fname");
 const lname = document.getElementById("lname");
@@ -39,7 +37,6 @@ editBtn.addEventListener("click", () => {
     editBtn.style.display = "none";
     saveBtn.style.display = "inline-block";
     cancelBtn.style.display = "inline-block";
-    updateAge();
 });
 
 cancelBtn.addEventListener("click", () => {
@@ -52,23 +49,4 @@ cancelBtn.addEventListener("click", () => {
     cancelBtn.style.display = "none";
 });
 
-function updateAge() {
-    const birthday = bdayInput.value;
-    if (!birthday) return;
 
-    const today = new Date();
-    const birthDate = new Date(birthday);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-
-    if (!isNaN(age)) {
-        ageInput.value = age;
-    }
-}
-
-// Real-time age update when user selects date
-bdayInput.addEventListener("change", updateAge);

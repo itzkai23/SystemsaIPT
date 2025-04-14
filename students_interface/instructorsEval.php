@@ -13,6 +13,22 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
     exit();
 }
 
+$query = "SELECT semester, school_year FROM section_professors LIMIT 1"; 
+$result = mysqli_query($conn, $query);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+
+    // Store in session
+    $_SESSION['semester'] = $row['semester'];
+    $_SESSION['school_year'] = $row['school_year'];
+} else {
+    // Default values or handle missing data
+    $_SESSION['semester'] = "N/A";
+    $_SESSION['school_year'] = "N/A";
+}
+
+
 // Fetch the logged-in user's section
 $user_id = $_SESSION['user_id'];  // Assuming the user_id is stored in the session
 $section_query = "SELECT section FROM registration WHERE id = ?";
@@ -130,6 +146,8 @@ $current_image .= "?t=" . time();
         
         <div class="whole">
         <h1>Faculty Evaluation</h1>
+        <p> <?php echo htmlspecialchars($row['semester']); ?></p>
+        <p><?php echo htmlspecialchars($row['school_year']); ?></p>
         <div class="group-container">
         
     <?php if ($result->num_rows > 0) { ?>

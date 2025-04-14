@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['pic'] = !empty($row['picture']) ? $row['picture'] : "../images/icon.jpg";
             $_SESSION['Birthday'] = $row['Birthday'];
+            $_SESSION['section'] = $row['section'];
             $_SESSION['is_admin'] = $row['is_admin']; // Store admin status
 
             // Redirect based on user type
