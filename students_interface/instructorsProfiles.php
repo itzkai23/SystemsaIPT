@@ -15,19 +15,21 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 $query = "SELECT semester, school_year FROM section_professors LIMIT 1"; 
-$result = mysqli_query($conn, $query);
+$ay_result = mysqli_query($conn, $query); 
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
+if ($ay_result && mysqli_num_rows($ay_result) > 0) {
+    $ay_row = mysqli_fetch_assoc($ay_result); 
 
-    // Store in session
-    $_SESSION['semester'] = $row['semester'];
-    $_SESSION['school_year'] = $row['school_year'];
+    $school_year = $ay_row['school_year'];
+    $semester = $ay_row['semester'];
+
+    $_SESSION['school_year'] = $school_year;
+    $_SESSION['semester'] = $semester;
 } else {
-    // Default values or handle missing data
-    $_SESSION['semester'] = "N/A";
-    $_SESSION['school_year'] = "N/A";
+    $school_year = "N/A";
+    $semester = "N/A";
 }
+
 
 // Fetch the logged-in user's section
 $user_id = $_SESSION['user_id'];  // Assuming the user_id is stored in the session
@@ -151,21 +153,23 @@ $current_image .= "?t=" . time();
 <div class="whole">
 
         <h1>Instructor's Profiles</h1>
-        <div class="con-year-sem"><strong>AY Term:</strong>
-        <div class="year-semester"> 
-        <p><?php echo htmlspecialchars($row['school_year']); ?>,</p>
-        <p> <?php echo htmlspecialchars($row['semester']); ?></p>
-        </div>
-        </div>
         <div class="group-container"> 
-                <?php if ($result->num_rows > 0) { ?>
+        <?php if ($result->num_rows > 0) { ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="card">
                 <img src="<?php echo !empty($row['prof_img']) ? htmlspecialchars($row['prof_img']) : '../images/facultyb.png'; ?>" 
                  alt="<?php echo htmlspecialchars($row['name']); ?>" 
                  width="150" height="150">                    
                  <h2><?php echo htmlspecialchars($row['name']); ?></h2>
-                    <a href="instructor.php?professor_id=<?php echo $row['id']; ?>"><p class="role"><?php echo htmlspecialchars($row['role']); ?></p></a>
+                    <a href="instructor.php?professor_id=<?php echo $row['id']; ?>">
+                      <p class="role"><?php echo htmlspecialchars($row['role']); ?></p>
+                    </a>
+                <div class="con-year-sem"><strong>AY Term:</strong>
+                   <div class="year-semester"> 
+                      <p><?php echo htmlspecialchars($school_year); ?>,</p>
+                      <p> <?php echo htmlspecialchars($semester); ?></p>
+                    </div>
+                </div> 
                 </div>
             <?php } ?>
         <?php } else { ?>
