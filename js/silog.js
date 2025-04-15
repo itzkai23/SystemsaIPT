@@ -59,3 +59,31 @@ document.getElementById("registerForm").addEventListener("submit", function(even
         event.preventDefault(); // Prevents form submission
     }
 });
+
+document.getElementById("login").addEventListener("submit", function (event) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const error = urlParams.get('error');
+  const errorDiv = document.getElementById('login-error');
+
+  // Handle error messages
+  if (error === 'incorrect_password') {
+      errorDiv.textContent = 'Incorrect password. Please try again.';
+  } else if (error === 'user_not_found') {
+      errorDiv.textContent = 'User not found. Please check your username.';
+  }
+
+  // Automatically open login modal if error exists
+  if (error) {
+      document.querySelector('.wrapper').classList.add('active-popup');
+      document.querySelector('.form-box.login').classList.add('active');
+  }
+
+  // Clear error message when the user starts typing
+  document.getElementById('username').addEventListener('input', () => {
+      errorDiv.textContent = ''; // Clear error when typing username
+  });
+
+  document.getElementById('password').addEventListener('input', () => {
+      errorDiv.textContent = ''; // Clear error when typing password
+  });
+});

@@ -26,7 +26,7 @@ if (isset($_SESSION['user_name'])) {
     <img src="../images/head.png" alt="headerlogo" class="logo">
     <nav class="navigation">
        <a href="#">Regulations</a>
-       <a href="../profstatus.php">Faculties</a>
+       <a href="../students_interface/profstatus.php">Faculties</a>
        <button class="btn-popup">Login</button>      
     </nav>
 </header>
@@ -48,6 +48,7 @@ if (isset($_SESSION['user_name'])) {
             <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="toggle-eye" onclick="togglePassword()"><i class="fas fa-eye" id="pass-eyecon"></i></span>
             </div>
+            <div id="login-error" class="error-message" style="color:red; font-size: 0.9em; margin-top: 5px;"></div>
             <h5><a href="../change_pass/forgotpass.php">Forgot password?</a></h5>
             <button type="submit" name="sub" class="form-login-btn">Login</button>
             <p>Don't have an account? <a href="#" class="register-link" >SignUp</a></p>

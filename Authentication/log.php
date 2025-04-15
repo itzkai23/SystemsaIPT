@@ -43,13 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
             }
             exit();
         } else {
-            echo "<script> 
-            alert('Incorrect Password!');
-            window.location.href = 'silog.php';
-             </script>";
+            // Redirect with error parameter
+            header("Location: silog.php?error=incorrect_password");
+            exit();
         }
     } else {
-        echo 'User not found!';
+        // Redirect with error parameter
+        header("Location: silog.php?error=user_not_found");
+        exit();
     }
 } else {
     echo 'Invalid access.';
