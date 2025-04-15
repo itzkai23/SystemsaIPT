@@ -495,11 +495,20 @@ $result = $conn->query($sql);
                     </td>
                 </tr>
 
+                <tr class="label-radio">
+                  <td><label for="feedback" class="option-feedback">IX. Open-Ended Feedback</label></td>
+                </tr>
+                <tr class="label-con-feedback">
+                  <td class="label-feedback">
+                   <label>What aspects of the course or the faculty's teaching style did you find most effective or enjoyable?</label>
+                  </td>
+                  <td class="radio-group"><textarea id="feedback" name="feedback"></textarea></td>
+                </tr>
+
             </table>
             
-            <label for="feedback">IX. Open-Ended Feedback</label>
-            <p>What aspects of the course or the faculty's teaching style did you find most effective or enjoyable?</p>
-            <textarea id="feedback" name="feedback"></textarea>
+            
+            
             
             <div class="btn-con">
             <button type="submit">Submit</button>

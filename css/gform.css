@@ -167,7 +167,7 @@ td {
     padding: 25px;
 }
 
-.label-radio {
+.label-radio, .label-con-feedback {
     border: 2px solid #ddd;
     padding-left: 30px;
 }
@@ -177,7 +177,7 @@ td {
     vertical-align: middle;
 } */
 
-.question-table td p {
+.question-table td p, .question-table .option-feedback {
     color: #fd2448;
     font-size: 12px;
     font-weight: 600;
@@ -199,6 +199,14 @@ td {
     font-weight: 400;
     color: rgb(95, 94, 94);
     margin-left: 3px;
+}
+
+.label-feedback label {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgb(95, 94, 94);
+    margin-left: 3px;
+    
 }
 
 .question-table .radio-group {
@@ -224,7 +232,7 @@ input[type="radio"] {
     text-align: left;
 }
 textarea {
-    width: 45%;
+    width: 100%;
     padding: 10px;
     border: 1px solid #bbb;
     border-radius: 6px;
