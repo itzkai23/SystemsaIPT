@@ -51,15 +51,14 @@ $current_image .= "?t=" . time();
      <li><a class="a-bar"href="upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
           
    </ul>
-
-   <div class="mid-section">
-   <a href="home.php" class="home">Home</a>
-   <a href="instructorsProfiles.php" class="pf">Faculty</a>
-   <a href="upf.php" class="pf">Profile</a>
-   </div>
    
    <div class="right-section">                              
-      
+    <div class="mid-section">
+          <a href="home.php" class="home">Home</a>
+          <a href="instructorsProfiles.php" class="pf">Faculty</a>
+          <a href="upf.php" class="pf">Profile</a>
+   </div>
+   
      <div class="logpos">
          
          <div class="logout-container"> 
@@ -101,8 +100,10 @@ $current_image .= "?t=" . time();
     <div class="box">
         <!-- Display Professor's Image -->
         <img src="<?php  echo !empty($prof_img) ? htmlspecialchars($prof_img) : $defimage; ?>" alt="<?php echo $professor_name; ?>"> 
-        <h2>Report a Professor</h2>    
-        <h4><?php echo $professor_name; ?></h4>  
+        <div class="report-f">
+        <h2>Report:</h2>    
+        <h4><?php echo $professor_name; ?></h4>
+        </div>  
 
         <form action="submit_report.php" method="post">
             <input type="hidden" name="professor_id" value="<?php echo $professor_id; ?>">
@@ -117,7 +118,7 @@ $current_image .= "?t=" . time();
                 <label><input type="checkbox" id="otherCheckbox" name="reason[]" value="Others"> Others:</label>
             </div>
 
-            <textarea name="details" placeholder="Optional: Provide additional details..."></textarea>
+            <textarea name="details" placeholder="Others:"></textarea>
 
             <button type="submit" class="submit-btn">Submit Report</button>
         </form>

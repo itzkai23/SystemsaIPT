@@ -11,8 +11,12 @@
 </head>
 <body>
     <div class="container">
-        <h2>Forgot Password</h2>
-        <p>Enter your email to reset your password</p>
+        <div class="forgot-image">
+        <img src="../images/logo3.png" alt="" class="colored-img">
+        <img src="../images/head2.png" alt="" class="colored-text-img">
+        </div>
+        <h2>Forgot Password?</h2>
+        <p>Enter your email address and we'll send you an otp to your cmu account on spam to reset your password</p>
         <form action="otppass.php" method="post">
             <input type="email" name="email" placeholder="Enter your email" required>
             <button type="submit">Send</button>

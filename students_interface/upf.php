@@ -66,13 +66,13 @@ $current_image .= "?t=" . time();
      <li><a class="a-bar"href="upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
       </ul>
 
+      <div class="right-section">
       <div class="mid-section">
          <a href="home.php" class="home">Home</a>
          <a href="instructorsProfiles.php" class="pf">Faculty</a>
          <a href="upf.php" class="pf">Profile</a>
       </div>
-
-      <div class="right-section">
+      
         <div class="logpos">
             <div class="logout-container"> 
                 <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
@@ -120,7 +120,7 @@ $current_image .= "?t=" . time();
       </section>
 
       <div class="profile-right">
-        <h3>Profile Details</h3>
+        <h3>Personal Information</h3>
         <form action="update_profile.php" method="post" id="profileForm">
             <div class="profile-grid">
                 <!-- First name and Last name display -->

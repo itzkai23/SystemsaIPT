@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             unset($_SESSION['temp_user']);
             echo "<script>
                     alert('Successfully created an account!');
-                    window.location.href='silog.php';
+                    window.location.href='../Authentication/silog.php';
                   </script>";
             exit();
         } else {
@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="buo">
-    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon">
+    <!-- <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon"> -->
+     <img src="../images/head2.png" alt="">
     <h2>Account Verification</h2>
     <p class="guide">Go to Gmail using the CMU account you register. If you can't find the otp on your inbox, check your spam messages and look for "University Registration", that's where you'll find your otp.</p>
     <p class="guide">This is the last step of your registration. It's a necessary step to verify that you're the real owner of the Gmail you are using to register in order to avoid unwanted risks such as identity theft. Thank you for understanding.</p>

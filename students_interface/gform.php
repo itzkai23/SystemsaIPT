@@ -112,8 +112,7 @@ $result = $conn->query($sql);
   <span></span>
 </div>
 
-<ul class="sidebar" id="sidebar">
-      
+<ul class="sidebar" id="sidebar">  
    <div class="sidebar-header">
     <img src="../images/head2.png" alt="Sidebar Image" class="sidebar-image">
    </div>
@@ -124,7 +123,11 @@ $result = $conn->query($sql);
 </ul>
 
 <div class="right-section">                              
-   
+<div class="mid-section">
+    <a href="home.php" class="home">Home</a>
+    <a href="instructorsProfiles.php" class="pf">Faculty</a>
+    <a href="upf.php" class="pf">Profile</a>
+    </div> 
 <div class="logpos">
   
   <div class="logout-container"> 

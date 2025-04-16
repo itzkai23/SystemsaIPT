@@ -106,13 +106,14 @@ $current_image .= "?t=" . time();
           
    </ul>
 
-   <div class="mid-section">
-   <a href="home.php" class="home">Home</a>
-   <a href="instructorsProfiles.php" class="pf">Faculty</a>
-   <a href="upf.php" class="pf">Profile</a>
-   </div>
    
-   <div class="right-section">                              
+   
+   <div class="right-section">
+    <div class="mid-section">
+    <a href="home.php" class="home">Home</a>
+    <a href="instructorsProfiles.php" class="pf">Faculty</a>
+    <a href="upf.php" class="pf">Profile</a>
+    </div>                              
       
      <div class="logpos">
          
@@ -178,7 +179,7 @@ $current_image .= "?t=" . time();
                 <?php if ($can_evaluate): ?>
                     <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">EVALUATE</a>
                 <?php else: ?>
-                    <i class="fas fa-check" style="color: #ddd; font-size: 20px;"></i>
+                    <i class="fas fa-check" id="f-check"></i>
                     <span class="btn-disabled">FINISHED</span>
             <?php endif; ?>
              

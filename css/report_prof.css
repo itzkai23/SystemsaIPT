@@ -32,11 +32,25 @@ body {
     border-radius: 50%;
 }
 
-.box h2, .box h2 {
-    font-family: "Roboto", sans-serif;
+.report-f {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.report-f h2 {
+    /* font-family: "Roboto", sans-serif; */
     margin-top: 5px;
     margin-bottom: 5px;
     letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.report-f h4 {
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 .checkbox-container {
@@ -114,14 +128,14 @@ textarea:focus {
     cursor: pointer;
     font-size: 16px;
     font-family: "Roboto", sans-serif;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
     font-weight: bold;
     transition: background 0.3s, color 0.3s;
 }
 
 .submit-btn:hover {
     color: white;
-    background: black;
+    background: rgb(49, 49, 49);
 }
 
 @media (max-width: 480px) {

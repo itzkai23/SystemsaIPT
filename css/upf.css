@@ -74,10 +74,10 @@ body {
     color: black;
     border-radius: 12px;
     width: 97%;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); */
     /* overflow: hidden; */
     margin-top: 10%;
-    
+    border: 2px solid #ddd;
 }
 .profile-left {
     background: #ffffff;
@@ -89,7 +89,7 @@ body {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 3px solid #f1c40f;
+    border: 3px solid #cccccc;
 }
 .profile-left h3 {
     color: #000225;
@@ -262,6 +262,10 @@ body {
       width: 100%;
       text-align: center;
       padding: 15px;
+    }
+
+    .profile-right {
+      margin-top: -30px;
     }
   
     .profile-right h3 {
