@@ -159,17 +159,20 @@ $current_image .= "?t=" . time();
                 <div class="card">
                 <img src="<?php echo !empty($row['prof_img']) ? htmlspecialchars($row['prof_img']) : '../images/facultyb.png'; ?>" 
                  alt="<?php echo htmlspecialchars($row['name']); ?>" 
-                 width="150" height="150">                    
-                 <h2><?php echo htmlspecialchars($row['name']); ?></h2>
-                    <a href="instructor.php?professor_id=<?php echo $row['id']; ?>">
-                      <p class="role"><?php echo htmlspecialchars($row['role']); ?></p>
-                    </a>
-                <div class="con-year-sem"><strong>AY Term:</strong>
+                 width="150" height="150">
+                 
+                 <div class="con-year-sem"><strong>AY Term:</strong>
                    <div class="year-semester"> 
                       <p><?php echo htmlspecialchars($school_year); ?>,</p>
                       <p> <?php echo htmlspecialchars($semester); ?></p>
                     </div>
-                </div> 
+                </div>
+                
+                 <h2><?php echo htmlspecialchars($row['name']); ?></h2>
+                    <a href="instructor.php?professor_id=<?php echo $row['id']; ?>">
+                      <p class="role"><?php echo htmlspecialchars($row['role']); ?></p>
+                    </a>
+                 
                 </div>
             <?php } ?>
         <?php } else { ?>

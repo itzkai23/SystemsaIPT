@@ -80,6 +80,8 @@ $current_image .= "?t=" . time();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Font Awesome CDN -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
      <link rel="stylesheet" href="../css/instructors_eval.css">
      <link rel="stylesheet" href="../css/headmenu.css">
     </head>  
@@ -161,22 +163,25 @@ $current_image .= "?t=" . time();
                  alt="<?php echo htmlspecialchars($row['name']); ?>" 
                  width="150" height="150">
              
+            <div class="con-year-sem"><strong>AY Term:</strong>
+                   <div class="year-semester"> 
+                      <p><?php echo htmlspecialchars($school_year); ?>,</p>
+                      <p> <?php echo htmlspecialchars($semester); ?></p>
+                    </div>
+            </div>
+                 
             <h2><?php echo htmlspecialchars($row['name']); ?></h2>
             <p class="role"><?php echo htmlspecialchars($row['role']); ?></p>
             <?php
                 $can_evaluate = canEvaluate($conn, $user_id, $row['id']);
                 ?>
                 <?php if ($can_evaluate): ?>
-                    <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">Evaluate</a>
+                    <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">EVALUATE</a>
                 <?php else: ?>
-                    <span class="btn-disabled">Evaluated</span>
+                    <i class="fas fa-check" style="color: #ddd; font-size: 20px;"></i>
+                    <span class="btn-disabled">FINISHED</span>
             <?php endif; ?>
-            <div class="con-year-sem"><strong>AY Term:</strong>
-                   <div class="year-semester"> 
-                      <p><?php echo htmlspecialchars($school_year); ?>,</p>
-                      <p> <?php echo htmlspecialchars($semester); ?></p>
-                    </div>
-                </div> 
+             
         </div>
         <?php } ?>
         <?php } else { ?>

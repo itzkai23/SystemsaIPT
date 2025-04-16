@@ -60,25 +60,27 @@ document.getElementById("registerForm").addEventListener("submit", function(even
     }
 });
 
-document.getElementById("login").addEventListener("submit", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
+  const loginForm = document.getElementById("login");
+  const errorDiv = document.getElementById("login-error");
+
+  // Extract URL parameters for error messages
   const urlParams = new URLSearchParams(window.location.search);
   const error = urlParams.get('error');
-  const errorDiv = document.getElementById('login-error');
 
-  // Handle error messages
-  if (error === 'incorrect_password') {
+  // Handle the error messages dynamically
+  if (error === 'invalid_credentials') {
       errorDiv.textContent = 'Incorrect password. Please try again.';
   } else if (error === 'user_not_found') {
       errorDiv.textContent = 'User not found. Please check your username.';
   }
 
-  // Automatically open login modal if error exists
+  // Keep the login form open when there is an error
   if (error) {
       document.querySelector('.wrapper').classList.add('active-popup');
-      document.querySelector('.form-box.login').classList.add('active');
   }
 
-  // Clear error message when the user starts typing
+  // Clear the error message when the user starts typing
   document.getElementById('username').addEventListener('input', () => {
       errorDiv.textContent = ''; // Clear error when typing username
   });

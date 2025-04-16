@@ -7,6 +7,18 @@ if (isset($_SESSION['user_name'])) {
     header("Location: ../students_interface/home.php");
     exit();
 }
+
+$error = $_GET['error'] ?? '';
+$errorMsg = '';
+
+switch ($error) {
+    case 'invalid_credentials':
+        $errorMsg = 'Incorrect password.';
+        break;
+    case 'user_not_found':
+        $errorMsg = 'User not found.';
+        break;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,33 +44,39 @@ if (isset($_SESSION['user_name'])) {
 </header>
 
 <div class="wrapper">
-    <div class="form-box login">
-        <span class="close login" id="logi" >
-            <img src="../images/close.png" alt="close">
-        </span>
-        <img src="../images/logo.png" alt="City of Malabon University" class="image">
-        <form id="login" action="log.php" method="post">
-            <div class="input-group">
+<div class="form-box login">
+    <span class="close login" id="logi">
+        <img src="../images/close.png" alt="close">
+    </span>
+    <img src="../images/logo.png" alt="City of Malabon University" class="image">
+    
+    <form id="login" action="log.php" method="post">
+        <div class="input-group">
             <span class="icon"><i class="fas fa-user"></i></span>
             <input type="text" id="username" name="uname" placeholder="Username" required>
-            </div>
+        </div>
 
-            <div class="input-group">
+        <div class="input-group">
             <span class="icon"><i class="fas fa-lock"></i></span>
             <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="toggle-eye" onclick="togglePassword()"><i class="fas fa-eye" id="pass-eyecon"></i></span>
+        </div>
+
+        <?php if ($errorMsg): ?>
+            <div id="login-error" class="error-message" style="color:red; font-size: 0.9em; margin-top: 5px;">
+                <?= htmlspecialchars($errorMsg) ?>
             </div>
-            <div id="login-error" class="error-message" style="color:red; font-size: 0.9em; margin-top: 5px;"></div>
-            <h5><a href="../change_pass/forgotpass.php">Forgot password?</a></h5>
-            <button type="submit" name="sub" class="form-login-btn">Login</button>
-            <p>Don't have an account? <a href="#" class="register-link" >SignUp</a></p>
-            
-            <div>
-                <label for="termsCheckbox" class="open-modal-btn">Terms and Conditions</label>
-            </div>
-        
-        </form>
-    </div>
+        <?php endif; ?>
+
+        <h5><a href="../change_pass/forgotpass.php">Forgot password?</a></h5>
+        <button type="submit" name="sub" class="form-login-btn">Login</button>
+        <p>Don't have an account? <a href="#" class="register-link">SignUp</a></p>
+
+        <div>
+            <label for="termsCheckbox" class="open-modal-btn">Terms and Conditions</label>
+        </div>
+    </form>
+</div>
 
     <div class="form-box register">
         <span class="close register" id="regi">
@@ -164,19 +182,10 @@ if (isset($_SESSION['user_name'])) {
     </div>
     <div class="chat-header">UP-CHAT</div>
     <label for="chat-popup" class="close">&times;</label>
-    <!-- <div class="chat-body" id="chat-body">
-        <div class="chat-message bot-message">Hello! How can I help you?</div>
-    </div> -->
     <iframe src="https://www.chatbase.co/chatbot-iframe/5cyDdC8pYxitCeWBRtzVm" frameborder="0" class="chat-body" id="chat-body">
-        <!-- <div class="chat-message bot-message">Hello! How can I help you?</div> -->
     </iframe>
-    <!-- <div class="chat-footer">
-        <textarea id="user-input" placeholder="Type a message..."></textarea>
-        <button onclick="sendMessage()">
-            <img class="send-image" src="images/sends.png" alt="Send">
-        </button>
-    </div> -->
 </div>
+
 
 <script src="../js/faeye.js"></script>
 <script src="../js/cbot.js"></script>

@@ -502,7 +502,7 @@ $result = $conn->query($sql);
                   <td class="label-feedback">
                    <label>What aspects of the course or the faculty's teaching style did you find most effective or enjoyable?</label>
                   </td>
-                  <td class="radio-group"><textarea id="feedback" name="feedback"></textarea></td>
+                  <td class="radio-group"><textarea id="feedback" name="feedback" placeholder="Optional"></textarea></td>
                 </tr>
 
             </table>
@@ -511,7 +511,7 @@ $result = $conn->query($sql);
             
             
             <div class="btn-con">
-            <button type="submit">Submit</button>
+            <button type="submit"><img src="../images/sends.png" alt=""> Submit Evaluation</button>
         </div>
         
         </div>

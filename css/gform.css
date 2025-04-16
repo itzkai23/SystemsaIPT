@@ -163,19 +163,26 @@ border-radius: 5px;
     border-collapse: collapse;
 }
 
-td {
+/* tr {
+  padding: 5px;
+} */
+
+.label-radio td {
     padding: 25px;
 }
 
-.label-radio, .label-con-feedback {
+.label-radio {
     border: 2px solid #ddd;
-    padding-left: 30px;
+    
 }
 
-/* .question-table td {
-    padding: 10px;
-    vertical-align: middle;
-} */
+.label-con-feedback {
+  border: 2px solid #ddd;
+}
+
+.label-con-feedback td {
+  padding: 7px;
+}
 
 .question-table td p, .question-table .option-feedback {
     color: #fd2448;
@@ -205,8 +212,11 @@ td {
     font-size: 13px;
     font-weight: 400;
     color: rgb(95, 94, 94);
-    margin-left: 3px;
-    
+    margin-left: 18px;
+    display: block;
+    max-width: 450px;
+    word-wrap: break-word;
+    white-space: normal;  /* Allows text to wrap */
 }
 
 .question-table .radio-group {
@@ -240,24 +250,33 @@ textarea {
     height: 100px;
     resize: none;
     margin-bottom: 20px;
+    margin-right: 0px;
 }
 
 .btn-con {
-    text-align: right;
-    margin-right: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.btn-con img {
+  width: 35px;
+  filter: brightness(0) invert(1);
 }
 
 button {
-    background-color: #1a5276;
+    background-color: #318ac2;
     color: white;
-    padding: 12px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 0px 7px 0px 0px;
     border: none;
-    border-radius: 6px;
-    font-size: 16px;
+    border-radius: 4px;
     cursor: pointer;
-    width: 20%;
     transition: 0.3s;
     margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
 button:hover {
@@ -265,70 +284,100 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-    .form-container {
-      width: 95%;
-      padding: 20px;
-      margin-top: 70px;
-    }
-  
-    .form-title {
-      font-size: 22px;
-    }
-  
-    .p-val, .description {
-      font-size: 13px;
-    }
-  
-    .rating-scale {
-      width: 100%;
-      padding: 15px;
-      font-size: 13px;
-    }
-  
-    .rating-scale p {
-      gap: 10px;
-    }
-  
-    .rating-scale span {
-      gap: 4px;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-  
-    .table-container {
-      padding: 15px;
-    }
-  
-    .question-table td {
-      padding: 15px 10px;
-      display: block;
-      width: 100%;
-    }
-  
-    .question-table .radio-group {
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-  
-    .label-column {
-      padding-left: 0;
-    }
-  
-    textarea {
-      width: 100%;
-      font-size: 14px;
-    }
-  
-    button {
-      width: 100%;
-      font-size: 14px;
-      padding: 10px;
-    }
-  
-    .btn-con {
-      text-align: center;
-      margin-right: 0;
-    }
+  body {
+    padding: 10px;
+    flex-direction: column;
+    align-items: stretch;
   }
+
+  .form-container {
+    width: 100%;
+    padding: 20px 15px;
+    margin-top: 60px;
+  }
+
+  .form-title {
+    font-size: 20px;
+  }
+
+  .p-val, .description {
+    font-size: 12.5px;
+  }
+
+  .rating-scale {
+    width: 94%;
+    padding: 15px 10px;
+    font-size: 12.5px;
+  }
+
+  .rating-scale p {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rating-scale span {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .table-container {
+    padding: 12px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .question-table td {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+  }
+
+  .question-table .radio-group {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .label-column {
+    padding-left: 0;
+  }
+
+  .label-feedback label {
+    margin-left: 0;
+  }
+
+  textarea {
+    font-size: 14px;
+    padding: 8px;
+    height: 90px;
+    width: 92%;
+  }
+
+  button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 12px;
+    justify-content: center;
+  }
+
+  .btn-con {
+    justify-content: center;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .btn-con img {
+    display: none; /* Optional: hide icon on small screens */
+  }
+
+  .back-button {
+    margin: 10px 0;
+  }
+
+  .back-button img {
+    width: 24px;
+  }
+}
+
   
   

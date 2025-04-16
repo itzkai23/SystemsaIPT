@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
         $hashed_password = $row['password'];
 
         if (password_verify($password, $hashed_password)) {
-            // Store user data in session
+            // Session variables
             $_SESSION['user_name'] = $row['uname']; 
             $_SESSION['f_name'] = $row['fname'];
             $_SESSION['l_name'] = $row['lname'];
@@ -33,26 +33,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
             $_SESSION['pic'] = !empty($row['picture']) ? $row['picture'] : "../images/icon.jpg";
             $_SESSION['Birthday'] = $row['Birthday'];
             $_SESSION['section'] = $row['section'];
-            $_SESSION['is_admin'] = $row['is_admin']; // Store admin status
+            $_SESSION['is_admin'] = $row['is_admin'];
 
-            // Redirect based on user type
-            if ($row['is_admin'] == 1) {
-                header('Location: ../admin/admin.php'); // Redirect admin
-            } else {
-                header('Location: ../students_interface/home.php'); // Redirect regular user
-            }
+            // Redirect based on admin status
+            $redirectUrl = $row['is_admin'] == 1 ? '../admin/admin.php' : '../students_interface/home.php';
+            header("Location: $redirectUrl");
             exit();
         } else {
-            // Redirect with error parameter
+            // Log invalid password attempt
+            error_log("Invalid password attempt for username: $uname", 0);
+            // Redirect to error page with a specific message
             header("Location: silog.php?error=incorrect_password");
             exit();
         }
     } else {
-        // Redirect with error parameter
+        // Log user not found
+        error_log("User not found: $uname", 0);
+        // Redirect to error page with a specific message
         header("Location: silog.php?error=user_not_found");
         exit();
     }
 } else {
+    // Generic error logging for unexpected access
+    error_log("Invalid access attempt.", 0);
     echo 'Invalid access.';
 }
 ?>
