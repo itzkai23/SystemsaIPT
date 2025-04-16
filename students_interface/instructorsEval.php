@@ -1,5 +1,6 @@
 <?php
 require '../connect.php';
+require 'functions.php';
 session_start();
 
 // Check if the user is logged in
@@ -14,18 +15,19 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
 }
 
 $query = "SELECT semester, school_year FROM section_professors LIMIT 1"; 
-$result = mysqli_query($conn, $query);
+$ay_result = mysqli_query($conn, $query); 
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
+if ($ay_result && mysqli_num_rows($ay_result) > 0) {
+    $ay_row = mysqli_fetch_assoc($ay_result); 
 
-    // Store in session
-    $_SESSION['semester'] = $row['semester'];
-    $_SESSION['school_year'] = $row['school_year'];
+    $school_year = $ay_row['school_year'];
+    $semester = $ay_row['semester'];
+
+    $_SESSION['school_year'] = $school_year;
+    $_SESSION['semester'] = $semester;
 } else {
-    // Default values or handle missing data
-    $_SESSION['semester'] = "N/A";
-    $_SESSION['school_year'] = "N/A";
+    $school_year = "N/A";
+    $semester = "N/A";
 }
 
 
@@ -59,6 +61,11 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
 if (!$result) {
     die("Error fetching professors: " . $conn->error);
 }
+
+if (isset($_GET['success']) && $_GET['success'] == 'true') {
+    echo "<script>alert('✅ Evaluation submitted successfully!');</script>";
+}
+
 
 // Default image
 $default_image = "../images/icon.jpg";
@@ -144,28 +151,32 @@ $current_image .= "?t=" . time();
 </nav>
        
         
-        <div class="whole">
-        <h1>Faculty Evaluation</h1>
-        <div class="con-year-sem"><strong>AY Term:</strong>
-        <div class="year-semester"> 
-        <p><?php echo htmlspecialchars($row['school_year']); ?>,</p>
-        <p> <?php echo htmlspecialchars($row['semester']); ?></p>
-        </div>
-        </div>
-        <div class="group-container">
-        
+  <div class="whole">
+    <h1>Faculty Evaluation</h1>
+  <div class="group-container">        
     <?php if ($result->num_rows > 0) { ?>
         <?php while ($row = $result->fetch_assoc()) { ?>
         <div class="card">
             <img src="<?php echo !empty($row['prof_img']) ? htmlspecialchars($row['prof_img']) : '../images/facultyb.png'; ?>" 
                  alt="<?php echo htmlspecialchars($row['name']); ?>" 
                  width="150" height="150">
-
-              
-              
+             
             <h2><?php echo htmlspecialchars($row['name']); ?></h2>
             <p class="role"><?php echo htmlspecialchars($row['role']); ?></p>
-            <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">Evaluate</a>
+            <?php
+                $can_evaluate = canEvaluate($conn, $user_id, $row['id']);
+                ?>
+                <?php if ($can_evaluate): ?>
+                    <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">Evaluate</a>
+                <?php else: ?>
+                    <span class="btn-disabled">Evaluated</span>
+            <?php endif; ?>
+            <div class="con-year-sem"><strong>AY Term:</strong>
+                   <div class="year-semester"> 
+                      <p><?php echo htmlspecialchars($school_year); ?>,</p>
+                      <p> <?php echo htmlspecialchars($semester); ?></p>
+                    </div>
+                </div> 
         </div>
         <?php } ?>
         <?php } else { ?>

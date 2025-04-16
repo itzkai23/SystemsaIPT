@@ -58,14 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Execute the statement
         if ($stmt->execute()) {
+            // Clear professor session and redirect to InstructorsEval.php with a success message
             $_SESSION['professor_id'] = null; // Clear professor session
             $stmt->close();
             $conn->close();
-            // Redirect back to the same page
-            header("Location: ".$_SERVER['HTTP_REFERER']);
+
+            // Redirect with success message
+            header("Location: InstructorsEval.php?success=true");
             exit(); // Ensure script stops execution after redirect
         } else {
-            echo "Error: " . $stmt->error;
+            echo "Error executing query: " . $stmt->error;
         }
     } else {
         echo "Error preparing statement: " . $conn->error;

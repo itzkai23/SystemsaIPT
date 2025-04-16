@@ -185,6 +185,19 @@ body {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
+.btn-disabled {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color:  #633c4f;
+  color: white;
+  border-radius: 5px;
+  cursor: not-allowed;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
 @media (max-width: 768px) {
   body {
     flex-direction: column;
