@@ -14,7 +14,7 @@ if (isset($_GET['search'])) {
     $search = mysqli_real_escape_string($conn, $_GET['search']);
 }
 
-$query = "SELECT id, fname, lname, email, contact, picture FROM registration WHERE is_admin = 0";
+$query = "SELECT id, fname, lname, email, contact, section FROM registration WHERE is_admin = 0";
 
 if (!empty($search)) {
     $query .= " AND (fname LIKE '%$search%' OR lname LIKE '%$search%' OR email LIKE '%$search%')";
@@ -136,6 +136,7 @@ $current_image .= "?t=" . time();
                     <th>Name</th>
                     <th>Email</th>
                     <th>Contact</th>
+                    <th>Section</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -147,6 +148,7 @@ $current_image .= "?t=" . time();
                         echo "<td>" . htmlspecialchars($row['fname'] . " " . $row['lname']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['contact']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['section']) . "</td>";
                         echo "<td>
                                 <form action='delete_students.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this account?\");'>
                                     <input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>
