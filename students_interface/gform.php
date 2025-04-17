@@ -22,19 +22,6 @@ if (!isset($_SESSION['user_id'])) {
     die("You must be logged in to evaluate. <a href='login.php'>Login</a>");
 }
 
-// $user_id = $_SESSION['user_id']; // Consistently use user_id
-
-// // ✅ Check if the user can evaluate *ONLY* on initial page load (GET request)
-// if ($_SERVER["REQUEST_METHOD"] === "GET" && !canEvaluate($conn, $user_id, $professor_id)) {
-//     // Show JavaScript alert and redirect
-//     echo "<script>
-//             alert('❌ You have already evaluated this professor. Please wait 30 days before evaluating again.');
-//             window.location.href = 'instructorsEval.php'; 
-//           </script>";
-//     exit; // Make sure the script stops executing here
-// }
-
-
 // Fetch professor name
 $profQuery = $conn->prepare("SELECT name FROM professors WHERE id = ?");
 $profQuery->bind_param("i", $professor_id);
@@ -160,7 +147,7 @@ $result = $conn->query($sql);
 
     </div>
   </div>
-  <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span></h4> 
+  <h4 class="user"><span><?php echo htmlspecialchars($_SESSION['f_name']); ?></span></h4> 
 </div>
          
 </div>
