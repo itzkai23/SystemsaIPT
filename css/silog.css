@@ -155,6 +155,10 @@ width: 100%;
     color: rgb(16, 29, 90);
     font-size: 18px;
 }
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
   
 .form-login-btn {  
     width: 98%;
@@ -288,7 +292,7 @@ width: 100%;
     #register{
         .register-input-wrapper{
             height: 180px;
-            overflow-y: auto;
+            overflow-y: scroll;
         }
         .register-input-wrapper::-webkit-scrollbar{
             width: 5px;

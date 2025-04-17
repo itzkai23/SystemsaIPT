@@ -16,12 +16,12 @@
         <img src="../images/head2.png" alt="" class="colored-text-img">
         </div>
         <h2>Forgot Password?</h2>
-        <p>Enter your email address and we'll send you an otp to your cmu account on spam to reset your password</p>
+        <p>Enter your CMU email and we'll send you an otp to your email on spam to reset your password</p>
         <form action="otppass.php" method="post">
-            <input type="email" name="email" placeholder="Enter your email" required>
+            <input type="email" name="email" placeholder="Enter your CMU email" required>
             <button type="submit">Send</button>
         </form>
-        <p class="message">Password reset will be sent to your email.</p>
+        <!-- <p class="message">Password reset will be sent to your email.</p> -->
         <a href="../Authentication/silog.php" class="back-link">Back to Login</a>
     </div>
 </body>

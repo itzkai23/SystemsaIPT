@@ -31,12 +31,11 @@ body {
 .forgot-image {
     display: flex;
     align-items: center;
-    gap: 10px;
     justify-content: center;
 }
 
 .colored-img {
-    width: 80px;
+    width: 90px;
 }
 
 .colored-text-img {
@@ -63,12 +62,17 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    letter-spacing: 1px;
 }
-.message {
+
+button:hover {
+    background-color: #0058b6;
+}
+/* .message {
     margin-top: 10px;
     font-size: 14px;
     color: green;
-}
+} */
 .back-link {
     display: block;
     margin-top: 15px;

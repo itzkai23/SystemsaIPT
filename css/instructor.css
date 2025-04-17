@@ -545,7 +545,7 @@ word-wrap: break-word;
   }
 
   .comment-text1 {
-  background-color:white;
+  background-color:rgb(248, 248, 248);
   margin-bottom: 0px;
   padding: 10px;
   border-radius: 15px;
@@ -558,12 +558,12 @@ word-wrap: break-word;
   .comment-text1 strong {
   font-size: 14px;
   display: block; /* Ensures it appears above */
-  color: black;
+  color: rgb(37, 37, 37);
   }
 
   .comment-text1 p {
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: -15px;
   margin-bottom: 0px;
   color: black;
@@ -601,7 +601,7 @@ word-wrap: break-word;
 
   .comment-text {
   max-width: 490px;
-  background-color:white;
+  background-color:rgb(248, 248, 248);
   margin-bottom: 0px;
   
   padding: 10px;
@@ -611,12 +611,12 @@ word-wrap: break-word;
   .comment-text strong {
   font-size: 14px;
   display: block; /* Ensures it appears above */
-  color: black;
+  color: rgb(37, 37, 37);
   }
 
   .comment-text p {
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: -15px;
   margin-bottom: 0px;
   color: black;

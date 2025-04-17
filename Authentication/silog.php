@@ -93,7 +93,6 @@ switch ($error) {
                 <span class="icon"><i class="fas fa-signature"></i></span>
                 <input type="text" name="lname" placeholder="Last Name" required>
                 </div>
-
                 <div class="input-group">
                 <span class="icon"><i class="fas fa-users"></i></span>
                 <select name="section" required>
@@ -103,7 +102,6 @@ switch ($error) {
                 <?php endwhile; ?>
                 </select>
                 </div>
-
                 <div class="input-group">
                 <span class="icon"><i class="fas fa-user"></i></span>
                 <input type="text" name="uname" placeholder="Username" id="user" required>
@@ -186,7 +184,20 @@ switch ($error) {
     </iframe>
 </div>
 
+<script>
+    const inputs = document.querySelectorAll('.register-input-wrapper input, .register-input-wrapper select');
 
+inputs.forEach((input, index) => {
+  input.addEventListener('focus', () => {
+    const nextInput = inputs[index + 0];
+    if (nextInput) {
+      setTimeout(() => {
+        nextInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300); // slight delay makes it smoother
+    }
+  });
+});
+</script>
 <script src="../js/faeye.js"></script>
 <script src="../js/cbot.js"></script>
 <script src="../js/silog.js"></script>
