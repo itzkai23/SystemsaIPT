@@ -26,7 +26,7 @@ if ($profResult && $profResult->num_rows > 0) {
             'id' => $prof['id'],
             'name' => $prof['name'],
             'role' => $prof['role'],
-            'prof_img' => !empty($prof['prof_img']) ? $prof['prof_img'] : "images/facultyb.png",
+            'prof_img' => !empty($prof['prof_img']) ? $prof['prof_img'] : "../images/facultyb.png",
             'evaluation_count' => $avgData['evaluation_count'] ?? 0,
             'professor_avg_score' => $avgData['professor_avg_score'] ? number_format($avgData['professor_avg_score'], 2) : "0"
         ];
@@ -82,6 +82,7 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     echo $output;
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
