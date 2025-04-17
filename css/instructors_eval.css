@@ -117,7 +117,7 @@ body {
 .con-year-sem strong {
   font-size: 13px;
   font-weight: 600;
-  color: #04055c;
+  color: rgb(26, 26, 26);
 }
 
 .year-semester {
@@ -135,7 +135,7 @@ body {
     font-size: 20px;
     margin-bottom: 5px;
     /* color: #0d47a1; */
-    color: rgb(0, 25, 51);
+    color: rgb(26, 26, 26);
 }
 
 /* Role */
@@ -148,12 +148,12 @@ body {
     padding: 5px 10px;
     border-radius: 5px;
     display: inline-block; */
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 0.5px;
     font-weight: bold;
     /* color: #1565c0;
     background-color: #bbdefb; */
-    color:rgb(0, 25, 51);
+    color:rgb(26, 26, 26);
     background-color:rgb(255, 173, 72);
     padding: 5px 10px;
     border-radius: 5px;

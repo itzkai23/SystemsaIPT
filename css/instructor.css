@@ -89,13 +89,13 @@ margin-top: auto;
 }
 
 .pro-role {
-margin-top: 2px;
+/* margin-top: 5px; */
 margin-bottom: 0px;
-font-size: 16px;
+font-size: 17px;
 font-family: "Roboto",sans-serif;
 font-weight: 600;
 opacity: 0.9;
-color: rgb(255, 152, 33);
+color: rgb(26, 26, 26);
 }
 
 .report-btn {
@@ -492,7 +492,7 @@ padding-bottom: 5px;
 
 h4 {
 font-size: 18px;
-color:rgb(255, 152, 33);
+color:rgb(26, 26, 26);
 margin-bottom: 10px;
 padding-bottom: 5px;
 text-align: center;

@@ -174,13 +174,13 @@ background: #555;
 .con-prof h5:first-of-type {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #5a5ec1; /* Light Purple color */
+    color: rgb(37, 37, 37); /* Light Purple color */
 }
 
 .con-prof h5:last-of-type {
     font-size: 1.2rem;
-    font-weight: 500;
-    color: #58a5d7; /* Light Blue color */
+    font-weight: 600;
+    color: rgb(255, 147, 23); /* Light Blue color */
 }
 
 /* Alternate Background Color for Even Entries */
@@ -193,18 +193,6 @@ h2 {
     font-size: 18px;
     font-weight: 500;
     font-family: "Roboto", sans-serif;
-}
-/* Specific Styles for Player's Name and Type */
-.con-prof h2:first-of-type {
-    font-size: 20px;
-    font-weight: 700;
-    color: #5a5ec1; /* Light Purple color */
-}
-
-.con-prof h2:last-of-type {
-    font-size: 18px;
-    font-weight: 600;
-    color: #58a5d7; /* Light Blue color */
 }
 
 /* Responsive Design */
@@ -297,7 +285,7 @@ h2 {
 
 .modal-content-usercom {
   text-align: center;
-  background-color: rgb(20, 20, 20);
+  background-color: white;
   margin: auto;
   margin-top: 6%;
   border-radius: 10px;
@@ -316,7 +304,7 @@ background: rgba(255, 255, 255, 0.1);
 backdrop-filter: blur(5px);
 padding: 20px;
 border-radius: 12px;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+border: 2px solid #ddd;
 z-index: 0;
 }
 
@@ -324,13 +312,14 @@ z-index: 0;
 .avnamecon {
 /* background: linear-gradient(135deg, #1976d2, #64b5f6);  */
 /* Blue gradient */
-background-color: #FFA500; /* Standard Orange */
+background-color: white; /* Standard Orange */
 padding: 15px;
 margin-bottom: 20px;
 border-radius: 10px;
-color: white;
+color: black;
 display: flex;
 flex-direction: column;
+border: 2px solid #ddd;
 }
 
 .avname {
@@ -342,7 +331,7 @@ align-items: center;
 width: 100px;
 height: 100px;
 border-radius: 50%;
-background: white;
+background: rgb(255, 147, 23);
 padding: 3px;
 margin-right: 10px;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -358,13 +347,15 @@ display: block;
     font-weight: 700;
     margin-top: 2px;
     margin-bottom: -5px;
+    letter-spacing: 0.5px;
 }
 
 #profRole {
     text-align: left;
-    margin-top: 2px;
-    color: white;
+    margin-top: 10px;
+    color: rgb(255, 147, 23);
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .rate {
@@ -374,12 +365,12 @@ display: block;
 
 .rate h3 {
     text-align: center;
-    color: white;
+    color: black;
     font-family: "Roboto", sans-serif;
 }
 
 .rate h4 {
-    color: black;
+    color: #242424;
 }
 
 .user-participant {
@@ -388,7 +379,7 @@ display: block;
 }
 
 .user-participant span {
-    color: black;
+    color: #242424;
     font-size: 14px;
     font-weight: 600;
     font-family: "Roboto", sans-serif;
@@ -412,7 +403,7 @@ display: block;
 }
 
 .comment-post label {
-    border: 1px solid #e6e6e6;
+    border: 1px solid #c5c5c5;
     border-radius: 30px;
     /* width: 65%;
     height: 50%;
@@ -522,15 +513,15 @@ text-align: left;
     }
   
     .comment-text p {
-    font-size: 12px;
-    font-weight: 800;
-    
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
     margin-bottom: 0px;
     }
   
     .comment-text small {
     font-size: 11px;
-    color: gray;
+    color: #555555;
     margin-top: 2px;
     display: block;
     }
