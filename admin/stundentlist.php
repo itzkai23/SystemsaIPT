@@ -69,13 +69,11 @@ $current_image .= "?t=" . time();
        
 </ul>
 
-<!-- <div class="mid-section">
+<div class="right-section">                              
+<div class="mid-section">
          <a href="../students_interface/home.php" class="home">Home</a>
          <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
-</div> -->
-
-<div class="right-section">                              
-   
+</div>
   <div class="logpos">
   
       <div class="logout-container"> 

@@ -6,7 +6,7 @@
 body { 
     font-family: Arial, sans-serif; 
     margin: 20px; 
-    background-color: #f4f4f4; 
+    background-color: #ffffff; 
 }
 
 .styled-heading {
@@ -29,24 +29,10 @@ body {
 }
 
 .rec-com-container {
-    overflow-y: auto;
-    background-color: #333;
-    max-height: 450px;
-    
-}
-
-/* Custom Scrollbar for Sidebar */
-.rec-com-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.rec-com-container::-webkit-scrollbar-thumb {
-    background: #FFA500;
-    border-radius: 10px;
-}
-
-.rec-com-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    /* overflow-y: auto; */
+    background-color: #ffffff;
+    /* max-height: 450px; */
+    border: 2px solid #ddd;
 }
 
 .repcomcon-btn {
@@ -57,12 +43,24 @@ body {
     gap: 40px;
 }
 /* Show the targeted report-box */
-/* .report-container {
-    position: relative;
+.report-container {
     overflow-y: auto;
     max-height: 450px;
-    width: 50%;
-} */
+}
+
+/* Custom Scrollbar for Sidebar */
+.report-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.report-container::-webkit-scrollbar-thumb {
+    background: #012362;
+    border-radius: 10px;
+}
+
+.report-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
 .sticky-heading {
     position: sticky;
@@ -92,8 +90,11 @@ body {
     display: block; 
     margin: 10px;
 }
+.report-box1 strong {
+    letter-spacing: 0.8px;
+}
 .repcomcon-btn a {
-    background-color: #E69500; 
+    background-color: #012362; 
     color: white; 
     border: none; 
     padding: 8px 12px; 
@@ -102,9 +103,10 @@ body {
     margin-top: 5px; 
     text-decoration: none;
     display: inline-block;
+    letter-spacing: 0.5px;
 }
 .repcomcon-btn a:hover {
-    background-color: #CC8400;
+    background-color: #001741;
     transition: 0.5 ease;
 }
 
@@ -123,7 +125,13 @@ body {
     white-space: normal; /* Prevent the text from overflowing horizontally */
     font-size: 15px;
     font-family: "Roboto", sans-serif;
+    letter-spacing: 0.8px;
 }
+
+.mark-btn {
+    letter-spacing: 0.5px;
+}
+
 button { 
     background-color: blue; 
     color: white; 
@@ -165,6 +173,7 @@ button:hover {
         padding: 6px 10px;
         width: 100%; /* Full width on very small screens */
         margin: 50px 5px 5px 5px;
+        letter-spacing: 0.5px;
     }
 
     /* Reported text adjustments for small screens */

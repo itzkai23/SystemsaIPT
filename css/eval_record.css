@@ -53,6 +53,10 @@ h2 {
     margin-bottom: 20px;
 }
 
+.student-count {
+    margin-bottom: 10px;
+}
+
 /* Table Styling */
 /* table {
     width: 100%;
@@ -250,8 +254,8 @@ tbody button:hover {
     cursor: pointer;
     border-radius: 3px;
     position: absolute;
-    top: 8em;
-    right: 1.5em;
+    top: 15.5%;
+    right: 5%;
 }
 
 .delete-btn:hover {
@@ -424,7 +428,7 @@ tbody button:hover {
 
   .delete-btn {
     font-size: 12px;
-    top: 6.5em;
+    top: 25%;
   }
 }
 

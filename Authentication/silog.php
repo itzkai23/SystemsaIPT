@@ -35,7 +35,7 @@ switch ($error) {
 </head>
 <body>
 <header>
-    <img src="../images/head.png" alt="headerlogo" class="logo">
+    <img src="../images/head2.png" alt="headerlogo" class="logo">
     <nav class="navigation">
        <a href="#">Regulations</a>
        <a href="../students_interface/profstatus.php">Faculties</a>

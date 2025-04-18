@@ -24,6 +24,7 @@ body {
     height: 90px;
     width: 260px;
     padding: 0px;
+    /* filter: brightness(0) saturate(100%) invert(13%) sepia(90%) saturate(1473%) hue-rotate(186deg) brightness(95%) contrast(92%); */
 }
 
 /* header */
@@ -81,6 +82,7 @@ header {
     margin-left: 40px;
     transition: .2s;
     background-color:  #162938;
+    letter-spacing: 1px;
 }
 
 .navigation .btn-popup:hover{

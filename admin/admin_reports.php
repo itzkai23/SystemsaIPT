@@ -75,13 +75,11 @@ $current_image .= "?t=" . time();
        
 </ul>
 
-<!-- <div class="mid-section">
-         <a href="../students_interface/home.php" class="home">Home</a>
-         <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
-</div> -->
-
 <div class="right-section">                              
-   
+<div class="mid-section">
+         <a href="admin.php" class="home">Home</a>
+         <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
+</div>
   <div class="logpos">
   
       <div class="logout-container"> 
@@ -140,7 +138,7 @@ $current_image .= "?t=" . time();
                     <?php if ($profReport['status'] === 'pending') : ?>
                         <form method="post">
                             <input type="hidden" name="prof_report_id" value="<?php echo $profReport['prof_report_id']; ?>">
-                            <button type="submit">Mark as Reviewed</button>
+                            <button type="submit" class="mark-btn">Mark as Reviewed</button>
                         </form>
                     <?php else : ?>
                         <span class="reviewed">Reviewed</span>
