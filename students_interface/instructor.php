@@ -284,9 +284,9 @@ $current_image .= "?t=" . time();
 <div class="section">
   <h3>Average Evaluation Points</h3>
   <h4>Current Status</h4>
-  <div class="user-participant">
+  <div class="user-participant" id="triggerPopup">
       <span>Number of Evaluations:</span> <strong><?php echo htmlspecialchars($evaluation_count); ?></strong>
-      <span>Average:</span> <strong>
+      <span>Average:</span> <strong id="averageDisplay">
         <?php
         if ($evaluation_count > 0) {
             echo number_format($professor_avg_score, 2);
@@ -295,6 +295,22 @@ $current_image .= "?t=" . time();
         }
         ?>
       </strong>
+  </div>
+</div>
+
+<!-- Modal structure -->
+<div class="modal-overlay" id="popupModal">
+  <div class="modal">
+    <button class="close-btn" id="closeModal">&times;</button>
+    <div class="circle-wrap">
+      <svg width="150" height="150">
+        <circle class="circle-bg" cx="75" cy="75" r="70"></circle>
+        <circle class="circle" id="progressCircle" cx="75" cy="75" r="70"></circle>
+      </svg>
+    </div>
+    <div class="score-text" id="scoreDisplay">4.5 / 5.0</div>
+    <div class="percentage" id="percentageDisplay">90%</div>
+    <div class="feedback" id="feedbackText">Excellent performance – well above expectations.</div>
   </div>
 </div>
 
