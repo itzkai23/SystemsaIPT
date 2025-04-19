@@ -256,7 +256,7 @@ $current_image .= "?t=" . time();
                       echo '<div class="comment-box1">';
                       echo '<img src="../images/icon.jpg " alt="User" class="comment-img">';
                       echo '<div class="comment-text1">';
-                      echo '<strong> Student </strong><br>';
+                      echo '<strong> Evaluation </strong><br>';
                       echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
                       echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
                       echo '</div>';
@@ -338,7 +338,7 @@ $current_image .= "?t=" . time();
                     // Anonymous feedback (evaluation)
                     echo '<img src="../images/icon.jpg" alt="Anonymous" class="comment-img">'; // use a generic image
                     echo '<div class="comment-text">';
-                    echo '<strong>Student</strong><br>';
+                    echo '<strong>Evaluation</strong><br>';
                     echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
                     echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>';
                 } elseif (!empty($comm['comment'])) {
@@ -382,70 +382,15 @@ $current_image .= "?t=" . time();
 
     
 </div>
+<script>
+  const scoreOutOf5 = <?= number_format($professor_avg_score, 2) ?>;
+  const evaluationCount = <?= $evaluation_count ?>;
+  const maxScore = 5.0;
+</script>
 
     <script src="../js/sidebar.js"></script>
     <script src="../js/logs.js"></script>
     <script src="../js/logs.js"></script>
     <script src="../js/instructor.js"></script>
-
-    <script>
-      // Score setup
-  const scoreOutOf5 = 4.62;
-  const maxScore = 5.0;
-  const percentage = (scoreOutOf5 / maxScore) * 100;
-
-  const circle = document.getElementById('progressCircle');
-  const offset = 440 - (440 * percentage) / 100;
-  circle.style.strokeDashoffset = offset;
-
-  // Dynamic color
-  if (percentage >= 90) {
-    circle.style.stroke = '#4ade80';
-  } else if (percentage >= 75) {
-    circle.style.stroke = '#facc15';
-  } else if (percentage >= 60) {
-    circle.style.stroke = '#f97316';
-  } else {
-    circle.style.stroke = '#ef4444';
-  }
-
-  // Feedback logic
-  const feedbackText = document.getElementById("feedbackText");
-  if (percentage >= 90) {
-    feedbackText.textContent = "Excellent performance – well above expectations.";
-  } else if (percentage >= 75) {
-    feedbackText.textContent = "Good performance – meets expectations.";
-  } else if (percentage >= 60) {
-    feedbackText.textContent = "Average – some improvement needed.";
-  } else {
-    feedbackText.textContent = "Below average – improvement required.";
-  }
-
-  // Set score/percentage text
-  document.getElementById("scoreDisplay").textContent = `${scoreOutOf5.toFixed(2)} / ${maxScore.toFixed(2)}`;
-  document.getElementById("percentageDisplay").textContent = `${Math.round(percentage)}%`;
-  document.getElementById("averageDisplay").textContent = `${scoreOutOf5.toFixed(2)}`;
-
-
-
-  // Modal logic
-  const trigger = document.getElementById("triggerPopup");
-  const modal = document.getElementById("popupModal");
-  const closeBtn = document.getElementById("closeModal");
-
-  trigger.addEventListener("click", () => {
-    modal.style.display = "flex";
-  });
-
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-    </script>
 </body>
 </html>
