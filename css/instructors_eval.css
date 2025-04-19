@@ -161,10 +161,11 @@ body {
     display: inline-block;
 }
 
-
 /* Button Link */
 .btn-link {
-    display: inline-block;
+    display: inline-flex; /* make it inline and flex */
+    align-items: center;              /* vertical centering */
+    gap: 8px;
     /* background: linear-gradient(145deg, #ec407a, #ad1457);  */
     background-color: #ec407a;
     /* Blue gradient */
@@ -172,7 +173,8 @@ body {
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
-    padding: 8px 15px;
+    padding: 3px 8px;
+    vertical-align: middle; /* aligns them vertically */
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);

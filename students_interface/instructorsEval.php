@@ -177,7 +177,8 @@ $current_image .= "?t=" . time();
                 $can_evaluate = canEvaluate($conn, $user_id, $row['id']);
                 ?>
                 <?php if ($can_evaluate): ?>
-                    <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">EVALUATE</a>
+                    <a class="btn-link" href="gform.php?professor_id=<?php echo $row['id']; ?>">
+                    <i class="fa fa-pencil-square" aria-hidden="true"  style="font-size: 24px; display: inline-block;"></i> EVALUATE</a>
                 <?php else: ?>
                     <i class="fas fa-check" id="f-check"></i>
                     <span class="btn-disabled">FINISHED</span>

@@ -181,7 +181,7 @@ $current_image .= "?t=" . time();
 
         <br>
         <div class="profile-buttons">
-          <button type="button" id="editProfileBtn" class="edit-btn">Edit</button>
+          <button type="button" id="editProfileBtn" class="edit-btn">Username and Password</button>
           <button type="submit" id="saveProfileBtn" style="display:none;" class="save-btn">Save</button>
           <button type="button" id="cancelEditBtn" style="display:none;" class="cancel-btn">Cancel</button>
         </div>
