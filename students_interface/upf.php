@@ -105,101 +105,90 @@ $current_image .= "?t=" . time();
    </nav>
 
    <div class="main-profile">
-    <div class="profile-card">
-      <section class="profile-left">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
-            <label for="fileinput" class="profile-picture-label">
-                <img src="<?php echo htmlspecialchars($current_image); ?>" class="picture" title="Click to upload image"/>
-                <div class="profile-edit-overlay">Change</div>
-            </label>
-            <input type="file" id="fileinput" name="picture_url" accept="image/*" onchange="previewimage();" style="display:none;"/>
-            <button class="btnup" name="btnup" style="display:none;">Save</button>
-        </form>
-        <h3><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h3>
-      </section>
+  <div class="profile-card">
+    <!-- LEFT: Profile Image and Name -->
+    <section class="profile-left">
+      <form action="upload.php" method="post" enctype="multipart/form-data">
+        <input disabled type="hidden" name="id" value="<?php echo $_SESSION['user_id']; ?>">
+        <label for="fileinput" class="profile-picture-label">
+          <img src="<?php echo htmlspecialchars($current_image); ?>" class="picture" title="Click to upload image" />
+          <div class="profile-edit-overlay">Change</div>
+        </label>
+        <input disabled type="file" id="fileinput" name="picture_url" accept="image/*" onchange="previewimage();" style="display:none;" />
+        <button class="btnup" name="btnup" style="display:none;">Save</button>
+      </form>
+      <h3><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']); ?></h3>
+    </section>
 
-      <div class="profile-right">
-        <h3>Personal Information</h3>
-        <form action="update_profile.php" method="post" id="profileForm">
-            <div class="profile-grid">
-                <!-- First name and Last name display -->
-                <div class="input-group" id="fname" style="display:none;">
-                    <label><strong>First Name:</strong></label>
-                    <input type="text" name="fname" value="<?php echo htmlspecialchars($_SESSION['f_name'] ?? ''); ?>" class="edit-input" style="display:none;">
-                </div>
-                <div class="input-group"id="lname" style="display:none;" >
-                    <label><strong>Last Name:</strong></label>
-                    <input type="text" name="lname" value="<?php echo htmlspecialchars($_SESSION['l_name'] ?? ''); ?>" class="edit-input" style="display:none;">
-                </div>
+    <!-- RIGHT: Personal Info -->
+    <div class="profile-right">
+      <h3>Personal Information</h3>
+      <form action="update_profile.php" method="post" id="profileForm">
+        <div class="profile-grid" id="staticInfo">
+          <!-- Email (read-only) -->
+          <div class="user-input">
+            <label><strong>Email:</strong></label>
+            <input disabled type="email" value="<?php echo htmlspecialchars($_SESSION['em']); ?>" readonly>
+          </div>
 
-                <div class="user-input">
-                    <div class="label-span">
-                    <label><strong>Email:</strong></label>
-                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['em']); ?></span>
-                    </div>
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['em'] ?? ''); ?>" class="edit-input" style="display:none;">
-                </div>
-                
-                <!-- Cellphone No and Email (default visible) -->
-                <div class="user-input">
-                    <div class="label-span">
-                    <label><strong>Phone No.:</strong></label>
-                    <span class="profile-text"><?php echo htmlspecialchars($_SESSION['con']); ?></span>
-                    </div>
-                    <input type="text" name="contact" value="<?php echo htmlspecialchars($_SESSION['con'] ?? ''); ?>" class="edit-input" style="display:none;">
-                </div>
+          <!-- Contact Number (read-only) -->
+          <div class="user-input">
+            <label><strong>Phone No.:</strong></label>
+            <input disabled type="text" value="<?php echo htmlspecialchars($_SESSION['con']); ?>" readonly>
+          </div>
 
-                <div class="user-input" id="birthdayGroup">
-                    <div class="label-span">
-                    <label><strong>Birthday:</strong></label>
-                    <span class="profile-text">
-                        <?php echo htmlspecialchars($_SESSION['Birthday']); ?>
-                    </span>
-                    </div>
-                    <input hidden type="date" id="Birthday" name="Birthday" value="<?php echo htmlspecialchars($_SESSION['Birthday'] ?? ''); ?>" class="edit-input">
-                </div>
+          <!-- Section (read-only) -->
+          <div class="user-input">
+            <label><strong>Section:</strong></label>
+            <input disabled type="text" value="<?php echo htmlspecialchars($_SESSION['section']); ?>" readonly>
+          </div>
 
-                <div class="user-input" id="section">
-                    <div class="label-span">
-                    <label><strong>Section:</strong></label>
-                    <span class="profile-text">
-                        <?php echo htmlspecialchars($_SESSION['section']); ?>
-                    </span>
-                    </div>
-                    <input hidden type="text" id="section" name="section" value="<?php echo htmlspecialchars($_SESSION['section'] ?? ''); ?>" class="edit-input">
-                </div>
-                
-                <div class="user-input" id="semester">
-                    <div class="label-span">
-                    <label><strong>Semester:</strong></label>
-                    <span class="profile-text">
-                        <?php echo htmlspecialchars($row['semester']); ?>
-                    </span>
-                    </div>
-                    <input hidden type="text" id="section" name="section" value="<?php echo htmlspecialchars($row['semester'] ?? ''); ?>" class="edit-input">
-                </div>
+          <!-- Semester (read-only) -->
+          <div class="user-input">
+            <label><strong>Semester:</strong></label>
+            <input disabled type="text" value="<?php echo htmlspecialchars($row['semester']); ?>" readonly>
+          </div>
 
-                <div class="user-input" id="school_year">
-                    <div class="label-span">
-                    <label><strong>School_year:</strong></label>
-                    <span class="profile-text">
-                        <?php echo htmlspecialchars($row['school_year']); ?>
-                    </span>
-                    </div>
-                    <input hidden type="text" id="school_year" name="school_year" value="<?php echo htmlspecialchars($row['school_year'] ?? ''); ?>" class="edit-input">
-                </div>
-                </div>
-            <br>
-            <div class="profile-buttons">
-                <button type="button" id="editProfileBtn" class="edit-btn">Edit</button>
-                <button type="submit" id="saveProfileBtn" style="display:none;" class="save-btn">Save</button>
-                <button type="button" id="cancelEditBtn" style="display:none;" class="cancel-btn">Cancel</button>
-            </div>
-        </form>
+          <!-- School Year (read-only) -->
+          <div class="user-input">
+            <label><strong>School Year:</strong></label>
+            <input disabled type="text" value="<?php echo htmlspecialchars($row['school_year']); ?>" readonly>
+          </div>
+        </div>
+
+        <!-- Editable Fields (Username & Password Only) -->
+        <div class="profile-grid" id="editFields" style="display: none;">
+          <div class="user-input">
+            <label><strong>Username:</strong></label>
+            <input type="text" name="uname" value="<?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?>">
+          </div>
+
+          <div class="user-input">
+            <label><strong>Current Password:</strong></label>
+            <input type="password" name="current_password" id="current_password" placeholder="Enter current password">
+          </div>
+
+          <div class="user-input">
+            <label><strong>New Password:</strong></label>
+            <input type="password" name="new_password" id="new_password" placeholder="Enter new password">
+          </div>
+
+          <div class="user-input">
+            <label><strong>Confirm New Password:</strong></label>
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm new password">
+          </div>
+        </div>
+
+        <br>
+        <div class="profile-buttons">
+          <button type="button" id="editProfileBtn" class="edit-btn">Edit</button>
+          <button type="submit" id="saveProfileBtn" style="display:none;" class="save-btn">Save</button>
+          <button type="button" id="cancelEditBtn" style="display:none;" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
     </div>
-    </div>
-   </div>
+  </div>
+</div>
 
 <script src="../js/sidebar.js"></script>
 <script src="../js/logs.js"></script>

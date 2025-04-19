@@ -14,8 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("iiss", $professor_id, $user_id, $reasons, $details);
     
     if ($stmt->execute()) {
-        echo "<script>alert('Report submitted successfully!'); window.location.href='instructor.php';</script>";
-        header("Location: instructor.php");
+        echo "<script>
+        alert('Report submitted successfully!');
+        window.location.href = 'instructorsProfiles.php';
+        </script>";    
         exit(); // Ensure script stops execution after redirect
     } else {
         echo "<script>alert('Failed to submit report. Please try again.'); window.history.back();</script>";

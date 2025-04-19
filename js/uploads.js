@@ -19,34 +19,50 @@ const previewimage = () => {
     }
 };
 
-const editBtn = document.getElementById("editProfileBtn");
-const saveBtn = document.getElementById("saveProfileBtn");
-const cancelBtn = document.getElementById("cancelEditBtn");
-const profileTexts = document.querySelectorAll(".profile-text");
-const editInputs = document.querySelectorAll(".edit-input");
-const bdayInput = document.getElementById("Birthday");
-const fname = document.getElementById("fname");
-const lname = document.getElementById("lname");
+const editBtn = document.getElementById('editProfileBtn');
+const saveBtn = document.getElementById('saveProfileBtn');
+const cancelBtn = document.getElementById('cancelEditBtn');
+const staticInfo = document.getElementById('staticInfo');
+const editFields = document.getElementById('editFields');
 
-
-editBtn.addEventListener("click", () => {
-    profileTexts.forEach(el => el.style.display = "none");
-    editInputs.forEach(el => el.style.display = "inline-block");
-    fname.style.display = "inline-block";
-    lname.style.display = "inline-block"; 
-    editBtn.style.display = "none";
-    saveBtn.style.display = "inline-block";
-    cancelBtn.style.display = "inline-block";
+editBtn.addEventListener('click', () => {
+  staticInfo.style.display = "none";
+  editFields.style.display = "block";
+  saveBtn.style.display = "inline-block";
+  cancelBtn.style.display = "inline-block";
+  editBtn.style.display = "none";
 });
 
-cancelBtn.addEventListener("click", () => {
-    profileTexts.forEach(el => el.style.display = "inline-block");
-    editInputs.forEach(el => el.style.display = "none");
-    fname.style.display = "none"; 
-    lname.style.display = "none"; 
-    editBtn.style.display = "inline-block";
-    saveBtn.style.display = "none";
-    cancelBtn.style.display = "none";
+cancelBtn.addEventListener('click', () => {
+  staticInfo.style.display = "grid";
+  editFields.style.display = "none";
+  saveBtn.style.display = "none";
+  cancelBtn.style.display = "none";
+  editBtn.style.display = "inline-block";
 });
 
+document.getElementById('profileForm').addEventListener('submit', function(e) {
+  const newPassword = document.getElementById('new_password').value;
+  const confirmPassword = document.getElementById('confirm_password').value;
 
+  if (newPassword !== confirmPassword) {
+    e.preventDefault(); // Stop form submission
+    alert("New password and confirm password do not match.");
+  }
+});
+
+document.getElementById("saveProfileBtn").addEventListener("click", function (e) {
+  const current = document.getElementById("current_password");
+  const newPass = document.getElementById("new_password");
+  const confirm = document.getElementById("confirm_password");
+
+  const oneFilled = current.value || newPass.value || confirm.value;
+
+  if (oneFilled) {
+    // Require all 3 if any is filled
+    if (!current.value || !newPass.value || !confirm.value) {
+      alert("To change your password, please fill in all password fields.");
+      e.preventDefault(); // Prevent form submission
+    }
+  }
+});

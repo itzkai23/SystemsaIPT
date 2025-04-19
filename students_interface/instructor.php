@@ -254,9 +254,9 @@ $current_image .= "?t=" . time();
                   // Display feedback if it exists
                   if (!empty($comm['feedback'])) {
                       echo '<div class="comment-box1">';
-                      echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                      echo '<img src="../images/icon.jpg " alt="User" class="comment-img">';
                       echo '<div class="comment-text1">';
-                      echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                      echo '<strong> Student </strong><br>';
                       echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
                       echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
                       echo '</div>';
@@ -308,27 +308,28 @@ $current_image .= "?t=" . time();
 <!-- Hidden Checkbox to Trigger Modal -->
 <input type="checkbox" id="termsCheckbox" class="modal-toggle">
 
-<!-- Modal Structure -->
 <div class="modal">
     <div class="modal-content">
         <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
         <label for="termsCheckbox" class="close-modal">&times;</label>
         <div class="label-section">
-            <!-- <h3>Comments</h3> -->
             <div class="modal-scroll">
-           <?php
+            <?php
             foreach ($feedbackData as $comm) {
                 echo '<div class="comment-box">';
-                echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                echo '<div class="comment-text">';
-                echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
 
                 if (!empty($comm['feedback'])) {
-                    // Display feedback without delete/report options
+                    // Anonymous feedback (evaluation)
+                    echo '<img src="../images/icon.jpg" alt="Anonymous" class="comment-img">'; // use a generic image
+                    echo '<div class="comment-text">';
+                    echo '<strong>Student</strong><br>';
                     echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
                     echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>';
                 } elseif (!empty($comm['comment'])) {
-                    // Display comment WITH delete/report options
+                    // User comment
+                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                    echo '<div class="comment-text">';
+                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
                     echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
                     echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>';
 
@@ -349,19 +350,19 @@ $current_image .= "?t=" . time();
                               </form>';
                     }
 
-                    echo '</div>'; // Close .menu-options
-                    echo '</div>'; // Close .menu-container
+                    echo '</div>'; // .menu-options
+                    echo '</div>'; // .menu-container
                 }
 
-                echo '</div>'; // Close .comment-text
-                echo '</div>'; // Close .comment-box
+                echo '</div>'; // .comment-text
+                echo '</div>'; // .comment-box
             }
             ?>
-
             </div>
         </div>
     </div>
 </div>
+
 
     
 </div>
