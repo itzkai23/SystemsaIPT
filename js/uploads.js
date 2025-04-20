@@ -20,37 +20,55 @@ const previewimage = () => {
 };
 
 const editBtn = document.getElementById('editProfileBtn');
+const toggleStaticInfo = document.getElementById('toggleStaticInfo');
 const saveBtn = document.getElementById('saveProfileBtn');
-const cancelBtn = document.getElementById('cancelEditBtn');
 const staticInfo = document.getElementById('staticInfo');
 const editFields = document.getElementById('editFields');
 
-editBtn.addEventListener('click', () => {
-  staticInfo.style.display = "none";
-  editFields.style.display = "block";
-  saveBtn.style.display = "inline-block";
-  cancelBtn.style.display = "inline-block";
-  editBtn.style.display = "none";
-});
+// Default active tab
+toggleStaticInfo.classList.add('active');
 
-cancelBtn.addEventListener('click', () => {
+// Reusable function to reset back to personal info
+function resetToStaticInfo() {
   staticInfo.style.display = "grid";
   editFields.style.display = "none";
   saveBtn.style.display = "none";
-  cancelBtn.style.display = "none";
-  editBtn.style.display = "inline-block";
+
+  toggleStaticInfo.classList.add('active');
+  editBtn.classList.remove('active');
+}
+
+// Show Username & Password section
+editBtn.addEventListener('click', () => {
+  if (!editBtn.classList.contains('active')) {
+    staticInfo.style.display = "none";
+    editFields.style.display = "grid";
+    saveBtn.style.display = "inline-block";
+
+    editBtn.classList.add('active');
+    toggleStaticInfo.classList.remove('active');
+  }
 });
 
+// Show Personal Info section
+toggleStaticInfo.addEventListener('click', () => {
+  if (!toggleStaticInfo.classList.contains('active')) {
+    resetToStaticInfo();
+  }
+});
+
+// Password validation on form submission
 document.getElementById('profileForm').addEventListener('submit', function(e) {
   const newPassword = document.getElementById('new_password').value;
   const confirmPassword = document.getElementById('confirm_password').value;
 
   if (newPassword !== confirmPassword) {
-    e.preventDefault(); // Stop form submission
+    e.preventDefault();
     alert("New password and confirm password do not match.");
   }
 });
 
+// Prevent partial password update
 document.getElementById("saveProfileBtn").addEventListener("click", function (e) {
   const current = document.getElementById("current_password");
   const newPass = document.getElementById("new_password");
@@ -59,10 +77,9 @@ document.getElementById("saveProfileBtn").addEventListener("click", function (e)
   const oneFilled = current.value || newPass.value || confirm.value;
 
   if (oneFilled) {
-    // Require all 3 if any is filled
     if (!current.value || !newPass.value || !confirm.value) {
       alert("To change your password, please fill in all password fields.");
-      e.preventDefault(); // Prevent form submission
+      e.preventDefault();
     }
   }
 });

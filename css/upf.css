@@ -140,18 +140,23 @@ body {
 
 .profile-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 30px 40px;
     width: 100%; 
     /* or any desired width */
     /* margin: 20px 20px 30px 20px; */
+    
     z-index: 0;
     position: relative;
 }
 
-.input-group {
+form {
+  padding: 25px;
+}
+
+.user-input input {
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     align-items: center;
     width: 100%;
 }
@@ -170,23 +175,38 @@ body {
     white-space: normal; 
 }
 
-.input-group label {
+.user-input input label {
     font-weight: bold;
     margin-bottom: 5px;
-    white-space: nowrap; /* Ensures the label does not break into multiple lines */
+    white-space: nowrap; 
 }
 
 .details {
     margin: 20px 0px 5px 19px;
 }
 
-.input-group input, .user-input input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
-    /* margin-top: 0px; */
+.user-input input {
+  padding: 8px;
+  border: 1px solid #ddd;  /* Light grey border */
+  border-radius: 5px;
+  font-size: 14px;
+  width: 100%;
+  background-color: #f9f9f9;  /* Light background for the input */
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  margin-top: 10px;
+}
+
+/* Focus effect (No hover, just focus shadow) */
+.user-input input:focus {
+  outline: none;
+  border-color: #aaa;  /* Darker grey when focused */
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow on focus */
+}
+
+
+.user-input label {
+  color: #a3a3a3;
+  font-size: 15px;
 }
 
 .bage {
@@ -202,50 +222,94 @@ body {
     display: none;
 }
 
-.profile-buttons {
-    text-align: left;
-
+/* Base tab styles (unchanged) */
+.toggle-tab {
+  text-align: center;
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #616161;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative; /* Needed for underline animation */
 }
 
-.profile-buttons button {
-    padding: 8px 18px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-family: Arial, sans-serif;   
+/* Animated underline effect */
+.toggle-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 0%;
+  background-color: #242424;
+  transition: width 0.3s ease;
 }
 
-.edit-btn {
-  background-color: #4caf50;  /* Green for 'Edit' */
-  color: white;
+/* On hover and active, expand underline */
+.toggle-tab:hover::after,
+.toggle-tab.active::after {
+  width: 100%;
 }
 
-.edit-btn:hover {
-  background-color: #45a049;  /* Darker green on hover */
-  transform: scale(1.05);  /* Slightly enlarge on hover */
+/* Hover effect (color unchanged) */
+.toggle-tab:hover {
+  color: #242424;
+}
+
+/* Active tab (color unchanged) */
+.toggle-tab.active {
+  color: #242424;
+  font-weight: 500;
+  border-bottom: none; /* since ::after replaces it visually */
+  background-color: #f5faff;
 }
 
 .save-btn {
-  background-color: #2196f3;  /* Blue for 'Save' */
-  color: white;
-  margin-right: 5px;
+  background-color: #2196f3;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  margin-top: 20px;
 }
 
+/* Hover - subtle tint change */
 .save-btn:hover {
-  background-color: #1976d2;  /* Darker blue on hover */
-  transform: scale(1.05);  /* Slightly enlarge on hover */
+  background-color: #1976d2;
+  transform: translateY(-1px);
 }
 
-.cancel-btn {
-  background-color: #f44336;  /* Red for 'Cancel' */
-  color: white;
+/* Focus - clean, minimal glow */
+.save-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
 }
 
-.cancel-btn:hover {
-  background-color: #e53935;  /* Darker red on hover */
-  transform: scale(1.05);  /* Slightly enlarge on hover */
+/* Active - pressed down */
+.save-btn:active {
+  transform: translateY(1px);
+  background-color: #1565c0;
+}
+
+.section-toggle {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.section-toggle.active {
+  color: #2196f3;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -280,12 +344,12 @@ body {
       gap: 15px;
     }
   
-    .input-group {
+    .user-input input {
       flex-direction: column;
       align-items: flex-start;
     }
   
-    .input-group input {
+    .user-input input {
       font-size: 16px;
     }
   
@@ -300,7 +364,6 @@ body {
   
     .profile-buttons button {
       width: 100%;
-      margin-bottom: 10px;
     }
   
     .bage {

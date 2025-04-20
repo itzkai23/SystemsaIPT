@@ -1,15 +1,13 @@
 <?php
 require '../connect.php';
-session_start();
+require '../Authentication/restrict_to_student.php';
+restrict_to_student();
 
 // Redirect to login page if session is not set
 if (!isset($_SESSION['user_name'])) {
     header('location:silog.php');
     exit();
 }
-
-require '../Authentication/restrict_to_student.php';
-restrict_to_student();
 
 $query = "SELECT semester, school_year FROM section_professors LIMIT 1"; 
 $result = mysqli_query($conn, $query);
@@ -119,69 +117,69 @@ $current_image .= "?t=" . time();
 
     <!-- RIGHT: Personal Info -->
     <div class="profile-right">
-      <h3>Personal Information</h3>
+      <div class="profile-buttons">
+          <h5 id="toggleStaticInfo" class="toggle-tab">Personal Information</h5>
+          <h5 id="editProfileBtn" class="toggle-tab">Username and Password</h5>
+        </div>
       <form action="update_profile.php" method="post" id="profileForm">
         <div class="profile-grid" id="staticInfo">
           <!-- Email (read-only) -->
           <div class="user-input">
-            <label><strong>Email:</strong></label>
+            <label>Email:</label><br>
             <input disabled type="email" value="<?php echo htmlspecialchars($_SESSION['em']); ?>" readonly>
           </div>
 
           <!-- Contact Number (read-only) -->
           <div class="user-input">
-            <label><strong>Phone No.:</strong></label>
+            <label>Phone No.:</label><br>
             <input disabled type="text" value="<?php echo htmlspecialchars($_SESSION['con']); ?>" readonly>
           </div>
 
           <!-- Section (read-only) -->
           <div class="user-input">
-            <label><strong>Section:</strong></label>
+            <label>Course/Section:</label><br>
             <input disabled type="text" value="<?php echo htmlspecialchars($_SESSION['section']); ?>" readonly>
           </div>
 
           <!-- Semester (read-only) -->
           <div class="user-input">
-            <label><strong>Semester:</strong></label>
+            <label>Semester:</label><br>
             <input disabled type="text" value="<?php echo htmlspecialchars($row['semester']); ?>" readonly>
           </div>
 
           <!-- School Year (read-only) -->
           <div class="user-input">
-            <label><strong>School Year:</strong></label>
+            <label>School Year:</label><br>
             <input disabled type="text" value="<?php echo htmlspecialchars($row['school_year']); ?>" readonly>
           </div>
         </div>
 
-        <!-- Editable Fields (Username & Password Only) -->
-        <div class="profile-grid" id="editFields" style="display: none;">
-          <div class="user-input">
-            <label><strong>Username:</strong></label>
-            <input type="text" name="uname" value="<?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?>">
-          </div>
-
-          <div class="user-input">
-            <label><strong>Current Password:</strong></label>
-            <input type="password" name="current_password" id="current_password" placeholder="Enter current password">
-          </div>
-
-          <div class="user-input">
-            <label><strong>New Password:</strong></label>
-            <input type="password" name="new_password" id="new_password" placeholder="Enter new password">
-          </div>
-
-          <div class="user-input">
-            <label><strong>Confirm New Password:</strong></label>
-            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm new password">
-          </div>
+    <!-- Editable Fields (Username & Password Only) -->
+      <div class="profile-grid" id="editFields" style="display: none;">
+        <div class="user-input">
+          <label>Username:</label><br>
+          <input type="text" name="uname" value="<?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?>">
         </div>
 
-        <br>
-        <div class="profile-buttons">
-          <button type="button" id="editProfileBtn" class="edit-btn">Username and Password</button>
-          <button type="submit" id="saveProfileBtn" style="display:none;" class="save-btn">Save</button>
-          <button type="button" id="cancelEditBtn" style="display:none;" class="cancel-btn">Cancel</button>
+        <div class="user-input">
+          <label>Current Password:</label><br>
+          <input type="password" name="current_password" id="current_password" placeholder="Enter current password">
         </div>
+
+        <div class="user-input">
+          <label>New Password:</label><br>
+          <input type="password" name="new_password" id="new_password" placeholder="Enter new password">
+        </div>
+
+        <div class="user-input">
+          <label>Confirm New Password:</label><br>
+          <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm new password">
+        </div>
+      </div>
+
+        
+        <button type="submit" id="saveProfileBtn" style="display:none;" class="save-btn">Save</button>
+        <!-- <button type="button" id="cancelEditBtn" style="display:none;" class="cancel-btn">Cancel</button> -->
       </form>
     </div>
   </div>
