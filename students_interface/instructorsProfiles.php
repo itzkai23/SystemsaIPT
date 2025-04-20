@@ -41,8 +41,8 @@ $stmt->bind_result($section);
 $stmt->fetch();
 $stmt->close();
 
-if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
-  // If admin, show all professors
+if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'faculty')) {
+  // If admin or faculty, show all professors
   $professor_query = "SELECT id, name, role, prof_img FROM professors";
   $result = $conn->query($professor_query);
 } else {

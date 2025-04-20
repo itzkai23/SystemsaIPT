@@ -1,11 +1,7 @@
 <?php
-session_start();
 require '../connect.php';
-
-// Ensure only admins can delete
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
-    die("Unauthorized access.");
-}
+require '../Authentication/restrict_to_admin.php';
+restrict_to_admin(); // Redirects if not admin
 
 // Check if record_id is set
 if (isset($_POST['record_id'])) {

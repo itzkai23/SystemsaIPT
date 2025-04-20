@@ -1,7 +1,8 @@
 <?php
 require '../connect.php';
 require 'functions.php'; // Include the functions file
-session_start();
+require '../Authentication/restrict_to_student.php';
+restrict_to_student();
 
 // Prevent browser from caching the page
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");

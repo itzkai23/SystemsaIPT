@@ -1,10 +1,7 @@
 <?php
-session_start();
 include '../connect.php';
-
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
-    die("Unauthorized access.");
-}
+require '../Authentication/restrict_to_admin.php';
+restrict_to_admin(); // Redirects if not admin
 
 // Handle "Mark as Reviewed" button submission for comments
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['report_id'])) {
@@ -71,14 +68,14 @@ $current_image .= "?t=" . time();
    </div>
      <li><a class="a-bar"href="../students_interface/home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
      <li><a class="a-bar"href="../students_interface/instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
-     <li><a class="a-bar"href="../students_interface/upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+     <li><a class="a-bar"href="register_prof.php"><i class="fas fa-user"></i><span>Faculty Registration</span></a></li>
        
 </ul>
 
 <div class="right-section">                              
 <div class="mid-section">
-         <a href="admin.php" class="home">Home</a>
-         <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
+         <!-- <a href="admin.php" class="home">Home</a>
+         <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a> -->
 </div>
   <div class="logpos">
   
@@ -121,40 +118,22 @@ $current_image .= "?t=" . time();
 
     <!-- <h3 class="styled-heading">Reported Comments & Evaluations</h3> -->
     <div class="repcomcon-btn">
-    <a href="#" onclick="showReport('comm'); return false;">Student Reports</a>
-    <a href="#" onclick="showReport('prof'); return false;">Professor Reports</a>
+    <a href="#" id="studentBtn" class="active" onclick="showReport('comm', this); return false;">Student Reports</a>
+    <a href="#" id="professorBtn" onclick="showReport('prof', this); return false;">Professor Reports</a>
     </div>
 
     <div class="maincon-repcom">
     <div class="rec-com-container">
-        <!-- Reported Professors Section -->
-        <div id="report1" class="report-container" style="display:none;">
-            <h4 class="sticky-heading">Reported Professors</h4>
-            <?php while ($profReport = $profReportsQuery->fetch_assoc()) : ?>
-                <div class='report-box1'>
-                    <p><strong><?php echo htmlspecialchars($profReport['fname'] . " " . $profReport['lname']); ?></strong> reported Professor <strong><?php echo htmlspecialchars($profReport['professor_name']); ?></strong></p>
-                    <div class="reported-text">Reasons: <?php echo htmlspecialchars($profReport['reasons']); ?></div>
-                    <small>Reported on: <?php echo htmlspecialchars($profReport['report_date']); ?></small>
-                    <?php if ($profReport['status'] === 'pending') : ?>
-                        <form method="post">
-                            <input type="hidden" name="prof_report_id" value="<?php echo $profReport['prof_report_id']; ?>">
-                            <button type="submit" class="mark-btn">Mark as Reviewed</button>
-                        </form>
-                    <?php else : ?>
-                        <span class="reviewed">Reviewed</span>
-                    <?php endif; ?>
-                </div>
-            <?php endwhile; ?>
-        </div>
-
         <!-- Reported Comments Section -->
         <div id="report2" class="report-container">
             <h4 class="sticky-heading">Reported Comments</h4>
+            <div class="report-grid"> <!-- ✅ NEW WRAPPER -->
             <?php while ($report = $reportsQuery->fetch_assoc()) : ?>
                 <div class='report-box'>
-                    <p><strong><?php echo htmlspecialchars($report['fname'] . " " . $report['lname']); ?></strong> reported:</p>
+                    <strong class="std-comment-report">Reported by <?php echo htmlspecialchars($report['fname'] . " " . $report['lname']); ?></strong>
+                    <small class="date-report">Reported on: <?php echo htmlspecialchars($report['reported_at']); ?></small>
                     <div class="reported-text"> <?php echo htmlspecialchars($report['reported_text']); ?> </div>
-                    <small>Reported on: <?php echo htmlspecialchars($report['reported_at']); ?></small>
+                    
                     <?php if ($report['status'] === 'pending') : ?>
                         <form method="post">
                             <input type="hidden" name="report_id" value="<?php echo $report['report_id']; ?>">
@@ -165,7 +144,35 @@ $current_image .= "?t=" . time();
                     <?php endif; ?>
                 </div>
             <?php endwhile; ?>
+            </div> <!-- ✅ CLOSE WRAPPER -->
         </div>
+
+        <!-- Reported Professors Section -->
+        <div id="report1" class="report-container" style="display:none;">
+            <h4 class="sticky-heading">Reported Professors</h4>
+            <div class="report-grid"> <!-- ✅ NEW WRAPPER -->
+            <?php while ($profReport = $profReportsQuery->fetch_assoc()) : ?>
+                
+                <div class='report-box1'>
+                    <strong class="prof-reported">Prof. <?php echo htmlspecialchars($profReport['professor_name']); ?></strong>
+                    <strong class="student-report">Reported by <?php echo htmlspecialchars($profReport['fname'] . " " . $profReport['lname']); ?></strong>
+                    <small class="date-report">Reported on: <?php echo htmlspecialchars($profReport['report_date']); ?></small> 
+                    <div class="reported-con">Reasons: <strong class="reported-text"><?php echo htmlspecialchars($profReport['reasons']); ?></strong></div>
+                    
+                    <?php if ($profReport['status'] === 'pending') : ?>
+                        <form method="post">
+                            <input type="hidden" name="prof_report_id" value="<?php echo $profReport['prof_report_id']; ?>">
+                            <button type="submit" class="mark-btn">Mark as Reviewed</button>
+                        </form>
+                    <?php else : ?>
+                        <span class="reviewed">Reviewed</span>
+                    <?php endif; ?>
+                </div>
+            <?php endwhile; ?>
+            </div> <!-- ✅ CLOSE WRAPPER -->
+        </div>
+
+        
     </div>
     </div>
         <script src="../js/sidebar.js"></script>

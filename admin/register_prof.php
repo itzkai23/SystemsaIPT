@@ -1,31 +1,23 @@
 <?php
 require '../connect.php';
 require '../Authentication/restrict_to_admin.php';
-restrict_to_admin(); // Redirects if not admin
+restrict_to_admin();
 
-// Keep your existing default image
 $default_image = "../images/icon.jpg";
-
-// Use session to get the latest profile picture
 $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION["pic"] : $default_image;
-
-// Force-refresh the image to prevent caching issues
-$current_image .= "?t=" . time();
-
+$current_image .= "?t=" . time(); // Prevent caching
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Admin - Register Faculty</title>
     <!-- Font Awesome CDN -->
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
- 
-    <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/headmenu.css">
-
+    <link rel="stylesheet" href="../css/reg_prof.css">
+</head>
 <body>
 
 <nav class="home-header">
@@ -92,38 +84,26 @@ $current_image .= "?t=" . time();
          
 </div>
 </nav>
-    <div class="admin-sec">
-        <p class="fp">Welcome Administrator!</p>
-        <div class="fdiv">
-        <h5>Academic Year: 2024-2025</h5>
-        <p>Evaluation Status: On-going</p>  
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="divider">
-            <a href="../students_interface/instructorsProfiles.php" class="divider-link">Faculties Profiles</a>
-            <img src="../images/facultyb.png" alt="icon">
-        </div>
-        
-        <div class="divider">
-            <a href="stundentlist.php" class="divider-link">Students List</a>
-            <img src="../images/usersb.png" alt="icon">
-        </div>
-        
-        <div class="divider">
-            <a href="eval_record.php" class="divider-link">Evaluations Records</a>
-            <img src="../images/feedb.png" alt="icon">
-        </div>
-        
-        <div class="divider">
-            <a href="admin_reports.php" class="divider-link">Report</a>
-            <img src="../images/reportb.png" alt="icon">
-        </div>
-    </div>
-    <!-- <a href="register_prof.php">register_prof</a> -->
+
+<div class="faculty-registration">
+    <h3>Register New Faculty</h3>
+    <form action="faculty_registration.php" method="POST">
+        <label for="fname">First Name:</label>
+        <input type="text" name="fname" id="fname" required>
+
+        <label for="lname">Last Name:</label>
+        <input type="text" name="lname" id="lname" required>
+
+        <label for="uname">Username:</label>
+        <input type="text" name="uname" id="uname" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+
+        <input type="submit" name="register_faculty" value="Register Faculty">
+    </form>
+</div>
 <script src="../js/sidebar.js"></script>
 <script src="../js/logs.js"></script>
-    
 </body>
 </html>

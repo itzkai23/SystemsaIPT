@@ -1,8 +1,18 @@
 <?php
 session_start();
 
-if (isset($_SESSION['user_name'])) {
-    header("Location: ../students_interface/home.php");
+// If already logged in, redirect based on role
+if (isset($_SESSION['user_name']) && isset($_SESSION['role'])) {
+    switch ($_SESSION['role']) {
+        case 'admin':
+            header("Location: ../admin/admin.php");
+            break;
+        case 'faculty':
+            header("Location: ../students_interface/instructorsProfiles.php");
+            break;
+        default:
+            header("Location: ../students_interface/home.php");
+    }
     exit();
 }
 
@@ -33,23 +43,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
             $_SESSION['pic'] = !empty($row['picture']) ? $row['picture'] : "../images/icon.jpg";
             $_SESSION['Birthday'] = $row['Birthday'];
             $_SESSION['section'] = $row['section'];
-            $_SESSION['is_admin'] = $row['is_admin'];
+            $_SESSION['role'] = $row['role']; // use role instead of is_admin
 
-            // Redirect based on admin status
-            $redirectUrl = $row['is_admin'] == 1 ? '../admin/admin.php' : '../students_interface/home.php';
-            header("Location: $redirectUrl");
+            // Redirect based on role
+            switch ($row['role']) {
+                case 'admin':
+                    header("Location: ../admin/admin.php");
+                    break;
+                case 'faculty':
+                    header("Location: ../students_interface/instructorsProfiles.php");
+                    break;
+                default:
+                    header("Location: ../students_interface/home.php");
+            }
             exit();
         } else {
             // Log invalid password attempt
             error_log("Invalid password attempt for username: $uname", 0);
-            // Redirect to error page with a specific message
             header("Location: silog.php?error=incorrect_password");
             exit();
         }
     } else {
         // Log user not found
         error_log("User not found: $uname", 0);
-        // Redirect to error page with a specific message
         header("Location: silog.php?error=user_not_found");
         exit();
     }

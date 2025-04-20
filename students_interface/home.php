@@ -1,23 +1,12 @@
 <?php
 require '../connect.php';
-session_start();
+require '../Authentication/restrict_to_student.php';
+restrict_to_student();
 
 // Prevent browser from caching the page
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-
-// Redirect to login page if session is not set
-if (!isset($_SESSION['user_name'])) {
-    header('location:../Authentication/silog.php');
-    exit();
-}
-
-if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-  header("Location: ../admin/admin.php");
-  exit();
-}
-
 
 // Keep your existing default image
 $default_image = "../images/icon.jpg";

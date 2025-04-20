@@ -1,10 +1,7 @@
 <?php
-session_start();
 include '../connect.php';
-
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
-    die("Unauthorized access.");
-}
+require '../Authentication/restrict_to_admin.php';
+restrict_to_admin(); // Redirects if not admin
 
 if (isset($_POST['comment_id'])) {
     $conn->begin_transaction(); // Ensure integrity

@@ -8,11 +8,8 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
-// Redirect admin users to home.php
-if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-    header('Location: home.php');
-    exit();
-}
+require '../Authentication/restrict_to_student.php';
+restrict_to_student();
 
 $query = "SELECT semester, school_year FROM section_professors LIMIT 1"; 
 $result = mysqli_query($conn, $query);

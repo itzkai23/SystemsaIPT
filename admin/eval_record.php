@@ -1,12 +1,7 @@
 <?php
-session_start();
 require '../connect.php';
-
-// Ensure only admins can access this page
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
-    header("Location: ../students_interface/home.php");
-    exit();
-}
+require '../Authentication/restrict_to_admin.php';
+restrict_to_admin(); // Redirects if not admin
 
 // Search logic
 $search = "";
@@ -104,13 +99,13 @@ $current_image .= "?t=" . time();
     </div>
     <li><a class="a-bar" href="../students_interface/home.php"><i class="fas fa-home"></i><span>Home</span></a></li>
     <li><a class="a-bar" href="../students_interface/instructorsProfiles.php"><i class="fas fa-chalkboard-teacher"></i><span>Faculty</span></a></li>
-    <li><a class="a-bar" href="../students_interface/upf.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+    <li><a class="a-bar"href="register_prof.php"><i class="fas fa-user"></i><span>Faculty Registration</span></a></li>
   </ul>
 
   <div class="right-section">
   <div class="mid-section">
-         <a href="admin.php" class="home">Home</a>
-         <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a>
+         <!-- <a href="admin.php" class="home">Home</a>
+         <a href="../students_interface/instructorsProfiles.php" class="pf">Faculty</a> -->
 </div>
     <div class="logpos">
       <div class="logout-container">

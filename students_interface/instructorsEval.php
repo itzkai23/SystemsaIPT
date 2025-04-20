@@ -1,16 +1,12 @@
 <?php
 require '../connect.php';
 require 'functions.php';
-session_start();
+require '../Authentication/restrict_to_student.php';
+restrict_to_student();
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_name'])) {
     header('location:../Authentication/silog.php');
-    exit();
-}
-
-if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-    header("Location: admin.php");
     exit();
 }
 

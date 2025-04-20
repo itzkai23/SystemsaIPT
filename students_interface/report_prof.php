@@ -1,6 +1,7 @@
 <?php
-session_start();
 include '../connect.php';
+require '../Authentication/restrict_to_student.php';
+restrict_to_student();
 
 // Get professor data from URL
 $professor_id = isset($_GET['id']) ? $_GET['id'] : '';
