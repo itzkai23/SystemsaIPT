@@ -22,8 +22,8 @@ function openModal(data) {
     document.getElementById("modal-questions-11-20").innerHTML = questionsRow11_20;
 
     // Show the delete button and set record ID for deletion
-    document.getElementById("delete-record-id").value = data.id;  // Set the record id for deletion
-    document.getElementById("delete-button").style.display = "block";  // Show delete button
+    // document.getElementById("delete-record-id").value = data.id;  // Set the record id for deletion
+    // document.getElementById("delete-button").style.display = "block";  // Show delete button
     
     // Display the modal
     document.getElementById("modal").style.display = "block";

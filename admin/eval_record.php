@@ -174,10 +174,10 @@ $current_image .= "?t=" . time();
             <td><?php echo number_format($row['evaluation_avg_score'], 2); ?></td>
             <td>
               <label class='view-btn' onclick='openModal(<?php echo json_encode($row, JSON_HEX_APOS | JSON_HEX_QUOT); ?>)'>View</label>
-              <form action='delete_record.php' method='POST' onsubmit='return confirm("Are you sure you want to delete this record?");'>
+              <!-- <form action='delete_record.php' method='POST' onsubmit='return confirm("Are you sure you want to delete this record?");'>
                 <input type='hidden' name='record_id' value='<?php echo htmlspecialchars($row['id']); ?>'>
                 <button type='submit'>Delete</button>
-              </form>
+              </form> -->
             </td>
           </tr>
         <?php endwhile; ?>
@@ -196,12 +196,12 @@ $current_image .= "?t=" . time();
       <h4>Professor's Average Score: <strong id="modal-avg"></strong></h4>
     </div>
 
-    <div id="delete-button-container">
+    <!-- <div id="delete-button-container">
       <form id="delete-record-form" action="delete_record.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
         <input type="hidden" name="record_id" id="delete-record-id">
         <button type="submit" id="delete-button" class="delete-btn">Delete</button>
       </form>
-    </div>
+    </div> -->
 
     <table>
       <thead>

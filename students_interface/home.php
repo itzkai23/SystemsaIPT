@@ -61,7 +61,7 @@ $current_image .= "?t=" . time();
    
    <div class="right-section">                              
    <div class="mid-section">
-   <a href="home.php" class="home">Home</a>
+   <a href="home.php" class="active">Home</a>
    <a href="instructorsProfiles.php" class="pf">Faculty</a>
    <a href="upf.php" class="pf">Profile</a>
    </div>

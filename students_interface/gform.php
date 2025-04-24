@@ -161,7 +161,7 @@ $result = $conn->query($sql);
         </a>
 
         <h1 class="form-title">Faculty Evaluation</h1>
-        <p class="p-val">Evaluating: <?php echo $professor_name; ?></p>
+        <div class="p-val-con"><p class="p-val">Evaluating: <?php echo $professor_name; ?></p></div>
         <p class="description">Your feedback helps us improve our teaching standards. Please rate the instructor based on the following criteria.</p>
         
         <form action="form_act.php" method="post">
