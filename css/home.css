@@ -16,7 +16,9 @@ body {
     background-blend-mode: multiply; /* Blending the gradient with the image */
     font-family: "Roboto", sans-serif;
     }  
-    
+.mid-section a.active {
+  color: rgb(250, 149, 54);
+}
 .h-text {
     text-align: center;
     width: 58%;

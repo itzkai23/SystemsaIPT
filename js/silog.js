@@ -6,86 +6,125 @@ const closelog = document.getElementById('logi');
 const closereg = document.getElementById('regi');
 const loginForm = document.getElementById('login');
 const registerForm = document.getElementById('register');
-const hText = document.querySelector('.h-text'); // Selecting the .h-text element
+const hText = document.querySelector('.h-text');
 
-// Function to hide .h-text
+// Hide and show hText
 function hideHText() {
   hText.style.display = 'none';
 }
 
-// Function to show .h-text
 function showHText() {
   hText.style.display = 'block';
 }
 
-// login button sa nav
+// Login popup open
 loginButton.addEventListener('click', () => {
   wrapper.classList.add('active-popup');
-  hideHText(); // Hide .h-text when login/register form opens
+  hideHText();
 });
 
-//papuntang signup
+// Switch to register form
 registerlink.addEventListener('click', () => {
   wrapper.classList.add('active');
   loginForm.reset();
+  document.getElementById('login-error').textContent = ''; // Clear login errors
 });
 
-// papuntang login
+// Switch to login form
 loginlink.addEventListener('click', () => {
   wrapper.classList.remove('active');
-  registerForm.reset(); 
+  registerForm.reset();
+  document.getElementById('register-error').textContent = ''; // Clear register errors
 });
 
-//close button sa login
+// Close login form
 closelog.addEventListener('click', () => {
   wrapper.classList.remove('active-popup');
   loginForm.reset();
-  showHText(); // Show .h-text when login/register form closes
+  document.getElementById('login-error').textContent = ''; // Clear login errors
+  showHText();
 });
 
-//close button sa signup
+// Close register form
 closereg.addEventListener('click', () => {
   wrapper.classList.remove('active-popup');
   registerForm.reset();
-  showHText(); // Show .h-text when login/register form closes  
+  document.getElementById('register-error').textContent = ''; // Clear register errors
+  showHText();
 });
 
-document.getElementById("registerForm").addEventListener("submit", function(event) {
-    var email = document.getElementById("email").value;
-    var allowedDomain = "@cityofmalabonuniversity.edu.ph";
+// Register email validation
+document.getElementById("registerForm").addEventListener("submit", function (event) {
+  var email = document.getElementById("email").value;
+  var allowedDomain = "@cityofmalabonuniversity.edu.ph";
+  var errorDiv = document.getElementById("register-error");
 
-    if (!email.endsWith(allowedDomain)) {
-        alert("Invalid email! Use your @cityofmalabonuniversity.edu.ph gmail");
-        event.preventDefault(); // Prevents form submission
-    }
+  if (!email.endsWith(allowedDomain)) {
+    errorDiv.textContent = "Invalid email! Use your @cityofmalabonuniversity.edu.ph email.";
+    event.preventDefault();
+  } else {
+    errorDiv.textContent = ""; // Clear error if valid
+  }
 });
 
+// Login error handler from PHP via URL param
 document.addEventListener("DOMContentLoaded", function () {
-  const loginForm = document.getElementById("login");
   const errorDiv = document.getElementById("login-error");
-
-  // Extract URL parameters for error messages
   const urlParams = new URLSearchParams(window.location.search);
   const error = urlParams.get('error');
 
-  // Handle the error messages dynamically
+  // Check for errors and display messages
   if (error === 'invalid_credentials') {
-      errorDiv.textContent = 'Incorrect password. Please try again.';
+    errorDiv.textContent = 'Incorrect password. Please try again.';
+    wrapper.classList.add('active-popup'); // Keep popup open
   } else if (error === 'user_not_found') {
-      errorDiv.textContent = 'User not found. Please check your username.';
+    errorDiv.textContent = 'User not found. Please check your username.';
+    wrapper.classList.add('active-popup'); // Keep popup open
   }
 
-  // Keep the login form open when there is an error
-  if (error) {
-      document.querySelector('.wrapper').classList.add('active-popup');
-  }
-
-  // Clear the error message when the user starts typing
+  // Clear error message on input for both username and password fields
   document.getElementById('username').addEventListener('input', () => {
-      errorDiv.textContent = ''; // Clear error when typing username
+    errorDiv.textContent = '';
   });
 
   document.getElementById('password').addEventListener('input', () => {
-      errorDiv.textContent = ''; // Clear error when typing password
+    errorDiv.textContent = '';
+  });
+
+  // Handle the form submission using JavaScript to prevent page reload
+  const loginForm = document.getElementById('login');
+  loginForm.addEventListener('submit', function(event) {
+    // Prevent the form from submitting and reloading the page
+    event.preventDefault();
+    
+    // Fetch the username and password values
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Send the login data to the server using AJAX (e.g., with Fetch API or XMLHttpRequest)
+    const formData = new FormData();
+    formData.append('uname', username);
+    formData.append('password', password);
+    formData.append('sub', 'true'); // Simulating button click
+
+    fetch('log.php', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.text())
+    .then(data => {
+      // Handle server response here, depending on success or failure
+      if (data.includes('invalid_credentials')) {
+        errorDiv.textContent = 'Incorrect password. Please try again.';
+        wrapper.classList.add('active-popup');
+      } else if (data.includes('user_not_found')) {
+        errorDiv.textContent = 'User not found. Please check your username.';
+        wrapper.classList.add('active-popup');
+      } else {
+        // Redirect user to their role-based page on success (handled by PHP after login)
+        window.location.href = data;
+      }
+    })
+    .catch(error => console.error('Error:', error));
   });
 });

@@ -211,7 +211,7 @@ $current_image .= "?t=" . time();
          <h5 class="prof-name"> <?php echo $professor_name; ?></h5>
          <!-- Add a Report Button -->
          <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
-        class="report-btn">Report</a>
+        class="report-btn"><i class="fas fa-exclamation-triangle"></i></a>
          </div>
          <h5 class="pro-role"><?php echo $profrole; ?></h5>
          </div>

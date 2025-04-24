@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Query preparation failed: " . $conn->error);
     }
 
-    $stmt->bind_param("iiss", $user_id, $professor_id, $comments, $submitted_at);
+    $stmt->bind_param("iiss", $_SESSION['user_id'], $professor_id, $comments, $submitted_at);
 
     if ($stmt->execute()) {
         // ✅ Redirect after successful evaluation

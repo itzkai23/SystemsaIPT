@@ -75,7 +75,7 @@ display: block;
 .prof-rep-div {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
 }
 
 .prof-name{
@@ -105,15 +105,13 @@ color: rgb(26, 26, 26);
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   background: red; /* Flat red background */
   color: white;
-  padding: 5px 10px;
+  padding: 5px 7px;
   border-radius: 5px;
   transition: background 0.3s ease-in-out;
-  font-family: 'Roboto', sans-serif;
-  width: 50PX;
 }
 
 .report-btn:hover {
@@ -772,8 +770,7 @@ word-wrap: break-word;
 /* ---------- MOBILE: 768px and below ---------- */
 @media (max-width: 768px) {
   .container {
-    width: 90%;
-    margin: 100px auto;
+    width: 88%;
     padding: 15px;
   }
 
@@ -809,8 +806,12 @@ word-wrap: break-word;
     padding: 10px;
   }
 
+  .comment-post label {
+    width: 90%;
+  }
+
   .section {
-    width: 100%;
+    width: 90%;
     height: auto;
   }
 

@@ -63,10 +63,6 @@
   transform: scaleX(1);
 }
 
-.home-header a.active {
-  color: rgb(250, 149, 54);
-}
-
 .right-section {
   display: flex;
   align-items: center;

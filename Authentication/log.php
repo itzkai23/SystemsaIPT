@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
             $_SESSION['pic'] = !empty($row['picture']) ? $row['picture'] : "../images/icon.jpg";
             $_SESSION['Birthday'] = $row['Birthday'];
             $_SESSION['section'] = $row['section'];
-            $_SESSION['role'] = $row['role']; // use role instead of is_admin
+            $_SESSION['role'] = $row['role'];
 
             // Redirect based on role
             switch ($row['role']) {
@@ -60,13 +60,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sub'])) {
         } else {
             // Log invalid password attempt
             error_log("Invalid password attempt for username: $uname", 0);
-            header("Location: silog.php?error=incorrect_password");
+            $_SESSION['login_error'] = 'Invalid username or password.';
+            header("Location: silog.php");
             exit();
         }
     } else {
         // Log user not found
         error_log("User not found: $uname", 0);
-        header("Location: silog.php?error=user_not_found");
+        $_SESSION['login_error'] = 'User not found.';
+        header("Location: silog.php");
         exit();
     }
 } else {

@@ -16,6 +16,9 @@ body {
     .mid-section a.active {
       color: rgb(250, 149, 54) !important;
     }
+.mid-section a.active {
+    color: rgb(250, 149, 54);
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {

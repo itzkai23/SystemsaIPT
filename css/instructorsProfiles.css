@@ -14,6 +14,10 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+.mid-section a.active {
+    color: rgb(250, 149, 54);
+}
+
 /* Container */
 .group-container {
     display: flex;

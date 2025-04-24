@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../connect.php';
 $query = "SELECT section FROM sections ORDER BY section";
 $result = mysqli_query($conn, $query);
@@ -6,18 +7,6 @@ $result = mysqli_query($conn, $query);
 if (isset($_SESSION['user_name'])) {
     header("Location: ../students_interface/home.php");
     exit();
-}
-
-$error = $_GET['error'] ?? '';
-$errorMsg = '';
-
-switch ($error) {
-    case 'invalid_credentials':
-        $errorMsg = 'Incorrect password.';
-        break;
-    case 'user_not_found':
-        $errorMsg = 'User not found.';
-        break;
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +38,6 @@ switch ($error) {
         <img src="../images/close.png" alt="close">
     </span>
     <img src="../images/logo.png" alt="City of Malabon University" class="image">
-    
     <form id="login" action="log.php" method="post">
         <div class="input-group">
             <span class="icon"><i class="fas fa-user"></i></span>
@@ -61,13 +49,15 @@ switch ($error) {
             <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="toggle-eye" onclick="togglePassword()"><i class="fas fa-eye" id="pass-eyecon"></i></span>
         </div>
-
-        <?php if ($errorMsg): ?>
-            <div id="login-error" class="error-message" style="color:red; font-size: 0.9em; margin-top: 5px;">
-                <?= htmlspecialchars($errorMsg) ?>
-            </div>
-        <?php endif; ?>
-
+            <!-- Display any error message -->
+        <div id="login-error" class="error-message">
+            <?php
+            if (isset($_SESSION['login_error'])) {
+                echo $_SESSION['login_error']; 
+                unset($_SESSION['login_error']);  // Clear the error after displaying
+            }
+            ?>
+        </div>
         <h5><a href="../change_pass/forgotpass.php">Forgot password?</a></h5>
         <button type="submit" name="sub" class="form-login-btn">Login</button>
         <p>Don't have an account? <a href="#" class="register-link">SignUp</a></p>
@@ -120,14 +110,12 @@ switch ($error) {
                 <span class="toggle-eye" onclick="togglePassign()"><i class="fas fa-eye"></i></span>
                 </div> 
              </div>
-
           <button type="submit" name="submit" class="form-register-btn">Register</button>
           <p>Already have an account? <a href="#" class="login-link">Login</a></p>
           
           <div>
           <label for="termsCheckbox" class="open-modal-btn">Terms and Conditions</label>
           </div>
-        
         </form>
       </div>
 
@@ -185,7 +173,7 @@ switch ($error) {
 </div>
 
 <script>
-    const inputs = document.querySelectorAll('.register-input-wrapper input, .register-input-wrapper select');
+const inputs = document.querySelectorAll('.register-input-wrapper input, .register-input-wrapper select');
 
 inputs.forEach((input, index) => {
   input.addEventListener('focus', () => {
@@ -198,6 +186,7 @@ inputs.forEach((input, index) => {
   });
 });
 </script>
+
 <script src="../js/faeye.js"></script>
 <script src="../js/cbot.js"></script>
 <script src="../js/silog.js"></script>
