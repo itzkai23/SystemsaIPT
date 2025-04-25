@@ -2,6 +2,8 @@
 require '../connect.php';
 require '../Authentication/restrict_to_student.php';
 restrict_to_student();
+require 'evaluation_schedule.php';
+
 
 // Prevent browser from caching the page
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
@@ -16,6 +18,15 @@ $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION
 
 // Force-refresh the image to prevent caching issues
 $current_image .= "?t=" . time();
+
+// Example: get section from session
+$user_section = isset($_SESSION['section']) ? $_SESSION['section'] : null;
+
+$eval_status = getEvaluationScheduleStatus($user_section);
+$can_evaluate = $eval_status['allowed'];
+
+$scheduled_sections = getTodayScheduledSections();
+
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +119,16 @@ $current_image .= "?t=" . time();
 <div class="h-text">
 <h2>Your feedback helps evaluate faculty performance, shaping better teaching and an improved learning experience for all students.</h2>
 <h3 class="">Your insight and feedbacks are all matters!</h3>
-<a href="instructorsEval.php" class="link">Evaluate Now!</a>
+
+<?php if ($can_evaluate): ?>
+  <a href="instructorsEval.php" class="link">Evaluate Now!</a>
+<?php else: ?>
+  <div class="tooltip-wrapper">
+    <a href="javascript:void(0);" class="link disabled-link">Evaluate Now!</a>
+    <span class="tooltip-text">You're not yet scheduled for evaluation</span>
+  </div>
+<?php endif; ?>
+
 </div> 
 </div>   
 <script src="../js/sidebar.js"></script>

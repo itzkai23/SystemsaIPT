@@ -3,6 +3,7 @@ require '../connect.php';
 require 'functions.php';
 require '../Authentication/restrict_to_student.php';
 restrict_to_student();
+require 'evaluation_schedule.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_name'])) {
