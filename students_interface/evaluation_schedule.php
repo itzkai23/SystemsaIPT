@@ -1,108 +1,83 @@
 <?php
-// includes/evaluation_schedule.php
-
 function getEvaluationScheduleStatus($user_section) {
-    // Fixed Schedule
-    $fixed_schedule = [
-        ['BSIT-3A', 'BSIT-3B'],
-        ['BSIT-3C', 'BSIT-3D'],
-        ['BSIT-3E', 'BSIT-3F'],
-        ['BSIT-3G', 'BSIT-3H'],
-        ['BSIT-3I', 'BSIT-3J'],
-        ['BSIT-3K'],
-        [] // Sunday - No Evaluation
-    ];
+    date_default_timezone_set('Asia/Manila'); // Ensure the timezone is correct
 
-    $start_date = new DateTime("2025-04-25"); // Sunday
+    $start_date = new DateTime('2025-04-29'); // Start date for evaluation
     $now = new DateTime();
-    $current_hour = (int) $now->format('G');
-    $days_diff = $start_date->diff($now)->days;
-    $day_index = $days_diff % 7;
+    $current_hour = (int)$now->format('G');
 
-    // Handle rest day
-    if ($day_index === 6) {
+    // Ensure evaluation cannot happen before the start date
+    if ($now < $start_date) {
         return [
             'allowed' => false,
-            'message' => "⛔ Faculty evaluation is closed today. Please come back tomorrow.",
+            'message' => "⚠️ The evaluation period has not started yet. Please wait until the start date.",
+            'schedule_date' => $start_date->format('F j, Y')
+        ];
+    }
+
+    $fixed_schedule = [
+        1 => ['BSIT-3A', 'BSIT-3B'], // Monday
+        2 => ['BSIT-3C', 'BSIT-3D'], // Tuesday
+        3 => ['BSIT-3E', 'BSIT-3F'], // Wednesday
+        4 => ['BSIT-3G', 'BSIT-3H'], // Thursday
+        5 => ['BSIT-3I', 'BSIT-3J'], // Friday
+        6 => ['BSIT-3K'],            // Saturday (only BSIT-3K)
+        7 => []                      // Sunday
+    ];
+
+    // Calculate how many days passed since start
+    $days_since_start = (int)$start_date->diff($now)->format('%a');
+    $day_offset = $days_since_start % 7;
+
+    // Get the correct day number based on evaluation week
+    $start_day_num = (int)$start_date->format('N'); // 1 = Monday, 7 = Sunday
+    $current_day = ($start_day_num + $day_offset - 1) % 7 + 1;
+
+    if ($current_day === 7) {
+        return [
+            'allowed' => false,
+            'message' => "⛔ Faculty evaluation is closed today (Sunday).",
             'schedule_date' => null
         ];
     }
 
-    $slot = ($current_hour >= 7 && $current_hour < 15) ? 0 : (($current_hour >= 15 && $current_hour < 22) ? 1 : -1);
-
-    // Outside evaluation hours
-    if ($slot === -1) {
-        $schedule_date = clone $start_date;
-        $schedule_date->modify("+$days_diff days");
-        return [
-            'allowed' => false,
-            'message' => "⏰ Faculty evaluation hasn’t started yet. Please come back between 7 AM and 10 PM.",
-            'schedule_date' => $schedule_date->format('F j, Y')
-        ];
-    }
-
-    $today_sections = $fixed_schedule[$day_index];
-    $allowed_section = count($today_sections) === 1 ? $today_sections[0] : $today_sections[$slot];
-
-    if ($user_section === $allowed_section) {
-        return ['allowed' => true];
+    // Determine time slot for evaluation
+    if ($current_hour >= 7 && $current_hour <= 14) {
+        $slot = 0; // Morning session
+    } elseif ($current_hour >= 15 && $current_hour <= 22) {
+        $slot = 1; // Afternoon session
     } else {
-        $schedule_date = null;
-        // Search when the user's section is allowed
-        foreach ($fixed_schedule as $i => $pair) {
-            foreach ($pair as $pos => $section) {
-                if ($section === $user_section) {
-                    $target_date = clone $start_date;
-                    $target_date->modify("+$i days");
-                    $schedule_date = $target_date->format('F j, Y');
-                    break 2;
-                }
-            }
-        }
         return [
             'allowed' => false,
-            'message' => "⚠️ You are not scheduled to evaluate at this time.",
-            'schedule_date' => $schedule_date
+            'message' => "⏰ Faculty evaluation is only open from 7 AM to 10 PM.",
+            'schedule_date' => $now->format('F j, Y')
         ];
     }
-}
 
-function getTodayScheduledSections() {
-    $fixed_schedule = [
-        ['BSIT-3A', 'BSIT-3B'],
-        ['BSIT-3C', 'BSIT-3D'],
-        ['BSIT-3E', 'BSIT-3F'],
-        ['BSIT-3G', 'BSIT-3H'],
-        ['BSIT-3I', 'BSIT-3J'],
-        ['BSIT-3K'],
-        [] // Sunday - No Evaluation
+    $today_sections = $fixed_schedule[$current_day];
+
+    // Check if the user's section matches the allowed session
+    if (isset($today_sections[$slot]) && $user_section === $today_sections[$slot]) {
+        return ['allowed' => true];
+    }
+
+    // Check when their section is allowed to evaluate next
+    for ($offset = 1; $offset <= 7; $offset++) {
+        $future_day = ($current_day + $offset - 1) % 7 + 1;
+        if (in_array($user_section, $fixed_schedule[$future_day])) {
+            $future_date = (clone $now)->modify("+$offset days");
+            return [
+                'allowed' => false,
+                'message' => "⚠️ You are not scheduled to evaluate at this time.",
+                'schedule_date' => $future_date->format('l, F j, Y')
+            ];
+        }
+    }
+
+    return [
+        'allowed' => false,
+        'message' => "⚠️ Your section is not scheduled for evaluation this week.",
+        'schedule_date' => null
     ];
-
-    $start_date = new DateTime("2025-04-25"); // Sunday
-    $now = new DateTime();
-    $current_hour = (int) $now->format('G');
-    $days_diff = $start_date->diff($now)->days;
-    $day_index = $days_diff % 7;
-
-    // Return full pair if evaluation is active hours
-    if ($day_index === 6) {
-        return ["Evaluation is closed today (Sunday)."];
-    }
-
-    $slot = ($current_hour >= 7 && $current_hour < 15) ? 0 : (($current_hour >= 15 && $current_hour < 22) ? 1 : -1);
-
-    if ($slot === -1) {
-        return ["Evaluation has not started yet. (Allowed between 7 AM and 10 PM)"];
-    }
-
-    $today_sections = $fixed_schedule[$day_index];
-    if (empty($today_sections)) {
-        return ["No sections scheduled today."];
-    }
-
-    if (count($today_sections) === 1) {
-        return [$today_sections[0]];
-    }
-
-    return [$today_sections[$slot]];
 }
+?>

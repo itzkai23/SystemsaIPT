@@ -12,7 +12,7 @@
     .modal-sched {
         display: none;
         position: fixed;
-        top: 0; left: 0;
+        top: 30px; left: 0;
         width: 100%; height: 100%;
         background: rgba(0,0,0,0.6);
         justify-content: center;
@@ -23,12 +23,12 @@
       .modal-content-sched {
         background: white;
         width: 90%;
-        max-width: 800px;
+        max-width: 500px;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         animation: fadeIn 0.3s ease;
-        max-height: 90vh;
+        max-height: 70vh;
         overflow-y: auto;
         position: relative;
       }

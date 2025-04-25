@@ -25,7 +25,6 @@ $user_section = isset($_SESSION['section']) ? $_SESSION['section'] : null;
 $eval_status = getEvaluationScheduleStatus($user_section);
 $can_evaluate = $eval_status['allowed'];
 
-$scheduled_sections = getTodayScheduledSections();
 
 ?>
 
@@ -46,6 +45,7 @@ $scheduled_sections = getTodayScheduledSections();
 
 <link rel="stylesheet" href="../css/home.css">
 <link rel="stylesheet" href="../css/headmenu.css">
+<link rel="stylesheet" href="../css/sched.css">
 </head>
   
 <body>
@@ -93,7 +93,8 @@ $scheduled_sections = getTodayScheduledSections();
 
                 <div class="dlog-icon">
                  <img src="../images/announcement.png" alt="">
-                <a class="a-pf" href="#">Announcement</a>
+                <!-- <a class="a-pf" href="#">Announcement</a> -->
+                <a class="open-btn" onclick="openModal()">Schedule</a>
                 </div>
                 
                 <div class="dlog-icon">
@@ -120,20 +121,146 @@ $scheduled_sections = getTodayScheduledSections();
 <h2>Your feedback helps evaluate faculty performance, shaping better teaching and an improved learning experience for all students.</h2>
 <h3 class="">Your insight and feedbacks are all matters!</h3>
 
+<?php 
+// Define the start date of the evaluation period
+$start_date = new DateTime('2025-04-29'); // Update this to your actual start date
+$now = new DateTime();
+
+// Check if the evaluation has started or not
+$evaluation_not_started = $now < $start_date;
+?>
+
 <?php if ($can_evaluate): ?>
   <a href="instructorsEval.php" class="link">Evaluate Now!</a>
 <?php else: ?>
   <div class="tooltip-wrapper">
     <a href="javascript:void(0);" class="link disabled-link">Evaluate Now!</a>
-    <span class="tooltip-text">You're not yet scheduled for evaluation</span>
+    <span class="tooltip-text">
+      <?php 
+        if ($evaluation_not_started) {
+          echo "The evaluation period hasn't started yet.";
+        } else {
+          echo "You're not yet scheduled for evaluation.";
+        }
+      ?>
+    </span>
   </div>
 <?php endif; ?>
 
+
 </div> 
-</div>   
+</div> 
+
+<div class="modal-sched" id="scheduleModal">
+  <div class="modal-content-sched">
+    <div class="modal-header">
+      <h2>College Weekly Schedule</h2>
+      <button class="announcement-btn" onclick="showAnnouncement()">Announcement</button>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+
+    <!-- Announcement Pop-up -->
+    <div class="announcement-popup" id="announcementPopup">
+      <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
+      <h3>📢 Announcement</h3>
+      <p>All classes on Monday will start 30 minutes late due to campus maintenance. Please be guided accordingly.</p>
+    </div>
+
+    <div class="modal-body">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Section</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">Monday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section A</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section B</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Tuesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section C</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section D</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Wednesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section E</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section F</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Thursday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section G</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section H</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Friday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section I</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section J</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section K</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
 <script src="../js/sidebar.js"></script>
 <script src="../js/logs.js"></script>
     
+<script>
+  function openModal() {
+    document.getElementById('scheduleModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('scheduleModal').style.display = 'none';
+    closeAnnouncement();
+  }
+
+  function showAnnouncement() {
+    document.getElementById('announcementPopup').style.display = 'block';
+  }
+
+  function closeAnnouncement() {
+    document.getElementById('announcementPopup').style.display = 'none';
+  }
+
+  window.onclick = function(e) {
+    const modal = document.getElementById('scheduleModal');
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
+</script>
     
   </body>
   
