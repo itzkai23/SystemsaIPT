@@ -26,6 +26,7 @@ if (isset($_SESSION['user_name'])) {
 <header>
     <img src="../images/head2.png" alt="headerlogo" class="logo">
     <nav class="navigation">
+       <a class="open-btn" onclick="openModal()">Show Schedule</a>
        <a href="#">Regulations</a>
        <a href="../students_interface/profstatus.php">Faculties</a>
        <button class="btn-popup">Login</button>      
@@ -172,6 +173,89 @@ if (isset($_SESSION['user_name'])) {
     </iframe>
 </div>
 
+
+
+<div class="modal-sched" id="scheduleModal">
+  <div class="modal-content-sched">
+    <div class="modal-header">
+      <h2>College Weekly Schedule</h2>
+      <button class="announcement-btn" onclick="showAnnouncement()">Announcement</button>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+
+    <!-- Announcement Pop-up -->
+    <div class="announcement-popup" id="announcementPopup">
+      <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
+      <h3>📢 Announcement</h3>
+      <p>All classes on Monday will start 30 minutes late due to campus maintenance. Please be guided accordingly.</p>
+    </div>
+
+    <div class="modal-body">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Section</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">Monday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section A</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section B</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Tuesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section C</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section D</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Wednesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section E</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section F</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Thursday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section G</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section H</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Friday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section I</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>Section J</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>Section K</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <script>
 const inputs = document.querySelectorAll('.register-input-wrapper input, .register-input-wrapper select');
 
@@ -185,6 +269,32 @@ inputs.forEach((input, index) => {
     }
   });
 });
+</script>
+
+<script>
+  function openModal() {
+    document.getElementById('scheduleModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('scheduleModal').style.display = 'none';
+    closeAnnouncement();
+  }
+
+  function showAnnouncement() {
+    document.getElementById('announcementPopup').style.display = 'block';
+  }
+
+  function closeAnnouncement() {
+    document.getElementById('announcementPopup').style.display = 'none';
+  }
+
+  window.onclick = function(e) {
+    const modal = document.getElementById('scheduleModal');
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
 </script>
 
 <script src="../js/faeye.js"></script>
