@@ -12,6 +12,49 @@ $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION
 // Force-refresh the image to prevent caching issues
 $current_image .= "?t=" . time();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['enable_evaluation'])) {
+      // Enable evaluation and set dates
+      $start_date = $_POST['start_date'];
+      $end_date = $_POST['end_date'];
+      $status = 'enabled';
+
+      // Prepare the SQL statement
+      if ($stmt = $conn->prepare("INSERT INTO evaluation_status (status, start_date, end_date) VALUES (?, ?, ?)")) {
+          // Bind the parameters
+          $stmt->bind_param("sss", $status, $start_date, $end_date);
+          
+          // Execute the statement
+          if ($stmt->execute()) {
+              echo "Evaluation enabled successfully.";
+          } else {
+              echo "Error executing query: " . $stmt->error;
+          }
+          $stmt->close();
+      } else {
+          echo "Error preparing statement: " . $conn->error;
+      }
+  } elseif (isset($_POST['disable_evaluation'])) {
+      // Disable evaluation
+      $status = 'disabled';
+
+      // Prepare the SQL statement
+      if ($stmt = $conn->prepare("INSERT INTO evaluation_status (status) VALUES (?)")) {
+          // Bind the parameter
+          $stmt->bind_param("s", $status);
+          
+          // Execute the statement
+          if ($stmt->execute()) {
+              echo "Evaluation disabled successfully.";
+          } else {
+              echo "Error executing query: " . $stmt->error;
+          }
+          $stmt->close();
+      } else {
+          echo "Error preparing statement: " . $conn->error;
+      }
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +102,7 @@ $current_image .= "?t=" . time();
       <div class="logout-container"> 
         <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" id="logoutButton">
         <div class="logout-dropdown" id="logoutDropdown">
-                <a href="upf.php" class="logpf-con">
+                <a href="admin.php" class="logpf-con">
                   <img src="<?php echo htmlspecialchars($current_image); ?>" class="piclog" alt="picture">
                   <h4><?php echo htmlspecialchars($_SESSION['f_name']) ." ".($_SESSION['l_name']);?></h4>
                 </a>
@@ -92,14 +135,25 @@ $current_image .= "?t=" . time();
          
 </div>
 </nav>
-    <div class="admin-sec">
-        <p class="fp">Welcome Administrator!</p>
-        <div class="fdiv">
+<div class="admin-sec">
+    <p class="fp">Welcome Administrator!</p>
+    <div class="fdiv">
         <h5>Academic Year: 2024-2025</h5>
-        <p>Evaluation Status: On-going</p>  
-        </div>
+        <p>Evaluation Status:</p>
     </div>
     
+    <form method="POST" action="">
+    <label for="start_date">Start Date:</label>
+    <input type="date" name="start_date" required>
+
+    <label for="end_date">End Date:</label>
+    <input type="date" name="end_date" required>
+
+    <button type="submit" name="enable_evaluation">Enable Evaluation</button>
+    <button type="submit" name="disable_evaluation">Disable Evaluation</button>
+</form>
+</div>
+
     <div class="container">
         <div class="divider">
             <a href="../students_interface/instructorsProfiles.php" class="divider-link">Faculties Profiles</a>

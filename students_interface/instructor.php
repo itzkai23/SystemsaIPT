@@ -1,15 +1,14 @@
 <?php
-
-session_start();
 require '../connect.php';
+session_start();
 
 // Check if professor_id is set in either the URL (GET) or the form submission (POST)
 if (isset($_GET['professor_id'])) {
-  $professor_id = $_GET['professor_id'];
+    $professor_id = $_GET['professor_id'];
 } elseif (isset($_POST['professor_id'])) {
-  $professor_id = $_POST['professor_id'];
+    $professor_id = $_POST['professor_id'];
 } else {
-  die("No professor selected. <a href='instructorsProfiles.php'>Go back</a>");
+    die("No professor selected. <a href='instructorsProfiles.php'>Go back</a>");
 }
 
 // Fetch professor details
@@ -42,28 +41,13 @@ $avgStmt->execute();
 $avgResult = $avgStmt->get_result();
 $avgData = $avgResult->fetch_assoc();
 
-// Extract average score and evaluation count
-$professor_avg_score = $avgData['professor_avg_score'];
-$evaluation_count = $avgData['evaluation_count'];
+// Extract average score and evaluation count safely
+$professor_avg_score = isset($avgData['professor_avg_score']) ? $avgData['professor_avg_score'] : 0;
+$evaluation_count = isset($avgData['evaluation_count']) ? $avgData['evaluation_count'] : 0;
 
-// Prepare the main query to fetch feedback and comments
-$query = "
+// Prepare query to fetch only comments
+$commentQuery = "
 SELECT 
-    ie.feedback, 
-    ie.submitted_at AS date_posted, 
-    NULL AS comment, 
-    NULL AS comment_id,  
-    r.fname AS student_name, 
-    r.lname, 
-    r.picture AS student_image
-FROM instructor_evaluation ie
-JOIN registration r ON ie.user_id = r.id
-WHERE ie.professor_id = ?
-
-UNION ALL
-
-SELECT 
-    NULL AS feedback, 
     c.created_at AS date_posted,
     c.comment, 
     c.id AS comment_id,  
@@ -73,33 +57,31 @@ SELECT
 FROM comments c
 JOIN registration r ON c.user_id = r.id
 WHERE c.professor_id = ?
+ORDER BY c.created_at DESC;
+";
 
-ORDER BY date_posted DESC;";  // Latest entries first
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ii", $professor_id, $professor_id);
+$stmt = $conn->prepare($commentQuery);
+$stmt->bind_param("i", $professor_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$feedbackData = [];
+$commentData = [];
 
 while ($row = $result->fetch_assoc()) {
-    $feedbackData[] = [
-        'feedback' => !empty($row['feedback']) ? $row['feedback'] : null,
-        'comment' => !empty($row['comment']) ? $row['comment'] : null,
-        'comment_id' => isset($row['comment_id']) ? $row['comment_id'] : null,
-        'date_posted' => $row['date_posted'],
-        'student_name' => $row['student_name'],
-        'lname' => $row['lname'],
+    $commentData[] = [
+        'comment' => isset($row['comment']) ? $row['comment'] : '',
+        'comment_id' => isset($row['comment_id']) ? $row['comment_id'] : 0,
+        'date_posted' => isset($row['date_posted']) ? $row['date_posted'] : '',
+        'student_name' => isset($row['student_name']) ? $row['student_name'] : '',
+        'lname' => isset($row['lname']) ? $row['lname'] : '',
         'student_image' => !empty($row['student_image']) ? $row['student_image'] : "../images/icon.jpg"
     ];
 }
 
-$totalCount = count($feedbackData);
+$totalCount = count($commentData);
 
+// Default images
 $defimage = '../images/facultyb.png';
-
-// Keep your existing default image
 $default_image = "../images/icon.jpg";
 
 // Use session to get the latest profile picture
@@ -107,9 +89,7 @@ $current_image = isset($_SESSION["pic"]) && !empty($_SESSION["pic"]) ? $_SESSION
 
 // Force-refresh the image to prevent caching issues
 $current_image .= "?t=" . time();
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -211,8 +191,17 @@ $current_image .= "?t=" . time();
          <div class="prof-rep-div">
          <h5 class="prof-name"> <?php echo $professor_name; ?></h5>
          <!-- Add a Report Button -->
-         <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" 
-        class="report-btn"><i class="fas fa-exclamation-triangle"></i></a>
+         <?php
+          // Check if the user is not an admin or faculty
+          if ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'faculty') {
+              // Display the report button only if the user is not an admin or faculty
+          ?>
+              <a href="report_prof.php?id=<?php echo urlencode($professor_id); ?>&name=<?php echo urlencode($professor_name); ?>&img=<?php echo urlencode($prof_img); ?>" class="report-btn">
+                  <i class="fas fa-exclamation-triangle"></i>
+              </a>
+          <?php
+          }
+          ?>
          </div>
          <h5 class="pro-role"><?php echo $profrole; ?></h5>
          </div>
@@ -251,19 +240,7 @@ $current_image .= "?t=" . time();
       <h3>Comments (<?php echo $totalCount; ?>)</h3> <!-- Display total count -->
         <div class="com-scroll">
                       <?php
-              foreach ($feedbackData as $comm) {
-                  // Display feedback if it exists
-                  if (!empty($comm['feedback'])) {
-                      echo '<div class="comment-box1">';
-                      echo '<img src="../images/icon.jpg " alt="User" class="comment-img">';
-                      echo '<div class="comment-text1">';
-                      echo '<strong> Evaluation </strong><br>';
-                      echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                      echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>'; // Uses common date field
-                      echo '</div>';
-                      echo '</div>';
-                  }
-
+              foreach ($commentData as $comm) {
                   // Display comment if it exists
                   if (!empty($comm['comment'])) {
                       echo '<div class="comment-box1">';
@@ -332,44 +309,44 @@ $current_image .= "?t=" . time();
         <div class="label-section">
             <div class="modal-scroll">
             <?php
-            foreach ($feedbackData as $comm) {
+            foreach ($commentData as $comm) {
                 echo '<div class="comment-box">';
 
-                if (!empty($comm['feedback'])) {
-                    // Anonymous feedback (evaluation)
-                    echo '<img src="../images/icon.jpg" alt="Anonymous" class="comment-img">'; // use a generic image
-                    echo '<div class="comment-text">';
-                    echo '<strong>Evaluation</strong><br>';
-                    echo '<p>' . htmlspecialchars($comm['feedback']) . '</p>';
-                    echo '<small>Evaluated: ' . htmlspecialchars($comm['date_posted']) . '</small>';
-                } elseif (!empty($comm['comment'])) {
-                    // User comment
-                    echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
-                    echo '<div class="comment-text">';
-                    echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
-                    echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
-                    echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>';
+                echo '<img src="' . htmlspecialchars($comm['student_image']) . '" alt="User" class="comment-img">';
+                echo '<div class="comment-text">';
+                echo '<strong>' . htmlspecialchars($comm['student_name']) . " " . htmlspecialchars($comm['lname']) . '</strong><br>';
+                echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
+                echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>';
 
-                    // Three-dot menu for comments ONLY
-                    echo '<div class="menu-container">';
-                    echo '<button class="menu-btn" onclick="toggleMenu(this)">&#x22EE;</button>';
-                    echo '<div class="menu-options">';
+                // Three-dot menu for comments
+                echo '<div class="menu-container">';
+                echo '<button class="menu-btn" onclick="toggleMenu(this)">&#x22EE;</button>';
+                echo '<div class="menu-options">';
 
-                    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-                        echo '<form action="delete_comment.php" method="post">
-                                <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
-                                <button type="submit" onclick="return confirm(\'Are you sure you want to delete this?\');">Delete</button>
-                              </form>';
-                    } else {
-                        echo '<form action="report_comment.php" method="post">
-                                <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
-                                <button type="submit">Report</button>
-                              </form>';
-                    }
-
-                    echo '</div>'; // .menu-options
-                    echo '</div>'; // .menu-container
+                // Admin check
+                if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                    echo '<form action="../admin/delete_comment.php" method="post">
+                            <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
+                            <button type="submit" onclick="return confirm(\'Are you sure you want to delete this?\');">Delete</button>
+                          </form>';
+                } 
+                // Check if the logged-in user is the author of the comment
+                elseif (isset($_SESSION['id']) && $_SESSION['id'] == $comm['user_id']) {
+                  echo '<form action="../admin/delete_comment.php" method="post">
+                          <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
+                          <button type="submit" onclick="return confirm(\'Are you sure you want to delete this?\');">Delete</button>
+                        </form>';
+                } 
+                // For other users, show report option
+                else {
+                    echo '<form action="report_comment.php" method="post">
+                            <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
+                            <button type="submit">Report</button>
+                          </form>';
                 }
+
+                echo '</div>'; // .menu-options
+                echo '</div>'; // .menu-container
 
                 echo '</div>'; // .comment-text
                 echo '</div>'; // .comment-box
@@ -379,7 +356,6 @@ $current_image .= "?t=" . time();
         </div>
     </div>
 </div>
-
 
     
 </div>

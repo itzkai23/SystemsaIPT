@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prof_report_id'])) {
 $reportsQuery = $conn->query("SELECT r.id AS report_id, c.comment AS reported_text, u.fname, u.lname, r.reported_at, r.status FROM reports r LEFT JOIN comments c ON r.comment_id = c.id JOIN registration u ON r.user_id = u.id ORDER BY r.reported_at DESC");
 
 // Fetch reported professors
-$profReportsQuery = $conn->query("SELECT rp.id AS prof_report_id, p.name AS professor_name, u.fname, u.lname, rp.reasons, rp.report_date, rp.status FROM reports_prof rp JOIN professors p ON rp.professor_id = p.id JOIN registration u ON rp.user_id = u.id ORDER BY rp.report_date DESC");
+$profReportsQuery = $conn->query("SELECT rp.id AS prof_report_id, p.name AS professor_name, u.fname, u.lname, rp.reasons, rp.details, rp.report_date, rp.status FROM reports_prof rp JOIN professors p ON rp.professor_id = p.id JOIN registration u ON rp.user_id = u.id ORDER BY rp.report_date DESC");
 
 // Keep your existing default image
 $default_image = "../images/icon.jpg";
@@ -148,28 +148,30 @@ $current_image .= "?t=" . time();
         </div>
 
         <!-- Reported Professors Section -->
-        <div id="report1" class="report-container" style="display:none;">
+        <div id="report1" class="report-container">
             <h4 class="sticky-heading">Reported Professors</h4>
-            <div class="report-grid"> <!-- ✅ NEW WRAPPER -->
-            <?php while ($profReport = $profReportsQuery->fetch_assoc()) : ?>
-                
-                <div class='report-box1'>
-                    <strong class="prof-reported">Prof. <?php echo htmlspecialchars($profReport['professor_name']); ?></strong>
-                    <strong class="student-report">Reported by <?php echo htmlspecialchars($profReport['fname'] . " " . $profReport['lname']); ?></strong>
-                    <small class="date-report">Reported on: <?php echo htmlspecialchars($profReport['report_date']); ?></small> 
-                    <div class="reported-con">Reasons: <strong class="reported-text"><?php echo htmlspecialchars($profReport['reasons']); ?></strong></div>
-                    
-                    <?php if ($profReport['status'] === 'pending') : ?>
-                        <form method="post">
-                            <input type="hidden" name="prof_report_id" value="<?php echo $profReport['prof_report_id']; ?>">
-                            <button type="submit" class="mark-btn">Mark as Reviewed</button>
-                        </form>
-                    <?php else : ?>
-                        <span class="reviewed">Reviewed</span>
-                    <?php endif; ?>
-                </div>
-            <?php endwhile; ?>
-            </div> <!-- ✅ CLOSE WRAPPER -->
+            <div class="report-grid">
+                <?php while ($profReport = $profReportsQuery->fetch_assoc()) : ?>
+                    <div class='report-box1'>
+                        <strong class="prof-reported">Prof. <?php echo htmlspecialchars($profReport['professor_name']); ?></strong>
+                        <small class="date-report">Reported on: <?php echo htmlspecialchars($profReport['report_date']); ?></small> 
+                        <div class="reported-con">Reasons: <strong class="reported-text"><?php echo htmlspecialchars($profReport['reasons']); ?></strong></div>
+                        <div class="reported-con">
+                            <?php if ($profReport['reasons'] === 'Others') : ?>
+                                <strong>Details:</strong> <span class="reported-text"><?php echo htmlspecialchars($profReport['details']); ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($profReport['status'] === 'pending') : ?>
+                            <form method="post">
+                                <input type="hidden" name="prof_report_id" value="<?php echo $profReport['prof_report_id']; ?>">
+                                <button type="submit" class="mark-btn">Mark as Reviewed</button>
+                            </form>
+                        <?php else : ?>
+                            <span class="reviewed">Reviewed</span>
+                        <?php endif; ?>
+                    </div>
+                <?php endwhile; ?>
+            </div>
         </div>
 
         

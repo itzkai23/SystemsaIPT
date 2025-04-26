@@ -1,8 +1,11 @@
 <?php
-function getEvaluationScheduleStatus($user_section) {
+function getEvaluationScheduleStatus($user_section, $conn) {
     date_default_timezone_set('Asia/Manila'); // Ensure the timezone is correct
 
-    $start_date = new DateTime('2025-04-29'); // Start date for evaluation
+    // Fetch the evaluation start date from the database
+    $query = $conn->query("SELECT start_date FROM evaluation_status ORDER BY id DESC LIMIT 1");
+    $evaluation_status = $query->fetch_assoc();
+    $start_date = new DateTime($evaluation_status['start_date']); // Start date from the database
     $now = new DateTime();
     $current_hour = (int)$now->format('G');
 
@@ -25,14 +28,15 @@ function getEvaluationScheduleStatus($user_section) {
         7 => []                      // Sunday
     ];
 
-    // Calculate how many days passed since start
+    // Calculate how many days have passed since the start date
     $days_since_start = (int)$start_date->diff($now)->format('%a');
     $day_offset = $days_since_start % 7;
 
-    // Get the correct day number based on evaluation week
+    // Get the current day of the week based on the evaluation start date
     $start_day_num = (int)$start_date->format('N'); // 1 = Monday, 7 = Sunday
     $current_day = ($start_day_num + $day_offset - 1) % 7 + 1;
 
+    // If today is Sunday (no evaluation), return the message
     if ($current_day === 7) {
         return [
             'allowed' => false,
@@ -41,7 +45,7 @@ function getEvaluationScheduleStatus($user_section) {
         ];
     }
 
-    // Determine time slot for evaluation
+    // Determine the time slot for evaluation (morning or afternoon)
     if ($current_hour >= 7 && $current_hour <= 14) {
         $slot = 0; // Morning session
     } elseif ($current_hour >= 15 && $current_hour <= 22) {
@@ -56,12 +60,12 @@ function getEvaluationScheduleStatus($user_section) {
 
     $today_sections = $fixed_schedule[$current_day];
 
-    // Check if the user's section matches the allowed session
+    // Check if the user's section matches the allowed session for today
     if (isset($today_sections[$slot]) && $user_section === $today_sections[$slot]) {
         return ['allowed' => true];
     }
 
-    // Check when their section is allowed to evaluate next
+    // If the user's section is not allowed today, check the next available day
     for ($offset = 1; $offset <= 7; $offset++) {
         $future_day = ($current_day + $offset - 1) % 7 + 1;
         if (in_array($user_section, $fixed_schedule[$future_day])) {
@@ -74,6 +78,7 @@ function getEvaluationScheduleStatus($user_section) {
         }
     }
 
+    // If no available days found
     return [
         'allowed' => false,
         'message' => "⚠️ Your section is not scheduled for evaluation this week.",

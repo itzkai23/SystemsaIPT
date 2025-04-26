@@ -22,9 +22,11 @@ $current_image .= "?t=" . time();
 // Example: get section from session
 $user_section = isset($_SESSION['section']) ? $_SESSION['section'] : null;
 
-$eval_status = getEvaluationScheduleStatus($user_section);
-$can_evaluate = $eval_status['allowed'];
+// Call the function to get the evaluation schedule status
+$evaluation_status = getEvaluationScheduleStatus($user_section, $conn);
 
+// Check if the user can evaluate and display the corresponding message
+$can_evaluate = $evaluation_status['allowed'];
 
 ?>
 
@@ -122,36 +124,29 @@ $can_evaluate = $eval_status['allowed'];
 <h3 class="">Your insight and feedbacks are all matters!</h3>
 
 <?php 
-// Define the start date of the evaluation period
-$start_date = new DateTime('2025-04-29'); // Update this to your actual start date
-$now = new DateTime();
-
-// Check if the evaluation has started or not
-$evaluation_not_started = $now < $start_date;
+// Assuming $user_section and $conn are defined above
+$status = getEvaluationScheduleStatus($user_section, $conn);
 ?>
 
-<?php if ($can_evaluate): ?>
+<?php if ($status['allowed']): ?>
   <a href="instructorsEval.php" class="link">Evaluate Now!</a>
 <?php else: ?>
   <div class="tooltip-wrapper">
     <a href="javascript:void(0);" class="link disabled-link">Evaluate Now!</a>
     <span class="tooltip-text">
-    <i class="fas fa-info-circle"></i>
-      <?php 
-        if ($evaluation_not_started) {
-          echo "The evaluation period hasn't started yet.";
-        } else {
-          echo "You're not yet scheduled for evaluation.";
-        }
-      ?>
+      <i class="fas fa-info-circle"></i>
+      <?php echo $status['message']; ?>
+      <?php if ($status['schedule_date']): ?>
+        <br><strong>Next available date: <?php echo $status['schedule_date']; ?></strong>
+      <?php endif; ?>
     </span>
   </div>
 <?php endif; ?>
 
 
-</div> 
-</div> 
 
+</div> 
+</div> 
 <div class="modal-sched" id="scheduleModal">
   <div class="modal-content-sched">
     <div class="modal-header">
@@ -161,32 +156,27 @@ $evaluation_not_started = $now < $start_date;
     </div>
 
     <?php 
-// Define the start date of the evaluation period
-$start_date = new DateTime('2025-04-29'); // Set your evaluation start date
-$now = new DateTime();
+    // Assume evaluation_schedule.php is already required above
+    // and $status is already available
 
-// Check if the evaluation has started
-$evaluation_not_started = $now < $start_date;
-
-// Define announcement message based on the status
-if ($evaluation_not_started) {
-    $announcement_message = "The evaluation period hasn't started yet.";
-} else {
-    if ($can_evaluate) {
+    // Define announcement message based on the evaluation status
+    if ($status['allowed']) {
         $announcement_message = "You can now evaluate.";
     } else {
-        $announcement_message = "You're not yet scheduled to evaluate.";
+        if ($status['schedule_date']) {
+            $announcement_message = "The Faculty Evaluation is scheduled on " . date('F j, Y', strtotime($status['schedule_date'])) . ".";
+        } else {
+            $announcement_message = "You're not yet scheduled to evaluate.";
+        }
     }
-}
-?>
+    ?>
 
-<!-- Announcement Pop-up -->
-<div class="announcement-popup" id="announcementPopup" style="display: none;">
-  <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
-  <h3>Schedule</h3>
-  <p id="announcementText"><?php echo $announcement_message; ?></p>
-</div>
-
+    <!-- Announcement Pop-up -->
+    <div class="announcement-popup" id="announcementPopup" style="display: none;">
+      <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
+      <h3>Schedule</h3>
+      <p id="announcementText"><?php echo $announcement_message; ?></p>
+    </div>
 
     <div class="modal-body">
       <table class="schedule-table">
@@ -253,7 +243,6 @@ if ($evaluation_not_started) {
     </div>
   </div>
 </div>
-
 
 <script src="../js/sidebar.js"></script>
 <script src="../js/logs.js"></script>
