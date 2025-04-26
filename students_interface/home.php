@@ -159,12 +159,33 @@ $evaluation_not_started = $now < $start_date;
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
 
-    <!-- Announcement Pop-up -->
-    <div class="announcement-popup" id="announcementPopup">
-      <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
-      <h3>📢 Announcement</h3>
-      <p>All classes on Monday will start 30 minutes late due to campus maintenance. Please be guided accordingly.</p>
-    </div>
+    <?php 
+// Define the start date of the evaluation period
+$start_date = new DateTime('2025-04-29'); // Set your evaluation start date
+$now = new DateTime();
+
+// Check if the evaluation has started
+$evaluation_not_started = $now < $start_date;
+
+// Define announcement message based on the status
+if ($evaluation_not_started) {
+    $announcement_message = "The evaluation period hasn't started yet.";
+} else {
+    if ($can_evaluate) {
+        $announcement_message = "You can now evaluate.";
+    } else {
+        $announcement_message = "You're not yet scheduled to evaluate.";
+    }
+}
+?>
+
+<!-- Announcement Pop-up -->
+<div class="announcement-popup" id="announcementPopup" style="display: none;">
+  <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
+  <h3>📢 Announcement</h3>
+  <p id="announcementText"><?php echo $announcement_message; ?></p>
+</div>
+
 
     <div class="modal-body">
       <table class="schedule-table">
