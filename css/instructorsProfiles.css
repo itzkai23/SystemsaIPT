@@ -26,6 +26,10 @@ body {
     gap: 20px;
 }
 
+.link-card-container {
+  text-decoration: none;
+}
+
 /* Profile Card */
 .whole {
   margin: auto;

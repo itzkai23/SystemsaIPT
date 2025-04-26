@@ -31,6 +31,7 @@ $current_image .= "?t=" . time();
  
     <link rel="stylesheet" href="../css/report_prof.css">
     <link rel="stylesheet" href="../css/headmenu.css">
+    <link rel="stylesheet" href="../css/sched.css">
 </head>
 <body>
 
@@ -77,7 +78,7 @@ $current_image .= "?t=" . time();
 
                 <div class="dlog-icon">
                  <img src="../images/announcement.png" alt="">
-                <a class="a-pf" href="#">Announcement</a>
+                 <a class="open-btn" onclick="openModal()">Schedule</a>
                 </div>
                 
                 <div class="dlog-icon">
@@ -125,8 +126,112 @@ $current_image .= "?t=" . time();
         </form>
     </div>
 
+    <div class="modal-sched" id="scheduleModal">
+  <div class="modal-content-sched">
+    <div class="modal-header">
+      <h2>Faculty Evaluation Schedule</h2>
+      <button class="announcement-btn" onclick="showAnnouncement()">Notice</button>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+
+    <?php 
+// Define the start date of the evaluation period
+$start_date = new DateTime('2025-04-29'); // Set your evaluation start date
+$now = new DateTime();
+
+// Check if the evaluation has started
+$evaluation_not_started = $now < $start_date;
+
+// Define announcement message based on the status
+if ($evaluation_not_started) {
+    $announcement_message = "The evaluation period hasn't started yet.";
+} else {
+    if ($can_evaluate) {
+        $announcement_message = "You can now evaluate.";
+    } else {
+        $announcement_message = "You're not yet scheduled to evaluate.";
+    }
+}
+?>
+
+<!-- Announcement Pop-up -->
+<div class="announcement-popup" id="announcementPopup" style="display: none;">
+  <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
+  <h3>Schedule</h3>
+  <p id="announcementText"><?php echo $announcement_message; ?></p>
+</div>
+
+
+    <div class="modal-body">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Course/Section</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">Monday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - A</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - B</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Tuesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - C</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - D</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Wednesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - E</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - F</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Thursday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - G</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - H</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Friday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - I</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - J</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - K</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
     <script src="../js/report_prof.js"></script>
     <script src="../js/sidebar.js"></script>
     <script src="../js/logs.js"></script>
+    <script src="../js/sched.js"></script>
 </body>
 </html>

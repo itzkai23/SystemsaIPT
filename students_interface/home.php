@@ -136,6 +136,7 @@ $evaluation_not_started = $now < $start_date;
   <div class="tooltip-wrapper">
     <a href="javascript:void(0);" class="link disabled-link">Evaluate Now!</a>
     <span class="tooltip-text">
+    <i class="fas fa-info-circle"></i>
       <?php 
         if ($evaluation_not_started) {
           echo "The evaluation period hasn't started yet.";
@@ -154,8 +155,8 @@ $evaluation_not_started = $now < $start_date;
 <div class="modal-sched" id="scheduleModal">
   <div class="modal-content-sched">
     <div class="modal-header">
-      <h2>College Weekly Schedule</h2>
-      <button class="announcement-btn" onclick="showAnnouncement()">Announcement</button>
+      <h2>Faculty Evaluation Schedule</h2>
+      <button class="announcement-btn" onclick="showAnnouncement()">Notice</button>
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
 
@@ -182,7 +183,7 @@ if ($evaluation_not_started) {
 <!-- Announcement Pop-up -->
 <div class="announcement-popup" id="announcementPopup" style="display: none;">
   <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
-  <h3>📢 Announcement</h3>
+  <h3>Schedule</h3>
   <p id="announcementText"><?php echo $announcement_message; ?></p>
 </div>
 
@@ -193,59 +194,59 @@ if ($evaluation_not_started) {
           <tr>
             <th>Day</th>
             <th>Time</th>
-            <th>Section</th>
+            <th>Course/Section</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td rowspan="2">Monday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section A</td>
+            <td>BSIT 3 - A</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section B</td>
+            <td>BSIT 3 - B</td>
           </tr>
           <tr>
             <td rowspan="2">Tuesday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section C</td>
+            <td>BSIT 3 - C</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section D</td>
+            <td>BSIT 3 - D</td>
           </tr>
           <tr>
             <td rowspan="2">Wednesday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section E</td>
+            <td>BSIT 3 - E</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section F</td>
+            <td>BSIT 3 - F</td>
           </tr>
           <tr>
             <td rowspan="2">Thursday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section G</td>
+            <td>BSIT 3 - G</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section H</td>
+            <td>BSIT 3 - H</td>
           </tr>
           <tr>
             <td rowspan="2">Friday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section I</td>
+            <td>BSIT 3 - I</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section J</td>
+            <td>BSIT 3 - J</td>
           </tr>
           <tr>
             <td>Saturday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section K</td>
+            <td>BSIT 3 - K</td>
           </tr>
         </tbody>
       </table>
@@ -256,32 +257,7 @@ if ($evaluation_not_started) {
 
 <script src="../js/sidebar.js"></script>
 <script src="../js/logs.js"></script>
-    
-<script>
-  function openModal() {
-    document.getElementById('scheduleModal').style.display = 'flex';
-  }
-
-  function closeModal() {
-    document.getElementById('scheduleModal').style.display = 'none';
-    closeAnnouncement();
-  }
-
-  function showAnnouncement() {
-    document.getElementById('announcementPopup').style.display = 'block';
-  }
-
-  function closeAnnouncement() {
-    document.getElementById('announcementPopup').style.display = 'none';
-  }
-
-  window.onclick = function(e) {
-    const modal = document.getElementById('scheduleModal');
-    if (e.target === modal) {
-      closeModal();
-    }
-  }
-</script>
+<script src="../js/sched.js"></script>
     
   </body>
   

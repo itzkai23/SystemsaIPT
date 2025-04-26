@@ -27,8 +27,7 @@ if (isset($_SESSION['user_name'])) {
 <header>
     <img src="../images/head2.png" alt="headerlogo" class="logo">
     <nav class="navigation">
-       <a class="open-btn" onclick="openModal()">Show Schedule</a>
-       <a href="#">Regulations</a>
+       <a class="open-btn" onclick="openModal()">Schedule</a>
        <a href="../students_interface/profstatus.php">Faculties</a>
        <button class="btn-popup">Login</button>      
     </nav>
@@ -180,7 +179,7 @@ if (isset($_SESSION['user_name'])) {
   <div class="modal-content-sched">
     <div class="modal-header">
       <h2>College Weekly Schedule</h2>
-      <button class="announcement-btn" onclick="showAnnouncement()">Announcement</button>
+      
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
 
@@ -197,59 +196,59 @@ if (isset($_SESSION['user_name'])) {
           <tr>
             <th>Day</th>
             <th>Time</th>
-            <th>Section</th>
+            <th>Course/Section</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td rowspan="2">Monday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section A</td>
+            <td>BSIT 3 - A</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section B</td>
+            <td>BSIT 3 - B</td>
           </tr>
           <tr>
             <td rowspan="2">Tuesday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section C</td>
+            <td>BSIT 3 - C</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section D</td>
+            <td>BSIT 3 - D</td>
           </tr>
           <tr>
             <td rowspan="2">Wednesday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section E</td>
+            <td>BSIT 3 - E</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section F</td>
+            <td>BSIT 3 - F</td>
           </tr>
           <tr>
             <td rowspan="2">Thursday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section G</td>
+            <td>BSIT 3 - G</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section H</td>
+            <td>BSIT 3 - H</td>
           </tr>
           <tr>
             <td rowspan="2">Friday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section I</td>
+            <td>BSIT 3 - I</td>
           </tr>
           <tr>
             <td>3:00 PM - 10:00 PM</td>
-            <td>Section J</td>
+            <td>BSIT 3 - J</td>
           </tr>
           <tr>
             <td>Saturday</td>
             <td>7:00 AM - 2:00 PM</td>
-            <td>Section K</td>
+            <td>BSIT 3 - K</td>
           </tr>
         </tbody>
       </table>
@@ -280,14 +279,6 @@ inputs.forEach((input, index) => {
   function closeModal() {
     document.getElementById('scheduleModal').style.display = 'none';
     closeAnnouncement();
-  }
-
-  function showAnnouncement() {
-    document.getElementById('announcementPopup').style.display = 'block';
-  }
-
-  function closeAnnouncement() {
-    document.getElementById('announcementPopup').style.display = 'none';
   }
 
   window.onclick = function(e) {

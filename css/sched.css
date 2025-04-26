@@ -1,13 +1,18 @@
-/* .open-btn {
-      margin: 2rem;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-    } */
+
+    * {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .modal-body {
+      max-height: calc(70vh - 60px); /* Adjust based on header height */
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }    
 
     .modal-sched {
         display: none;
@@ -29,7 +34,6 @@
         box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         animation: fadeIn 0.3s ease;
         max-height: 70vh;
-        overflow-y: auto;
         position: relative;
       }
   
@@ -40,7 +44,7 @@
   
       .modal-header {
         padding: 1rem;
-        background: #007bff;
+        background: #012362;
         color: white;
         display: flex;
         justify-content: space-between;
@@ -55,22 +59,47 @@
       }
   
       .announcement-btn {
-        background-color: #ffc107;
-        color: #000;
+        background-color: #f9a825; /* Vibrant amber/yellow */
+        color: #ffffff;
         border: none;
-        padding: 0.4rem 0.8rem;
-        border-radius: 6px;
-        margin-right: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        margin-right: 8.5rem;
         cursor: pointer;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: background-color 0.3s ease, transform 0.25s ease;
       }
+      
+      .announcement-btn:hover,
+      .announcement-btn:focus {
+        background-color: #f57f17; /* Slightly deeper amber on hover */
+        outline: none;
+        transform: scale(1.05);
+      }
+      
+      
   
       .close-btn {
-        background: none;
+        background-color: transparent;
         border: none;
-        font-size: 1.5rem;
-        color: white;
+        font-size: 1.4rem;
+        color: #ffffff;
         cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background-color 0.2s ease, transform 0.2s ease;
       }
+      
+      .close-btn:hover,
+      .close-btn:focus {
+        outline: none;
+        transform: scale(1.1);
+      }
+      
   
       .schedule-table {
         width: 100%;
@@ -97,11 +126,23 @@
         .modal-header {
           flex-direction: column;
           align-items: flex-start;
+          padding: 1rem 1rem 0.5rem 1rem;
         }
   
         .announcement-btn {
-          margin-top: 0.5rem;
+          font-size: 0.9rem;
+          padding: 0.35rem 0.7rem;
+          margin-top: 5px;
         }
+        
+        .close-btn {
+          font-size: 1.5rem;
+          position: absolute;
+          top: 8px;
+          right: 15px;
+        }
+
+        
       }
   
       /* Announcement Pop-up */
@@ -111,16 +152,20 @@
         top: 20%;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffeeba;
-        padding: 1rem;
-        border-radius: 10px;
+        background-color: #fff8e1;
+        color: #5f440b;
+        border: 1px solid #ffe08a;
+        padding: 1.2rem;
+        border-radius: 12px;
         width: 80%;
         max-width: 500px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         z-index: 1001;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        transition: all 0.3s ease;
       }
+      
   
       .announcement-popup h3 {
         margin-top: 0;
