@@ -8,31 +8,189 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e3f2fd; /* Light blue background */
+    background-color: #f0f0f0; /* Light blue background */
 }
 
 /* Admin Section */
 .admin-sec {
-    background: linear-gradient(135deg, #1976d2, #64b5f6); /* Gradient Blue */
-    color: white;
-    padding: 20px;
+  background: linear-gradient(135deg, #1976d2, #64b5f6); /* Gradient Blue */
+    color: #f8f8f8;
+    padding: 30px;
     margin: 80px 80px 10px 80px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.admin-sec:hover {
+    transform: translateY(-2px);
 }
 
 .fp {
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .fdiv {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 15px;
-    border-left: solid 3px white;
-    border-radius: 8px;
-    margin-top: 10px;
+  background: #fff;
+  border-left: 5px solid #64b5f6; /* Use green for a "status" indicator */
+  border-radius: 10px;
+  padding: 20px 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
 }
+
+.fdiv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.edit-btn {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn:hover {
+  background-color: #1976D2;
+}
+
+.eval-status-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Green badge for On-going */
+.on-going {
+  color: green;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: 400;
+}
+
+/* Red badge for On-hold */
+.on-hold {
+  color: red;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: 400;
+}
+
+.eval-status-container .start-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: #43a047;
+  letter-spacing: 1px;
+}
+
+.eval-status-container .end-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f44336;
+  letter-spacing: 1px;
+}
+
+.eval-status-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.eval-buttons form {
+  display: flex;
+  gap: 10px;
+}
+
+.eval-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.eval-buttons button {
+  position: relative;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 80px;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+/* Default Enable Button Style */
+#enableBtn {
+  background-color: #4CAF50;
+}
+
+/* Default Disable Button Style */
+#disableBtn {
+  background-color: #f44336;
+}
+
+/* Hover Effects */
+#enableBtn:hover {
+  background-color: #43a047;
+}
+
+#disableBtn:hover {
+  background-color: #e53935;
+}
+
+.eval-buttons button:focus {
+  outline: none;
+}
+
+/* Active State Styling */
+.active {
+  background-color: white;
+  color: inherit; /* Inherit the default text color */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Light shadow for active button */
+}
+
+.fdiv h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.fdiv p {
+  margin: 5px 0;
+  font-size: 15px;
+  color: #555;
+}
+
+.fdiv:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
 
 /* Grid Container */
 .container {
@@ -131,3 +289,138 @@ body {
     }
   }
   
+
+/* Modal background */
+.modal-admin {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* General Modal Styling */
+.modal-content-admin {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  max-width: 500px;
+  margin: 50px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+  margin-top: 12%;
+  position: relative;
+}
+
+/* Modal Close Button */
+.close {
+  font-size: 30px;
+  color: #333;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #e74c3c;
+}
+
+/* Title Styling */
+h2 {
+  font-size: 24px;
+  color: #1565c0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Label Styling */
+label {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Input Field Styling */
+input[type="date"] {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+input[type="date"]:focus {
+  border-color: #3498db;
+}
+
+/* Button Styling */
+.form-buttons {
+  text-align: center;
+}
+
+/* Modern Button Styling */
+button.btn-update {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+button.btn-update:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Modal Fade-in Animation */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Adjust modal width for smaller screens */
+  .modal-content-admin {
+      width: 90%;
+      padding: 15px;
+      margin-top: 20%;
+  }
+
+  /* Make button fit within smaller screens */
+  button.btn-update {
+      padding: 12px 20px;
+  }
+
+  /* Adjust input padding and font size for mobile */
+  input[type="date"] {
+      padding: 10px;
+      font-size: 14px;
+  }
+
+  .eval-buttons {
+      margin-left: -14px;
+  }
+}
+

@@ -154,11 +154,11 @@ if (isset($_SESSION['user_name'])) {
 </div>
 
 <div class="h-text">
-    <h2>Welcome to the Faculty Evaluation Management System!</h2>
+    <h2>Faculty Evaluation Management System for BSIT Third Year at City of Malabon University</h2>
     <h3>Take a moment to share your thoughts on your professors and courses. Your input helps shape a better learning experience for you and future students!</h3>
     </div>
 
-    <button class="chat-button" onclick="toggleChat()">
+    <!-- <button class="chat-button" onclick="toggleChat()">
     <div class="notification-dot"></div>
     <img src="../images/transbot2.png" alt="imgbot">
 </button>  
@@ -168,17 +168,17 @@ if (isset($_SESSION['user_name'])) {
         <img src="../images/transbot.png" alt="imgbot">
     </div>
     <div class="chat-header">UP-CHAT</div>
-    <label for="chat-popup" class="close">&times;</label>
+    <label for="chat-popup" class="close" onclick="closeChat()">&times;</label>
     <iframe src="https://www.chatbase.co/chatbot-iframe/5cyDdC8pYxitCeWBRtzVm" frameborder="0" class="chat-body" id="chat-body">
     </iframe>
-</div>
+</div> -->
 
 
 
 <div class="modal-sched" id="scheduleModal">
   <div class="modal-content-sched">
     <div class="modal-header">
-      <h2>College Weekly Schedule</h2>
+      <h2>BSIT Third Year Evaluation Schedule</h2>
       
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
@@ -271,27 +271,10 @@ inputs.forEach((input, index) => {
 });
 </script>
 
-<script>
-  function openModal() {
-    document.getElementById('scheduleModal').style.display = 'flex';
-  }
-
-  function closeModal() {
-    document.getElementById('scheduleModal').style.display = 'none';
-    closeAnnouncement();
-  }
-
-  window.onclick = function(e) {
-    const modal = document.getElementById('scheduleModal');
-    if (e.target === modal) {
-      closeModal();
-    }
-  }
-</script>
-
 <script src="../js/faeye.js"></script>
 <script src="../js/cbot.js"></script>
 <script src="../js/silog.js"></script>
+<script src="../js/sched.js"></script>
 
 </body>
 </html>

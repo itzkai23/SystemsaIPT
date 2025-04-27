@@ -150,7 +150,7 @@ $status = getEvaluationScheduleStatus($user_section, $conn);
 <div class="modal-sched" id="scheduleModal">
   <div class="modal-content-sched">
     <div class="modal-header">
-      <h2>Faculty Evaluation Schedule</h2>
+      <h2>BSIT Third Year Evaluation Schedule</h2>
       <button class="announcement-btn" onclick="showAnnouncement()">Notice</button>
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>

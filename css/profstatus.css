@@ -43,7 +43,7 @@ header {
     background-color: #012362;
     justify-content: space-between;
     align-items: center;
-    z-index: 99;
+    z-index: 10000;
 
 }
 
@@ -89,7 +89,7 @@ header {
 .page-container {
     width: 50%;
     margin-top: 50px;
-    background-color: #2d3a47;
+    background-color: #012362;
     padding: 20px;
     border-radius: 10px;
 }

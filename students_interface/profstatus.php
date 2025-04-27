@@ -96,12 +96,13 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/profstatus.css">
+    <link rel="stylesheet" href="../css/sched.css">
 </head>
 <body>
 <header>
     <img src="../images/head.png" alt="headerlogo" class="logo">
     <nav class="navigation">
-       <a href="#">Regulations</a>
+       <a class="open-btn" onclick="openModal()">Schedule</a>
        <a href="profstatus.php">Faculties</a>
        <a href="../Authentication/silog.php">Signup/Login</a>      
     </nav>
@@ -187,6 +188,89 @@ if (isset($_GET['fetch_comments']) && isset($_GET['professor_id'])) {
         </div>  
     </div>
 
+
+<div class="modal-sched" id="scheduleModal">
+  <div class="modal-content-sched">
+    <div class="modal-header">
+      <h2>BSIT Third Year Evaluation Schedule</h2>
+      
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+
+    <!-- Announcement Pop-up -->
+    <div class="announcement-popup" id="announcementPopup">
+      <button class="announcement-close" onclick="closeAnnouncement()">&times;</button>
+      <h3>📢 Announcement</h3>
+      <p>All classes on Monday will start 30 minutes late due to campus maintenance. Please be guided accordingly.</p>
+    </div>
+
+    <div class="modal-body">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Course/Section</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">Monday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - A</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - B</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Tuesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - C</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - D</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Wednesday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - E</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - F</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Thursday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - G</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - H</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Friday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - I</td>
+          </tr>
+          <tr>
+            <td>3:00 PM - 10:00 PM</td>
+            <td>BSIT 3 - J</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>7:00 AM - 2:00 PM</td>
+            <td>BSIT 3 - K</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <script src="../js/profstatus.js"></script>
+<script src="../js/sched.js"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@ function getEvaluationScheduleStatus($user_section, $conn) {
     if ($now < $start_date) {
         return [
             'allowed' => false,
-            'message' => "⚠️ The evaluation period has not started yet. Please wait until the start date.",
+            'message' => "⚠️ The evaluation period has not yet started. Please wait for the scheduled date.",
             'schedule_date' => $start_date->format('F j, Y')
         ];
     }

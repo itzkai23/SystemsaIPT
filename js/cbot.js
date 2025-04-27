@@ -39,3 +39,12 @@ function getBotResponse(textarea) {
 function resizetextarea(textarea) {
     textarea.style.width = textarea.value.length + "ch"; // Adjust width based on character count
   }
+
+  function toggleChat() {
+    let chatPopup = document.getElementById("chat-popup");
+    chatPopup.style.display = chatPopup.style.display === "none" || chatPopup.style.display === "" ? "flex" : "none";
+}
+
+function closeChat() {
+    document.getElementById("chat-popup").style.display = "none";
+}

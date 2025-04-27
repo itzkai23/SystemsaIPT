@@ -84,10 +84,10 @@ $current_image .= "?t=" . time();
                 <a class="a-pf" href="https://sgs.cityofmalabonuniversity.edu.ph/">Visit Official Website</a>
                 </div>
 
-                <div class="dlog-icon">
+                <!-- <div class="dlog-icon">
                  <img src="../images/announcement.png" alt="">
                 <a class="a-pf" href="#">Announcement</a>
-                </div>
+                </div> -->
                 
                 <div class="dlog-icon">
                  <img src="../images/facultyb.png" alt="">
