@@ -165,7 +165,7 @@ padding: 5px 0px 5px 10px;
 text-decoration: none;
 margin-bottom: 10px;
 }
-.a-pf:hover,.logpf-con:hover {
+.a-pf:hover,.logpf-con:hover, .open-btn:hover {
 background-color: rgb(236, 236, 236);
 transition: 0.5s ease;
 cursor: pointer;

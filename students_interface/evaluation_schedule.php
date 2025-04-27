@@ -13,7 +13,7 @@ function getEvaluationScheduleStatus($user_section, $conn) {
     if ($now < $start_date) {
         return [
             'allowed' => false,
-            'message' => "⚠️ The evaluation period has not yet started. Please wait for the scheduled date.",
+            'message' => "The evaluation period has not yet started. Please wait for the scheduled date.",
             'schedule_date' => $start_date->format('F j, Y')
         ];
     }
@@ -40,7 +40,7 @@ function getEvaluationScheduleStatus($user_section, $conn) {
     if ($current_day === 7) {
         return [
             'allowed' => false,
-            'message' => "⛔ Faculty evaluation is closed today (Sunday).",
+            'message' => "Faculty evaluation is closed today (Sunday).",
             'schedule_date' => null
         ];
     }
@@ -53,7 +53,7 @@ function getEvaluationScheduleStatus($user_section, $conn) {
     } else {
         return [
             'allowed' => false,
-            'message' => "⏰ Faculty evaluation is only open from 7 AM to 10 PM.",
+            'message' => "Faculty evaluation is only open from 7 AM to 10 PM.",
             'schedule_date' => $now->format('F j, Y')
         ];
     }
@@ -72,7 +72,7 @@ function getEvaluationScheduleStatus($user_section, $conn) {
             $future_date = (clone $now)->modify("+$offset days");
             return [
                 'allowed' => false,
-                'message' => "⚠️ You are not scheduled to evaluate at this time.",
+                'message' => "You are not scheduled to evaluate at this time.",
                 'schedule_date' => $future_date->format('l, F j, Y')
             ];
         }
@@ -81,7 +81,7 @@ function getEvaluationScheduleStatus($user_section, $conn) {
     // If no available days found
     return [
         'allowed' => false,
-        'message' => "⚠️ Your section is not scheduled for evaluation this week.",
+        'message' => "Your section is not scheduled for evaluation this week.",
         'schedule_date' => null
     ];
 }

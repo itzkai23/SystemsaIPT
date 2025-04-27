@@ -154,7 +154,7 @@ if (isset($_SESSION['user_name'])) {
 </div>
 
 <div class="h-text">
-    <h2>Faculty Evaluation Management System for BSIT Third Year at City of Malabon University</h2>
+    <h2>An Improved Faculty Evaluation Management System for City of Malabon University</h2>
     <h3>Take a moment to share your thoughts on your professors and courses. Your input helps shape a better learning experience for you and future students!</h3>
     </div>
 
@@ -178,7 +178,7 @@ if (isset($_SESSION['user_name'])) {
 <div class="modal-sched" id="scheduleModal">
   <div class="modal-content-sched">
     <div class="modal-header">
-      <h2>BSIT Third Year Evaluation Schedule</h2>
+      <h2>Faculty Evaluation Schedule</h2>
       
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>

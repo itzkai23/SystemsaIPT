@@ -318,6 +318,8 @@ $current_image .= "?t=" . time();
                 echo '<p>' . htmlspecialchars($comm['comment']) . '</p>';
                 echo '<small>Commented on: ' . htmlspecialchars($comm['date_posted']) . '</small>';
 
+                echo '</div>'; // .comment-text
+                echo '</div>'; // .comment-box
                 // Three-dot menu for comments
                 echo '<div class="menu-container">';
                 echo '<button class="menu-btn" onclick="toggleMenu(this)">&#x22EE;</button>';
@@ -341,15 +343,12 @@ $current_image .= "?t=" . time();
                 else {
                     echo '<form action="report_comment.php" method="post">
                             <input type="hidden" name="comment_id" value="' . htmlspecialchars($comm['comment_id']) . '">
-                            <button type="submit">Report</button>
+                            <button type="submit" class="repcomment-btn">Report</button>
                           </form>';
                 }
 
                 echo '</div>'; // .menu-options
                 echo '</div>'; // .menu-container
-
-                echo '</div>'; // .comment-text
-                echo '</div>'; // .comment-box
             }
             ?>
             </div>

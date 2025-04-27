@@ -727,16 +727,40 @@ word-wrap: break-word;
 }
 
 .menu-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    /* display: inline-block; */
-    position: absolute;
-    top: -35px;
-    right: 10px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  position: absolute;
+  top: -60px;
+  right: 20px;
+  padding: 5px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
 }
 
+.menu-btn:hover {
+  background-color: rgba(0, 0, 0, 0.08); /* subtle hover */
+}
+
+.menu-btn:focus {
+  outline: 2px solid #1976d2; /* accessibility */
+}
+
+.menu-options .repcomment-btn {
+  background-color: #d32f2f;
+    color: black;
+    border: none;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.menu-options .repcomment-btn:hover {
+  background-color: #b71c1c;
+
+}
 .menu-options {
     display: none;
     position: absolute;
