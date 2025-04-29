@@ -178,9 +178,8 @@ if (isset($_SESSION['user_name'])) {
 <div class="modal-sched" id="scheduleModal">
   <div class="modal-content-sched">
     <div class="modal-header">
-      <h2>Faculty Evaluation Schedule</h2><hr>
-      <h2>Starts at: April 28, 2025</h2>
-      <h2>Ends at : May 12, 2025</h2>
+      <h2>Faculty Evaluation Schedule</h2>
+      
       <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
 
